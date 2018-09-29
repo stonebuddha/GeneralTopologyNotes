@@ -28,9 +28,9 @@
 	\end{itemize}
 \end{definition}
 
-\begin{proposition}
+\begin{remark}
 	$\bbR$ is uncountable.
-\end{proposition}
+\end{remark}
 \begin{proof}
 	Suppose $\bbR$ is countable.
 	Then there exists $S \subset \bbN^+$ such that $\bbR \sim S$.
@@ -65,12 +65,12 @@
 	Let $X$ be a set. There is no surjection from $X$ to $\wp(X)$.
 \end{lemma}
 
-\begin{proposition}
+\begin{remark}
 	Let $X$ be a set. Then
 	\[
 	\wp(X) \sim \{0,1\}^X \coloneqq \{ f : X \to \{0,1\} \}.
 	\]
-\end{proposition}
+\end{remark}
 
 \begin{definition}
 	A \emph{partial order} on a set $X$ is a binary relation on $X$, written ${\le}$, if
@@ -113,6 +113,161 @@
 		\item \emph{Well Ordering Lemma (Zermelo's Theorem):} Every nonempty set $X$ admits a well ordering ${\le}$.
 	\end{itemize}
 \end{theorem}
+
+\section{Topological Spaces}
+
+\begin{definition}
+	Let $X$ be a nonempty set.
+	A collection $\tau \subset \wp(X)$ is said to be a \emph{topology} if
+	\begin{itemize}
+		\item $\emptyset,X \in \tau$,
+		\item $\tau$ is closed under finite intersection, and
+		\item $\tau$ is closed under arbitrary union.
+	\end{itemize}
+	Then $(X,\tau)$ is called a \emph{topological space}.
+	Elements of $\tau$ are called \emph{open sets}.
+\end{definition}
+
+\begin{example}\
+	\begin{enumerate}
+		\item \emph{Trivial Topology:} $\tau \coloneqq \{ \emptyset, X\}$.
+		\item \emph{Discrete Topology:} $\tau \coloneqq \wp(X)$.
+		\item \emph{Standard Topology in $\bbR$:} $A$ is an open set (i.e., $A \in \tau$) iff for all $x \in A$, there exists $\epsilon > 0$, such that $(x-\epsilon,x+\epsilon) \subset A$.
+		\item \emph{Sorgenfrey (Line) Topology in $\bbR$:} $A \in \tau$ iff for all $x \in A$, there exists $\epsilon > 0$, such that $[x,x+\epsilon) \subset A$.
+		\item $\tau_r \coloneqq \{ (a,+\infty) : a \in \bbR \} \cup \{ \emptyset,\bbR \}$ and $\tau_l \coloneqq \{ (-\infty,a) : a \in \bbR \} \cup \{ \emptyset,\bbR\}$ are two topologies in $\bbR$.
+	\end{enumerate}
+\end{example}
+
+\begin{definition}
+	Let $\tau_1$ and $\tau_2$ be topologies on $X$.
+	$\tau_1$ is said to be \emph{coarser than} $\tau_2$ (i.e., $\tau_2$ is said to be \emph{finer than} $\tau_1$) if $\tau_1 \subset \tau_2$.
+	The trivial topology is the coarsest and the discrete topology is the finest.
+\end{definition}
+
+\begin{definition}
+	$x \in X$ is said to be an \emph{isolated point} if $\{x\}$ is open.
+\end{definition}
+
+\begin{remark}
+	If $\{ \tau_\alpha \}_{\alpha \in \calI}$ is a collection of topologies on $X$, then
+	\[
+	\bigcap_{\alpha \in \calI} \tau_\alpha = \{ U \subset X : \forall \alpha \in \calI. (U \in \tau_\alpha) \}
+	\]
+	is still a topology on $X$.
+\end{remark}
+
+\begin{proposition}
+	Let $X$ be a set and $\calF$ be a family of subsets of $X$.
+	Then the smallest topology $\tau$ containing $\calF$ is given by arbitrary union of finite intersection of elements of $\calF \cup \{\emptyset,X\}$, i.e.,
+	\[
+	\tau = \left\{ \bigcup_{\alpha \in \calI} (U_1^\alpha \cap \cdots \cap U_{N(\alpha)}^\alpha) : N(\alpha) \in \bbN, U_i^\alpha \in \calF \cup \{ \emptyset, X \} \right\}.
+	\]
+	Moreover, we say that $\tau$ is \emph{generated} by $\calF$, and $\calF$ is a \emph{subbase} of $\tau$.
+\end{proposition}
+
+\begin{definition}
+	Let $(X,\tau)$ be a topological space.
+	$U \subset X$ is said to be a \emph{neighborhood} of $x \in X$ if $U$ is open and $x \in U$.
+	Similarly, $U$ is said to be a neighborhood of $E \subset X$ if $U$ is open and $E \subset U$.
+\end{definition}
+
+\begin{definition}
+	A family $\beta \subset \wp(X)$ is said to be a \emph{base} of the topology $\tau$ on $X$, if every open set can be written as a union of elements of $\beta$.
+	
+	Given $x \in X$, a family $\beta_x \subset \tau$ of neighborhoods of $x$ is said to be a \emph{local base} of $x$ if every neighborhood of $x$ contains an element of $\beta_x$.
+\end{definition}
+
+\begin{example}\
+	\begin{enumerate}
+		\item Consider $(\bbR,\tau_{\mathrm{standard}})$. Then $\beta \coloneqq \{ (a,b) : a,b \in \bbQ, a \le b \}$ is a base.
+		\item Consider $(\bbR,\tau_{\mathrm{sorg}})$.
+		Then $\beta \coloneqq \{ [x,p) : x \in \bbR, x \le p, p \in \bbQ\}$ is a base.
+		For all $x \in \bbR$, $\beta_x \coloneqq \{ [x,p) : x \le p, p \in \bbQ \}$ is a local base of $x$.
+		\item Consider $(X,\tau_{\mathrm{discrete}})$. Then $\beta \coloneqq \{ \emptyset \} \cup \{ \{x \} : x \in X \}$ is a base.
+	\end{enumerate}
+\end{example}
+
+\begin{proposition}
+	Suppose $X \neq \emptyset$ and $\beta \subset \wp(X)$.
+	Then $\beta$ is a base for a topology on $X$ iff
+	\begin{enumerate}
+		\item $\emptyset \in \beta$,
+		\item for all $x \in X$, there exists $B \in \beta$, such that $x \in B$, and
+		\item for all $B_1,B_2 \in \beta$, $B_1 \cap B_2 \neq \emptyset$, then for all $x \in B_1 \cap B_2$, there exist $B_3 \in \beta$, such that $x \in B_3$ and $B_3 \subset B_1 \cap B_2$.
+	\end{enumerate}
+\end{proposition}
+
+\section{Axioms of Countability}
+
+\begin{definition}
+	Let $(X,\tau)$ be a topological space.
+	\begin{itemize}
+		\item $(X,\tau)$ is said to be \emph{first countable} (i.e., $(X,\tau)$ satisfies the first axiom of countability), if every $x \in X$ admits a countable local base.
+		\item $(X,\tau)$ is said to be \emph{second countable}, if it has a countable base.
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	The second axiom of countability implies the first one, but the other direction does not hold in general.
+\end{remark}
+
+\section{Some Topologies}
+
+\begin{definition}\
+	\begin{itemize}
+		\item \emph{Induced Topology:} Let $(X,\tau)$ be a topological space and $Y \subset X$.
+		Then $\tau_Y \coloneqq \{ Y \cap U : U \in \tau \}$ is a topology on $Y$.
+		\item \emph{Inverse Image Topology:} Let $f : X \to Y$ and $(Y,\tau_Y)$ be a topological space. Then $\tau_X \coloneqq \{ f^{-1}(V) : V \in \tau_Y \}$ is a topology on $X$.
+		\item \emph{Direct Image Topology:} Let $f : X \to Y$ and $(X,\tau_X)$ be a topological space. Then $\tau_Y \coloneqq \{ V : f^{-1}(V) \in \tau_X \}$ is a topology on $Y$.
+		\item \emph{Quotient Topology:} Let $(X,\tau)$ be a topological space and ${\sim}$ be an equivalence relation in $X$.
+		For all $x \in X$, define $[x] \coloneqq \{ y \in X : y \sim x \}$ to be the equivalence class of $x$.
+		Define $Y \coloneqq X /{\sim}$ and a projection map $p : X \to Y$ as $x \mapsto [x]$.
+		The \emph{quotient topology} on $Y$ is the direct image topology of $\tau$ via $p$.
+		\item \emph{Product Topology:} Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+		The \emph{product topology} on $X \times Y$ is given by a subbase $\calF \coloneqq \{ U \times V : U \in \tau_X, V \in \tau_Y \}$.
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	Let $(X,\tau_X)$ be a topological space and $f : X \to Y$.
+	Let $\tau_Y$ be the direct image topology of $\tau_X$ via $f$ and $\tilde{\tau}_X$ be the inverse image topology of $\tau_Y$ via $f$.
+	Then $\tilde{\tau}_X \subset \tau_X$.
+\end{remark}
+
+\begin{remark}
+	Suppose the topology $(\bbR,\tau_{\mathrm{standard}})$.
+	Define $f : \bbR \to \bbR$ as $x \mapsto 0$.
+	Then the direct image topology $\tau_\bbR$ is $\{ V \subset \bbR : f^{-1}(V) \in \tau_\mathrm{standard} \}$, i.e., the discrete topology $\wp(\bbR)$.
+	The inverse image topology is then $\tilde{\tau}_{\bbR} = \{ f^{-1}(V) : V \in \tau_\bbR \}$, i.e., the trivial topology $\{ \emptyset, \bbR \}$.
+\end{remark}
+
+\begin{definition}
+	A property of topological spaces is said to be \emph{hereditary} if whenever a space has the property, so do all its subsets with induced topology.
+\end{definition}
+
+\begin{remark}
+	The first/second axiom of countability are hereditary properties.
+\end{remark}
+
+\begin{remark}\
+	\begin{itemize}
+		\item Let $(X,\tau_X)$ be a topological space and $Y \subset X$.
+		Let $\tau_Y$ be the induced topology on $Y$.
+		Then $Y$ is open in $X$ iff $\tau_Y \subset \tau_X$.
+		\item Let $(X,\tau_X)$ be a topological space and $i : Y \to X$ be an inclusion map (i.e., $y \mapsto y$).
+		Then the induced topology on $Y$ is exactly the same as the inverse image topology via $i$.
+		\item Let $(X,\tau_X)$ be a topological space and $f : X\to Y$ for some $Y$.
+		Let $\tau_Y$ be the direct image topology via $f$ and $E \coloneqq Y \setminus f(X)$.
+		Then the induced topology from $Y$ to $E$ is the discrete topology.
+		\item Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+		Define $\pi_X : X \times Y \to X$ as $(x,y) \mapsto x$ and $\pi_Y : X \times Y \to Y$ as $(x,y) \mapsto y$.
+		Let $\sigma_1$ and $\sigma_2$ be the inverse image topology on $X \times Y$ via $\pi_X$ and $\pi_Y$, respectively.
+		Let $\tau$ be the topology on $X \times Y$ generated by $\sigma_1 \cup \sigma_2$.
+		then $\tau$ is the product topology.
+	\end{itemize}	
+\end{remark}
+
+\section{Metric Spaces}
 		
 \bibliographystyle{abbrv}
 %\bibliography{db}
