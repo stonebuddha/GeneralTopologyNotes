@@ -1,0 +1,119 @@
+\documentclass{techreport}
+
+%\nochangebars
+
+\newcommand{\Omit}[1]{}
+
+\sloppy
+\begin{document}
+\title{21-651: General Topology}
+\author{Di Wang (diw3)}
+\maketitle
+
+\section{Sets and Ordering}
+
+\begin{definition}
+	$2$ sets $A,B$ are said to be \emph{equipotent}, written $A \sim B$, if there exists a bijection between them.
+\end{definition}
+
+\begin{remark}
+	Equipotence is an equivalence relation.
+\end{remark}
+
+\begin{definition}\
+	\begin{itemize}
+		\item A set is said to be \emph{finite} if it is equipotent to a set $\{1,\cdots,n\} \subset \bbN$ for some $n \in \bbN$.
+		\item A set is said to be \emph{countable} if it is equipotent to some subset of $\bbN$.
+		\item A set is said to be \emph{uncountable} if it is not countable.
+	\end{itemize}
+\end{definition}
+
+\begin{proposition}
+	$\bbR$ is uncountable.
+\end{proposition}
+\begin{proof}
+	Suppose $\bbR$ is countable.
+	Then there exists $S \subset \bbN^+$ such that $\bbR \sim S$.
+	In other words, there exists a bijection $f : \bbR \to S$.
+	Define $g$ to be the restriction of $f$ on $[0,1]$.
+	Then $g : [0,1] \to f([0,1])$ is also a bijection.
+	Define $S' \coloneqq f([0,1]) \subset S \subset \bbN^+$.
+	Define a sequence $\{x_n\}_{n \in \bbN^+} \subset \{0,1\}$ in the following way:
+	\begin{itemize}
+		\item If $n \in S'$, let $r \coloneqq g^{-1}(n)$.
+		Then there exists a sequence $\{ r_n\}_{n \in \bbN^+}$ such that $r = \sum_{n=1}^\infty r_n \cdot 2^{-n}$.
+		Define $x_n \coloneqq 1 - r_n$.
+		\item If $n \not\in S'$, define $x_n \coloneqq 0$.
+	\end{itemize}
+	Define $x \coloneqq \sum_{n=1}^\infty x_n \cdot 2^{-n} \in [0,1]$.
+	We claim that $g(x) \not\in S'$.
+	If $g(x) \in S'$, then $x = g^{-1}(g(x))$. By the definition of $x$ we know that $x_{g(x)} = 1-x_{g(x)}$, which leads to a contradiction.
+	Hence $g(x) \not\in S'$, and therefore $g$ is not a bijection.
+	Then we can conclude that $\bbR$ is not countable, i.e., indeed uncountable.
+\end{proof}
+
+\begin{theorem}[Cantor-Bernstein-Schr{\"o}der]
+	If there exist injections $f:A \to B$ and $g : B \to A$, then $A \sim B$.
+\end{theorem}
+
+\begin{definition}
+	Let $X$ be a set.
+	The \emph{power set} of $X$, written $\wp(X)$, is the set of all subsets of $X$.
+\end{definition}
+
+\begin{lemma}[Cantor]
+	Let $X$ be a set. There is no surjection from $X$ to $\wp(X)$.
+\end{lemma}
+
+\begin{proposition}
+	Let $X$ be a set. Then
+	\[
+	\wp(X) \sim \{0,1\}^X \coloneqq \{ f : X \to \{0,1\} \}.
+	\]
+\end{proposition}
+
+\begin{definition}
+	A \emph{partial order} on a set $X$ is a binary relation on $X$, written ${\le}$, if
+	\begin{itemize}
+		\item (reflexivity): $x \le x$ for all $x \in X$,
+		\item (antisymmetry): $x \le y$ and $y \le x$ imply $x = y$ for all $x,y \in X$, and
+		\item (transitivity): $x \le y$ and $y \le z$ imply $x \le z$ for all $x,y,z \in X$.
+	\end{itemize}
+\end{definition}
+
+\begin{example}
+	Let $X \coloneqq \wp(\bbR)$.
+	Then $A \le B \coloneqq A \subset B$ is a partial order on $X$.
+\end{example}
+
+\begin{definition}
+	A partial ordering $(X,{\le})$ is a \emph{linear ordering} if for all $x,y \in X$, we have either $x \le y$ or $y \le x$.
+\end{definition}
+
+\begin{definition}
+	Let $(X,{\le})$ be a partial ordering.
+	Let $E \subset X$.
+	\begin{itemize}
+		\item $x \in X$ is said to be an \emph{upper bound} of $E$ if for all $y \in E$, we have $y \le x$.
+		\item $x \in E$ is said to be a \emph{maximal element} of $E$ if there does not exist $y \in E$ such that $x < y$.
+		\item If $x \in E$ and for all $y \in E$ we have $y \le x$, then $x$ is the \emph{greatest element} of $E$.
+	\end{itemize}
+	\emph{Lower bounds}, \emph{minimal elements}, and \emph{least elements} are defined in a similar way.
+\end{definition}
+
+\begin{definition}
+	A poset $(X,{\le})$ is said to be \emph{well-ordered} if it is linearly ordered and every nonempty subset of $X$ has the least element.
+\end{definition}
+
+\begin{theorem}
+	The following three are equivalent:
+	\begin{itemize}
+		\item \emph{Axiom of Choice:} Given a collection $\calA$ of nonempty disjoint sets, there exists a set $C$ such that (i) $C \subset \bigcup \calA$, and (ii) for all $A \in \calA$, $C \cap A$ has exactly one element.
+		\item \emph{Zorn's Lemma:} Suppose $(X,{\le})$ is a poset. If every chain in $X$ has an upper bound, then $X$ has a maximal element.
+		\item \emph{Well Ordering Lemma (Zermelo's Theorem):} Every nonempty set $X$ admits a well ordering ${\le}$.
+	\end{itemize}
+\end{theorem}
+		
+\bibliographystyle{abbrv}
+%\bibliography{db}
+\end{document}
