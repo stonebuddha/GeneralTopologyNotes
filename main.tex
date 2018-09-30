@@ -119,23 +119,23 @@
 \begin{definition}
 	Let $X$ be a nonempty set.
 	A collection $\tau \subset \wp(X)$ is said to be a \emph{topology} if
-	\begin{itemize}
+	\begin{enumerate}
 		\item $\emptyset,X \in \tau$,
 		\item $\tau$ is closed under finite intersection, and
 		\item $\tau$ is closed under arbitrary union.
-	\end{itemize}
+	\end{enumerate}
 	Then $(X,\tau)$ is called a \emph{topological space}.
 	Elements of $\tau$ are called \emph{open sets}.
 \end{definition}
 
 \begin{example}\
-	\begin{enumerate}
+		\begin{itemize}
 		\item \emph{Trivial Topology:} $\tau \coloneqq \{ \emptyset, X\}$.
 		\item \emph{Discrete Topology:} $\tau \coloneqq \wp(X)$.
 		\item \emph{Standard Topology in $\bbR$:} $A$ is an open set (i.e., $A \in \tau$) iff for all $x \in A$, there exists $\epsilon > 0$, such that $(x-\epsilon,x+\epsilon) \subset A$.
 		\item \emph{Sorgenfrey (Line) Topology in $\bbR$:} $A \in \tau$ iff for all $x \in A$, there exists $\epsilon > 0$, such that $[x,x+\epsilon) \subset A$.
 		\item $\tau_r \coloneqq \{ (a,+\infty) : a \in \bbR \} \cup \{ \emptyset,\bbR \}$ and $\tau_l \coloneqq \{ (-\infty,a) : a \in \bbR \} \cup \{ \emptyset,\bbR\}$ are two topologies in $\bbR$.
-	\end{enumerate}
+	\end{itemize}
 \end{example}
 
 \begin{definition}
@@ -178,13 +178,13 @@
 \end{definition}
 
 \begin{example}\
-	\begin{enumerate}
+	\begin{itemize}
 		\item Consider $(\bbR,\tau_{\mathrm{standard}})$. Then $\beta \coloneqq \{ (a,b) : a,b \in \bbQ, a \le b \}$ is a base.
 		\item Consider $(\bbR,\tau_{\mathrm{sorg}})$.
 		Then $\beta \coloneqq \{ [x,p) : x \in \bbR, x \le p, p \in \bbQ\}$ is a base.
 		For all $x \in \bbR$, $\beta_x \coloneqq \{ [x,p) : x \le p, p \in \bbQ \}$ is a local base of $x$.
 		\item Consider $(X,\tau_{\mathrm{discrete}})$. Then $\beta \coloneqq \{ \emptyset \} \cup \{ \{x \} : x \in X \}$ is a base.
-	\end{enumerate}
+	\end{itemize}
 \end{example}
 
 \begin{proposition}
@@ -268,7 +268,91 @@
 \end{remark}
 
 \section{Metric Spaces}
-		
+
+\begin{definition}
+	A map $d : X \times X \to [0,+\infty)$ is said to be a \emph{metric} (\emph{distance}), if
+	\begin{enumerate}
+		\item 
+		\begin{enumerate}
+			\item $d(x,x) = 0$ for all $x \in X$,
+			\item $x \neq y$ implies $d(x,y) > 0$ for all $x,y \in X$,
+		\end{enumerate}
+		\item $d(x,y) = d(y,x)$ for all $x,y \in X$, and
+		\item $d(x,z) \le d(x,y) + d(y,z)$ for all $x,y,z \in X$.
+	\end{enumerate}
+	Then $(X,d)$ is said to be a \emph{metric space}.
+\end{definition}
+
+\begin{definition}
+	Let $(X,d)$ be a metric space.
+	The \emph{ball} centered at $x in X$ with radius $r > 0$, written $B(x,r)$, is defined as $\{ y \in X : d(x,y) < r\}$.
+\end{definition}
+
+\begin{lemma}
+	$\beta \coloneqq \{ B(x,r) : x \in X, r > 0 \} \cup \{ \emptyset \}$ is a base for a topology.
+	In other words, every metric space $(X,d)$ admits a natural topology $\tau_d$.
+\end{lemma}
+
+\begin{example}\
+	\begin{itemize}
+		\item Let $X = \bbR$ and $d(x,y) \coloneqq |x-y|$ be a metric in $X$.
+		Then $B(x,\epsilon) = (x-\epsilon,x+\epsilon)$, i.e., the metric space $(X,d)$ admits the standard topology.
+		\item Suppose $X$ is a set.
+		Define $\tilde{L}_\infty(X) \coloneqq \{ f :  X \to \bbR : f~\text{is bounded} \}$.
+		Then $d_\infty(f,g) \coloneqq \sup_{x \in X} |f(x) - g(x)|$ is a metric.
+		\item Consider $[a,b] \subset \bbR$ and $C([a,b]) = \{ f : [a,b] \to \bbR : f~\text{is continuos}\}$.
+		Then $d(f,g) \coloneqq \max_{x \in [a,b]} |f(x)-g(x)|$ is a metric.
+		\item Consider the space $\bbR^N$.
+		Define
+		\begin{eqnarray*}
+			d_1(x,y) & \coloneqq & \sqrt{\sum_{i=1}^N (x_i-y_i)^2} \\
+			d_2(x,y) & \coloneqq & \sum_{i=1}^N |x_i - y_i| \\
+			d_3(x,y) & \coloneqq & \max_{i=1,\cdots,N} |x_i - y_i|
+		\end{eqnarray*}
+		then the topologies associated to these metrics coincide.
+	\end{itemize}
+\end{example}
+
+\begin{remark}
+	Suppose $(X,d)$ is a metric space, $x \in X$ and $r > 0$.
+	In general $\overline{B(x,r)} \neq \{y \in X : d(x,y) \le r \}$.
+\end{remark}
+
+\begin{definition}
+	Let $(X,d)$ be a metric space and $A \subset X$.
+	The \emph{diameter} of $A$, written $\mathrm{diam}(A)$, is defined as $\sup \{ d(x,y) : x,y \in A$.
+	$A$ is said to be \emph{bounded} if $\mathrm{diam}(A) < +\infty$.
+\end{definition}
+
+\begin{proposition}
+	Let $(X,d)$ be a metric space.
+	Define $d_1(x,y) \coloneqq \frac{d(x,y)}{1 + d(x,y)}$.
+	Then $(X,d_1)$ is a bounded metric space and $\tau_d = \tau_{d_1}$.
+\end{proposition}
+
+\begin{lemma}
+	If $d_1,d_2$ are metrics on $X$ and $d_1 \le d_2$, then $\tau_{d_1} \subset \tau_{d_2}$.
+\end{lemma}
+
+\begin{remark}
+	Consider $C((0,1)) = \{ f : (0,1) \to \bbR : f~\text{is continuous} \}$.
+	Define $K_n \coloneqq [\frac{1}{n}, 1-\frac{1}{n}]$ for $n \in \bbN^+$.
+	Then $\bigcup_{n=1}^\infty K_n = (0,1)$.
+	Define
+	\begin{eqnarray*}
+		d(f,g) & \coloneqq & \max_{n \in \bbN^+} \left\{ \frac{1}{2^n} \max_{x \in K_n} \frac{|f(x)-g(x)|}{1+|f(x)-g(x)|} \right\} \\
+		\tilde{d}(f,g) & \coloneqq & \sup_{x \in (0,1)} \frac{|f(x)-g(x)|}{1+|f(x)-g(x)|}
+	\end{eqnarray*}
+	to be two metrics on $C(0,1)$.
+	Then $\tau_d \subset \tau_{\tilde{d}}$ and $\tau_d \neq \tau_{\tilde{d}}$.
+\end{remark}
+
+\begin{definition}
+	Let $\rho$ be a pseudo-metric (i.e., a metric without the property $x \neq y \implies d(x,y) > 0$) on $X$.
+	Define an equivalence relation ${\sim}$ as $x \sim y$ iff $\rho(x,y) = 0$.
+	Then $(Y,d)$ with $Y \coloneqq X / {\sim}$ and $d([x],[y]) \coloneqq \rho(x,y)$ is a metric space, named the \emph{quotient metric space}.
+\end{definition}
+
 \bibliographystyle{abbrv}
 %\bibliography{db}
 \end{document}
