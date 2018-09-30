@@ -72,7 +72,7 @@
 	\end{equation*}
 \end{remark}
 
-\begin{definition}[Partial ordering]\label{De:PartialOrder}
+\begin{definition}\label{De:PartialOrder}
 	A \emph{partial order} on a set $X$ is a binary relation on $X$, written ${\le}$, if
 	\begin{itemize}
 		\item (reflexivity): $x \le x$ for all $x \in X$,
@@ -87,7 +87,7 @@
 	Then $A \le B \coloneqq A \subseteq B$ is a partial order on $X$.
 \end{example}
 
-\begin{definition}[Linear ordering]\label{De:LinearOrder}
+\begin{definition}\label{De:LinearOrder}
 	A partial ordering $(X,{\le})$ is a \emph{linear ordering} if for all $x,y \in X$, we have either $x \le y$ or $y \le x$.
 \end{definition}
 
@@ -102,7 +102,7 @@
 	\emph{Lower bounds}, \emph{minimal elements}, and \emph{least elements} are defined in a similar way.
 \end{definition}
 
-\begin{definition}[Well ordering]\label{De:WellOrdering}
+\begin{definition}\label{De:WellOrdering}
 	A poset $(X,{\le})$ is said to be \emph{well-ordered} if it is linearly ordered and every nonempty subset of $X$ has the least element.
 \end{definition}
 
@@ -117,7 +117,7 @@
 
 \section{Topological Spaces}
 
-\begin{definition}[Topologies]\label{De:Topology}
+\begin{definition}\label{De:Topology}
 	Let $X$ be a nonempty set.
 	A collection $\tau \subseteq \wp(X)$ is said to be a \emph{topology} if
 	\begin{enumerate}
@@ -156,6 +156,8 @@
 	\end{equation*}
 	is still a topology on $X$.
 \end{remark}
+
+\section{Bases and Subbases}
 
 \begin{proposition}\label{Prop:Subbase}
 	Let $X$ be a set and $\calF$ be a family of subsets of $X$.
@@ -198,7 +200,9 @@
 	\end{enumerate}
 \end{proposition}
 
-\begin{definition}[Axioms of countability]\label{De:AxiomsOfCountability}
+\section{Countability Axioms}
+
+\begin{definition}\label{De:AxiomsOfCountability}
 	Let $(X,\tau)$ be a topological space.
 	\begin{itemize}
 		\item $(X,\tau)$ is said to be \emph{first countable} (i.e., $(X,\tau)$ satisfies the first axiom of countability), if every $x \in X$ admits a countable local base.
@@ -209,6 +213,8 @@
 \begin{remark}\label{Rem:SndAxCountImplyFstAx}
 	The second axiom of countability implies the first one, but the other direction does not hold in general.
 \end{remark}
+
+\section{Topological Constructions}
 
 \begin{definition}\label{De:SomeMoreTopologies}\
 	\begin{itemize}
@@ -264,7 +270,7 @@
 
 \section{Metric Spaces}
 
-\begin{definition}[Metrics]\label{De:Metrics}
+\begin{definition}\label{De:Metrics}
 	A map $d : X \times X \to [0,+\infty)$ is said to be a \emph{metric} (\emph{distance}), if
 	\begin{enumerate}
 		\item 
@@ -342,15 +348,13 @@
 	Then $\tau_d \subset \tau_{\tilde{d}}$.
 \end{remark}
 
-\begin{definition}[Quotient metric spaces]\label{De:QuotientMetricSpaces}
+\begin{definition}\label{De:QuotientMetricSpaces}
 	Let $\rho$ be a pseudo-metric (i.e., a metric without the property as \defref{Metrics}(1)(b)) on $X$.
 	Define an equivalence relation ${\sim}$ as $x \sim y$ iff $\rho(x,y) = 0$.
-	Then $(Y,d)$ with $Y \coloneqq X / {\sim}$ and $d([x],[y]) \coloneqq \rho(x,y)$ is a metric space.
+	Then $(Y,d)$ with $Y \coloneqq X / {\sim}$ and $d([x],[y]) \coloneqq \rho(x,y)$ is said to be the \emph{quotient metric space}.
 \end{definition}
 
-\section{Normed Spaces}
-
-\begin{definition}[Infinite sums]\label{De:InifiniteSums}
+\begin{definition}\label{De:InifiniteSums}
 	Let $X$ be a set and $f : X \to [0,+\infty]$.
 	The \emph{infinite sum}, written $\sum_{x \in X} f(x)$, is defined as
 	\begin{equation*}
@@ -363,7 +367,7 @@
 	Moreover, $f$ does not take the value $+\infty$.
 \end{proposition}
 
-\begin{definition}[Norms]\label{De:Norms}
+\begin{definition}\label{De:Norms}
 	Let $V$ be a vector space over $\bbR$.
 	The function $\norm{\cdot} : V \to [0,+\infty)$ is said to be a \emph{norm} on $X$ if
 	\begin{enumerate}
@@ -386,7 +390,7 @@
 	In general, topological spaces don't imply metric spaces and metric spaces don't imply normed spaces.
 \end{remark}
 
-\begin{definition}[$\ell^p$ spaces]\label{De:lpSpaces}
+\begin{definition}\label{De:lpSpaces}
 	Given a set $X$ and $p \in [1,+\infty)$, the space $\ell^p(X)$ is defined as
 	\begin{equation*}
 		\set{ f : X \to \bbR : \sum_{x \in X} \abs{f(x)}^p < +\infty }.
@@ -421,9 +425,244 @@
 	\end{equation*}
 \end{theorem}
 
-\begin{proposition}
+\begin{proposition}\label{Prop:lpVectorSpace}
 	$\ell^p(X)$ is a vector space over $\bbR$.
 \end{proposition}
+
+\section{Limit Points}
+
+\begin{definition}\label{De:LimitPoint}
+	Let $(X,\tau)$ be a topological space.
+	Given $E \subseteq X$ and $p \in X$, $p$ is said to be a \emph{limit point} of $E$ if for all neighborhoods $U$ of $p$, we have $(U \cap E) \setminus \{ p \} \neq \emptyset$.
+\end{definition}
+
+\begin{remark}\label{Rem:LimitContainedInClosure}
+	Let $E'$ be the set of all limit points of $E$.
+	Then $E' \subseteq \overline{E}$.
+\end{remark}
+
+\begin{proposition}\label{Prop:NonLimitIsIsolated}
+	Let $(X,\tau)$ be a topological space.
+	Suppose $E \subseteq X$ is equipped with the induced topology $\tau_E$.
+	Then $p \in E \setminus E'$ iff $\{p\} \in \tau_E$ (i.e., $p$ is an isolated point in $\tau_E$).
+\end{proposition}
+
+\begin{proposition}\label{Prop:BallOfLimitContainInfinite}
+	Let $(X,d)$ be a metric space.
+	Given $E \subseteq X$ and $p \in E'$, for all $r > 0$, the ball $B(p,r)$ contains infinitely many points of $E$.
+\end{proposition}
+
+\begin{proposition}\label{Prop:OrigPlusLimitIsClosure}
+	Let $(X,\tau)$ be a topological space and $E \subseteq X$.
+	Then $E \cup E' = \overline{E}$.
+\end{proposition}
+
+\section{Sequences}
+
+\begin{definition}\label{De:Sequences}
+	Let $(X,\tau)$ be a topological space.
+	Suppose $\{x_n\}_{n \in \bbN} \subseteq X$ is a sequence in $X$.
+	Then $p$ is said to be a \emph{limit} of $\{x_n\}_{n \in \bbN}$, written $x_n \xrightarrow[n \to \infty]{} p$, if for all neighborhoods $U$ of $p$, there exists $n_0 \in \bbN$ such that for all $n \ge n_0$, we have $x_n \in U$.
+\end{definition}
+
+\begin{remark}\label{Rem:LimitOfSeqNotUnique}
+	The limit of a sequence may not be unique.
+\end{remark}
+
+\begin{lemma}\label{Lem:LimitOfSeqInClosure}
+	Let $(X,\tau)$ be a topological space.
+	Suppose $x_n \rightarrow p$ in $X$ for some $\{x_n\}_{n \in \bbN} \subseteq X$ and $p \in X$.
+	If there exists $E \subseteq X$ such that for all $n \in \bbN$ we have $x_n \in E$, then $p \in \overline{E}$.
+\end{lemma}
+
+\begin{lemma}\label{Lem:FirstCountLimitOfSeqIffClosure}
+	If a topological space satisfies the first axiom of countability, then $p \in \overline{E}$ iff there exists a sequence $\{x_n\}_{n \in \bbN} \subseteq E$ such that $x_n \rightarrow p$.
+\end{lemma}
+
+\begin{example}\label{Exa:CountableNotImplyFstCountable}
+	In general countable sets do not imply the first axiom of countability.
+	Define $X \coloneqq \bbN \times \bbN$.
+	Define $\tau$ as follows: $U \subseteq X$ is open if (i) either $(0,0) \not\in U$, or (ii) $(0,0) \in U$ implies that $U$ contains all but a finite number of points in all but a finite number of columns.
+	Then $\tau$ is not first countable.
+\end{example}
+
+\begin{definition}\label{De:SequentiallyClosed}
+	Let $(X,\tau)$ be a topological space.
+	Then $E \subseteq X$ is said to be \emph{sequentially closed} if $E = \{ p \in X : \Exists{\{x_n\}_{n \in \bbN} \subseteq E } x_n \rightarrow p \}$.
+\end{definition}
+
+\begin{definition}\label{De:SequentiallyOpen}
+	Let $(X,\tau)$ be a topological space.
+	Then $U \subseteq X$ is said to be \emph{sequentially open} if for all $p \in U$, for all $\{x_n\}_{n \in \bbN} \subseteq X$ with $x_n \rightarrow p$, there exists $n_0 \in \bbN$ such that for all $n \ge n_0$, we have $x_n \in U$.
+\end{definition}
+
+\begin{remark}\label{Rem:ClosedOpenImplySeqClosedOpen}\
+	\begin{itemize}
+		\item If $E$ is closed, then $E$ is sequentially closed.
+		\item If $U$ is open, then $U$ is sequentially open.
+	\end{itemize}
+\end{remark}
+
+\begin{remark}\label{Rem:SeqOpenNotOpen}
+	In general, sequentially open sets may not be open.
+	Consider an uncountable set $X$ and the co-countable topology $\tau \coloneqq \{ X \setminus F : F~\text{is countable} \} \cup \{ \emptyset \}$.
+	Then for all $p \in X$, $\{p\}$ is not open, while all nonempty sets $U \subseteq X$ are sequentially open.
+\end{remark}
+
+\begin{remark}\label{Rem:ClosureIsSeqClosureThenFUSpace}
+	Define $\overline{E}_{\mathrm{seq}} \coloneqq \{ p \in X : \Exists{\{x_n\}_{n \in \bbN} \subseteq E} x_n \rightarrow p \}$.
+	Then in general we have $\overline{E}_{\mathrm{seq}} \subseteq \overline{E}$.
+	If $(X,\tau)$ is a topological space where for all $E \subseteq X$ we have $\overline{E} = \overline{E}_{\mathrm{seq}}$, then $(X,\tau)$ is said to be a \emph{Fr{\'e}chet-Urysohn space}.
+	Then the first axiom of countability indeed implies F-U.
+\end{remark}
+
+\begin{definition}\label{De:SequentialSpace}
+	Let $(X,\tau)$ be a topological space.
+	If every sequentially closed subset $E \subseteq X$ is closed and every sequentially open subset $U \subseteq X$ is open, then $(X,\tau)$ is said to be a \emph{sequential space}.
+\end{definition}
+	
+\section{Separability}
+
+\begin{definition}\label{De:DenseSet}
+	Let $(X,\tau)$ be a topological space.
+	$E$ is said to be \emph{dense} if $\overline{E} = X$.
+\end{definition}
+
+\begin{definition}\label{De:SeparableSpace}
+	A topological space $(X,\tau)$ is said to be \emph{separable} if there exists a countable dense set in $X$.
+\end{definition}
+
+\begin{remark}\label{Rem:SubsetSeparable}
+	If $\tau_1 \subseteq \tau_2$ and $(X,\tau_2)$ is separable, then $(X,\tau_1)$ is also separable.
+\end{remark}
+
+\begin{proposition}\label{Prop:SndAxCountImplySeparable}
+	If a topological space $(X,\tau)$ satisfies the second axiom of countability, then $(X,\tau)$ is separable.
+\end{proposition}
+
+\begin{proposition}\label{Prop:MetricSeparableImplySndAxCount}
+	Suppose $(X,d)$ is a metric space.
+	Then $(X,d)$ is separable iff it is second countable.
+\end{proposition}
+
+\begin{example}\label{Exa:SeparableSpaces}\
+	\begin{itemize}
+		\item $\bbR$ with the Sorgenfrey topology is separable. Indeed, we have $\overline{\bbQ} = \bbR$.
+		\item Suppose $X \neq \emptyset$ is equipped with the discrete topology.
+		Then $X$ is separable iff $X$ is countable.
+		\item $\ell^p(\bbN)$ for some $1 \le p < +\infty$ is separable.
+		A countable dense set could be $\{  \{ (r_1,\cdots,r_n,0,\cdots) \in \ell^p(\bbN) : n \in \bbN, r_i \in \bbQ \}$.
+		\item $C([a,b])$ with the norm $\norm{f}_\infty \coloneqq \max_{x \in [a,b]} \abs{f(x)}$ is separable.
+	\end{itemize}
+\end{example}
+
+\begin{proposition}\label{Prop:SeparableMetricInduceSeparable}
+	Suppose $(X,d)$ is a separable metric space and $A \subseteq X$.
+	Then $(A,d|_A)$ is also separable.
+\end{proposition}
+
+\section{Connectedness}
+
+\begin{definition}\label{De:ConnectedSpace}
+	A topological space $(X,\tau)$ is said to be \emph{connected} if the only open sets that are also closed are $\emptyset$ and $X$.
+\end{definition}
+
+\begin{remark}\label{Rem:SplitDisconnectedSpace}
+	$(X,\tau)$ said to be is \emph{disconnected} if there exists $A \subseteq X$ such that $A \neq \emptyset$, $A \neq X$ and $A$ is both open and closed.
+	In other words, $X = A \cup (X \setminus A)$ is a union of two disjoint open sets.
+	In general, $(X,\tau)$ is disconnected if there exist nonempty open sets $U_1$ and $U_2$ such that $U_1 \cap U_2 = \emptyset$ and $X = U_1 \cup U_2$.
+\end{remark}
+
+\begin{definition}\label{De:ConnectedSet}
+	Let $(X,\tau)$ be a topological space.
+	$E \subseteq X$ is said to be \emph{connected} if the induced topology $(E,\tau_E)$ is connected.
+\end{definition}
+
+\begin{remark}\label{Rem:DisconnectedSubsetNotLifting}
+	Let $(X,\tau)$ be a topological space.
+	If $E \subseteq X$ is disconnect, then $E = V_1 \cup V_2$ for some disjoint nonempty open sets $V_1,V_2$ in $E$.
+	Then there exist open sets $U_1$ and $U_2$ in $X$ such that $V_1 = E \cap U_1$ and $V_2 = E \cap U_2$.
+	However, in general $U_1 \cap U_2 \neq \emptyset$.
+\end{remark}
+
+\begin{proposition}\label{Prop:MetricDisconnectedSubsetLifting}
+	Suppose $(X,d)$ is a metric space.
+	Then $E \subseteq X$ is disconnected iff there exist nonempty disjoint open sets $U$ and $V$ in $X$ such that $E \subseteq U \cup V$.
+\end{proposition}
+
+\begin{theorem}\label{The:RConnectedConvex}
+	$C \subseteq \bbR$ is connected iff $C$ is convex, i.e., an interval.
+\end{theorem}
+
+\begin{proposition}\label{Prop:ConnIffEveryTwoPointsConn}
+	A topological space $(X,\tau)$ is connected iff for all $x,y\in X$, there exists $E \subseteq X$ such that $x,y\in E$ and $E$ is connected.
+\end{proposition}
+
+\begin{proposition}\label{Prop:UnionConnStillConn}
+	Let $(X,\tau)$ be a topological space.
+	Let $E \subseteq X$.
+	If $E = \bigcup_{\alpha \in \Lambda} E_\alpha$ for each $E_\alpha$ connected, and $\bigcap_{\alpha \in \Lambda} E_\alpha$ is nonempty, then $E$ is connected.
+\end{proposition}
+
+\begin{proposition}\label{Prop:ClosureOfConnStillConn}
+	Let $(X,\tau)$ be a topological space.
+	If $E \subseteq X$ is connected, then $\overline{E}$ is also connected.
+\end{proposition}
+
+\begin{definition}\label{De:ContinuousFromInterval}
+	Let $(X,\tau)$ be a topological space and $[a,b] \subseteq \bbR$.
+	A function $r : [a,b] \to X$ is said to be \emph{continuous} if for all $x_0 \in [a,b]$, for all sequences $\{x_n\}_{n \in \bbN} \subseteq [a,b]$, $x_n \rightarrow x_0$ implies $r(x_n) \rightarrow r(x_0)$.
+\end{definition}
+
+\begin{lemma}\label{Lem:ContinuousReverseOpenIsOpen}
+	Let $(X,\tau)$ be a topological space and $[a,b] \subseteq \bbR$.
+	Let $r : [a,b] \to X$ be a continuous function.
+	Then for all $U \in \tau$, $r^{-1}(U)$ is open in $[a,b]$.
+\end{lemma}
+
+\begin{remark}\label{Lem:ContinuousReverseClosedIsClosed}
+	Let $r : [a,b] \to X$ be a continuous function.
+	If $C$ is closed in $X$, then $r^{-1}(C)$ is closed in $[a,b]$.
+\end{remark}
+
+\begin{definition}\label{De:PathwiseConnected}
+	A topological space $(X,\tau)$ is said to be \emph{pathwise connected} if for all $x,y \in X$, there exists a continuous path $r : [a,b] \to X$ such that $r(a) =x$ and $r(b)=y$.
+\end{definition}
+
+\begin{proposition}\label{Prop:PathWiseConnImplyConn}
+	If the topological space $(X,\tau)$ is pathwise connected, then it is connected.
+\end{proposition}
+
+\begin{proposition}\label{Prop:OpenSetInEuclideanSpaceConn}
+	Suppose $U \subseteq \bbR^N$ is an open set.
+	Then $U$ is connected iff it is pathwise connected.
+\end{proposition}
+
+\begin{definition}\label{De:ConnEquivalenceRelation}
+	Let $(X,\tau)$ be a topological space.
+	Let's define a relation ${\sim}$ as $x \sim y$ iff there exists $E \subseteq X$ such that $x,y\in E$ and $E$ is connected.
+	Then ${\sim}$ is an equivalence relation.
+	For all $x \in X$, define the equivalence class of $x$ as $E_x \coloneqq \{ y \in X : y \sim x \}$.
+	Then $E_x = \bigcup_{E \subseteq X, x \in E, E~\text{is connected}} E$, i.e., $E_x$ is a (largest) connected component.
+	Moreover, we have $E_x = \overline{E_x}$.
+\end{definition}
+
+\begin{proposition}\label{Prop:ClosedConnComponentStillClosed}
+	Let $(X,\tau)$ be a topological space and $C \subseteq X$ be a closed set.
+	The connected components of $C$ are closed in $X$.
+\end{proposition}
+
+\begin{definition}\label{De:TotalDisconnectedness}
+	A topological space $(X,\tau)$ is said to be \emph{totally disconnected} if every connected component is a singleton.
+\end{definition}
+
+\begin{example}\label{De:QInRIsTotallyDisconn}
+	$\bbQ$ in $\bbR$ is totally disconnected.
+\end{example}
+
+\section{Functions and Continuity}
+
+\section{Separation Axioms}
 
 \bibliographystyle{abbrv}
 %\bibliography{db}
