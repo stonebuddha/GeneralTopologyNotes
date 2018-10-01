@@ -151,41 +151,6 @@
 \usetikzlibrary{shapes,arrows}
 \RequirePackage{enumitem}
 \setlist{nosep,leftmargin=*,labelindent=\parindent}
-%%
-%% Commands to avoid a full page consisting of occurrences of "spsp" from a bug in
-%% the changebar package when using pdflatex.
-%%
-%% See http://tex.stackexchange.com/questions/162332/why-does-the-changebar-package-create-a-page-full-of-spsp-and-how-can-this-be
-%%
-\makeatletter % changes the catcode of @ to 11
-\AtEndDocument{%
-\def\cb@checkPdfxy#1#2#3#4#5{%
-	\cb@@findpdfpoint{#1}{#2}%
-	\ifdim#3sp=\cb@pdfx\relax      % <<-- original has \ifnum#3=\cb@pdfx
-		\ifdim#4sp=\cb@pdfy\relax      % <<-- original has \ifnum#4=\cb@pdfy
-			\ifdim#5=\cb@pdfz\relax
-			\else
-				\cb@error
-			\fi
-		\else
-			\cb@error
-		\fi
-	\else
-		\cb@error
-	\fi
-}}
-\makeatother % changes the catcode of @ back to 12
-\RequirePackage{color}
-\RequirePackage[color]{changebar}
-\cbcolor{ACMRed}
-% decrease spacing around equations & floats
-\AtBeginDocument{%
-	\setlength\abovedisplayskip{0.5\abovedisplayskip}%
-	\setlength\belowdisplayskip{0.5\belowdisplayskip}%
-	\setlength\abovedisplayshortskip{0.5\abovedisplayshortskip}%
-	\setlength\belowdisplayshortskip{0.5\belowdisplayshortskip}%
-	\setlength\floatsep{0.5\floatsep}%
-}
 
 \IfFileExists{refs.sty}{\RequirePackage{refs}}{}
 \IfFileExists{shortcuts.sty}{\RequirePackage{shortcuts}}{}
