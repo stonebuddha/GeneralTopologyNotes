@@ -462,7 +462,7 @@
 \begin{definition}\label{De:Sequences}
 	Let $(X,\tau)$ be a topological space.
 	Suppose $\{x_n\}_{n \in \bbN} \subseteq X$ is a sequence in $X$.
-	Then $p$ is said to be a \emph{limit} of $\{x_n\}_{n \in \bbN}$, written $x_n \xrightarrow[n \to \infty]{} p$, if for all neighborhoods $U$ of $p$, there exists $n_0 \in \bbN$ such that for all $n \ge n_0$, we have $x_n \in U$.
+	Then $p$ is said to be a \emph{limit} of $\{x_n\}_{n \in \bbN}$, written $x_n \xrightarrow[n \to \infty]{X} p$, if for all neighborhoods $U$ of $p$, there exists $n_0 \in \bbN$ such that for all $n \ge n_0$, we have $x_n \in U$.
 \end{definition}
 
 \begin{remark}\label{Rem:LimitOfSeqNotUnique}
@@ -611,7 +611,7 @@
 
 \begin{definition}\label{De:ContinuousFromInterval}
 	Let $(X,\tau)$ be a topological space and $[a,b] \subseteq \bbR$.
-	A function $r : [a,b] \to X$ is said to be \emph{continuous} if for all $x_0 \in [a,b]$, for all sequences $\{x_n\}_{n \in \bbN} \subseteq [a,b]$, $x_n \rightarrow x_0$ implies $r(x_n) \rightarrow r(x_0)$.
+	A function $r : [a,b] \to X$ is said to be \emph{continuous} if for all $x_0 \in [a,b]$, for all sequences $\{x_n\}_{n \in \bbN} \subseteq [a,b]$, $x_n \xrightarrow{[a,b]} x_0$ implies $r(x_n) \xrightarrow{X} r(x_0)$.
 \end{definition}
 
 \begin{lemma}\label{Lem:ContinuousReverseOpenIsOpen}
@@ -662,7 +662,117 @@
 
 \section{Functions and Continuity}
 
+\begin{definition}\label{De:ContinuousFunctions}
+	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+	A function $f : X \to Y$ is said to be \emph{continuous} if for all open sets $V \subseteq Y$ (i.e., $V \in \tau_Y$), we have $f^{-1}(V) \in \tau_X$.
+\end{definition}
+
+\begin{proposition}\label{Prop:SomeEquivResultsAboutContFunc}
+	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+	Suppose $f : X \to Y$.
+	The following are equivalent:
+	\begin{enumerate}
+		\item $f$ is continuous,
+		\item for all $x \in X$, for all neighborhoods $V$ of $f(x)$ in $Y$, there exists a neighborhood $U$ of $x$ in $X$ such that $f(U) \subseteq V$, and
+		\item $C$ is a closed set in $Y$ implies $f^{-1}(C)$ is closed in $X$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proposition}\label{Prop:ContFuncIffOnSubbase}
+	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+	Let $\calS$ be a subbase of open sets in $\tau_Y$.
+	Then $f : X \to Y$ is continuous iff for all $V \in \calS$, $f^{-1}(V) \in \tau_X$.
+\end{proposition}
+
+\begin{definition}\label{De:SequentiallyContinuous}
+	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+	The function $f : X \to Y$ is said to be \emph{sequentially continuous} if for all $x_0 \in X$, for all sequences $\{x_n\}_{n \in \bbN} \subseteq X$, $x_n \xrightarrow{X} x_0$ implies $f(x_0) \xrightarrow{Y} f(x_0)$.
+\end{definition}
+
+\begin{remark}\label{Rem:ContImplySeqCont}
+	If $f$ is a continuous function, then it is sequentially continuous.
+\end{remark}
+
+\begin{example}\label{Exa:SeqContNotCont}
+	Let $X = \bbR$ and $\tau_c$ be the co-countable topology $\{ \emptyset \} \cup \{ \bbR \setminus E : E~\text{is countable} \}$.
+	Let $Y = X$ equipped with the discrete topology $\tau_d = \wp(\bbR)$.
+	Let $f : X \to Y$ be a function defined as $x \mapsto x$.
+	Then $f$ is sequentially continuous but not continuous.
+\end{example}
+
+\begin{proposition}\label{Prop:FstAxCountContIffSeqCont}
+	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+	Let $f : X\to Y$.
+	If $X$ satisfies the first axiom of countability, then $f$ is continuous iff $f$ is sequentially continuous.
+\end{proposition}
+
+\begin{proposition}\label{Prop:ContCompIsCont}
+	The composition of continuous functions is continuous.
+\end{proposition}
+
+\begin{proposition}\label{Prop:ContPreserveConn}
+	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+	If $f : X \to Y$ is a continuous function, then $X$ is connected implies that $f(X)$ is connected.
+\end{proposition}
+
 \section{Separation Axioms}
+
+\begin{definition}\label{De:AxiomsOfSeparation}
+	Let $(X,\tau)$ be a topological space.
+	It is said to be
+	\begin{enumerate}
+		\item $T_0$, if for all $x,y \in X$, $x \neq y$ implies there exists an open set $U$ such that exactly one of $x,y$ belongs to $U$.
+		\item $T_1$, if for all $x,y \in X$, $x \neq y$ implies there exists an open set $U$ such that $x \in U$ and $y \not\in U$.
+		\item $T_2$ or \emph{Hausdorff}, if for all $x,y \in X$, $x \neq y$ implies there exist disjoint open sets $U$ and $V$ such that $x \in U$ and $y \in V$.
+		\item \emph{regular}, if for all $x \in X$, for all closed sets $C \subseteq X$, $x \not\in C$ implies there exist disjoint open sets $U$ and $V$ such that $x \in U$ and $C \subseteq V$.
+		\item $T_3$, if $(X,\tau)$ is $T_1$ and regular.
+		\item \emph{completely regular}, if for all $x \in X$, for all closed sets $C \subseteq X$, $x \not\in C$ implies there exists a continuous function $f : X \to [0,1]$ such that $f(x) = 1$ and $f \equiv 0$ on $C$.
+		\item $T_{3\frac{1}{2}}$ or \emph{Tikhonov}, if $(X,\tau)$ is $T_0$ and completely regular.
+		\item \emph{normal}, if for all disjoint closed sets $C_1,C_2 \subseteq X$, there exist disjoint open sets $U_1$ and $U_2$ such that $C_1 \subseteq U_1$ and $C_2 \subseteq U_2$.
+		\item $T_4$, if $(X,\tau)$ is $T_1$ and normal.
+	\end{enumerate}
+\end{definition}
+
+\begin{proposition}\label{Prop:T1SingletonClosed}
+	If $(X,\tau)$ is $T_1$, then every singleton is closed.
+\end{proposition}
+
+\begin{theorem}\label{The:HierarchyOfSeparation}
+	Consider axioms of separation.
+	We have
+	\begin{equation*}
+		T_4 \implies T_3 \implies T_2 \implies T_1 \implies T_0.
+	\end{equation*}
+\end{theorem}
+
+\begin{example}\label{Exa:NotT0}
+	There exist topologies that are not $T_0$.
+	For example, let $X$ be a set with at least 2 elements and $\tau = \{ \emptyset, X\}$.
+	Then $(X,\tau)$ is not $T_0$.
+\end{example}
+
+\begin{example}\label{Exa:T0NotImplyT1}
+	In general $T_0$ does not imply $T_1$.
+	For example, let $X = \bbR$ and $\tau = \{ (a,+\infty) : a \in \bbR \} \cup \{ \emptyset \}$.
+	Then $(X,\tau)$ is $T_0$ but not $T_1$.
+\end{example}
+
+\begin{example}\label{Exa:NormalNotImplyRegular}
+	In general normal spaces are not necessarily regular spaces.
+	The topology in \exref{T0NotImplyT1} is an example.
+\end{example}
+
+\begin{example}\label{Exa:RegularNotImplyNormal}
+	In general regular spaces are not necessarily normal spaces.
+	Let's consider the Sorgenfrey line $(\bbR,\tau)$ where $\tau = \{ A \subseteq \bbR : \Forall{x \in A} \Exists{\epsilon > 0} [x,x+\epsilon) \subseteq A \}$.
+	The Sorgenfrey plane $(\bbR^2,S)$ is defined as the product topology $(\bbR,\tau) \times (\bbR,\tau)$.
+	Then $S$ is regular but not normal.
+\end{example}
+
+\begin{lemma}\label{Lem:RegularIffNeighborContainClosure}
+	Let $(X,\tau)$ be a topological space.
+	Then $X$ is regular iff for all $x \in X$, for all neighborhoods $U \subseteq X$ of $x$, there exists an open set $V$ such that $x \in V \subseteq \overline{V} \subseteq U$.
+\end{lemma}
 
 \bibliographystyle{abbrv}
 %\bibliography{db}
