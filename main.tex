@@ -11,7 +11,7 @@
 \section{Sets and Ordering}
 
 \begin{definition}\label{De:Equipotent}
-	$2$ sets $A,B$ are said to be \emph{equipotent}, written $A \sim B$, if there exists a bijection between them.
+	Two sets $A,B$ are said to be \emph{equipotent}, written as $A \sim B$, if there exists a bijection between them.
 \end{definition}
 
 \begin{remark}\label{Rem:EquipotenceIsEquivalence}
@@ -29,26 +29,6 @@
 \begin{remark}\label{Rem:RIsUncountable}
 	$\bbR$ is uncountable.
 \end{remark}
-\begin{proof}
-	Suppose $\bbR$ is countable.
-	Then there exists $S \subseteq \bbN^+$ such that $\bbR \sim S$.
-	In other words, there exists a bijection $f : \bbR \to S$.
-	Define $g$ to be the restriction of $f$ on $[0,1]$.
-	Then $g : [0,1] \to f([0,1])$ is also a bijection.
-	Define $S' \coloneqq f([0,1]) \subseteq S \subseteq \bbN^+$.
-	Define a sequence $\{x_n\}_{n \in \bbN^+} \subseteq \{0,1\}$ in the following way:
-	\begin{itemize}
-		\item If $n \in S'$, let $r \coloneqq g^{-1}(n)$.
-		Then there exists a sequence $\{ r_n\}_{n \in \bbN^+}$ such that $r = \sum_{n=1}^\infty r_n \cdot 2^{-n}$.
-		Define $x_n \coloneqq 1 - r_n$.
-		\item If $n \not\in S'$, define $x_n \coloneqq 0$.
-	\end{itemize}
-	Define $x \coloneqq \sum_{n=1}^\infty x_n \cdot 2^{-n} \in [0,1]$.
-	We claim that $g(x) \not\in S'$.
-	If $g(x) \in S'$, then $x = g^{-1}(g(x))$. By the definition of $x$ we know that $x_{g(x)} = 1-x_{g(x)}$, which leads to a contradiction.
-	Hence $g(x) \not\in S'$, and therefore $g$ is not a bijection.
-	Then we can conclude that $\bbR$ is not countable, i.e., indeed uncountable.
-\end{proof}
 
 \begin{theorem}[Cantor-Bernstein-Schr{\"o}der]\label{The:CantorBernsteinSchroder}
 	If there exist injections $f:A \to B$ and $g : B \to A$, then $A \sim B$.
@@ -56,7 +36,7 @@
 
 \begin{definition}\label{De:PowerSet}
 	Let $X$ be a set.
-	The \emph{power set} of $X$, written $\wp(X)$, is the set of all subsets of $X$.
+	The \emph{power set} of $X$, written as $\wp(X)$, is the collection of all subsets of $X$.
 \end{definition}
 
 \begin{lemma}[Cantor]\label{Lem:CantorPowerSet}
@@ -71,7 +51,7 @@
 \end{remark}
 
 \begin{definition}\label{De:PartialOrder}
-	A \emph{partial order} on a set $X$ is a binary relation on $X$, written ${\le}$, if
+	A \emph{partial order} on a set $X$ is a binary relation on $X$, written as ${\le}$, if
 	\begin{itemize}
 		\item (reflexivity): $x \le x$ for all $x \in X$,
 		\item (antisymmetry): $x \le y$ and $y \le x$ imply $x = y$ for all $x,y \in X$, and
@@ -161,10 +141,23 @@
 	Let $X$ be a set and $\calF$ be a family of subsets of $X$.
 	Then the smallest topology $\tau$ containing $\calF$ is given by arbitrary union of finite intersection of elements of $\calF \cup \{\emptyset,X\}$, i.e.,
 	\begin{equation*}
-		\tau = \set{ \bigcup_{\alpha \in \calI} (U_1^\alpha \cap \cdots \cap U_{N(\alpha)}^\alpha) : N(\alpha) \in \bbN, U_i^\alpha \in \calF \cup \{ \emptyset, X \} }.
+		\set{ \bigcup_{\alpha \in \calI} \p{U_1^\alpha \cap \cdots \cap U_{N(\alpha)}^\alpha} : N(\alpha) \in \bbN, U_i^\alpha \in \calF \cup \{ \emptyset, X \} }.
 	\end{equation*}
 	Moreover, we say that $\tau$ is \emph{generated} by $\calF$, and $\calF$ is a \emph{subbase} of $\tau$.
 \end{proposition}
+\begin{proof}
+	Define $\tau$ to be the smallest topology containing $\calF$ and $\tau'$ to be the topology constructed by arbitrary union of finite intersection of elements of $\calF$ and $\emptyset$.
+	Then because $\tau$ is the smallest topology containing $\calF$, we know that $\tau \subseteq \tau'$.
+	Then it suffices to show that $\tau' \subseteq \tau$.
+	Pick an arbitrary
+	\begin{equation}\label{Eq:UnionIntersect}
+	\bigcup_{\alpha \in \calJ} \p{ U_1^\alpha \cap \cdots \cap U_{N(\alpha)}^\alpha }
+	\end{equation}
+	from $\tau'$.
+	Because $U_i^\alpha$ are elements of $\calF \cup \{ \emptyset,X\}$, and indeed $\tau \supseteq \calF \cup \{ \emptyset,X\}$, we know that $U_i^\alpha \in \tau$.
+	By definition of topologies, we know \eqref{UnionIntersect} is an open set, i.e., it is contained in $\tau$.
+	Therefore we conclude that $\tau' \subseteq \tau$.
+\end{proof}
 
 \begin{definition}\label{De:Neighborhoods}
 	Let $(X,\tau)$ be a topological space.
@@ -173,9 +166,9 @@
 \end{definition}
 
 \begin{definition}\label{De:BaseLocalBase}
-	A family $\beta \subseteq \wp(X)$ is said to be a \emph{base} of the topology $\tau$ on $X$, if every open set can be written as a union of elements of $\beta$.
+	A family $\beta \subseteq \tau$ is said to be a \emph{base} of the topology $\tau$ on $X$, if every open set can be written as a union of elements of $\beta$.
 	
-	Given $x \in X$, a family $\beta_x \subseteq \tau$ of neighborhoods of $x$ is said to be a \emph{local base} of $x$ if every neighborhood of $x$ contains an element of $\beta_x$.
+	Given $x \in X$, a family $\beta_x \subseteq \{ U \in \tau : x \in U\}$ of neighborhoods of $x$ is said to be a \emph{local base} of $x$ if every neighborhood of $x$ contains an element of $\beta_x$.
 \end{definition}
 
 \begin{example}\label{Exa:BaseLocalBase}\
@@ -197,6 +190,61 @@
 		\item for all $B_1,B_2 \in \beta$, $B_1 \cap B_2 \neq \emptyset$, then for all $x \in B_1 \cap B_2$, there exist $B_3 \in \beta$, such that $x \in B_3$ and $B_3 \subseteq B_1 \cap B_2$.
 	\end{enumerate}
 \end{proposition}
+\begin{proof}
+	\begin{itemize}
+		\item For the ${\implies}$ direction, let $\beta$ is a base for $\tau$.
+		\begin{itemize}
+			\item WTS (1): Trivial by $\emptyset \in \tau$.
+			\item WTS (2): Trivial by $X \in \tau$.
+			\item WTS (3): Fix $B_1$ and $B_2$ and let $x \in B_1 \cap B_2$.
+			Because $B_1,B_2 \in \beta \subseteq \tau$, i.e., $B_1$ and $B_2$ are open sets, we know that $B_1 \cap B_2$ is also open.
+			By definition of bases, we know there exists a collection $\{U_\alpha \in \beta\}_{\alpha \in \calI}$ such that
+			\[
+			B_1 \cap B_2 = \bigcup_{\alpha \in \calI} U_\alpha.
+			\]
+			Because $x \in B_1 \cap B_2$, we know that there exists $\alpha_0 \in \calI$ such that $x \in U_{\alpha_0}$.
+			Set $B_3 \coloneqq U_{\alpha_0} \in \beta$.
+			Then we conclude that $x \in B_3$ and $B_3 \subseteq B_1 \cap B_2$.
+		\end{itemize}
+		
+		\item For the ${\impliedby}$ direction, let $\tau$ be the collection constructed by arbitrary union of elements of $\beta$.
+		Then indeed $\beta \subseteq \tau$.
+		We claim that $\tau$ is a topology.
+		\begin{itemize}
+			\item WTS \defref{Topology}(1): On the one hand, (1) implies that $\emptyset \in \tau$.
+			On the other hand, for each $x \in X$, by (2) we know there exists $B_x \in \beta$ such that $x \in B_x$.
+			Therefore
+			\[
+			X = \bigcup_{x \in X} B_x \in \tau.
+			\]
+			
+			\item WTS \defref{Topology}(2):
+			Suppose $U_1,\cdots,U_n \in \tau$.
+			It suffices to show that $U_1 \cap \cdots \cap U_n \in \tau$.
+			For each $i=1,\cdots,n$, $U_i \in \tau$ implies that
+			\[
+			U_i = \bigcup \calB_i \quad \text{for some} \quad \calB_i \subseteq \beta.
+			\]
+			Let $x \in U_1 \cap \cdots \cap U_n$.
+			Then for each $i=1,\cdots,n$, there exists $B_x^{(i)} \in \calB_i$ such that $x \in B_x^{(i)}$.
+			Therefore $x \in B_x^{(1)} \cap \cdots \cap B_x^{(n)}$.
+			By induction with the property (3) we know that there exists $B_x \in \beta$ such that $B_x \subseteq B_x^{(1)} \cap \cdots \cap B_x^{(n)}$.
+			Therefore, we conclude that
+			\[
+			U_1 \cap \cdots \cap U_n = \bigcup_{x \in U_1 \cap \cdots \cap U_n} B_x \in \tau.
+			\]
+			
+			\item WTS \defref{Topology}(3):
+			Suppose $\{U_\alpha \in \tau\}_{\alpha \in \calI}$.
+			It suffices to show that $\bigcup_{\alpha \in \calI} U_\alpha \in \tau$.
+			For each $\alpha \in \calI$, $U_\alpha \in \tau$ implies that
+			\[
+			U_\alpha = \bigcup \calB_\alpha \quad \text{for some} \quad \calB_\alpha \subseteq \beta.
+			\]
+			Then $\bigcup_{\alpha \in \calI} U_\alpha = \bigcup_{\alpha \in \calI} \bigcup \calB_\alpha$ is indeed contained in $\tau$.
+		\end{itemize}
+	\end{itemize}
+\end{proof}
 
 \section{Countability Axioms}
 
