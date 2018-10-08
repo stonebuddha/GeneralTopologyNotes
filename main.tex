@@ -252,13 +252,21 @@
 	Let $(X,\tau)$ be a topological space.
 	\begin{itemize}
 		\item $(X,\tau)$ is said to be \emph{first countable} (i.e., $(X,\tau)$ satisfies the first axiom of countability), if every $x \in X$ admits a countable local base.
-		\item $(X,\tau)$ is said to be \emph{second countable}, if it has a countable base.
+		\item $(X,\tau)$ is said to be \emph{second countable} (i.e., $(X,\tau)$ satisfies the second axiom of countability), if it has a countable base.
 	\end{itemize}
 \end{definition}
 
 \begin{remark}\label{Rem:SndAxCountImplyFstAx}
 	The second axiom of countability implies the first one, but the other direction does not hold in general.
 \end{remark}
+
+\begin{proposition}\label{Prop:SndAxCountImplyFstAx}
+	If a topological space $(X,\tau)$ is second countable, then it is first countable.
+\end{proposition}
+\begin{proof}
+	Let $\beta = \{ B_n\}_{n \in \bbN} \subseteq \tau$ be a base.
+	We claim that for every $x \in X$, the collection $\beta_x \coloneqq \{ B_n \in \beta : x \in B_n\}$ is a local base of $x$.
+\end{proof}
 
 \section{Topological Constructions}
 
