@@ -675,33 +675,61 @@
 	Given $E \subseteq X$ and $p \in X$, $p$ is said to be a \emph{limit point} of $E$ if for all neighborhoods $U$ of $p$, we have $(U \cap E) \setminus \{ p \} \neq \emptyset$.
 \end{definition}
 
-\begin{remark}\label{Rem:LimitContainedInClosure}
+\begin{proposition}\label{Prop:LimitContainedInClosure}
 	Let $E'$ be the set of all limit points of $E$.
 	Then $E' \subseteq \overline{E}$.
-\end{remark}
+\end{proposition}
+\begin{proof}
+	Let $p$ be a limit point of $E$, i.e., for all neighborhoods $U$ of $p$, $(U \cap E) \setminus \{ p\} \neq \emptyset$, so indeed $U \cap E \neq \emptyset$.
+	By definition of closures we conclude that $p \in \overline{E}$.
+\end{proof}
 
 \begin{proposition}\label{Prop:NonLimitIsIsolated}
 	Let $(X,\tau)$ be a topological space.
 	Suppose $E \subseteq X$ is equipped with the induced topology $\tau_E$.
 	Then $p \in E \setminus E'$ iff $\{p\} \in \tau_E$ (i.e., $p$ is an isolated point in $\tau_E$).
 \end{proposition}
+\begin{proof}
+	\begin{align*}
+		& \{p\} \in \tau_E \\
+		\iff & \Exists{U \in \tau} U \cap E = \{p\} \\
+		\iff & p \in E \wedge \Exists{U \in \tau} (U \cap E) \setminus \{p\} = \emptyset \\
+		\iff & p \in E \wedge p \not\in E' \\
+		\iff & p \in E \setminus E'.
+	\end{align*}
+\end{proof}
 
 \begin{proposition}\label{Prop:BallOfLimitContainInfinite}
 	Let $(X,d)$ be a metric space.
 	Given $E \subseteq X$ and $p \in E'$, for all $r > 0$, the ball $B(p,r)$ contains infinitely many points of $E$.
 \end{proposition}
+\begin{proof}
+	Suppose that there exists $r > 0$ such that $B(p,r)$ contains finitely many points of $E$.
+	Then there exists $r' > 0$ such that $B(p,r') = \{p\}$.
+	But $B(p,r')$ is an open neighborhood of $p$, $p \in E'$ implies that $(B(p,r') \cap E) \setminus \{p\}$ should be nonempty.
+	Thus we conclude the proof by contradiction.
+\end{proof}
 
 \begin{proposition}\label{Prop:OrigPlusLimitIsClosure}
 	Let $(X,\tau)$ be a topological space and $E \subseteq X$.
 	Then $E \cup E' = \overline{E}$.
 \end{proposition}
+\begin{proof}
+	By the fact that $E \subseteq \overline{E}$ as well as \propref{LimitContainedInClosure} we know that $E \cup \overline{E} \subseteq \overline{E}$.
+	Then it suffices to show that $\overline{E} \subseteq E \cup E'$.
+	Suppose $p \in \overline{E}$, then for every neighborhood $U$ of $p$, $U \cap E \neq \emptyset$.
+	\begin{itemize}
+		\item If for all such $U$, $(U \cap E) \setminus \{p\} \neq \emptyset$, then $p \in E'$.
+		\item Otherwise, suppose there exists $U_0 \in \tau$ such that $p \in U_0$ and $(U_0 \cap E) \setminus \{p\} = \emptyset$. Because $U_0 \cap E \neq \emptyset$, we know that $U_0 \cap E = \{ p\}$ exactly. Thus $p \in E$.
+	\end{itemize}
+\end{proof}
 
 \section{Sequences}
 
 \begin{definition}\label{De:Sequences}
 	Let $(X,\tau)$ be a topological space.
 	Suppose $\{x_n\}_{n \in \bbN} \subseteq X$ is a sequence in $X$.
-	Then $p$ is said to be a \emph{limit} of $\{x_n\}_{n \in \bbN}$, written $x_n \xrightarrow[n \to \infty]{X} p$, if for all neighborhoods $U$ of $p$, there exists $n_0 \in \bbN$ such that for all $n \ge n_0$, we have $x_n \in U$.
+	Then $p$ is said to be a \emph{limit} of $\{x_n\}_{n \in \bbN}$, written as $x_n \xrightarrow[n \to \infty]{X} p$ (sometimes $x_n \xrightarrow{X} p$ or even $x_n \rightarrow p$ if there is no ambiguity) , if for all neighborhoods $U$ of $p$, there exists $n_0 \in \bbN$ such that for all $n \ge n_0$, we have $x_n \in U$.
 \end{definition}
 
 \begin{remark}\label{Rem:LimitOfSeqNotUnique}
@@ -709,14 +737,38 @@
 \end{remark}
 
 \begin{lemma}\label{Lem:LimitOfSeqInClosure}
-	Let $(X,\tau)$ be a topological space.
-	Suppose $x_n \rightarrow p$ in $X$ for some $\{x_n\}_{n \in \bbN} \subseteq X$ and $p \in X$.
-	If there exists $E \subseteq X$ such that for all $n \in \bbN$ we have $x_n \in E$, then $p \in \overline{E}$.
+	Let $(X,\tau)$ be a topological space and $E \subseteq X$.
+	If $x_n \rightarrow p$ for some sequence $\{x_n\}_{n \in \bbN} \subseteq E$ and $p \in X$, then $p \in \overline{E}$.
 \end{lemma}
+\begin{proof}
+	Straightforward from the definition.
+\end{proof}
 
 \begin{lemma}\label{Lem:FirstCountLimitOfSeqIffClosure}
 	If a topological space satisfies the first axiom of countability, then $p \in \overline{E}$ iff there exists a sequence $\{x_n\}_{n \in \bbN} \subseteq E$ such that $x_n \rightarrow p$.
 \end{lemma}
+\begin{proof}
+	The ${\impliedby}$ direction is given by \lemref{LimitOfSeqInClosure}.
+	For the ${\implies}$ direction, suppose $\beta_p = \{B_n\}_{n \in \bbN}$ is a local base for $p$.
+	\begin{itemize}
+		\item If $p \in E$, then we define $x_n \coloneqq p$ for all $n$.
+		Then $\{x_n\}_{n \in \bbN} \subseteq E$ and $x_n \rightarrow p$ trivially.
+		\item If $|\beta_p|$ is finite, i.e., $\beta_p = \{B_1,\cdots,B_N\}$ for some $N$, we define $V \coloneqq B_1 \cap \cdots \cap B_N$, then $V$ is open and by the fact that $p \in V$ we know that $V$ is a neighborhood of $p$.
+			By the assumption that $p \in \overline{E}$ we know that $V \cap E \neq \emptyset$.
+			Pick $x_o \in V \cap E$ and define $x_n \coloneqq x_o$ for all $n$.
+			Then $\{x_n\}_{n \in \bbN} \subseteq E$ and $x_n \rightarrow p$ trivially.
+		\item Otherwise, suppose $\beta=\{B_n\}_{n \in \bbN}$ contains countably many elements.
+			By $p \in \overline{E}$ we know that $E \cap B_n \neq \emptyset$ for all $n$.
+			We define
+			\[
+			x_n \in \p{ \bigcap_{i=0}^n B_i } \cap E
+			\]
+			and we claim that $x_n \rightarrow p$.
+			Suppose $U$ is a neighborhood of $p$.
+			Then there exists $m \in \bbN$ such that $U \supseteq B_m$.
+			By definition of $\{x_n\}_{n \in \bbN}$, we conclude that for all $n \ge m$, $x_n \in B_m \subseteq U$.
+	\end{itemize}
+\end{proof}
 
 \begin{example}\label{Exa:CountableNotImplyFstCountable}
 	In general countable sets do not imply the first axiom of countability.
@@ -735,24 +787,49 @@
 	Then $U \subseteq X$ is said to be \emph{sequentially open} if for all $p \in U$, for all $\{x_n\}_{n \in \bbN} \subseteq X$ with $x_n \rightarrow p$, there exists $n_0 \in \bbN$ such that for all $n \ge n_0$, we have $x_n \in U$.
 \end{definition}
 
-\begin{remark}\label{Rem:ClosedOpenImplySeqClosedOpen}\
+\begin{proposition}\label{Prop:ClosedOpenImplySeqClosedOpen}\
 	\begin{itemize}
 		\item If $E$ is closed, then $E$ is sequentially closed.
 		\item If $U$ is open, then $U$ is sequentially open.
 	\end{itemize}
-\end{remark}
+\end{proposition}
+\begin{proof}
+	\begin{itemize}
+		\item If $E$ is closed, then we have $E = \overline{E}$.
+		By \lemref{LimitOfSeqInClosure} we know that for all sequences $\{x_n\}_{n \in \bbN} \subseteq E$ and $x_n \rightarrow p$, then $p \in \overline{E}$.
+		Therefore $E$ is sequentially closed.
+		
+		\item Suppose $U$ is open and $\{x_n\}_{n \in \bbN} \subseteq X$ with $x_n \rightarrow p$ for some $p \in U$.
+		We claim that there exists $n_0 \in \bbN$ such that for all $n \ge n_0$ we have $x_n \in U$.
+		If not, we know that for all $n_0 \in \bbN$ there exists $n \ge n_0$ such that $x_n \not\in U$.
+		Thus the sequence has a sub-sequence $\{y_n\}_{n \in \bbN} \subseteq X \setminus U$ with the same limit point $p$.
+		However, $X \setminus U$ is closed and hence sequentially closed, we have $p \in X \setminus U$, which contradicts the assumption that $p \in U$.
+	\end{itemize}
+\end{proof}
 
-\begin{remark}\label{Rem:SeqOpenNotOpen}
+\begin{proposition}\label{Prop:SeqOpenNotOpen}
 	In general, sequentially open sets may not be open.
-	Consider an uncountable set $X$ and the co-countable topology $\tau \coloneqq \{ X \setminus F : F~\text{is countable} \} \cup \{ \emptyset \}$.
+	Consider an uncountable set $X$ and the \emph{co-countable topology} $\tau \coloneqq \{ X \setminus F : F~\text{is countable} \} \cup \{ \emptyset \}$.
 	Then for all $p \in X$, $\{p\}$ is not open, while all nonempty sets $U \subseteq X$ are sequentially open.
-\end{remark}
+\end{proposition}
+\begin{proof}
+	\begin{itemize}
+		\item WTS $\{p\}$ is not open for all $p \in X$: By definition of $\tau$ we know that all nonempty open sets should contain uncountably many elements. Thus $\{p\}$ is not open.
+		\item WTS $E$ is sequentially open for all nonempty $E \subseteq X$: Suppose $p \in E$ and $\{x_n\}_{n \in \bbN} \subseteq X$ with $x_n \rightarrow p$.
+		We want to show that there exists $n_0 \in \bbN$ such that for all $n \ge n_0$ we have $x_n \in E$.
+		Suppose not, then for all $n_0 \in \bbN$, there exists $n \ge n_0$ such that $x_{n_0} \not\in E$.
+		Then there exists a sub-sequence $\{ y_n\}_{n \in \bbN} \subseteq X \setminus E$ with the same limit point $p$.
+		Define $U \coloneqq X \setminus \{y_n : n \in \bbN\}$.
+		Then $U$ is an open neighborhood of $E$, and indeed a neighborhood of $p$.
+		However, since $y_n \not\in U$ for all $n$, we have a contradiction from $y_n \rightarrow p$.
+	\end{itemize}
+\end{proof}
 
 \begin{remark}\label{Rem:ClosureIsSeqClosureThenFUSpace}
 	Define $\overline{E}_{\mathrm{seq}} \coloneqq \{ p \in X : \Exists{\{x_n\}_{n \in \bbN} \subseteq E} x_n \rightarrow p \}$.
 	Then in general we have $\overline{E}_{\mathrm{seq}} \subseteq \overline{E}$.
 	If $(X,\tau)$ is a topological space where for all $E \subseteq X$ we have $\overline{E} = \overline{E}_{\mathrm{seq}}$, then $(X,\tau)$ is said to be a \emph{Fr{\'e}chet-Urysohn space}.
-	Then the first axiom of countability indeed implies F-U.
+	The first axiom of countability indeed implies F-U.
 \end{remark}
 
 \begin{definition}\label{De:SequentialSpace}
