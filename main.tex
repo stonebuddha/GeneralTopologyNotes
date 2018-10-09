@@ -1,6 +1,7 @@
 \documentclass{techreport}
 
 \newcommand{\Omit}[1]{}
+\newcommand{\diw}[1]{{\color{ACMRed} DW: #1}}
 
 \sloppy
 \begin{document}
@@ -952,27 +953,132 @@
 
 \begin{proposition}\label{Prop:MetricDisconnectedSubsetLifting}
 	Suppose $(X,d)$ is a metric space.
-	Then $E \subseteq X$ is disconnected iff there exist nonempty disjoint open sets $U$ and $V$ in $X$ such that $U \cap E \neq \emptyset$, $V \cap E \neq \emptyset$, and $E = (U \cap E) \cup (V \cap E)$.
+	Then $E \subseteq X$ is disconnected iff there exist nonempty disjoint open sets $U$ and $V$ in $X$ such that $U \cap E \neq \emptyset$, $V \cap E \neq \emptyset$, and $E \subseteq U \cup V$.
 \end{proposition}
+\begin{proof}
+	\begin{itemize}
+		\item WTS the ${\impliedby}$ direction: Observe that
+		\[
+		E = (U \cap E) \cup (V \cap E)
+		\]
+		by $E \subseteq U \cup V$.
+		By $U$ and $V$ are disjoint we know that $U \cap E$ and $V \cap E$ are also disjoint.
+		Also, we know that $U \cap E$ and $V \cap E$ are nonempty.
+		Thus by definition we conclude that $E$ is disconnected.
+		
+		\item WTS the ${\implies}$ direction:
+		Suppose $E \subseteq X$ is disconnected.
+		Then there exists sets $A,B$ such that
+		\begin{enumerate}[(i)]
+			\item $E = A \cup B$,
+			\item $A = E \cap U$ for some $U \in \tau_d$,
+			\item $B = E \cap V$ for some $V \in \tau_d$,
+			\item $A \neq \emptyset$, $B \neq \emptyset$, and
+			\item $A \cap B = \emptyset$ and thus $E \cap U \cap V = \emptyset$.
+		\end{enumerate}
+		
+		First, we claim that $A \cup \overline{B} = \emptyset$ and $\overline{A} \cup B = \emptyset$.
+		Without loss of generality we only need to show $\overline{A} \cup B = \emptyset$.
+		Let $b \in B = E \cap V$.
+		Then there exists $r > 0$ such that $B(b,r) \subseteq V$.
+		Thus we have
+		\[
+		B(b,r) \cap A \subseteq V \cap A = V \cap E \cap U = \emptyset
+		\]
+		by (v) and we know that $b \not\in \overline{A}$.
+		
+		By $A \cup \overline{B} = \emptyset$, we know that for every $a \in A$, there exists $r_a > 0$ such that $B(a,r_a) \cap B = \emptyset$.
+		Similarly, for every $b \in B$, there exists $r_b > 0$ such that $B(b,r_b) \cap A = \emptyset$.
+		Define two open sets
+		\begin{align*}
+			\tilde{U} & \coloneqq \bigcup_{a \in A} B\p{a,\frac{r_a}{2}} \\
+			\tilde{V} & \coloneqq \bigcup_{b \in B} B\p{b,\frac{r_b}{2}}
+		\end{align*}
+		and then we have
+		\begin{itemize}
+			\item $\tilde{U} \cap E \supseteq A \cap E  = A \neq \emptyset$ by (i) and (iv),
+			\item $\tilde{V} \cap E \supseteq B \cap E = B \neq \emptyset$ by (i) and (iv),
+			\item $E = A \cup B \subseteq \tilde{U} \cap \tilde{V}$ by (i), and
+			\item $\tilde{U} \cap \tilde{V} = \emptyset$, because for all $x \in B(a,\nicefrac{r_a}{2})$ and $y \in B(b,\nicefrac{r_b}{2})$, we know the following
+			\begin{align*}
+				& d(a,b) \le d(a,x) + d(x,y) + d(y,b) \\
+				\implies & d(x,y) \ge d(a,b) - d(a,x) - d(y,b) \\
+				\implies & d(x,y) > \max\{r_a,r_b\} - \frac{r_a}{2} - \frac{r_b}{2} \\
+				\implies & d(x,y) > 0 \\
+				\implies & x \neq y
+			\end{align*}
+			hence $\tilde{U} \cap \tilde{V} = \emptyset$.
+		\end{itemize}
+	\end{itemize}
+\end{proof}
 
 \begin{theorem}\label{The:RConnectedConvex}
 	$C \subseteq \bbR$ is connected iff $C$ is convex, i.e., an interval.
 \end{theorem}
+\begin{proof}
+	\diw{TODO.}
+\end{proof}
 
 \begin{proposition}\label{Prop:ConnIffEveryTwoPointsConn}
 	A topological space $(X,\tau)$ is connected iff for all $x,y\in X$, there exists $E \subseteq X$ such that $x,y\in E$ and $E$ is connected.
 \end{proposition}
+\begin{proof}
+	\begin{itemize}
+		\item WTS the ${\implies}$ direction: Set $E$ to be $X$.
+		\item WTS the ${\impliedby}$ direction:
+		Suppose $X$ is disconnected.
+		Then there exist disjoint nonempty open sets $\tilde{U}$ and $\tilde{V}$ such that $\tilde{U} \cup \tilde{V} = X$.
+		Let $x \in \tilde{U}$ and $y \in \tilde{V}$.
+		Then by assumption we know that there exists $E \subseteq X$ such that $x,y\in E$ and $E$ is connected.
+		However, on the other hand, we have
+		\[
+		E = E \cap X = (E \cap \tilde{U}) \cup (E \cap \tilde{V})
+		\]
+		and indeed $E$ is union of two disjoint nonempty open sets in $E$, thus $E$ should be disconnected.
+		By contradiction, we conclude that $X$ is connected.
+	\end{itemize}
+\end{proof}
 
 \begin{proposition}\label{Prop:UnionConnStillConn}
 	Let $(X,\tau)$ be a topological space.
 	Let $E \subseteq X$.
 	If $E = \bigcup_{\alpha \in \Lambda} E_\alpha$ for each $E_\alpha$ connected, and $\bigcap_{\alpha \in \Lambda} E_\alpha$ is nonempty, then $E$ is connected.
 \end{proposition}
+\begin{proof}
+	Without loss of generality let's assume $E = X$.
+	Suppose $E$ is disconnected.
+	Then there exist disjoint nonempty open sets $U,V$ in $E$ such that $E = U \cup V$.
+	On the other hand, we have for each $\alpha \in \Lambda$
+	\[
+	E_\alpha = E \cap E_\alpha = (U \cap E_\alpha) \cup (V \cap E_\alpha),
+	\]
+	but $E_\alpha$ is connected, hence either $E_\alpha \subseteq U$ or $E_\alpha \subseteq V$.
+	By the assumption that $\bigcap_{\alpha \in \Lambda} E_\alpha \neq \emptyset$, we know that either for all $\alpha$, $E_\alpha \subseteq U$ or for all $\alpha$, $E_\alpha \subseteq V$.
+	Because $E = \bigcup_{\alpha \in \Lambda} E_\alpha$, we know that either $E \subseteq U$ or $E \subseteq V$, thus either $U = \emptyset$ or $V = \emptyset$, which leads to a contradiction.
+	Therefore we conclude that $E$ is connected.
+\end{proof}
 
 \begin{proposition}\label{Prop:ClosureOfConnStillConn}
 	Let $(X,\tau)$ be a topological space.
 	If $E \subseteq X$ is connected, then $\overline{E}$ is also connected.
 \end{proposition}
+\begin{proof}
+	Suppose $\overline{E}$ is disconnected.
+	Then there exist two disjoint nonempty open sets $U,V$ in $\overline{E}$ such that $\overline{E} = U \cup V$.
+	Let $U = \overline{E} \cap U_0$ and $V = \overline{E}\cap V_0$ for some $U_0,V_0 \in \tau$.
+	Thus by $E \subseteq \overline{E}$ we have
+	\[
+	E = (E \cap U_0) \cup (E \cap V_0).
+	\]
+	On the other hand,
+	\[
+	(E \cap U_0) \cap (E \cap V_0) \subseteq (\overline{E} \cap U_0) \cap (\overline{E} \cap V_0) = U \cap V = \emptyset,
+	\]
+	and because $E$ is connected, we have either $E \subseteq U_0$ or $E \subseteq V_0$.
+	Without loss of generality, let's assume $E \subseteq V_0$ and indeed $E \cap U_0 = \emptyset$.
+	However, $\overline{E} \cap U_0 = U \neq \emptyset$, so pick an $x \in \overline{E} \cap U_0$, by $x \in \overline{E}$ and $x \in U_0$ we know that $U_0 \cap E \neq \emptyset$, which leads to a contradiction.
+	Therefore we conclude that $\overline{E}$ is connected.
+\end{proof}
 
 \begin{definition}\label{De:ContinuousFromInterval}
 	Let $(X,\tau)$ be a topological space and $[a,b] \subseteq \bbR$.
@@ -984,11 +1090,27 @@
 	Let $r : [a,b] \to X$ be a continuous function.
 	Then for all $U \in \tau$, $r^{-1}(U)$ is open in $[a,b]$.
 \end{lemma}
+\begin{proof}
+	Suppose $U \in \tau$ and $r^{-1}(U)$ is not open in $[a,b]$.
+	Then there exists $x \in r^{-1}(U)$, such that for all $\epsilon > 0$, $(x-\epsilon,x+\epsilon) \cap [a,b] \not\subseteq r^{-1}(U)$.
+	Define a sequence $\{x_n\}_{n \in \bbN^+}$ such that for all $n \in \bbN^+$, $x_n \in ((x-\nicefrac{1}{n},x+\nicefrac{1}{n}) \cap [a,b]) \setminus r^{-1}(U)$.
+	Thus $r(x_n) \not\in U$ for all $n \in \bbN^+$.
+	Then $x_n \xrightarrow{[a,b]} x$ and because $r$ is continuous, we know that $r(x_n) \xrightarrow{X} r(x) \in U$.
+	By contradiction, we conclude that $r^{-1}(U)$ must be open.
+\end{proof}
 
-\begin{remark}\label{Lem:ContinuousReverseClosedIsClosed}
+\begin{proposition}\label{Prop:ContinuousReverseClosedIsClosed}
 	Let $r : [a,b] \to X$ be a continuous function.
 	If $C$ is closed in $X$, then $r^{-1}(C)$ is closed in $[a,b]$.
-\end{remark}
+\end{proposition}
+\begin{proof}
+	By \lemref{ContinuousReverseOpenIsOpen}, we know that $r^{-1}(X \setminus C)$ is open.
+	Then
+	\[
+	r^{-1}(C) = r^{-1}(X \setminus (X \setminus C)) = r^{-1}(X) \setminus r^{-1}(X \setminus C) = [a,b] \setminus r^{-1}(X\setminus C)
+	\]
+	is closed in $[a,b]$.
+\end{proof}
 
 \begin{definition}\label{De:PathwiseConnected}
 	A topological space $(X,\tau)$ is said to be \emph{pathwise connected} if for all $x,y \in X$, there exists a continuous path $r : [a,b] \to X$ such that $r(a) =x$ and $r(b)=y$.
@@ -997,19 +1119,36 @@
 \begin{proposition}\label{Prop:PathWiseConnImplyConn}
 	If the topological space $(X,\tau)$ is pathwise connected, then it is connected.
 \end{proposition}
+\begin{proof}
+	Suppose $(X,\tau)$ is pathwise connected but not connected.
+	Then there exist two disjoint nonempty open sets $U,V$ such that $X = U \cup V$.
+	Let $x \in U$ and $y \in V$.
+	By the pathwise connectedness, there exists a continuous path $r : [0,1] \to X$ such that $r(0)=x$ and $r(1)=y$.
+	By \lemref{ContinuousReverseOpenIsOpen} and the fact that $r(0)=x,r(1)=y$, we know that $r^{-1}(U)$ and $r^{-1}(V)$ are nonempty open sets in $[a,b]$.
+	By $U \cap V = \emptyset$, we know that $r^{-1}(U) \cap r^{-1}(V) = \emptyset$.
+	On the other hand,
+	\[
+	[0,1] = r^{-1}(X) = r^{-1}(U) \cup r^{-1}(V)
+	\]
+	is written as union of two disjoint nonempty open sets, which contradicts the fact that $[0,1]$ is connected (by \theoref{RConnectedConvex}).
+	Therefore we conclude that $(X,\tau)$ is connected.
+\end{proof}
 
 \begin{proposition}\label{Prop:OpenSetInEuclideanSpaceConn}
 	Suppose $U \subseteq \bbR^N$ is an open set.
 	Then $U$ is connected iff it is pathwise connected.
 \end{proposition}
+\begin{proof}
+	\diw{TODO.}
+\end{proof}
 
 \begin{definition}\label{De:ConnEquivalenceRelation}
 	Let $(X,\tau)$ be a topological space.
 	Let's define a relation ${\sim}$ as $x \sim y$ iff there exists $E \subseteq X$ such that $x,y\in E$ and $E$ is connected.
 	Then ${\sim}$ is an equivalence relation.
 	For all $x \in X$, define the equivalence class of $x$ as $E_x \coloneqq \{ y \in X : y \sim x \}$.
-	Then $E_x = \bigcup_{E \subseteq X, x \in E, E~\text{is connected}} E$, i.e., $E_x$ is a (largest) connected component.
-	Moreover, we have $E_x = \overline{E_x}$.
+	Then $E_x = \bigcup_{E \subseteq X, x \in E, E~\text{is connected}} E$, i.e., $E_x$ is a (largest) connected component containing $x$.
+	Moreover, we have $E_x = \overline{E_x}$ by \propref{ClosureOfConnStillConn}.
 \end{definition}
 
 \begin{proposition}\label{Prop:ClosedConnComponentStillClosed}
