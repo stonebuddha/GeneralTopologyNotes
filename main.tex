@@ -1181,21 +1181,62 @@
 		\item $C$ is a closed set in $Y$ implies $f^{-1}(C)$ is closed in $X$.
 	\end{enumerate}
 \end{proposition}
+\begin{proof}
+	\begin{itemize}
+		\item WTS (1) implies (2): Suppose $x \in X$ and $V$ is a neighborhood of $f(x)$ in $Y$.
+		Because $f$ is continuous, we know that $f^{-1}(V) \in \tau_X$.
+		Define $U \coloneqq f^{-1}(V)$ and then immediately we have $x \in U$ and $f(U) \subseteq V$.
+		
+		\item WTS (3) implies (1):
+		For each $V \in \tau_Y$, defined $C \coloneqq Y \setminus V$ is a closed set in $Y$.
+		Then $f^{-1}(C)$ is closed in $X$.
+		Thus
+		\[
+		f^{-1}(V) = X \setminus f^{-1}(C)
+		\]
+		is open in $X$.
+		
+		\item WTS (2) implies (3): Let $C$ be a closed set in $Y$.
+		Then $V \coloneqq Y \setminus C$ is an open set in $Y$.
+		Define $U \coloneqq f^{-1}(V)$.
+		If $U = \emptyset$, then $f^{-1}(C) = X$ is indeed closed in $X$.
+		Suppose $U \neq \emptyset$.
+		Then for every $x \in U$, there exists a neighborhood $U_x$ of $x$ such that $f(U_x) \subseteq V$.
+		Therefore $U_x \subseteq f^{-1}(V) = U$ and
+		\[
+		U = \bigcup_{x \in U} U_x
+		\]
+		is indeed an open set in $X$.
+		Therefore $f^{-1}(C) = X \setminus f^{-1}(V) = X \setminus U$ is closed in $X$.
+	\end{itemize}
+\end{proof}
 
 \begin{proposition}\label{Prop:ContFuncIffOnSubbase}
 	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
 	Let $\calS$ be a subbase of open sets in $\tau_Y$.
 	Then $f : X \to Y$ is continuous iff for all $V \in \calS$, $f^{-1}(V) \in \tau_X$.
 \end{proposition}
+\begin{proof}
+	\diw{TODO.}
+\end{proof}
 
 \begin{definition}\label{De:SequentiallyContinuous}
 	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
-	The function $f : X \to Y$ is said to be \emph{sequentially continuous} if for all $x_0 \in X$, for all sequences $\{x_n\}_{n \in \bbN} \subseteq X$, $x_n \xrightarrow{X} x_0$ implies $f(x_0) \xrightarrow{Y} f(x_0)$.
+	The function $f : X \to Y$ is said to be \emph{sequentially continuous} if for all $x_0 \in X$, for all sequences $\{x_n\}_{n \in \bbN^+} \subseteq X$, $x_n \xrightarrow{X} x_0$ implies $f(x_n) \xrightarrow{Y} f(x_0)$.
 \end{definition}
 
-\begin{remark}\label{Rem:ContImplySeqCont}
+\begin{proposition}\label{Prop:ContImplySeqCont}
 	If $f$ is a continuous function, then it is sequentially continuous.
-\end{remark}
+\end{proposition}
+\begin{proof}
+	Let $f : X \to Y$ from $(X,\tau_X)$ to $(Y,\tau_Y)$.
+	Suppose $x_n \xrightarrow{X} x_0$.
+	We claim that $f(x_n) \xrightarrow{Y} f(x_0)$.
+	Let $V$ be a neighborhood of $f(x_0)$ in $Y$.
+	Because $f$ is continuous, we know that $U \coloneqq f^{-1}(V)$ is open in $X$.
+	By $x_n \xrightarrow{X} x_0$ and $x_0 \in U$ we know that there exists $n_0$ such that for all $n \ge n_0$ we have $x_n \in U$, which implies that $f(x_n) \in V$.
+	Therefore we conclude that $f(x_n) \xrightarrow{Y} f(x_0)$.
+\end{proof}
 
 \begin{example}\label{Exa:SeqContNotCont}
 	Let $X = \bbR$ and $\tau_c$ be the co-countable topology $\{ \emptyset \} \cup \{ \bbR \setminus E : E~\text{is countable} \}$.
@@ -1209,6 +1250,20 @@
 	Let $f : X\to Y$.
 	If $X$ satisfies the first axiom of countability, then $f$ is continuous iff $f$ is sequentially continuous.
 \end{proposition}
+\begin{proof}
+	We already proved the ${\implies}$ direction in \propref{ContImplySeqCont}.
+	To show the ${\impliedby}$ direction, suppose that $f$ is sequentially continuous but not continuous.
+	Then there exists $V \in \tau_Y$ such that $f^{-1}(V) \not\in \tau_X$.
+	In particular, $f^{-1}(V) \neq \emptyset$ so there exists $a \in f^{-1}(V)$ which is not an interior point of $f^{-1}(V)$.
+	Let $\beta_a = \{B_n\}_{n\in \bbN}$ be a local base of $a$.
+	Without loss of generality, let's assume $B_n \supseteq B_{n+1}$ for all $n \in \bbN$.
+	Because $a$ is not an interior point of $f^{-1}(V)$, we know that for all $n \in \bbN$, $B_n \not\subseteq f^{-1}(V)$.
+	Define a sequence $\{x_n\}_{n \in \bbN}$ such that $x_n \in B_n \setminus f^{-1}(V)$ for all $n$.
+	Then we have $x_n \xrightarrow{X} a$.
+	Because $f$ is sequentially continuous, we know that $f(x_n) \xrightarrow{Y} f(a) \in V$.
+	However $f(x_n) \not\in V$ for all $n$, which leads to a contradiction.
+	Therefore we conclude that $f$ is continuous.
+\end{proof}
 
 \begin{proposition}\label{Prop:ContCompIsCont}
 	The composition of continuous functions is continuous.
@@ -1218,6 +1273,22 @@
 	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
 	If $f : X \to Y$ is a continuous function, then $X$ is connected implies that $f(X)$ is connected.
 \end{proposition}
+\begin{proof}
+	Suppose that $X$ is connected but $f(X)$ is not connected.
+	Then there exist disjoint nonempty open sets $U,V$ in $Y$ such that $U \cap f(X) \neq \emptyset$, $V \cap f(X) \neq \emptyset$, and $f(X) \subseteq U \cup V$.
+	Because $f$ is continuous, we know that $f^{-1}(U)$ and $f^{-1}(V)$ are open in $X$.
+	Then
+	\[
+	X = f^{-1}(U) \cup f^{-1}(V)
+	\]
+	is union of two nonempty open sets.
+	Moreover, we have
+	\[
+	f^{-1}(U) \cap f^{-1}(V) = f^{-1}(U \cap V) = f^{-1}(f(X) \cap U \cap V) = f^{-1}(\emptyset) = \emptyset,
+	\]
+	thus $X$ is disconnected, which leads to a contradiction.
+	Therefore we conclude that $f(X)$ is connected.
+\end{proof}
 
 \section{Separation Axioms}
 
