@@ -389,18 +389,34 @@
 
 \begin{definition}\label{De:OpenBalls}
 	Let $(X,d)$ be a metric space.
-	The \emph{ball} centered at $x \in X$ with radius $r > 0$, written $B(x,r)$, is defined as $\{ y \in X : d(x,y) < r\}$.
+	The \emph{ball} centered at $x \in X$ with radius $r > 0$, written as $B(x,r)$, is defined as $\{ y \in X : d(x,y) < r\}$.
 \end{definition}
 
 \begin{lemma}\label{Lem:MetricInduceTop}
 	$\beta \coloneqq \{ B(x,r) : x \in X, r > 0 \} \cup \{ \emptyset \}$ is a base for a topology.
-	In other words, every metric space $(X,d)$ admits a natural topology $\tau_d$.
+	In other words, every metric space $(X,d)$ admits a natural topology $\tau_d$ with $\beta$ as its base.
 \end{lemma}
+\begin{proof}
+	By \propref{BaseStructure}(3) it is sufficient to show that for all $B_1,B_2 \in \beta$ satisfying $B_1 \cap B_2 \neq \emptyset$, then for all $x \in B_1 \cap B_2$, there exists $B_3 \in \beta$ such that $x \in B_3$ and $B_3 \subseteq B_1 \cap B_2$.
+	Let $B_1 = B(x_1,r_1)$ and $B_2 = B(x_2,r_2)$.
+	For all $x \in B_1 \cap B_2$, define $r \coloneqq \min \{ r_1 - d(x,x_1), r_2 - d(x,x_2) \} > 0$.
+	Define $B_3 \coloneqq B(x,r) \in \beta$.
+	Then $x \in B_3$ and we claim that $B_3 \subseteq B_1 \cap B_2$.
+	For every $x_o \in B_3$, we have
+	\begin{align*}
+		& d(x_o,x) < r \\
+		\implies & d(x_o,x) < \min \{ r_1 - d(x,x_1), r_2 - d(x,x_2) \} \\
+		\implies & d(x_o,x) + d(x,x_1) < r_1 \wedge d(x_o,x)+d(x,x_2) < r_2 \\
+		\implies & d(x_o,x_1) < r_1 \wedge d(x_o,x_2) < r_2 \\
+		\implies & x_o \in B_1 \wedge x_o \in B_2
+	\end{align*}
+	and indeed we conclude that $x_o \in B_1 \cap B_2$.
+\end{proof}
 
 \begin{example}\label{Exa:MetricSpaces}\
 	\begin{itemize}
 		\item Let $X = \bbR$ and $d(x,y) \coloneqq \abs{x-y}$ be a metric in $X$.
-		Then $B(x,\epsilon) = (x-\epsilon,x+\epsilon)$, i.e., the metric space $(X,d)$ admits the standard topology.
+		Then $B(x,\epsilon)$ is the open interval $(x-\epsilon,x+\epsilon)$, i.e., the metric space $(X,d)$ admits the standard topology in $\bbR$.
 		\item Suppose $X$ is a set.
 		Define $\tilde{L}_\infty(X) \coloneqq \{ f :  X \to \bbR : f~\text{is bounded} \}$.
 		Then $d_\infty(f,g) \coloneqq \sup_{x \in X} \abs{f(x) - g(x)}$ is a metric.
@@ -414,6 +430,7 @@
 			d_3(x,y) & \coloneqq \max_{i=1,\cdots,N} \abs{x_i - y_i}
 		\end{align*}
 		then the topologies associated to these metrics coincide.
+		Indeed, they are all standard topology in $\bbR^N$, or the \emph{Euclidean topology}.
 	\end{itemize}
 \end{example}
 
@@ -424,21 +441,75 @@
 
 \begin{definition}\label{De:Diameter}
 	Let $(X,d)$ be a metric space and $A \subseteq X$.
-	The \emph{diameter} of $A$, written $\mathrm{diam}(A)$, is defined as $\sup \{ d(x,y) : x,y \in A$.
+	The \emph{diameter} of $A$, written as $\mathrm{diam}(A)$, is defined as $\sup \{ d(x,y) : x,y \in A$.
 	$A$ is said to be \emph{bounded} if $\mathrm{diam}(A) < +\infty$.
 \end{definition}
 
+\begin{proposition}\label{Prop:MetricOpenFindABall}
+	Let $(X,d)$ be a metric space. Then $U \in \tau_d$ iff for all $x \in U$, there exists $r >0$ such that $B(x,r) \subseteq U$.
+\end{proposition}
+\begin{proof}
+	\begin{itemize}
+		\item For the ${\implies}$ direction, let $U \in \tau_d$.
+		Then there exists a collection $\{B(x_\alpha,r_\alpha)\}_{\alpha \in \calI}$ of balls such that
+		\[
+		U = \bigcup_{\alpha \in \calI} B(x_\alpha,r_\alpha).
+		\]
+		For every $x \in U$, then, there exists $\alpha \in \calI$ such that $x \in B(x_\alpha,r_\alpha)$.
+		Let $s_\alpha \coloneqq d(x,x_\alpha) < r_\alpha$.
+		We claim that $B(x,r_\alpha-s_\alpha) \subseteq U$.
+		For every $x_o \in B(x,r_\alpha-s_\alpha)$, we have
+		\[
+		d(x_o,x_\alpha) \le d(x_o,x) + d(x,x_\alpha) < (r_\alpha - s_\alpha) + s_\alpha = r_\alpha
+		\]
+		hence $x_o \in B(x_\alpha,r_\alpha)$ and indeed $x_o \in U$.
+		Therefore we conclude that $B(x,r_\alpha-s_\alpha) \subseteq U$.
+		
+		\item Suppose for every $x \in U$, there exists $r_x > 0$ such that $B(x,r_x) \subseteq U$.
+		Then
+		\[
+		U = \bigcup_{x \in U} B(x,r_x)
+		\]
+		is trivially open in $X$.
+	\end{itemize}
+\end{proof}
+
 \begin{proposition}\label{Prop:MetricCanAlwaysBounded}
 	Let $(X,d)$ be a metric space.
-	Define $d_1(x,y) \coloneqq \frac{d(x,y)}{1 + d(x,y)}$.
+	Define $d_1(x,y) \coloneqq \nicefrac{d(x,y)}{(1 + d(x,y))}$.
 	Then $(X,d_1)$ is a bounded metric space and $\tau_d = \tau_{d_1}$.
 \end{proposition}
+\begin{proof}
+	For all $x,y \in X$, we have $d_1(x,y) = \nicefrac{d(x,y)}{(1+d(x,y))} < 1$, thus $\mathrm{diam}(X) \le 1$ and $X$ is trivially bounded.
+	Obverse that for any $R \in (0,1)$, and for all $x, y \in X$,
+	\begin{align*}
+		& \frac{d(x,y)}{1+d(x,y)} < R \\
+		\iff & d(x,y) < R + R \cdot d(x,y) \\
+		\iff & d(x,y) < \frac{R}{1-R}.
+	\end{align*}
+	Thus we know that for all $x \in X$ and $R \in (0,1)$,
+	\[
+	B_{d_1}(x,R) = B_d\p{x, \frac{R}{1-R} }.
+	\]
+	Then by \propref{MetricOpenFindABall} we conclude that $d$ and $d_1$ yield the same topology.
+\end{proof}
 
 \begin{lemma}\label{Lem:SmallerMetricIsWeaker}
 	If $d_1,d_2$ are metrics on $X$ and $d_1 \le d_2$, then $\tau_{d_1} \subseteq \tau_{d_2}$.
 \end{lemma}
+\begin{proof}
+	Let $U \in \tau_{d_1}$.
+	We want to show that $U \in \tau_{d_2}$ and by \propref{MetricOpenFindABall} it suffices to show that for every $x \in U$, there exists $r >0$ such that $B_{d_2}(x,r) \subseteq U$.
+	Suppose $x_0 \in U$.
+	Also by \propref{MetricOpenFindABall} we know that there exists $r_0 > 0$ such that $B_{d_1}(x_0,r_0) \subseteq U$.
+	For any $y \in B_{d_2}(x_0,r_0)$, we know that $d_1(x_0,y) \le d_2(x_0,y) < r_0$ thus $y \in B_{d_1}(x_0,r_0)$.
+	Therefore we have
+	\[
+	B_{d_2}(x_0,r_0) \subseteq B_{d_1}(x_0,r_0) \subseteq U.
+	\]
+\end{proof}
 
-\begin{remark}\label{Rem:SmallerMetricIndeedWeaker}
+\begin{proposition}\label{Prop:SmallerMetricIndeedWeaker}
 	Consider $C((0,1)) = \{ f : (0,1) \to \bbR : f~\text{is continuous} \}$.
 	Define $K_n \coloneqq \sq{\frac{1}{n}, 1-\frac{1}{n}}$ for $n \in \bbN^+$.
 	Then $\bigcup_{n=1}^\infty K_n = (0,1)$.
@@ -447,9 +518,30 @@
 		d(f,g) & \coloneqq \max_{n \in \bbN^+} \set{ \frac{1}{2^n} \max_{x \in K_n} \frac{\abs{f(x)-g(x)}}{1+\abs{f(x)-g(x)}} } \\
 		\tilde{d}(f,g) & \coloneqq  \sup_{x \in (0,1)} \frac{\abs{f(x)-g(x)}}{1+\abs{f(x)-g(x)}}
 	\end{align*}
-	to be two metrics on $C(0,1)$.
+	to be two metrics on $C((0,1))$.
 	Then $\tau_d \subset \tau_{\tilde{d}}$.
-\end{remark}
+\end{proposition}
+\begin{proof}
+	First of all, for all $f,g \in C((0,1))$, for every $n \in \bbN^+$, we have
+	\[
+	\max_{x \in K_n} \frac{\abs{f(x)-g(x)}}{1+\abs{f(x)-g(x)}} \le \tilde{d}(f,g)
+	\]
+	and $\nicefrac{1}{2^n} < 1$ for all $n \in \bbN^+$, we know that $d(f,g) \le \tilde{d}(f,g)$.
+	By \lemref{SmallerMetricIsWeaker} we know that $\tau_d \subseteq \tau_{\tilde{d}}$.
+	To show $\tau_d \neq \tau_{\tilde{d}}$, we claim that $B_{\tilde{d}}(\mathbf{0},\nicefrac{1}{2})$ is not a neighborhood of $\mathbf{0}$ in $\tau_d$.
+	Suppose it is, then there exists $r > 0$ such that $B_d(\mathbf{0},r) \subseteq B_{\tilde{d}}(\mathbf{0},\nicefrac{1}{2})$.
+	Choose an $m >1$ such that $\nicefrac{1}{2^m} < r$.
+	Define $f \in C((0,1))$ to be the piecewise linear functions through $(0,1)$, $(\nicefrac{1}{(m+1)},1)$, $(\nicefrac{1}{m},0)$, $(1-\nicefrac{1}{m},0)$, $(1-\nicefrac{1}{m+1},1)$ and $(1,1)$.
+	Then for all $n \le m$, $f(K_n) = \{0\}$, so
+	\[
+	d(f,\mathbf{0})  = \max_{n > m} \set{ \frac{1}{2^n} \max_{x \in K_n} \frac{f(x)}{1+f(x)}  } < \frac{1}{2^m} < r
+	\]
+	however
+	\[
+	\tilde{d}(f,\mathbf{0}) = \sup_{x \in (0,1)} \frac{f(x)}{1+f(x)} = \frac{1}{2}
+	\]
+	thus $f \in B_d(\mathbf{0},r)$ and $f \not\in B_{\tilde{d}}(\mathbf{0}, \nicefrac{1}{2})$, which leads to a contradiction.
+\end{proof}
 
 \begin{definition}\label{De:QuotientMetricSpaces}
 	Let $\rho$ be a pseudo-metric (i.e., a metric without the property as \defref{Metrics}(1)(b)) on $X$.
@@ -459,7 +551,7 @@
 
 \begin{definition}\label{De:InifiniteSums}
 	Let $X$ be a set and $f : X \to [0,+\infty]$.
-	The \emph{infinite sum}, written $\sum_{x \in X} f(x)$, is defined as
+	The \emph{infinite sum}, written as $\sum_{x \in X} f(x)$, is defined as
 	\begin{equation*}
 		\sup \set{ \sum_{x \in Y} f(x) : Y \subseteq X, Y~\text{is finite} }.
 	\end{equation*}
@@ -469,13 +561,30 @@
 	If $\sum_{x \in X} f(x) < +\infty$, then the set $\{ x \in X : f(x) > 0\}$ is countable.
 	Moreover, $f$ does not take the value $+\infty$.
 \end{proposition}
+\begin{proof}
+	Suppose $\sum_{x \in X} f(x) = M < +\infty$.
+	For all $k \in \bbN^+$, define $X_k \coloneqq \{ x \in X : f(x) > \nicefrac{1}{k} \}$.
+	Then
+	\[
+	\{ x \in X : f(x) > 0 \} = \bigcup_{k \in \bbN^+} X_k.
+	\]
+	On the other hand, we have
+	\[
+	\sum_{x \in X_k} f(x) \le M
+	\]
+	so indeed
+	\[
+	\abs{X_k} \le \frac{M}{\frac{1}{k}} = Mk
+	\]
+	is finite. Therefore we conclude that $\{x \in X : f(x) > 0\}$ is countable.
+\end{proof}
 
 \begin{definition}\label{De:Norms}
 	Let $V$ be a vector space over $\bbR$.
 	The function $\norm{\cdot} : V \to [0,+\infty)$ is said to be a \emph{norm} on $X$ if
 	\begin{enumerate}
 		\item $\norm{v} = 0$ iff $v = 0$ for all $v \in V$,
-		\item $\norm{\alpha v} = \abs{\alpha} \norm{v}$ for all $v \in V$, $\alpha \in \bbR$, and
+		\item $\norm{\alpha v} = \abs{\alpha} \cdot \norm{v}$ for all $v \in V$, $\alpha \in \bbR$, and
 		\item $\norm{v+w} \le \norm{v} + \norm{w}$ for all $v,w \in V$.
 	\end{enumerate}
 	Then $(V,\norm{\cdot})$ is said to be a \emph{normed space}.
@@ -486,7 +595,7 @@
 \end{proposition}
 
 \begin{remark}\label{Rem:NormedBalls}
-	If $(X,\norm{\cdot})$ is a normed space, we will consider in $X$ the topology induced by $d$ as in \propref{NormInduceMetric}, i.e., the topology whose base of open sets are $\{ B(x,r) : x \in X, r > 0 \}$ with $B(x,r) \coloneqq \{ y \in X : \norm{x-y} < r \}$.
+	If $(X,\norm{\cdot})$ is a normed space, we will consider in $X$ the topology induced by the metric $d$ in \propref{NormInduceMetric}, i.e., the topology whose base of open sets are $\{ B(x,r) : x \in X, r > 0 \}$ with $B(x,r) \coloneqq \{ y \in X : \norm{x-y} < r \}$.
 \end{remark}
 
 \begin{remark}\label{Rem:MetricNotImplyNorm}
@@ -500,13 +609,14 @@
 	\end{equation*}
 \end{definition}
 
-\begin{definition}[H{\"o}lder's conjugate exponents]\label{De:HoldersConjugateExponent}
+\begin{definition}\label{De:HoldersConjugateExponent}
 	Suppose $1 \le p \le +\infty$.
-	The \emph{H{\"o}lder's conjugate exponent} of $p$ is $p' \coloneqq \frac{p}{1-p} \in [1,+\infty]$.
+	The \emph{H{\"o}lder's conjugate exponent} of $p$ is $p' \coloneqq \nicefrac{p}{(1-p)} \in [1,+\infty]$.
+	Then $\nicefrac{1}{p} + \nicefrac{1}{p'}=1$ and $(p')' = p$.
 \end{definition}
 
 \begin{theorem}[Yang's inequality]\label{The:YangsInequality}
-	Given $1 < p < +\infty$ and $a,b > 0$, we have $ab \le \frac{1}{p} a^p + \frac{1}{p'} b^{p'}$.
+	Given $1 < p < +\infty$ and $a,b > 0$, we have $ab \le \nicefrac{1}{p}  \cdot a^p + \nicefrac{1}{p'} \cdot b^{p'}$.
 \end{theorem}
 
 \begin{theorem}[H{\"o}lder's inequality]\label{The:HoldersInequality}
@@ -529,8 +639,34 @@
 \end{theorem}
 
 \begin{proposition}\label{Prop:lpVectorSpace}
-	$\ell^p(X)$ is a vector space over $\bbR$.
+	$\ell^p(X)$ is a vector space over $\bbR$ with the norm $\norm{f}_p \coloneqq  \p{\sum_{x \in X} \abs{f(x)}^p}^{\nicefrac{1}{p}}$.
 \end{proposition}
+\begin{proof}
+	\begin{itemize}
+		\item WTS \defref{Norms}(1):
+		On the one hand, we have $\norm{\mathbf{0}}_p = 0$ trivially.
+		On the other hand, if $\norm{f}_p = 0$ then we know that
+		\[
+		\sum_{x \in X} \abs{f(x)}^p = 0
+		\]
+		thus for all $x \in X$, we have $f(x) = 0$, i.e., $f = \mathbf{0}$.
+		
+		\item WTS \defref{Norms}(2): Suppose $f \in \ell^p(X)$ and $\alpha \in \bbR$.
+		Then we have
+		\begin{align*}
+			\norm{\alpha f} & = \p{\sum_{x \in X} \abs{\alpha \cdot f(x)}^p}^{\frac{1}{p}} \\
+			& = \p{ \sum_{x \in X} \abs{\alpha}^p \cdot \abs{f(x)}^p}^\frac{1}{p} \\
+			& = \p{ \abs{\alpha}^p \cdot \sum_{x \in X} \abs{f(x)}^p }^\frac{1}{p} \\
+			& = \abs{\alpha} \cdot \norm{f}_p.
+		\end{align*}
+		
+		\item WTS \defref{Norms}(3): Suppose $f,g \in \ell^p(X)$ and we want to show that $\norm{f+g}_p \le \norm{f}_p+\norm{g}_p$, or equivalently
+		\[
+		\p{ \sum_{x \in X} \abs{f(x) + g(x)}^p }^\frac{1}{p} \le \p{ \sum_{x \in X} \abs{f(x)}^p}^\frac{1}{p} + \p{ \sum_{x \in X} \abs{g(x)}^p}^\frac{1}{p}.
+		\]
+		We then conclude this case by \theoref{MinkowskisInequality}.
+	\end{itemize}
+\end{proof}
 
 \section{Limit Points}
 
