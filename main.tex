@@ -848,18 +848,62 @@
 	A topological space $(X,\tau)$ is said to be \emph{separable} if there exists a countable dense set in $X$.
 \end{definition}
 
-\begin{remark}\label{Rem:SubsetSeparable}
+\begin{proposition}\label{Prop:SubsetSeparable}
 	If $\tau_1 \subseteq \tau_2$ and $(X,\tau_2)$ is separable, then $(X,\tau_1)$ is also separable.
-\end{remark}
+\end{proposition}
+\begin{proof}
+	Let $E$ be a dense set in $\tau_2$.
+	We claim that $E$ is also dense in $\tau_1$.
+	Let $p \in X$ and $U \in \tau_1$ such that $p \in U$.
+	By the assumption that $\tau_1 \subseteq \tau_2$ we know that $U \in \tau_2$.
+	Because $E$ is dense in $\tau_2$, we know that $U \cap E \neq \emptyset$.
+	Then by definition we know that $p \in \overline{E}^{\tau_1}$, and we conclude that $E$ is dense in $\tau_1$.
+\end{proof}
 
 \begin{proposition}\label{Prop:SndAxCountImplySeparable}
 	If a topological space $(X,\tau)$ satisfies the second axiom of countability, then $(X,\tau)$ is separable.
 \end{proposition}
+\begin{proof}
+	Let $\beta = \{ B_n\}_{n \in \bbN}$ is a base for $\tau$.
+	Define $x_n \in B_n$ for all $n \in \bbN$ and $E \coloneqq \{ x_n : n \in \bbN \}$.
+	We claim that $\overline{E} = X$.
+	For all $p \in X$, let $U$ be a neighborhood of $p$.
+	Then there exists a collection $\{B_n\}_{n \in \calI}$ with some $\calI \subseteq \bbN$ such that
+	\[
+	U = \bigcup_{n \in \calI} B_n.
+	\]
+	Therefore $U \cap E \supseteq \{ x_n : n \in \calI \} \neq \emptyset$.
+	By definition of closures we know that $p \in \overline{E}$.
+	Therefore we conclude that $X = \overline{E}$.
+\end{proof}
 
 \begin{proposition}\label{Prop:MetricSeparableImplySndAxCount}
 	Suppose $(X,d)$ is a metric space.
 	Then $(X,d)$ is separable iff it is second countable.
 \end{proposition}
+\begin{proof}
+	The ${\impliedby}$ direction is proved in \propref{SndAxCountImplySeparable}.
+	To show the ${\implies}$ direction, let $E$ be a countable dense set in $\tau_d$.
+	Define a countable collection of open sets
+	\[
+	\beta \coloneqq \set{ B(x,r) : x \in E, r \in \bbQ^+}
+	\]
+	and we claim that $\beta$ is a base for $\tau_d$.
+	Let $U \in \tau_d$ be an open set.
+	Then for each $x \in U$, there exists $r_x > 0$ such that $B(x,r_x) \subseteq U$.
+	On the other hand, $\overline{E} = X$ implies that $B(x,\nicefrac{r_x}{2}) \cap E \neq \emptyset$, thus we can pick $e_x \in B(x,\nicefrac{r_x}{2}) \cap E$.
+	Then $x \in B(e_x,\nicefrac{r_x}{2})$.
+	On the other hand, for every $y \in B(e_x,\nicefrac{r_x}{2})$, we have
+	\[
+	d(y,x) \le d(y,e_x) + d(e_x,x) < \frac{r_x}{2} + \frac{r_x}{2} = r_x
+	\]
+	thus $y \in B(x,r_x)$.
+	Hence we know that $B(e_x,\nicefrac{r_x}{2}) \subseteq B(x,r_x) \subseteq U$.
+	Therefore, we conclude the proof by
+	\[
+	U = \bigcup_{x \in U} B\p{e_x, \frac{r_x}{2}}.
+	\]
+\end{proof}
 
 \begin{example}\label{Exa:SeparableSpaces}\
 	\begin{itemize}
