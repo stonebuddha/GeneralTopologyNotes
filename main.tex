@@ -1313,8 +1313,7 @@
 \end{proposition}
 
 \begin{theorem}\label{The:HierarchyOfSeparation}
-	Consider axioms of separation.
-	We have
+	For the axioms of separation defined in \defref{AxiomsOfSepartion}, we have
 	\begin{equation*}
 		T_4 \implies T_3 \implies T_2 \implies T_1 \implies T_0.
 	\end{equation*}
@@ -1344,9 +1343,203 @@
 	Then $S$ is regular but not normal.
 \end{example}
 
-\begin{lemma}\label{Lem:RegularIffNeighborContainClosure=======================}
+\begin{lemma}\label{Lem:RegularIffNeighborContainClosure}
 	Let $(X,\tau)$ be a topological space.
 	Then $X$ is regular iff for all $x \in X$, for all neighborhoods $U \subseteq X$ of $x$, there exists an open set $V$ such that $x \in V \subseteq \overline{V} \subseteq U$.
+\end{lemma}
+
+\begin{theorem}\label{The:ProductOfRegularStillRegular}
+	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+	Then $(X,\tau_X)$ and $(Y,\tau_Y)$ are regular iff the product topology $(X \times Y, \tau_{X \times Y})$ is regular.
+\end{theorem}
+
+\begin{proposition}\label{Prop:MetricT4}
+	Every metric space is $T_4$, i.e., $T_1$ and normal.
+\end{proposition}
+
+\section{Compactness}
+
+\begin{definition}\label{De:Covers}
+	Let $(X,\tau)$ be a topological space.
+	An \emph{open cover} of $X$ is any collection of open sets whose union is $X$.
+	A \emph{subcover} is a subset of a cover which is still a cover.
+\end{definition}
+
+\begin{definition}\label{De:CompactSpace}
+	Let $(X,\tau)$ be a topological space.
+	\begin{itemize}
+		\item $(X,\tau)$ is said to be \emph{compact} if every open cover of $X$ admits a finite subcover.
+		\item $(X,\tau)$ is said to be \emph{sequentially compact} if every sequence $\{x_n\}_{n \in \bbN} \subseteq X$ admits a convergent subsequence.
+		\item $E \subseteq X$ is said to be \emph{relatively compact} (precompact) if $\overline{E}$ is compact w.r.t. the induced topology.
+	\end{itemize}
+\end{definition}
+
+\begin{remark}\label{Rem:WeakerPreserveCompactness}
+	If two topologies $\tau_1 \subseteq \tau_2$, then $\tau_2$ is compact implies that $\tau_1$ is compact.
+\end{remark}
+
+\begin{remark}\label{Rem:CompactSetFiniteSubcover}
+	Let $(X,\tau)$ be a topological space and $K \subseteq X$.
+	Then $K$ is compact iff $(K, \tau|_K)$ is compact, i.e., if $K \subseteq \bigcup_{\alpha \in \Lambda} U_\alpha$ with a collection of open sets $U_\alpha$, then there exist a finite $\calI \subseteq \Lambda$ such that $K \subseteq \bigcup_{\alpha \in \calI} U_\alpha$.
+\end{remark}
+
+\begin{lemma}\label{Lem:HausdorffSeparatePointAndCompact}
+	Let $(X,\tau)$ be a Hausdorff space.
+	Suppose $K \subseteq X$ is compact and $x_0 \not\in K$.
+	Then there exist disjoint open sets $U$ and $V$ such that $x_0 \in V$ and $K \subseteq U$.
+\end{lemma}
+
+\begin{proposition}\label{Prop:SeveralPropertiesOfCompactness}
+	Let $(X,\tau)$ be a topological space.
+	\begin{enumerate}
+		\item If $X$ is compact and $C \subseteq X$ is closed, then $C$ is also compact.
+		\item If $X$ is Hausdorff and $K \subseteq X$ is compact, then $K$ is closed.
+		\item If $X$ is Hausdorff and compact, then $X$ is regular.
+		\item If $X$ is Hausdorff and compact, then $X$ is normal.
+	\end{enumerate}
+\end{proposition}
+
+\begin{example}\label{Exa:CompactNotImplyClosed}
+	In general compactness does not imply closedness.
+\end{example}
+
+\begin{example}\label{Exa:ClosureOfCompactNotCompact}
+	If $(X,\tau)$ is not Hausdorff, there might exist a compact set $K \subseteq X$ but $\overline{K}$ is not compact.
+\end{example}
+
+\begin{proposition}\label{Prop:ClosedIntervalCompact}
+	If $a,b \in \bbR$ and $a < b$, then $[a,b]$ is compact.
+\end{proposition}
+
+\begin{example}\label{Exa:ClosedBoundedNotCompact}
+	In general closed bounded sets are not necessarily compact.
+\end{example}
+
+\begin{definition}\label{De:FiniteIntersectionProperty}
+	A family $\{E_\alpha\}_{\alpha \in \Lambda}$ of subsets of a set $X$ is said to have the \emph{finite intersection property}, if every finite subfamily has a nonempty intersection.
+\end{definition}
+
+\begin{proposition}\label{Prop:CompactIffFiniteIntersectClosedSetsNonemptyIntersection}
+	Let $(X,\tau)$ be a topological space.
+	Then $X$ is compact iff for every family $\{C_\alpha\}_{\alpha \in \Lambda}$ of closed subsets with the finite intersection property, we have $\bigcap_{\alpha \in \Lambda} C_\alpha \neq \emptyset$.
+\end{proposition}
+
+\begin{lemma}\label{Lem:InfiniteSubsetOfCompactHasLimit}
+	Let $(X,\tau)$ be a compact space.
+	If $E \subseteq X$ is infinite then it has an accumulation point.
+\end{lemma}
+
+\begin{proposition}\label{Prop:CopactFstCountThenSeqCompact}
+	If $(X,\tau)$ is compact and first countable, then $X$ is sequentially compact.
+\end{proposition}
+
+\begin{definition}\label{De:TotallyBoundedness}
+	Let $(X,d)$ be a metric space.
+	$A \subseteq X$ is said to be \emph{totally bounded} if for all $\epsilon > 0$, there exists $n 	\in \bbN$ and $a_1,\cdots,a_n \in A$ such that $A \subseteq \bigcup_{i=1}^n B(a_i,\epsilon)$.
+\end{definition}
+
+\begin{lemma}\label{Lem:MetricSeqCompactIsTotallyBounded}
+	Let $(X,d)$ be a metric space.
+	If $X$ is sequentially compact, then it is totally bounded, so also bounded.
+\end{lemma}
+
+\begin{proposition}\label{Prop:MetricCompactIffSeqCompact}
+	Let $(X,d)$ be a metric space.
+	Then $X$ is compact iff $X$ is sequentially compact.
+\end{proposition}
+
+\begin{proposition}\label{Prop:MetricSeqCompactImplySeparable}
+	Let $(X,d)$ be a metric space.
+	If $X$ is sequentially compact, then $X$ is separable.
+	In particular, $X$ is second countable.
+\end{proposition}
+
+\begin{proposition}\label{Prop:MetricSndCountImplyLindelof}
+	Let $(X,d)$ be a metric space.
+	If $X$ is second countable, then it is Lindel{\"o}f, i.e., every open cover admits a countable subcover.
+\end{proposition}
+
+\begin{proposition}\label{Prop:ContFuncPreserveCompact}
+	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+	If $K \subseteq X$ is (sequentially) compact, $f : X \to Y$ is continuous, then $f(K)$ is also (sequentially) compact.
+\end{proposition}
+
+\begin{proposition}\label{Prop:ContBijectionFromCompactToT2IsHome}
+	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+	Suppose $f : X \to Y$ is a bijection, $X$ is compact, $Y$ is $T_2$ and $f$ is continuous.
+	Then $f^{-1} : Y \to X$ is continuous, i.e., $f$ is a homeomorphism.
+\end{proposition}
+
+\begin{example}\label{Exa:ContBijectionNotHome}
+	In general \propref{ContBijectionFromCompactToT2IsHome} does not hold if $X$ is not compact or $Y$ is not $T_2$.
+\end{example}
+
+\begin{theorem}\label{The:Weierstrass}
+	Let $(X,\tau)$ be a (sequentially) compact space.
+	If $f: X\to\bbR$ is (sequentially) continuous, then there exists $x \in X$ such that $f(x) = \min_{x \in X} f(x)$.
+\end{theorem}
+
+\begin{theorem}\label{The:ProductOfCompactStillCompact}
+	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+	Then $(X,\tau_X)$ and $(Y,\tau_Y)$ are compact iff the product topology $(X \times Y,\tau_{X \times Y})$ is compact. 
+\end{theorem}
+
+\section{Compactification}
+
+\begin{definition}\label{De:Compactification}
+	Let $(X,\tau_X)$ be a topological space.
+	$(Y,\tau_Y)$ is said to be a \emph{compactification} of $(X,\tau_X)$ if $Y$ is compact and $X$ is homeomorphic to a dense subset of $Y$.
+\end{definition}
+
+\begin{definition}\label{De:LocallyCompactness}
+	A topological space $(X,\tau)$ is said to be \emph{locally compact} iff for all $x \in X$, there exists a neighborhood $U$ of $x$ such that $\overline{U}$ is compact.
+\end{definition}
+
+\begin{theorem}\label{The:AlexandroffCompactification}
+	Let $(X,\tau)$ be a topological space that is not compact.
+	Let $\infty$ denote a point that is not in $X$ and $X_\infty \coloneqq X \cup \{\infty\}$.
+	Let $\tau_\infty$ be the collection of all subsets $U \subseteq X_\infty$ such that either (i) $U \in \tau$, or (ii) $\infty \in U$ and $X \setminus U$ is closed and compact.
+	Then $(X_\infty,\tau_\infty)$ is compact and $X$ is dense in $X_\infty$.
+	Moreover, $(X_\infty,\tau_\infty)$ is Hausdorff iff $(X,\tau)$ is Hausdorff and locally compact.
+\end{theorem}
+
+\begin{definition}\label{De:GeneralProductTopology}
+	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha \in \Lambda}$ be a collection of topological spaces.
+	Consider
+	\[
+	\prod_{\alpha \in \Lambda} X_\alpha \coloneqq \set{ f : \Lambda \to \bigcup_{\alpha \in \Lambda} X_\alpha : \Forall{\alpha \in \Lambda} f(\alpha) \in X_\alpha }.
+	\]
+	For an $f$ in the collection defined above, $f(\alpha)$ is said to be the \emph{$\alpha$-coordinate} of $f$.
+	The \emph{project} along the $\beta$-axis for any $\beta \in \Lambda$ is defined as $\pi_\beta(f) \coloneqq f(\beta)$.
+	The \emph{product topology} on $\prod_{\alpha \in \Lambda} X_\alpha$ is the smallest topology that renders each projection continuous.
+	Then a subbase of open sets would be
+	\[
+	\calF \coloneqq \set{ \pi_\alpha^{-1}(V_\alpha) : \alpha \in \Lambda \wedge V_\alpha \in \tau_\alpha }
+	\]
+	and a base would be
+	\[
+	\beta \coloneqq \set{ \bigcap_{\alpha \in \Lambda_o} \pi_\alpha^{-1}(V_\alpha) : \Lambda_o \subseteq \Lambda~\mathrm{finite} \wedge V_\alpha \in \tau_\alpha  }.
+	\]
+\end{definition}
+
+\begin{definition}\label{De:BoxTopology}
+	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha \in \Lambda}$ be a collection of topological spaces.
+	The \emph{box topology} on $\prod_{\alpha \in \Lambda} X_\alpha$ is the topology generated by $\set{ \prod_{\alpha \in \Lambda} V_\alpha : V_\alpha \in \tau_\alpha }$.
+\end{definition}
+
+\begin{lemma}\label{Lem:ProdTopSeqConvergeIffEveryAxisConverge}
+	Let $X \coloneqq \prod_{\alpha \in \Lambda} X_\alpha$ with the product topology.
+	A sequence $\{x^n\}_{n \in \bbN} \subseteq X$ converges to $x^o \in X$ iff $x^n_\alpha \rightarrow x^o_\alpha$ for all $\alpha \in \Lambda$.
+\end{lemma}
+
+\begin{lemma}\label{Lem:ProdTopContFuncIffContEveryAxis}
+	Let $X \coloneqq \prod_{\alpha \in \Lambda} X_\alpha$ with the product topology and $(Z,\tau_Z)$ be a topological space.
+	A function $f :Z \to X$ is continuous iff $\pi_\alpha \circ f : Z \to X_\alpha$ is continuous for all $\alpha \in \Lambda$.
+\end{lemma}
+
+\begin{lemma}\label{Lem:CompactIffCompactWRTSubbase}
+	Let $(X,\tau)$ be a topological space and $\calS$ be a subbase of $\tau$.
+	Then $X$ is compact iff every cover of $X$ with elements of $\calS$ admits a finite subcover.
 \end{lemma}
 
 \bibliographystyle{abbrv}
