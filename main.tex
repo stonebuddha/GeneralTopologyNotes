@@ -7,7 +7,6 @@
 \begin{document}
 \title{21-651: General Topology}
 \author{Di Wang}
-\affil{Carnegie Mellon University}
 \date{}
 \maketitle
 
@@ -154,7 +153,7 @@
 	Then it suffices to show that $\tau' \subseteq \tau$.
 	Pick an arbitrary
 	\begin{equation}\label{Eq:UnionIntersect}
-	\bigcup_{\alpha \in \calJ} \p{ U_1^\alpha \cap \cdots \cap U_{N(\alpha)}^\alpha }
+	\bigcup_{\alpha \in \calI} \p{ U_1^\alpha \cap \cdots \cap U_{N(\alpha)}^\alpha }
 	\end{equation}
 	from $\tau'$.
 	Because $U_i^\alpha$ are elements of $\calF \cup \{ \emptyset,X\}$, and indeed $\tau \supseteq \calF \cup \{ \emptyset,X\}$, we know that $U_i^\alpha \in \tau$.
@@ -408,10 +407,10 @@
 	For every $x_o \in B_3$, we have
 	\begin{align*}
 		& d(x_o,x) < r \\
-		\implies & d(x_o,x) < \min \{ r_1 - d(x,x_1), r_2 - d(x,x_2) \} \\
-		\implies & d(x_o,x) + d(x,x_1) < r_1 \wedge d(x_o,x)+d(x,x_2) < r_2 \\
-		\implies & d(x_o,x_1) < r_1 \wedge d(x_o,x_2) < r_2 \\
-		\implies & x_o \in B_1 \wedge x_o \in B_2
+		\implies~ & d(x_o,x) < \min \{ r_1 - d(x,x_1), r_2 - d(x,x_2) \} \\
+		\implies~ & d(x_o,x) + d(x,x_1) < r_1 \wedge d(x_o,x)+d(x,x_2) < r_2 \\
+		\implies~ & d(x_o,x_1) < r_1 \wedge d(x_o,x_2) < r_2 \\
+		\implies~ & x_o \in B_1 \wedge x_o \in B_2
 	\end{align*}
 	and indeed we conclude that $x_o \in B_1 \cap B_2$.
 \end{proof}
@@ -487,8 +486,8 @@
 	Obverse that for any $R \in (0,1)$, and for all $x, y \in X$,
 	\begin{align*}
 		& \frac{d(x,y)}{1+d(x,y)} < R \\
-		\iff & d(x,y) < R + R \cdot d(x,y) \\
-		\iff & d(x,y) < \frac{R}{1-R}.
+		\iff~ & d(x,y) < R + R \cdot d(x,y) \\
+		\iff~ & d(x,y) < \frac{R}{1-R}.
 	\end{align*}
 	Thus we know that for all $x \in X$ and $R \in (0,1)$,
 	\[
@@ -572,13 +571,11 @@
 	\{ x \in X : f(x) > 0 \} = \bigcup_{k \in \bbN^+} X_k.
 	\]
 	On the other hand, we have
-	\[
+	\begin{gather*}
 	\sum_{x \in X_k} f(x) \le M
-	\]
-	so indeed
-	\[
+	\shortintertext{so indeed}
 	\abs{X_k} \le \frac{M}{\frac{1}{k}} = Mk
-	\]
+	\end{gather*}
 	is finite. Therefore we conclude that $\{x \in X : f(x) > 0\}$ is countable.
 \end{proof}
 
@@ -695,10 +692,10 @@
 \begin{proof}
 	\begin{align*}
 		& \{p\} \in \tau_E \\
-		\iff & \Exists{U \in \tau} U \cap E = \{p\} \\
-		\iff & p \in E \wedge \Exists{U \in \tau} (U \cap E) \setminus \{p\} = \emptyset \\
-		\iff & p \in E \wedge p \not\in E' \\
-		\iff & p \in E \setminus E'.
+		\iff~ & \Exists{U \in \tau} U \cap E = \{p\} \\
+		\iff~ & p \in E \wedge \Exists{U \in \tau} (U \cap E) \setminus \{p\} = \emptyset \\
+		\iff~ & p \in E \wedge p \not\in E' \\
+		\iff~ & p \in E \setminus E'.
 	\end{align*}
 \end{proof}
 
@@ -1004,10 +1001,10 @@
 			\item $\tilde{U} \cap \tilde{V} = \emptyset$, because for all $x \in B(a,\nicefrac{r_a}{2})$ and $y \in B(b,\nicefrac{r_b}{2})$, we know the following
 			\begin{align*}
 				& d(a,b) \le d(a,x) + d(x,y) + d(y,b) \\
-				\implies & d(x,y) \ge d(a,b) - d(a,x) - d(y,b) \\
-				\implies & d(x,y) > \max\{r_a,r_b\} - \frac{r_a}{2} - \frac{r_b}{2} \\
-				\implies & d(x,y) > 0 \\
-				\implies & x \neq y
+				\implies~ & d(x,y) \ge d(a,b) - d(a,x) - d(y,b) \\
+				\implies~ & d(x,y) > \max\{r_a,r_b\} - \frac{r_a}{2} - \frac{r_b}{2} \\
+				\implies~ & d(x,y) > 0 \\
+				\implies~ & x \neq y
 			\end{align*}
 			hence $\tilde{U} \cap \tilde{V} = \emptyset$.
 		\end{itemize}
