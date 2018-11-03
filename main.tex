@@ -1541,6 +1541,46 @@
 	Then $X$ is compact iff every cover of $X$ with elements of $\calS$ admits a finite subcover.
 \end{lemma}
 
+\begin{theorem}\label{The:Tikhonov}
+	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha \in \Lambda}$ be a collection of topological spaces.
+	Then $\prod_{\alpha \in \Lambda} X_\alpha$ is compact iff $X_\alpha$ is compact for all $\alpha \in \Lambda$.
+\end{theorem}
+
+\begin{proposition}\label{Prop:IntProdSubProdIntAndCloProdEqProdClo}
+	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha \in \Lambda}$ be a collection of topological spaces.
+	Let $\emptyset \neq E_\alpha \subseteq X_\alpha$ for all $\alpha \in \Lambda$.
+	\begin{enumerate}
+		\item $\p{\prod_{\alpha \in \Lambda} E_\alpha}^o \subseteq \prod_{\alpha \in \Lambda} E_\alpha^o$, and the equality holds iff $E_\alpha = X_\alpha$ for all but at most finitely many $\alpha \in \Lambda$.
+		\item $\overline{\prod_{\alpha \in \Lambda} E_\alpha} = \prod_{\alpha \in \Lambda} \overline{E_\alpha}$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proposition}\label{Prop:ProdConnIffBothConn}
+	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+	Then $(X\times Y,\tau_{X \times Y})$ is connected iff $(X,\tau_X)$ and $(Y,\tau_Y)$ are connected.
+\end{proposition}
+
+\begin{theorem}\label{The:ProdConnIffEachConn}
+	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha \in \Lambda}$ be a collection of topological spaces.
+	Then $\prod_{\alpha \in \Lambda}$ is connected iff $X_\alpha$ is connected for all $\alpha \in \Lambda$.
+\end{theorem}
+
+\begin{proposition}\label{Prop:ProdT2IffEachT2}
+	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha \in \Lambda}$ be a collection of topological spaces.
+	Then $\prod_{\alpha \in \Lambda}$ is Hausdorff iff $X_\alpha$ is Hausdorff for all $\alpha \in \Lambda$.
+\end{proposition}
+
+\begin{theorem}\label{The:StoneCechCompactification}
+	Suppose that a topological space $(X,\tau_X)$ is Hausdorff and completely regular.
+	Define $C_b(X) \coloneqq \{ f : X \to \bbR : f~\text{continuous and bounded} \}$.
+	For each $f \in C_b(X)$, there exists $m_f \in \bbR$ such that $f(X) \subseteq [-m_f,m_f]$.
+	Define $Y_0 \coloneqq \prod_{f \in C_b(X)} [-m_f,m_f]$.
+	Define the evaluation map $e : X \to Y_0$ as $e(x) \coloneqq (f \mapsto f(x))$.
+	Define $\beta \coloneqq e(X)$ and $Y \coloneqq \overline{\beta}$.
+	Then $Y$ with the inducted topology from $Y_0$ is a compactification of $X$.
+\end{theorem}
+
 \bibliographystyle{abbrv}
 %\bibliography{db}
+
 \end{document}
