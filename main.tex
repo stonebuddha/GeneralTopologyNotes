@@ -1580,6 +1580,47 @@
 	Then $Y$ with the inducted topology from $Y_0$ is a compactification of $X$.
 \end{theorem}
 
+\begin{proposition}\label{Prop:ContIntoT2AtMostOneExt}
+	Let $(Y,\tau_Y)$ and $(Z,\tau_Z)$ be two topological spaces.
+	Suppose $Z$ is Hausdorff.
+	Let $E \subseteq Y$ and $h : E \to Z$ be a continuous function.
+	Then $h$ admits at most one continuous extension to $\overline{E}$.
+\end{proposition}
+
+\begin{definition}\label{De:SemiCont}
+	Let $(X,\tau)$ be a topological space.
+	A function $f : X \to \bbR$ is said to be \emph{lower semicontinuous} if $f^{-1}((a,+\infty))$ is open for all $a \in \bbR$.
+	A function $f : X \to \bbR$ is said to be \emph{upper semicontinuous} if $f^{-1}((-\infty,a))$ is open for all $a \in \bbR$.
+\end{definition}
+
+\begin{example}\label{Exa:IndicatorsSemiCont}
+	Let $E \subseteq X$.
+	Consider the characteristic function
+	\[
+	\chi_E(x) \coloneqq
+	\begin{dcases}
+ 		1 & x \in E \\
+ 		0 & x \not\in E
+ 	\end{dcases}
+	\]
+	Then
+	\begin{itemize}
+		\item $\chi_E$ is lower semicontinuous iff $E$ is open.
+		\item $\chi_E$ is upper semicontinuous iff $E$ is closed.
+	\end{itemize} 	
+\end{example}
+
+\begin{lemma}\label{Lem:SomeFactsAboutSemiCont}
+	Let $f : X \to \bbR$ be a function.
+	\begin{itemize}
+		\item $f$ is lower semicontinuous iff $-f$ is upper semicontinuous.
+		\item $f$ is continuous iff $f$ is lower and upper semicontinuous.
+		\item Let $\{f_\alpha\}_{\alpha \in \Lambda}$ be a collection of lower semicontinuous functions and $f(x) \coloneqq \sup_{\alpha \in \Lambda} f_{\alpha}(x)$ is finite.
+		Then $f$ is lower semicontinuous.
+		Similarly, if $\{g_\alpha\}_{\alpha \in \Lambda}$ is a collection of upper semicontinuous functions and $g(x) \coloneqq \inf_{\alpha \in \Lambda} g_\alpha(x)$ is finite, then $g$ is upper semicontinuous.
+	\end{itemize}
+\end{lemma}
+
 \bibliographystyle{abbrv}
 %\bibliography{db}
 
