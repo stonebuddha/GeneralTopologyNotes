@@ -1408,7 +1408,21 @@
 			& \implies (a,b) \in \overline{V_x} \times \overline{V_y}
 		\end{align}
 		
-		\item To show ${\impliedby}$:
+		\item To show ${\impliedby}$: It suffices to show that $X$ is regular.
+		Let $x \in X$ and $U_x \in \tau_X$ such that $x \in U_x$.
+		Fix $y \in Y$. Then $U \coloneqq U_x \times Y$ is a neighborhood of $(x,y)$.
+		Because $X \times Y$ is regular, there exists $V \in \tau_{X \times Y}$ such that $(x,y) \in V \subseteq \overline{V} \subseteq U$.
+		Let $V_x$ be a neighborhood of $x$ and $V_y$ be a neighborhood of $y$ such that $V_x \times V_y \subseteq V$.
+		
+		We claim that $\overline{V_x} \subseteq U_x$, and then we conclude by \lemref{RegularIffNeighborContainClosure}.
+		Suppose $z \in \overline{V_x}$ and $y \in \overline{V_y}$.
+		Then $(z,y) \in \overline{V_x} \times \overline{V_y}$ and $\overline{V_x \times V_y} \subseteq \overline{V} \subseteq U = U_x \times Y$.
+		It then suffices to show that $\overline{V_x} \times \overline{V_y} \subseteq \overline{V_x \times V_y}$.
+		Let $a \in \overline{V_x}$ and $b \in \overline{V_y}$.
+		Then for all neighborhoods $W$ of $(a,b)$, there exist a neighborhood $W_a$ of $a$ and a neighborhood $W_b$ of $b$ such that $W_a \times W_B \subseteq W$.
+		We know that $W_a \cap V_x \neq \emptyset$ and $W_b \cap V_y \neq \emptyset$,
+		thus $(W_a \times W_b) \cap (V_x \times V_y) \neq \emptyset$.
+		Therefore $W \cap (V_x \times V_y) \neq \emptyset$ and $(a,b) \in \overline{V_x\times V_y}$.
 	\end{itemize}
 \end{proof}
 
@@ -1444,6 +1458,35 @@
 \begin{proposition}\label{Prop:MetricT4}
 	Every metric space is $T_4$, i.e., $T_1$ and normal.
 \end{proposition}
+\begin{proof}
+	Let $(X,d)$ be a metric space.
+	Because metric spaces are Hausdorff, they are also $T_1$ by definition.
+	Let $C_1$ and $C_2$ be disjoint closed sets.
+	Define the distance of a point $x \in X$ to a set $A \subseteq X$ as
+	\[
+	d(x,A) \coloneqq \inf \{ d(x,y) : y \in A \}
+	\]
+	
+	We claim that if $z \not\in C_1$, then $d(z,C_1) > 0$.
+	If not, there exists $\{y_n\}_{n \in \bbN} \subseteq C_1$ such that $d(z,y_n) \rightarrow 0$.
+	By \lemref{LimitOfSeqInClosure}, we know $z \in \overline{C_1} = C_1$, which leads to a contradiction.
+	
+	Define two open sets
+	\begin{align}
+		U_1 & \coloneqq \bigcup_{x \in C_1} B\p{x,\frac{d(x,C_2)}{3}} \\
+		U_2 & \coloneqq \bigcup_{y \in C_2} B\p{y,\frac{d(y,C_1)}{3}}
+	\end{align}
+	such that $C_1 \subseteq U_1$ and $C_2 \subseteq U_2$.
+	We claim that $U_1 \cap U_2 = \emptyset$.
+	If not, let $z \in U_1 \cap U_2$.
+	Then there exist $x \in C_1$ and $y \in C_2$ such that $z \in B(x,\nicefrac{d(x,C_2)}{3})$ and $z \in B(y,\nicefrac{d(y,C_1)}{3})$.
+	Without loss of generality, let's assume $d(y,C_1) \le d(x,C_2)$.
+	Thus
+	\[
+	0 < d(x,C_2) \le d(x,y) \le d(x,z)+d(z,y) < \frac{2d(x,C_2)}{3}
+	\]
+	which leads to a contradiction.
+\end{proof}
 
 \section{Compactness}
 
