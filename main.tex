@@ -157,7 +157,7 @@
 	\end{equation}
 	from $\tau'$.
 	Because $U_i^\alpha$ are elements of $\calF \cup \{ \emptyset,X\}$, and indeed $\tau \supseteq \calF \cup \{ \emptyset,X\}$, we know that $U_i^\alpha \in \tau$.
-	By definition of topologies, we know \eqref{UnionIntersect} is an open set, i.e., it is contained in $\tau$.
+	By definition of topologies, we know \eqref{Eq:UnionIntersect} is an open set, i.e., it is contained in $\tau$.
 	Therefore we conclude that $\tau' \subseteq \tau$.
 \end{proof}
 
@@ -1310,6 +1310,14 @@
 \begin{proposition}\label{Prop:T1SingletonClosed}
 	If $(X,\tau)$ is $T_1$, then every singleton is closed.
 \end{proposition}
+\begin{proof}
+	Let $x \in X$. We want to show that $\overline{\{x\}} = \{x\}$.
+	
+	Suppose $y \neq x$.
+	Then $T_1$ implies there exists a neighborhood $V$ of $y$ such that $x \not\in V$.
+	Thus $V \cap \{x\} = \emptyset$ and $y \not\in \overline{\{x\}}$.
+	Because $y$ is arbitrarily chosen, we conclude that $\overline{\{x\}} = \{x\}$.
+\end{proof}
 
 \begin{theorem}\label{The:HierarchyOfSeparation}
 	For the axioms of separation defined in \defref{AxiomsOfSeparation}, we have
@@ -1317,6 +1325,19 @@
 		T_4 \implies T_3 \implies T_2 \implies T_1 \implies T_0.
 	\end{equation*}
 \end{theorem}
+\begin{proof}\
+	\begin{itemize}
+		\item $T_1 \implies T_0$: Trivial.
+		\item $T_2 \implies T_1$: Trivial.
+		\item $T_3 \implies T_2$: Suppose $x \neq y$. By definition, $T_3$ is $T_1$ and regular.
+		By \propref{T1SingletonClosed}, we know that $\{y\}$ is closed.
+		Define $C \coloneqq \{ y\}$ to be a closed set.
+		By regularity we know that there exist disjoint open sets $U,V$ such that $x \in U$ and $C \subseteq V$, which is equivalent to $y \in V$.
+		\item $T_4 \implies T_3$: Suppose $x \in X$ and a closed $C \subseteq X$ such that $x \not\in C$.
+		Define $C' \coloneqq \{ x\}$ to be a closed set by \propref{T1SingletonClosed}.
+		By normality we know that there exist disjoint open sets $U,U'$ such that $C \subseteq U$ and $C' \subseteq U'$, which is equivalent to $x \in U'$.
+	\end{itemize}
+\end{proof}
 
 \begin{example}\label{Exa:NotT0}
 	There exist topologies that are not $T_0$.
@@ -1335,22 +1356,90 @@
 	The topology in \exref{T0NotImplyT1} is an example.
 \end{example}
 
+\begin{lemma}\label{Lem:RegularIffNeighborContainClosure}
+	Let $(X,\tau)$ be a topological space.
+	Then $X$ is regular iff for all $x \in X$, for all neighborhoods $U \subseteq X$ of $x$, there exists an open set $V$ such that $x \in V \subseteq \overline{V} \subseteq U$.
+\end{lemma}
+\begin{proof}\
+	\begin{itemize}
+		\item To show ${\implies}$: Suppose $X$ is regular and $x \in X$, $U \in \tau$ such that $x \in U$.
+		Define $C \coloneqq X \setminus U$ to be a closed set such that $x \not\in C$.
+		By regularity we have disjoint open sets $V,W$ such that $x \in V$ and $C \subseteq W$.
+		
+		We claim that $\overline{V} \subseteq U$.
+		If not, there would exist $y \in \overline{V} \setminus U$.
+		Then $y \in C \subseteq W$ so $W \cap \overline{V} \neq \emptyset$, but $V,W$ are open and $W \cap V = \emptyset$, thus we have a contradiction.
+		
+		\item To show ${\impliedby}$: Suppose $x \in X$ and a closed $C \subseteq X$ such that $x \not\in C$.
+		Define $U \coloneqq X \setminus C$ to be an open set such that $x \in U$.
+		Then by assumption there exists an open set $V$ such that $x \in V \subseteq \overline{V} \subseteq U$.
+		Define $W \coloneqq X \setminus \overline{V}$ to be an open set.
+		Then $V,W$ are disjoint.
+		Moreover, we have $C = X \setminus U \subseteq X \setminus \overline{V} = W$, i.e., we can separate a point and a disjoint closed set.
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}\label{The:ProductOfRegularStillRegular}
+	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
+	Then $(X,\tau_X)$ and $(Y,\tau_Y)$ are regular iff the product topology $(X \times Y, \tau_{X \times Y})$ is regular.
+\end{theorem}
+\begin{proof}\
+	\begin{itemize}
+		\item To show ${\implies}$: Suppose $(x,y) \in X \times Y$ and $U \in \tau_{X \times Y}$ such that $(x,y) \in U$.
+		By definition of product topology we have $W_x \in \tau_X$ and $W_y \in \tau_Y$ such that $x \in W_x$, $y \in W_y$ and $W_x \times W_y \subseteq U$.
+		Because $X,Y$ are regular, there exist $V_x \in \tau_X$ and $V_y \in \tau_Y$ such that
+		\begin{gather}
+			x \in V_x \subseteq \overline{V_x} \subseteq W_x \\
+			y \in V_y \subseteq \overline{V_y} \subseteq W_y
+		\end{gather}
+		Define $V \coloneqq V_x \times V_y$ to be a neighborhood of $(x,y)$.
+		Then $V \subseteq \overline{V_x} \times \overline{V_y} \subseteq W_x \times W_y \subseteq U$.
+		
+		We claim that $\overline{V} = \overline{V_x \times V_y} \subseteq \overline{V_x} \times \overline{V_y} $ and then
+		we conclude the proof by \lemref{RegularIffNeighborContainClosure}.
+		Let $(a,b) \in \overline{V}$.
+		Let $V_a$ be a neighborhood of $a$ in $X$.
+		Let $V_b$ be a neighborhood of $b$ in $Y$.
+		Then
+		\begin{align}
+			(a,b) \in \overline{V} & \implies (V_a \times V_b) \cap V \neq \emptyset \\
+			& \implies V_a \cap V_x \neq \emptyset \wedge V_b \cap V_y \neq \emptyset \\
+			& \implies a \in \overline{V_x} \wedge b \in \overline{V_y} \\
+			& \implies (a,b) \in \overline{V_x} \times \overline{V_y}
+		\end{align}
+		
+		\item To show ${\impliedby}$:
+	\end{itemize}
+\end{proof}
+
 \begin{example}\label{Exa:RegularNotImplyNormal}
 	In general regular spaces are not necessarily normal spaces.
 	Let's consider the Sorgenfrey line $(\bbR,\tau)$ where $\tau = \{ A \subseteq \bbR : \Forall{x \in A} \Exists{\epsilon > 0} [x,x+\epsilon) \subseteq A \}$.
 	The Sorgenfrey plane $(\bbR^2,S)$ is defined as the product topology $(\bbR,\tau) \times (\bbR,\tau)$.
 	Then $S$ is regular but not normal.
 \end{example}
-
-\begin{lemma}\label{Lem:RegularIffNeighborContainClosure}
-	Let $(X,\tau)$ be a topological space.
-	Then $X$ is regular iff for all $x \in X$, for all neighborhoods $U \subseteq X$ of $x$, there exists an open set $V$ such that $x \in V \subseteq \overline{V} \subseteq U$.
-\end{lemma}
-
-\begin{theorem}\label{The:ProductOfRegularStillRegular}
-	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
-	Then $(X,\tau_X)$ and $(Y,\tau_Y)$ are regular iff the product topology $(X \times Y, \tau_{X \times Y})$ is regular.
-\end{theorem}
+\begin{proof}
+	First of all, let's prove $(\bbR,\tau)$ is regular, then by \theoref{ProductOfRegularStillRegular} we know that $S$ is regular.
+	Suppose $x \in \bbR$ and a closed $C \subseteq \bbR$ such that $x \not\in C$.
+	Then there exists $\epsilon>0$ such that $[x,x+\epsilon) \cap C = \emptyset$.
+	Define $U \coloneqq [x,x+\epsilon)$ and $V \coloneqq \bbR \setminus [x,x+\epsilon)$.
+	Then $x \in U$ and $C \subseteq V$.
+	
+	We claim that $V$ is open. We conclude the proof by observing that
+	\begin{align}
+		V & = (-\infty,x) \cup [x+\epsilon,+\infty) \\
+		& = \bigcup_{n \in \bbN^+} [-n, x-\nicefrac{1}{n}) \cup \bigcup_{m > x + \epsilon} [x+\epsilon,m)
+	\end{align}
+	
+	Then we need to show that $S$ is not normal.
+	Define
+	\begin{align}
+		C_1 & \coloneqq \{ (x,-x) : x \in \bbQ \} \\
+		C_2 & \coloneqq \{ (y,-y) : y \in \bbR \setminus \bbQ \}
+	\end{align}
+	We claim that $C_1,C_2$ are closed and cannot be separated by disjoint open sets.
+	\diw{Baire category theorem.}
+\end{proof}
 
 \begin{proposition}\label{Prop:MetricT4}
 	Every metric space is $T_4$, i.e., $T_1$ and normal.
