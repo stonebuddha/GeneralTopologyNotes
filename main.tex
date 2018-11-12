@@ -1519,6 +1519,14 @@
 	Suppose $K \subseteq X$ is compact and $x_0 \not\in K$.
 	Then there exist disjoint open sets $U$ and $V$ such that $x_0 \in V$ and $K \subseteq U$.
 \end{lemma}
+\begin{proof}
+	Let $x \in K$. Then $x \neq x_0$ and because $X$ is Hausdorff, there exist disjoint open sets $U_x,V_x$ in $X$ such that $x \in U_x$, $x_0 \in V_x$.
+	Thus $K \subseteq \bigcup_{x \in K} U_x$.
+	Because $K$ is compact, there exist $n \in \bbN$ and $x_1,\cdots,x_n \in K$ such that $K \subseteq \bigcup_{i=1}^n U_{x_i}$.
+	Let's define $U \coloneqq \bigcup_{i=1}^n U_{x_i}$ and $V \coloneqq \bigcap_{i=1}^n V_{x_i}$.
+	Then $K \subseteq U$, $x_0 \in V$, and $U \cap V = \emptyset$.
+	We conclude the proof by observing that $V$ is open because it is a finite intersection of open sets.
+\end{proof}
 
 \begin{proposition}\label{Prop:SeveralPropertiesOfCompactness}
 	Let $(X,\tau)$ be a topological space.
@@ -1529,18 +1537,95 @@
 		\item If $X$ is Hausdorff and compact, then $X$ is normal.
 	\end{enumerate}
 \end{proposition}
+\begin{proof}\
+	\begin{enumerate}
+		\item Let $C \subseteq \bigcup_{\alpha \in \Lambda} U_\alpha$ where $U_\alpha \in \tau$. Then
+		\[
+		X = \bigcup_{\alpha \in \Lambda} U_\alpha \cup (X \setminus C)
+		\]
+		is an open cover because $C$ is closed.
+		Because $X$ is compact, there exists a finite $\calI \subseteq \Lambda$ such that $X = \bigcup_{\alpha \in \calI} U_\alpha \cup (X \setminus C)$.
+		Therefore $C \subseteq \bigcup_{\alpha \in \calI} U_\alpha$ so $C$ is compact.
+		
+		\item We claim that $(X \setminus K)$ is open.
+		Let $x_0 \in X \setminus K$.
+		By \lemref{HausdorffSeparatePointAndCompact}, there exist disjoint open sets $U,V$ such that $K \subseteq U$ and $x_0 \in V$.
+		Then $V \subseteq X \setminus U \subseteq X \setminus K$.
+		Therefore $(X \setminus K)$ is open.
+		
+		\item Let $C$ be a closed set and $x_0 \not\in C$.
+		By (1), we know that $C$ is compact.
+		Then we conclude the proof by \lemref{HausdorffSeparatePointAndCompact}.
+		
+		\item Let $C_1,C_2$ be disjoint closed sets.
+		Then for all $x \in C_1$, by (3), we know that there exist disjoint open sets $U_x,V_x$ such that $x \in U_x$ and $C_2 \subseteq V_x$.
+		Thus $C_1 = \bigcup_{x \in C_1} U_x$.
+		Again by (1) we know that $C_1$ is compact, then there exist $n \in \bbN$ and $x_1,\cdots,x_n \in C_1$ such that $C_1 = \bigcup_{i=1}^n U_{x_i}$.
+		Define $U \coloneqq \bigcup_{i=1}^n U_{x_i}$.
+		Define $V \coloneqq \bigcap_{i=1}^n V_{x_i}$ to be an open set.
+		Then $C_1 \subseteq U$, $C_2 \subseteq V$, and $U \cap V =\emptyset$.
+	\end{enumerate}
+\end{proof}
 
 \begin{example}\label{Exa:CompactNotImplyClosed}
 	In general compactness does not imply closedness.
+	Let $\tau = \set{\emptyset,X}$ and $\emptyset \neq E \subset X$.
+	Then $E$ is compact trivially but $\overline{E} = X$ then $E$ is not closed.
 \end{example}
 
 \begin{example}\label{Exa:ClosureOfCompactNotCompact}
 	If $(X,\tau)$ is not Hausdorff, there might exist a compact set $K \subseteq X$ but $\overline{K}$ is not compact.
+	Let $X = \bbN$ and $\tau = \set{ A \cup \set{1} : A \subseteq \bbN } \cup \set{\emptyset}$.
+	Then $K = \set{1}$ is compact trivially but $\overline{K} = \bbN$ is not compact, because  $\bbN = \bigcup_{m \in \bbN} \{1,m \}$ has no finite subcover.
 \end{example}
 
 \begin{proposition}\label{Prop:ClosedIntervalCompact}
 	If $a,b \in \bbR$ and $a < b$, then $[a,b]$ is compact.
 \end{proposition}
+\begin{proof}
+	Let $[a,b] \subseteq \bigcup_{\alpha \in \Lambda} U_\alpha$ where $U_\alpha \subseteq \bbR$ are open.
+	Define
+	\[
+	S \coloneqq \set{ x \in [a,b] :  \text{$[a,x]$ can be covered with finitely many $U_\alpha$'s} }
+	\]
+	
+	We claim that $b \in S$. First of all, $S \neq \emptyset$ because $a \in S$.
+	Define $x_0 \coloneqq \sup S$.
+	\begin{itemize}
+		\item WTS $x_0 > a$: Let $\alpha_0 \in \Lambda$ such that $a \in U_{\alpha_0}$.
+		Because $U_{\alpha_0}$ is open, there exists $\epsilon > 0$ such that $(a-\epsilon,a+\epsilon) \subseteq U_{\alpha_0}$, thus $x_0 \ge a + \nicefrac{\epsilon}{2} > a$.
+		
+		\item WTS $x_0 = b$: If not, let $\alpha_0 \in \Lambda$ such that $x_0 \in U_{\alpha_0}$.
+		Let $\epsilon > 0$ such that $a < x_0 - \epsilon < x_0 < x_0 + \epsilon < b$ and $(x_0-\epsilon,x_0+\epsilon) \subseteq U_{\alpha_0}$.
+		Because $x_0 = \sup S$, there exists $x_1 > x_0 -\epsilon$ such that $[a,x_1]$ is covered by finitely many $U_\alpha$'s.
+		Then
+		\[
+		\sq{a,x_0+\frac{\epsilon}{2}} = \sq{a,x_1} \cup \sq{x_1,x_0+\frac{\epsilon}{2}}
+		\]
+		and $[x_1,x_0+\nicefrac{\epsilon}{2}] \subseteq U_{\alpha_0}$, therefore $x_0 + \nicefrac{\epsilon}{2} \in S$ contradicts $\sup S = x_0$.
+		
+		\item WTS $b \in S$: Let $b \in U_{\alpha_0}$ for $\alpha_0 \in \Lambda$.
+		Then there exists $\epsilon > 0$ such that $(b-\epsilon,b+\epsilon) \subseteq U_{\alpha_0}$.
+		Because $\sup S = b$, there exists $x_1 \in S$ such that $b-\epsilon < x_1 < b$.
+		Thus $[a,b] = [a,x_1] \cup [x_1,b]$.
+		Because $[a,x_1]$ can be covered by finitely many $U_\alpha$'s and $[x_1,b] \subseteq U_{\alpha_0}$, we conclude that $b \in S$.
+	\end{itemize}
+\end{proof}
+
+\begin{theorem}[Heine-Borel property]\label{The:HeineBorelProperty}
+	The set $K \subseteq \bbR$ is compact iff it is closed and bounded.
+\end{theorem}
+\begin{proof}
+	\begin{itemize}
+		\item WTS ${\implies}$: Since $\bbR$ is Hausdorff, by \propref{SeveralPropertiesOfCompactness}(2), we know that $K$ is closed.
+		If $K$ is not bounded, then $\sup_{x \in K} \abs{x} = +\infty$.
+		Then $K \subseteq \bigcup_{n \in \bbN^+} (-n,n)$ does not have a finite subcover, which contradicts that $K$ is compact.
+		
+		\item WTS ${\impliedby}$: Because $K$ is bounded, there exists $n \in \bbN^+$ such that $K \subseteq [-n,n]$.
+		By \propref{ClosedIntervalCompact}, we know $[-n,n]$ is compact.
+		By \propref{SeveralPropertiesOfCompactness}(1) and $K$ is closed, we conclude that $K$ is compact.
+	\end{itemize}
+\end{proof}
 
 \begin{example}\label{Exa:ClosedBoundedNotCompact}
 	In general closed bounded sets are not necessarily compact.
