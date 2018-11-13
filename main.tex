@@ -1798,25 +1798,75 @@
 	If $X$ is second countable, then it is Lindel{\"o}f, i.e., every open cover admits a countable subcover.
 \end{proposition}
 
+\begin{remark}\label{Rem:AnotherProofMetricSeqCompactImplyCompact}
+	Here we give another proof of \propref{MetricCompactIffSeqCompact}.
+	Suppose $(X,d)$ is a sequentially compact metric space.
+	Let $X = \bigcup_{\alpha \in \Lambda} U_\alpha$ where $U_\alpha$'s are open sets.
+	By \propref{MetricSeqCompactImplySeparable}, $X$ is second countable.
+	By \propref{MetricSndCountImplyLindelof}, $X$ is Lindel{\"o}f, so there exists a countable subcover $X = \bigcup_{n=1}^\infty U_n$.
+	If there is no finite subcover, then for all $m \in \bbN$, there exists $x_m \not\in U_1 \cup \cdots \cup U_m$.
+	Because $X$ is sequentially compact, we know that $\{x_m\}_{m \in \bbN}$ admits a converging subsequence, say, $\{x_{m_k}\}_{k \in \bbN} \subseteq \{ x_m \}_{m \in \bbN}$ and $x_{m_k} \rightarrow p$.
+	Suppose $m_0 \in \bbN$ such that $p \in U_{m_0}$.
+	Then there exists $k_0$ such that for all $k \ge k_0$, $x_{m_k} \in U_{m_0}$.
+	But by construction, each $U_m$ can only have finitely many $x_{m_k}$'s.
+	Hence we have a contradiction.
+\end{remark}
+
 \begin{proposition}\label{Prop:ContFuncPreserveCompact}
 	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
 	If $K \subseteq X$ is (sequentially) compact, $f : X \to Y$ is continuous, then $f(K)$ is also (sequentially) compact.
 \end{proposition}
+\begin{proof}
+	Suppose $f(K) \subseteq \bigcup_{\alpha \in \Lambda} V_\alpha$ where $V_\alpha$'s are open sets in $Y$.
+	Then $U_\alpha \coloneqq f^{-1}(V_\alpha)$ is open in $X$, and $K \subseteq \bigcup_{\alpha \in \Lambda} U_\alpha$.
+	Because $K$ is compact, there exists a finite $\calI \subseteq \Lambda$ such that $K \subseteq \bigcup_{\alpha \in \calI} U_\alpha$.
+	Thus $f(K) \subseteq f(\bigcup_{\alpha \in \calI} U_\alpha) \subseteq \bigcup_{\alpha \in \calI} V_\alpha$.
+\end{proof}
 
 \begin{proposition}\label{Prop:ContBijectionFromCompactToT2IsHome}
 	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
 	Suppose $f : X \to Y$ is a bijection, $X$ is compact, $Y$ is $T_2$ and $f$ is continuous.
 	Then $f^{-1} : Y \to X$ is continuous, i.e., $f$ is a homeomorphism.
 \end{proposition}
+\begin{proof}
+	Define $g \coloneqq f^{-1} : Y \to X$.
+	Let $C \subseteq X$ be a closed set.
+	Because $X$ is compact, by \propref{SeveralPropertiesOfCompactness}(1) we know that $C$ is also compact.
+	Thus by \propref{ContFuncPreserveCompact}, $f(C) = g^{-1}(C)$ is compact in $Y$.
+	Because $Y$ is $T_2$, by \propref{SeveralPropertiesOfCompactness}(2) we know that $g^{-1}(C)$ is closed in $Y$.
+	Then by \propref{SomeEquivResultsAboutContFunc}(3) we know that $g$ is continuous.
+\end{proof}
 
 \begin{example}\label{Exa:ContBijectionNotHome}
 	In general \propref{ContBijectionFromCompactToT2IsHome} does not hold if $X$ is not compact or $Y$ is not $T_2$.
+	\diw{TODO.}
 \end{example}
 
-\begin{theorem}\label{The:Weierstrass}
+\begin{theorem}[Weierstrass theorem]\label{The:Weierstrass}
 	Let $(X,\tau)$ be a (sequentially) compact space.
 	If $f: X\to\bbR$ is (sequentially) continuous, then there exists $x \in X$ such that $f(x) = \min_{x \in X} f(x)$.
 \end{theorem}
+\begin{proof}
+	\begin{itemize}
+		\item First proof: Because $X$ is compact and $f$ is continuous, by \propref{ContFuncPreserveCompact}, we know $f(X)$ is compact in $\bbR$.
+		Then by \theoref{HeineBorelProperty} we know that $f(X)$ is closed and bounded.
+		
+		\item Second proof: Define $\alpha \coloneqq \inf f(X)$.
+		If $\alpha \not\in f(X)$, then for all $x \in X$, $f(x) > \alpha$, and there exists $y_x \in X$ such that $f(x) > \alpha_x \coloneqq f(y_x) > \alpha$.
+		Define $U_x \coloneqq \{ z \in X : f(z) > \alpha_x \} = f^{-1}((\alpha_x,+\infty))$ is open.
+		Then $X = \bigcup_{x \in X} U_x$ and because $X$ is compact, there exist $n \in \bbN$ and $x_1,\cdots,x_n \in X$ such that $X = \bigcup_{i=1}^n U_{x_i}$.
+		Then for all $x \in X$, we have $f(x) \ge \min_{i=1}^n \alpha_{x_i} > \alpha$, 
+		thus $\inf f(X) \ge \min_{i=1}^n \alpha_{x_i} > \alpha$, which contradicts the deifnition of $\alpha$.
+		
+		\item The sequentially compact case: Define $\alpha \coloneqq \inf f(X)$.
+		Then there exists a decreasing sequence $\{\alpha_n\}_{n \in \bbN}$ contained in $f(X)$ and $\alpha_n \rightarrow \alpha$.
+		Thus for all $n \in \bbN$, there exists $x_n \in X$ such that $\alpha < f(x_n) < \alpha_n$.
+		By the squeeze theorem, we have $f(x_n) \rightarrow \alpha$.
+		Because $X$ is sequentially compact, $\{x_n\}_{n \in \bbN}$ admits a converging subsequence, say, $x_{n_k} \rightarrow x_0$.
+		Because $f$ is sequentially continuous, we know that $f(x_{n_k}) \rightarrow f(x_0)$ in $\bbR$.
+		Thus $f(x_0) = \alpha$.
+	\end{itemize}
+\end{proof}
 
 \begin{theorem}\label{The:ProductOfCompactStillCompact}
 	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
