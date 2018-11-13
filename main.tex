@@ -1686,7 +1686,7 @@
 	But now $E = \bigcup_{x \in E} \{x\}$ does not admit a finite subcover, which contradicts that $E$ is compact.
 \end{proof}
 
-\begin{proposition}\label{Prop:CopactFstCountThenSeqCompact}
+\begin{proposition}\label{Prop:CompactFstCountThenSeqCompact}
 	If $(X,\tau)$ is compact and first countable, then $X$ is sequentially compact.
 \end{proposition}
 \begin{proof}
@@ -1695,8 +1695,16 @@
 	If $\#E < \infty$, then one of $E$ must repeat infinitely many times in $\{x_n\}_{n \in \bbN}$.
 	Then let's assume $\#E = \infty$.
 	By \lemref{InfiniteSubsetOfCompactHasLimit}, we know that there exists $x_0 \in X$ such that $x_0 \in E'$.
-	Because $X$ is first countable, let $\{B_n\}_{n \in \bbN}$ be a nesting countable local base at $x_0$.
-	\diw{LAST TIME HERE}
+	By \propref{OrigPlusLimitIsClosure} we know that $x_0 \in \overline{E}$.
+	Then by \lemref{FirstCountLimitOfSeqIffClosure} we know that there exists $\{y_m\}_{m \in \bbN} \subseteq E$ such that $y_m \rightarrow x_0$.
+	Let's assume $x_0 \not\in E$, otherwise a constant sequence with $x_0$ converges to $x_0$ trivially.
+	
+	Let $\{B_n\}_{n \in \bbN}$ be a nesting countable local base at $x_0$.
+	For each $k \in \bbN$, there exists a smallest $m_k$ such that $\{ y_m : m \ge m_k\} \subseteq (E \cap B_k) \setminus \{x_0\}$.
+	Define $n_k \in \bbN$ such that $x_{n_k} = y_{m_k}$.
+	Then $n_k$'s are non-decreasing because $B_k$'s are nested.
+	If $\#\{ x_{n_k} : k \in \bbN \} < \infty$, we can obtain a converging sequence by repeating the last element.
+	Otherwise, we can get rid of duplicates and conclude that $x_{n_k} \rightarrow x_0$.
 \end{proof}
 
 \begin{definition}\label{De:TotallyBoundedness}
@@ -1708,17 +1716,82 @@
 	Let $(X,d)$ be a metric space.
 	If $X$ is sequentially compact, then it is totally bounded, so also bounded.
 \end{lemma}
+\begin{proof}
+	Fix $\epsilon > 0$ and $x_1 \in X$.
+	If $X = B(x_1,\epsilon)$, then $X$ is bounded trivially.
+	Otherwise, let $x_2 \in X \setminus B(x_1,\epsilon)$.
+	If again $X = B(x_1,\epsilon) \cup B(x_2,\epsilon)$, then $X$ is also bounded.
+	Otherwise, we repeat the process.
+	If the process does not terminate, i.e., for all $n \in \bbN$, there exists $x_n \in X \setminus (\bigcup_{i=1}^{n-1} B(x_i,\epsilon))$.
+	Therefore for $n \neq m$, we have $d(x_n,x_m) \ge \epsilon$, thus no subsequence of $\{x_n\}_{n \in \bbN}$ can converge, which contradicts the sequential compactness.
+	
+	To show $X$ is bounded, let's pick $\epsilon =1$ and there exist $n \in \bbN$ and $x_1,\cdots,x_n \in X$ such that $X = \bigcup_{i=1}^n B(x_i,1)$.
+	Then for all $x,y \in X$, if $x \in B(x_i,1)$ and $y \in B(x_j,1)$, we have
+	\[
+	d(x,y) \le d(x,x_i) + d(x_i,x_j) + d(x_j,y) < 2 + \max\{ d(x_l,x_k): 1 \le l,k \le n \}
+	\]
+	is indeed finte.
+\end{proof}
 
 \begin{proposition}\label{Prop:MetricCompactIffSeqCompact}
 	Let $(X,d)$ be a metric space.
 	Then $X$ is compact iff $X$ is sequentially compact.
 \end{proposition}
+\begin{proof}
+	The ${\implies}$ direction is trivial: Because $X$ is a metric space, $X$ is first countable, and then by \propref{CompactFstCountThenSeqCompact} we conclude that $X$ is sequentially compact.
+	
+	To show the ${\impliedby}$ direction, let's assume $X$ is sequentially compact.
+	Let $X = \bigcup_{\alpha \in \Lambda} U_\alpha$ where $U_\alpha$'s are open sets.
+	Suppose there does not exist a finite subcover.
+	By \lemref{MetricSeqCompactIsTotallyBounded}, $X$ is totally bounded and $a	\coloneqq \mathrm{diam}(X) < +\infty$.
+	Thus there exist $n \in \bbN$ and $x_1,\cdots,x_n \in X$ such that $X = \bigcup_{i=1}^n B(x_i, \nicefrac{a}{4})$.
+	Moreover, $X = \bigcup_{i=1}^n \overline{B(x_i, \nicefrac{a}{4})}$.
+	Then at least one closed ball cannot be covered with finitely many $U_\alpha$'s.
+	Call it $\overline{B_1}$. Then $\mathrm{diam}(\overline{B_1}) = \nicefrac{a}{2}$ and $\overline{B_1}$ is also sequentially compact.
+	So the induced metric space on $\overline{B_1}$ is totally bounded and so there exist $m > 0$ and $y_1,\cdots,y_m \in \overline{B_1}$ such that
+	\[
+	\overline{B_1} = \bigcup_{i=1}^m\p{ \overline{B\p{y_i,\frac{a}{8}}} \cap \overline{B_1} }
+	\]
+	Because $\overline{B_1}=\bigcup_{\alpha \in \Lambda} (\overline{B_1} \cap U_\alpha)$, we know that there exists one closed ball $\overline{B\p{y_i,\frac{a}{8}}}$ that cannot be covered by finitely many $(\overline{B_1} \cap U_\alpha)$'s.
+	Call it $\overline{B_2}$. Then $\mathrm{diam}(\overline{B_2}) \le \nicefrac{a}{4}$.
+	
+	Repeat the process and find nesting closed balls $\overline{B_1} \supseteq \overline{B_2} \supseteq \cdots \supseteq \overline{B_n} \supseteq \cdots$ with $\mathrm{diam}(\overline{B_n}) \le \nicefrac{a}{2^n}$.
+	Pick $x_n \in \overline{B_n}$.
+	Because $X$ is sequentially compact, there exists $\{x_{n_k}\}_{k \in \bbN} \subseteq \{x_n\}_{n \in \bbN}$ such that $x_{n_k} \rightarrow p$.
+	Then $p \in \bigcap_{n=1}^\infty \overline{B_n}$, but since $\mathrm{diam}(\overline{B_n}) \rightarrow 0$, we have indeed $\{p\} = \bigcap_{n=1}^\infty \overline{B_n}$.
+	Let $\alpha_0 \in \Lambda$ such that $p \in U_{\alpha_0}$.
+	Then there exists $r > 0$ such that $B(p,r) \subseteq U_{\alpha_0}$.
+	Let $n_k \gg 1$ such that $d(p,x_{n_k}) < \nicefrac{r}{2}$ and $\mathrm{diam}(\overline{B_{n_k}}) < \nicefrac{r}{2}$.
+	
+	Then we claim that $\overline{B_{n_k}} \subseteq B(p,r) \subseteq U_{\alpha_0}$.
+	For all $y \in \overline{B_{n_k}}$, we have
+	\[
+	d(y,p) \le d(y,x_{n_k}) + d(x_{n_k}, p) < \mathrm{diam}(\overline{B_{n_k}}) + \frac{r}{2} = r
+	\]
+	But by construction we know that $\overline{B_{n_k}}$ cannot be covered by finite many $U_\alpha$'s, thus we conclude the proof by contradiction.
+\end{proof}
 
 \begin{proposition}\label{Prop:MetricSeqCompactImplySeparable}
 	Let $(X,d)$ be a metric space.
 	If $X$ is sequentially compact, then $X$ is separable.
 	In particular, $X$ is second countable.
 \end{proposition}
+\begin{proof}
+	By \lemref{MetricSeqCompactIsTotallyBounded}, $X$ is totally bounded.
+	Then for all $m \in \bbN$, there exist $n_m \in \bbN$ and $x^{(m)}_1,\cdots,x^{(m)}_{n_m} \in X$ such that
+	\[
+	X = \bigcup_{i=1}^{n_m} B\p{ x^{(m)}_i, \frac{1}{m}} 
+	\]
+	Define $S \coloneqq \{ x^{(m)}_i : m \in \bbN, i=1,\cdots,n_m \}$ to be a countable set.
+	We claim that $S$ is dense in $X$, i.e., $\overline{S} = X$.
+	Fix $x \in X$ and $\epsilon > 0$.
+	Let $m \gg 1$ such that $\nicefrac{1}{m} < \epsilon$.
+	Let $x^{(m)}_i$ be such that $x \in B(x^{(m)}_i, \nicefrac{1}{m})$.
+	Then $x^{(m)}_i \in B(x,\nicefrac{1}{m}) \subseteq B(x,\epsilon)$, therefore $B(x,\epsilon) \cap S \supseteq \{ x^{(m)}_i \} \neq \emptyset$.
+	Because $\epsilon$ is arbitrarily chosen, we have $x \in \overline{S}$.
+	Thus we conclude that $\overline{S} = X$.
+	By \propref{MetricSeparableImplySndAxCount}, we know that the metric space $X$ is second countable.
+\end{proof}
 
 \begin{proposition}\label{Prop:MetricSndCountImplyLindelof}
 	Let $(X,d)$ be a metric space.
