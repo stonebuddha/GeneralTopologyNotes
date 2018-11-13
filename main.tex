@@ -1872,6 +1872,29 @@
 	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
 	Then $(X,\tau_X)$ and $(Y,\tau_Y)$ are compact iff the product topology $(X \times Y,\tau_{X \times Y})$ is compact. 
 \end{theorem}
+\begin{proof}
+	The $\impliedby$ direction is easy.
+	The projection maps $\pi_X : X \times Y \to X$ and $\pi_Y : X \times Y \to Y$ are indeed continuous, thus by \propref{ContFuncPreserveCompact} we conclude that $X$ and $Y$ are compact.
+	
+	To show the $\implies$ direction, suppose $X \times Y$ is not compact.
+	Then there exists $X \times Y \subseteq \bigcup_{\alpha \in \Lambda} W_\alpha$ that does not admit a finite subcover.
+	
+	First of all, we claim that there exists $x_0 \in X$ such that for all neighborhoods $U$ of $x_0$ in $X$, there does not exist a finite subset of $\{W_\alpha\}$ that covers $U \times Y$.
+	If not, then for all $x \in X$, there exists $U_x \in \tau_X$ such that $U_x \times Y$ is covered by finitely many $W_\alpha$'s, say $\calW_x$.
+	Because $X = \bigcup_{x \in X} U_x$ and $X$ is compact, there exist $n \in \bbN$ and $x_1,\cdots,x_n \in X$ such that $X = \bigcup_{i=1}^n U_{x_i}$.
+	Define $\calT \coloneqq \{ W_\alpha : W_\alpha \in \calW_{x_i}, i=1,\cdots,n\}$ to be a finite collection.
+	Then $X \times Y = \bigcup_{W_\alpha \in \calT} W_\alpha$ contradicts the assumption that there does not exist a finite subcover.
+	
+	Secondly, we claim that there exists $y_0 \in Y$ such that for all neighborhoods $U \times V$ of $(x_0,y_0)$, there does not exist a finite subset of $\{ W_\alpha \}$ that covers $U \times V$.
+	If not, then for all $y \in Y$, there exist $U_y$ neighborhood of $x_0$ and $V_y$ neighborhood of $y$ such that $U_y \times V_y$ is covered by finitely many $W_\alpha$'s, say $\calW_y$.
+	Because $Y = \bigcup_{y \in Y} V_y$ and $Y$ is compact, there exist $n \in \bbN$ and $y_1,\cdots,y_n \in Y$ such that $Y = \bigcup_{i=1}^n V_{x_i}$.
+	Then $U \coloneqq U_{y_1} \cap \cdots \cap U_{y_n}$ is a neighborhood of $x_0$ in $X$.
+	Thus $U \times Y$ is covered by $\{ W_\alpha : W_\alpha \in \calW_{y_i}, i=1,\cdots,n\}$ that is a finite collection, which leads to a contradiction.
+	
+	Finally, let $\alpha_0 \in \Lambda$ such that $(x_0,y_0) \in W_{\alpha_0}$.
+	Then there exist a neighborhood $U$ of $x_0$ in $X$ and a neighborhood $V$ of $y_0$ in $Y$ such that $U \times V \subseteq W_{\alpha_0}$.
+	But this contradicts the claims above: $U \times V$ cannot be covered by finitely many $W_\alpha$'s.
+\end{proof}
 
 \section{Compactification}
 
