@@ -1,6 +1,7 @@
-\documentclass{techreport}
+\documentclass[screen]{techreport}
 
-\newcommand{\Omit}[1]{}
+\numberwithin{equation}{section}
+
 \newcommand{\diw}[1]{{\color{Red} DW: #1}}
 
 \sloppy
@@ -47,9 +48,9 @@
 
 \begin{remark}\label{Rem:PowerSetAndIndicators}
 	Let $X$ be a set. Then
-	\begin{equation*}
+	\begin{equation}
 		\wp(X) \sim \{0,1\}^X \coloneqq \set{ f : X \to \{0,1\} }.
-	\end{equation*}
+	\end{equation}
 \end{remark}
 
 \begin{definition}\label{De:PartialOrder}
@@ -131,9 +132,9 @@
 
 \begin{remark}\label{Rem:IntersectTopStillTop}
 	If $\{ \tau_\alpha \}_{\alpha \in \calI}$ is a collection of topologies on $X$, then
-	\begin{equation*}
+	\begin{equation}
 		\bigcap_{\alpha \in \calI} \tau_\alpha = \set{ U \subseteq X : \Forall{\alpha \in \calI} U \in \tau_\alpha }
-	\end{equation*}
+	\end{equation}
 	is still a topology on $X$.
 \end{remark}
 
@@ -142,9 +143,9 @@
 \begin{proposition}\label{Prop:Subbase}
 	Let $X$ be a set and $\calF$ be a family of subsets of $X$.
 	Then the smallest topology $\tau$ containing $\calF$ is given by arbitrary union of finite intersection of elements of $\calF \cup \{\emptyset,X\}$, i.e.,
-	\begin{equation*}
+	\begin{equation}
 		\set{ \bigcup_{\alpha \in \calI} \p{U_1^\alpha \cap \cdots \cap U_{N(\alpha)}^\alpha} : N(\alpha) \in \bbN, U_i^\alpha \in \calF \cup \{ \emptyset, X \} }.
-	\end{equation*}
+	\end{equation}
 	Moreover, we say that $\tau$ is \emph{generated} by $\calF$, and $\calF$ is a \emph{subbase} of $\tau$.
 \end{proposition}
 \begin{proof}
@@ -192,7 +193,7 @@
 		\item for all $B_1,B_2 \in \beta$, $B_1 \cap B_2 \neq \emptyset$, then for all $x \in B_1 \cap B_2$, there exist $B_3 \in \beta$, such that $x \in B_3$ and $B_3 \subseteq B_1 \cap B_2$.
 	\end{enumerate}
 \end{proposition}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item For the ${\implies}$ direction, let $\beta$ is a base for $\tau$.
 		\begin{itemize}
@@ -276,7 +277,7 @@
 \begin{proposition}\label{Prop:SorgFstCountNotSnd}
 	The Sorgenfrey line topology in $\bbR$ is first countable but not second countable.
 \end{proposition}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item For each $x \in \bbR$, $\beta_x \coloneqq \{ [x,x+\nicefrac{1}{n}) : n \in \bbN \}$ is a countable local base of $x$. Therefore $(\bbR,\tau_{\mathrm{sorg}})$ is first countable.
 		\item We claim that if $\beta \subseteq \tau_{\mathrm{sorg}}$ is a base, the map $\Phi : \beta \to \bbR \cup \{ - \infty \}$ defined as $B \mapsto \inf B$ is onto.
@@ -378,7 +379,7 @@
 \begin{definition}\label{De:Metrics}
 	A map $d : X \times X \to [0,+\infty)$ is said to be a \emph{metric} (\emph{distance}), if
 	\begin{enumerate}
-		\item 
+		\item\
 		\begin{enumerate}
 			\item $d(x,x) = 0$ for all $x \in X$,
 			\item $x \neq y$ implies $d(x,y) > 0$ for all $x,y \in X$,
@@ -405,13 +406,13 @@
 	Define $B_3 \coloneqq B(x,r) \in \beta$.
 	Then $x \in B_3$ and we claim that $B_3 \subseteq B_1 \cap B_2$.
 	For every $x_o \in B_3$, we have
-	\begin{align*}
+	\begin{align}
 		& d(x_o,x) < r \\
 		\implies~ & d(x_o,x) < \min \{ r_1 - d(x,x_1), r_2 - d(x,x_2) \} \\
 		\implies~ & d(x_o,x) + d(x,x_1) < r_1 \wedge d(x_o,x)+d(x,x_2) < r_2 \\
 		\implies~ & d(x_o,x_1) < r_1 \wedge d(x_o,x_2) < r_2 \\
 		\implies~ & x_o \in B_1 \wedge x_o \in B_2
-	\end{align*}
+	\end{align}
 	and indeed we conclude that $x_o \in B_1 \cap B_2$.
 \end{proof}
 
@@ -426,11 +427,11 @@
 		Then $d(f,g) \coloneqq \max_{x \in [a,b]} \abs{f(x)-g(x)}$ is a metric.
 		\item Consider the space $\bbR^N$.
 		Define
-		\begin{align*}
+		\begin{align}
 			d_1(x,y) & \coloneqq \sqrt{\sum_{i=1}^N (x_i-y_i)^2} \\
 			d_2(x,y) & \coloneqq \sum_{i=1}^N \abs{x_i - y_i} \\
 			d_3(x,y) & \coloneqq \max_{i=1,\cdots,N} \abs{x_i - y_i}
-		\end{align*}
+		\end{align}
 		then the topologies associated to these metrics coincide.
 		Indeed, they are all standard topology in $\bbR^N$, or the \emph{Euclidean topology}.
 	\end{itemize}
@@ -450,7 +451,7 @@
 \begin{proposition}\label{Prop:MetricOpenFindABall}
 	Let $(X,d)$ be a metric space. Then $U \in \tau_d$ iff for all $x \in U$, there exists $r >0$ such that $B(x,r) \subseteq U$.
 \end{proposition}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item For the ${\implies}$ direction, let $U \in \tau_d$.
 		Then there exists a collection $\{B(x_\alpha,r_\alpha)\}_{\alpha \in \calI}$ of balls such that
@@ -484,11 +485,11 @@
 \begin{proof}
 	For all $x,y \in X$, we have $d_1(x,y) = \nicefrac{d(x,y)}{(1+d(x,y))} < 1$, thus $\mathrm{diam}(X) \le 1$ and $X$ is trivially bounded.
 	Obverse that for any $R \in (0,1)$, and for all $x, y \in X$,
-	\begin{align*}
+	\begin{align}
 		& \frac{d(x,y)}{1+d(x,y)} < R \\
 		\iff~ & d(x,y) < R + R \cdot d(x,y) \\
 		\iff~ & d(x,y) < \frac{R}{1-R}.
-	\end{align*}
+	\end{align}
 	Thus we know that for all $x \in X$ and $R \in (0,1)$,
 	\[
 	B_{d_1}(x,R) = B_d\p{x, \frac{R}{1-R} }.
@@ -516,10 +517,10 @@
 	Define $K_n \coloneqq \sq{\frac{1}{n}, 1-\frac{1}{n}}$ for $n \in \bbN$.
 	Then $\bigcup_{n=1}^\infty K_n = (0,1)$.
 	Define
-	\begin{align*}
+	\begin{align}
 		d(f,g) & \coloneqq \max_{n \in \bbN} \set{ \frac{1}{2^n} \max_{x \in K_n} \frac{\abs{f(x)-g(x)}}{1+\abs{f(x)-g(x)}} } \\
 		\tilde{d}(f,g) & \coloneqq  \sup_{x \in (0,1)} \frac{\abs{f(x)-g(x)}}{1+\abs{f(x)-g(x)}}
-	\end{align*}
+	\end{align}
 	to be two metrics on $C((0,1))$.
 	Then $\tau_d \subset \tau_{\tilde{d}}$.
 \end{proposition}
@@ -554,9 +555,9 @@
 \begin{definition}\label{De:InifiniteSums}
 	Let $X$ be a set and $f : X \to [0,+\infty]$.
 	The \emph{infinite sum}, written as $\sum_{x \in X} f(x)$, is defined as
-	\begin{equation*}
+	\begin{equation}
 		\sup \set{ \sum_{x \in Y} f(x) : Y \subseteq X, Y~\text{is finite} }.
-	\end{equation*}
+	\end{equation}
 \end{definition}
 
 \begin{proposition}\label{Prop:FiniteSumImplyCountableNonZero}
@@ -571,11 +572,11 @@
 	\{ x \in X : f(x) > 0 \} = \bigcup_{k \in \bbN} X_k.
 	\]
 	On the other hand, we have
-	\begin{gather*}
+	\begin{gather}
 	\sum_{x \in X_k} f(x) \le M
 	\shortintertext{so indeed}
 	\abs{X_k} \le \frac{M}{\frac{1}{k}} = Mk
-	\end{gather*}
+	\end{gather}
 	is finite. Therefore we conclude that $\{x \in X : f(x) > 0\}$ is countable.
 \end{proof}
 
@@ -604,9 +605,9 @@
 
 \begin{definition}\label{De:lpSpaces}
 	Given a set $X$ and $p \in [1,+\infty)$, the space $\ell^p(X)$ is defined as
-	\begin{equation*}
+	\begin{equation}
 		\set{ f : X \to \bbR : \sum_{x \in X} \abs{f(x)}^p < +\infty }.
-	\end{equation*}
+	\end{equation}
 \end{definition}
 
 \begin{definition}\label{De:HoldersConjugateExponent}
@@ -622,26 +623,26 @@
 \begin{theorem}[H{\"o}lder's inequality]\label{The:HoldersInequality}
 	Let $X$ be a set.
 	Given $1 \le p \le +\infty$, $q$ conjugate exponent of $p$, and $f,g: X \to [-\infty,+\infty]$, we have
-	\begin{alignat*}{2}
+	\begin{alignat}{2}
 		\sum_{x \in X} \abs{f(x) \cdot g(x)} & \le  \p{ \sum_{x \in X} \abs{f(x)}^p }^{\frac{1}{p}} \p{  \sum_{y \in X} \abs{g(y)}^q }^{\frac{1}{q}}, \quad &&  1 < p < +\infty \\
 		\sum_{x \in X} \abs{f(x) \cdot g(x)} & \le \p{ \sum_{x \in X} \abs{f(x)} } \cdot \sup_{y \in X} \abs{g(y)}, \quad &&  p=1 \\
 		\sum_{x \in X} \abs{f(x) \cdot g(x)} & \le \sup_{x \in X} \abs{f(x)} \cdot \p{ \sum_{y \in X} \abs{g(y)} }, \quad && p=+\infty
-	\end{alignat*}
+	\end{alignat}
 	As a corollary, if $f \in \ell^p(X)$ and $g \in \ell^q(X)$, then $f \cdot g \in \ell^1(X)$.
 \end{theorem}
 
 \begin{theorem}[Minkowski's inequality]\label{The:MinkowskisInequality}
 	Let $X$ be a set.
 	Given $1 \le p < +\infty$ and $f,g:X \to [-\infty,+\infty]$, we have
-	\begin{equation*}
+	\begin{equation}
 		\p{ \sum_{x \in X} \abs{f(x)+g(x)}^p }^{\frac{1}{p}} \le \p{ \sum_{x \in X} \abs{f(x)}^p }^{\frac{1}{p}} + \p{ \sum_{x \in X} \abs{g(x)}^p }^{\frac{1}{p}}.
-	\end{equation*}
+	\end{equation}
 \end{theorem}
 
 \begin{proposition}\label{Prop:lpVectorSpace}
 	$\ell^p(X)$ is a vector space over $\bbR$ with the norm $\norm{f}_p \coloneqq  \p{\sum_{x \in X} \abs{f(x)}^p}^{\nicefrac{1}{p}}$.
 \end{proposition}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item WTS \defref{Norms}(1):
 		On the one hand, we have $\norm{\mathbf{0}}_p = 0$ trivially.
@@ -653,12 +654,12 @@
 		
 		\item WTS \defref{Norms}(2): Suppose $f \in \ell^p(X)$ and $\alpha \in \bbR$.
 		Then we have
-		\begin{align*}
+		\begin{align}
 			\norm{\alpha f} & = \p{\sum_{x \in X} \abs{\alpha \cdot f(x)}^p}^{\frac{1}{p}} \\
 			& = \p{ \sum_{x \in X} \abs{\alpha}^p \cdot \abs{f(x)}^p}^\frac{1}{p} \\
 			& = \p{ \abs{\alpha}^p \cdot \sum_{x \in X} \abs{f(x)}^p }^\frac{1}{p} \\
 			& = \abs{\alpha} \cdot \norm{f}_p.
-		\end{align*}
+		\end{align}
 		
 		\item WTS \defref{Norms}(3): Suppose $f,g \in \ell^p(X)$ and we want to show that $\norm{f+g}_p \le \norm{f}_p+\norm{g}_p$, or equivalently
 		\[
@@ -690,13 +691,13 @@
 	Then $p \in E \setminus E'$ iff $\{p\} \in \tau_E$ (i.e., $p$ is an isolated point in $\tau_E$).
 \end{proposition}
 \begin{proof}
-	\begin{align*}
+	\begin{align}
 		& \{p\} \in \tau_E \\
 		\iff~ & \Exists{U \in \tau} U \cap E = \{p\} \\
 		\iff~ & p \in E \wedge \Exists{U \in \tau} (U \cap E) \setminus \{p\} = \emptyset \\
 		\iff~ & p \in E \wedge p \not\in E' \\
 		\iff~ & p \in E \setminus E'.
-	\end{align*}
+	\end{align}
 \end{proof}
 
 \begin{proposition}\label{Prop:BallOfLimitContainInfinite}
@@ -793,7 +794,7 @@
 		\item If $U$ is open, then $U$ is sequentially open.
 	\end{itemize}
 \end{proposition}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item If $E$ is closed, then we have $E = \overline{E}$.
 		By \lemref{LimitOfSeqInClosure} we know that for all sequences $\{x_n\}_{n \in \bbN} \subseteq E$ and $x_n \rightarrow p$, then $p \in \overline{E}$.
@@ -812,7 +813,7 @@
 	Consider an uncountable set $X$ and the \emph{co-countable topology} $\tau \coloneqq \{ X \setminus F : F~\text{is countable} \} \cup \{ \emptyset \}$.
 	Then for all $p \in X$, $\{p\}$ is not open, while all nonempty sets $U \subseteq X$ are sequentially open.
 \end{proposition}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item WTS $\{p\}$ is not open for all $p \in X$: By definition of $\tau$ we know that all nonempty open sets should contain uncountably many elements. Thus $\{p\}$ is not open.
 		\item WTS $E$ is sequentially open for all nonempty $E \subseteq X$: Suppose $p \in E$ and $\{x_n\}_{n \in \bbN} \subseteq X$ with $x_n \rightarrow p$.
@@ -989,23 +990,23 @@
 		By $A \cup \overline{B} = \emptyset$, we know that for every $a \in A$, there exists $r_a > 0$ such that $B(a,r_a) \cap B = \emptyset$.
 		Similarly, for every $b \in B$, there exists $r_b > 0$ such that $B(b,r_b) \cap A = \emptyset$.
 		Define two open sets
-		\begin{align*}
+		\begin{align}
 			\tilde{U} & \coloneqq \bigcup_{a \in A} B\p{a,\frac{r_a}{2}} \\
 			\tilde{V} & \coloneqq \bigcup_{b \in B} B\p{b,\frac{r_b}{2}}
-		\end{align*}
+		\end{align}
 		and then we have
 		\begin{itemize}
 			\item $\tilde{U} \cap E \supseteq A \cap E  = A \neq \emptyset$ by (i) and (iv),
 			\item $\tilde{V} \cap E \supseteq B \cap E = B \neq \emptyset$ by (i) and (iv),
 			\item $E = A \cup B \subseteq \tilde{U} \cap \tilde{V}$ by (i), and
 			\item $\tilde{U} \cap \tilde{V} = \emptyset$, because for all $x \in B(a,\nicefrac{r_a}{2})$ and $y \in B(b,\nicefrac{r_b}{2})$, we know the following
-			\begin{align*}
+			\begin{align}
 				& d(a,b) \le d(a,x) + d(x,y) + d(y,b) \\
 				\implies~ & d(x,y) \ge d(a,b) - d(a,x) - d(y,b) \\
 				\implies~ & d(x,y) > \max\{r_a,r_b\} - \frac{r_a}{2} - \frac{r_b}{2} \\
 				\implies~ & d(x,y) > 0 \\
 				\implies~ & x \neq y
-			\end{align*}
+			\end{align}
 			hence $\tilde{U} \cap \tilde{V} = \emptyset$.
 		\end{itemize}
 	\end{itemize}
@@ -1021,7 +1022,7 @@
 \begin{proposition}\label{Prop:ConnIffEveryTwoPointsConn}
 	A topological space $(X,\tau)$ is connected iff for all $x,y\in X$, there exists $E \subseteq X$ such that $x,y\in E$ and $E$ is connected.
 \end{proposition}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item WTS the ${\implies}$ direction: Set $E$ to be $X$.
 		\item WTS the ${\impliedby}$ direction:
@@ -1180,7 +1181,7 @@
 		\item $C$ is a closed set in $Y$ implies $f^{-1}(C)$ is closed in $X$.
 	\end{enumerate}
 \end{proposition}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item WTS (1) implies (2): Suppose $x \in X$ and $V$ is a neighborhood of $f(x)$ in $Y$.
 		Because $f$ is continuous, we know that $f^{-1}(V) \in \tau_X$.
@@ -1321,9 +1322,9 @@
 
 \begin{theorem}\label{The:HierarchyOfSeparation}
 	For the axioms of separation defined in \defref{AxiomsOfSeparation}, we have
-	\begin{equation*}
+	\begin{equation}
 		T_4 \implies T_3 \implies T_2 \implies T_1 \implies T_0.
-	\end{equation*}
+	\end{equation}
 \end{theorem}
 \begin{proof}\
 	\begin{itemize}
@@ -1615,7 +1616,7 @@
 \begin{theorem}[Heine-Borel property]\label{The:HeineBorelProperty}
 	The set $K \subseteq \bbR$ is compact iff it is closed and bounded.
 \end{theorem}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item WTS ${\implies}$: Since $\bbR$ is Hausdorff, by \propref{SeveralPropertiesOfCompactness}(2), we know that $K$ is closed.
 		If $K$ is not bounded, then $\sup_{x \in K} \abs{x} = +\infty$.
@@ -1651,7 +1652,7 @@
 	Let $(X,\tau)$ be a topological space.
 	Then $X$ is compact iff for every family $\{C_\alpha\}_{\alpha \in \Lambda}$ of closed subsets with the finite intersection property, we have $\bigcap_{\alpha \in \Lambda} C_\alpha \neq \emptyset$.
 \end{proposition}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item WTS ${\implies}$: Let $\{C_\alpha\}_{\alpha \in \Lambda}$ be a family of closed sets with the finite intersection property.
 		If $\bigcap_{\alpha \in \Lambda} C_\alpha = \emptyset$, then
@@ -1914,7 +1915,7 @@
 	Then $(X_\infty,\tau_\infty)$ is compact and $X$ is dense in $X_\infty$.
 	Moreover, $(X_\infty,\tau_\infty)$ is Hausdorff iff $(X,\tau)$ is Hausdorff and locally compact.
 \end{theorem}
-\begin{proof}
+\begin{proof}\
 	\begin{enumerate}
 		\item Let's first show that $\tau_\infty$ is a topology.
 		We claim that $U \in \tau_\infty$ iff (i) $U \cap X \in \tau$, and (ii) if $\infty \in U$ then $X \setminus U$ is compact.
@@ -2019,7 +2020,7 @@
 	Let $X \coloneqq \prod_{\alpha \in \Lambda} X_\alpha$ with the product topology.
 	A sequence $\{x^n\}_{n \in \bbN} \subseteq X$ converges to $x^o \in X$ iff $x^n_\alpha \rightarrow x^o_\alpha$ for all $\alpha \in \Lambda$.
 \end{lemma}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item WTS $\implies$: Assume $x^n \rightarrow x^o$.
 		Because projection maps $\pi_\alpha$ are continuous, by \propref{ContImplySeqCont}, we know that they are also sequentially continuous, thus
@@ -2070,7 +2071,7 @@
 	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha \in \Lambda}$ be a collection of topological spaces.
 	Then $\prod_{\alpha \in \Lambda} X_\alpha$ is compact iff $X_\alpha$ is compact for all $\alpha \in \Lambda$.
 \end{theorem}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item WTS $\implies$: Trivial by \propref{ContFuncPreserveCompact} and the fact that projection maps $\pi_\alpha$ are continuous.
 		\item WTS $\impliedby$: Let
@@ -2178,7 +2179,7 @@
 	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha \in \Lambda}$ be a collection of topological spaces.
 	Then $\prod_{\alpha \in \Lambda}$ is Hausdorff iff $X_\alpha$ is Hausdorff for all $\alpha \in \Lambda$.
 \end{proposition}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item WTS $\impliedby$: Suppose $f,g \in \prod_{\alpha \in \Lambda} X_\alpha$ and $f\neq g$.
 		Then there exists $\alpha_0 \in \Lambda$ such that $f(\alpha_0) \neq g(\alpha_0)$.
@@ -2223,7 +2224,7 @@
 	Define $\beta \coloneqq e(X)$ and $Y \coloneqq \overline{\beta}$.
 	Then $Y$ with the inducted topology from $Y_0$ is a compactification of $X$.
 \end{theorem}
-\begin{proof}
+\begin{proof}\
 	\begin{itemize}
 		\item Firstly, we want to show that $e$ is an injection.
 		Suppose $x,y \in X$ such that $x \neq y$.
@@ -2463,5 +2464,8 @@
 	\end{equation}
 	Moreover, $\lim_{x \to x_0} f(x)$ exists iff there is equality in \eqref{Eq:LimInfLeLimSup}, and $\lim_{x \to x_0} f(x)$ is that common value.
 \end{theorem}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{db}
 
 \end{document}
