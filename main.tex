@@ -2335,6 +2335,9 @@
 \begin{lemma}\label{Lem:NormalIffNeighborContainClosure}
 	A topological space $(X,\tau)$ is normal iff for all closed $C$ and open $U$ such that $C \subseteq U$, there exists an open subset $V$ such that $C \subseteq V \subseteq \overline{V} \subseteq U$.
 \end{lemma}
+\begin{proof}
+	\diw{TODO.}
+\end{proof}
 
 \begin{corollary}\label{Cor:NormalIffNeighborContainClosure}
 	Let $(X,\tau)$ be a normal space.
@@ -2366,7 +2369,7 @@
 
 \begin{lemma}\label{Lem:T2CompactEmptyInterThenFinteEmptyInter}
 	Let $(X,\tau)$ be a Hausdorff space and $\{K_\alpha\}_{\alpha \in \Lambda}$ be a collection of compact sets.
-	If $\bigcap_{\alpha \in \Lambda} K_\alpha = \emptyset$ then there exists a finite $\calI \subseteq \Lambda$ such that $\bigcup_{\alpha \in \calI} K_\alpha = \emptyset$.
+	If $\bigcap_{\alpha \in \Lambda} K_\alpha = \emptyset$ then there exists a finite $\calI \subseteq \Lambda$ such that $\bigcap_{\alpha \in \calI} K_\alpha = \emptyset$.
 \end{lemma}
 
 \begin{lemma}\label{Lem:LocCompT2ThenNeighborContainCompactClosure}
@@ -2380,6 +2383,17 @@
 	Let $K$ be a compact set and $U$ be an open set such that $K \subseteq U$.
 	Then there exists a cut-off function $f : X \to [0,1]$ that is continuous and compactly supported, such that $f|_K \equiv 1$ and $f|_{X \setminus U} \equiv 0$.
 \end{theorem}
+\begin{proof}[Proof 1]
+	By \lemref{LocCompT2ThenNeighborContainCompactClosure}, there exists an open set $V$ such that $\overline{V}$ is compact and $K \subseteq V \subseteq \overline{V} \subseteq U$.
+	Let $X_\infty$ be the one-point compactification of $X$ by \theoref{AlexandroffCompactification}.
+	Because $X$ is locally compact and Hausdorff, $X_\infty$ is Hausdorff.
+	Since $X_\infty$ is indeed compact, we know that $X_\infty$ is normal.
+	Then by \theoref{Urysohn} we know that there exists a continuous function $f : X_\infty \to [0,1]$ such that $f|_K \equiv 1$ and $f |_{X_\infty \setminus V } \equiv 0$.
+	Then the function $f|_X : X \to [0,1]$ is also continuous, and $\mathrm{supp}(f|_X) = \overline{\{x \in X: f(x) \neq 0\}} \subseteq \overline{V}$ is compact.
+\end{proof}
+\begin{proof}[Proof 2]
+	\diw{TODO.}
+\end{proof}
 
 \begin{lemma}\label{Lem:UniformContinuous}
 	Let $(X,\tau)$ be a topological space and a sequence of continuous functions $\{f_n \in C(X,\bbR)\}_{n \in \bbN}$.
