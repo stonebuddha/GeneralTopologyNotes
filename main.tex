@@ -1907,13 +1907,85 @@
 	A topological space $(X,\tau)$ is said to be \emph{locally compact} iff for all $x \in X$, there exists a neighborhood $U$ of $x$ such that $\overline{U}$ is compact.
 \end{definition}
 
-\begin{theorem}\label{The:AlexandroffCompactification}
+\begin{theorem}[Alexandroff's one-point compactification]\label{The:AlexandroffCompactification}
 	Let $(X,\tau)$ be a topological space that is not compact.
 	Let $\infty$ denote a point that is not in $X$ and $X_\infty \coloneqq X \cup \{\infty\}$.
-	Let $\tau_\infty$ be the collection of all subsets $U \subseteq X_\infty$ such that either (i) $U \in \tau$, or (ii) $\infty \in U$ and $X \setminus U$ is closed and compact.
+	Let $\tau_\infty$ be the collection of all subsets $U \subseteq X_\infty$ such that either $U \in \tau$, or $\infty \in U$ and $X \setminus U$ is closed and compact.
 	Then $(X_\infty,\tau_\infty)$ is compact and $X$ is dense in $X_\infty$.
 	Moreover, $(X_\infty,\tau_\infty)$ is Hausdorff iff $(X,\tau)$ is Hausdorff and locally compact.
 \end{theorem}
+\begin{proof}
+	\begin{enumerate}
+		\item Let's first show that $\tau_\infty$ is a topology.
+		We claim that $U \in \tau_\infty$ iff (i) $U \cap X \in \tau$, and (ii) if $\infty \in U$ then $X \setminus U$ is compact.
+		\begin{itemize}
+			\item WTS ${\implies}$: If $\infty \not\in U$ then $U \subseteq X$, therefore $U \cap X = U \in \tau$ by definition.
+			If $\infty \in U$, then by definition we know that $X \setminus U$ is closed and compact, and $X \cap U = X \setminus (X \setminus U)$ is open in $X$.
+			\item WTS $\impliedby$: Let $U$ be such that satisfies (i) and (ii).
+			If $\infty \not\in U$, then $U = U \cap X \in \tau$ is an element of $\tau_\infty$.
+			If $\infty \in U$, then $X \setminus U$ is compact, and $X \setminus U = X \setminus (U \cap X)$ is closed in $X$.
+		\end{itemize}
+		Let $\{ U_\alpha \in \tau_\infty\}_{\alpha \in \Lambda}$ be a collection of elements of $\tau_\infty$.
+		If $U_\alpha \subseteq X$ for all $\alpha \in \Lambda$, then $U_\alpha \in \tau$ and thus $\bigcup_{\alpha \in \Lambda} U_\alpha \in \tau$ and $\infty \not\in \bigcup_{\alpha \in \Lambda} U_\alpha$, so by definition we know that the union is in $\tau_\infty$.
+		Otherwise, let $\beta \in \Lambda$ such that $\infty \in U_\beta$.
+		Then $X \setminus U_\beta$ is closed and compact.
+		By the claim, we have $\bigcup_{\alpha \in \Lambda} (U_\alpha \cap X)$ is open in $X$, thus $X \setminus (\bigcup_{\alpha \in \Lambda} U_\alpha)$ is closed in $X$.
+		On the other hand,
+		\[
+		X \setminus \p{\bigcup_{\alpha \in \Lambda} U_\alpha} \subseteq X \setminus U_\beta
+		\]
+		and $X \setminus U_\beta$ is closed and compact, so by \propref{SeveralPropertiesOfCompactness}(1) we know that $X \setminus (\bigcup_{\alpha \in \Lambda} U_\alpha)$ is also compact.
+		Hence we conclude that $\bigcup_{\alpha \in \Lambda} U_\alpha \in \tau_\infty$, i.e., $\tau_\infty$ is closed under arbitrary union.
+		\diw{TODO: finite intersection.}
+		
+		\item Then we want to show that $(X_\infty,\tau_\infty)$ is compact.
+		Suppose $X_\infty \subseteq \bigcup_{\alpha \in \Lambda} U_\alpha$ where $U_\alpha$'s are open in $X_\infty$.
+		Let $\beta \in \Lambda$ such that $\infty \in U_\beta$.
+		Then $X \setminus U_\beta$ is closed and compact in $X$.
+		Observing that
+		\begin{gather}
+		X \setminus U_\beta \subseteq \bigcup_{\alpha \in \Lambda} (U_\alpha \cap X)
+		\shortintertext{there exist $n \in \bbN$ and $\alpha_1,\cdots,\alpha_n \in \Lambda$ such that}
+		X \setminus U_\beta \subseteq \bigcup_{i=1}^n (U_{\alpha_i} \cap X)
+		\shortintertext{thus}
+		X_\infty \subseteq \bigcup_{i=1}^n (U_{\alpha_i} \cap X) \cup U_\beta \subseteq \bigcup_{i=1}^n U_{\alpha_i} \cup U_\beta
+		\end{gather}
+		Therefore we conclude that there exists a finite subcover.
+		
+		\item Now we claim that $\overline{X} = X_\infty$. Then the inclusion map $i : X \to X \subseteq X_\infty$ is a homeomorphism (observing that $\tau_\infty |_X = \tau$).
+		It suffices to show that $\infty \in \overline{X}$.
+		Fix $U \in \tau_\infty$ such that $\infty \in U$.
+		Then $U \setminus \{ \infty\} = U \cap X = X \setminus (X \setminus U)$.
+		Define $K \coloneqq X \setminus U$ to be a compact set in $X$.
+		Then $U = \{ \infty\} \cup (X \setminus K)$.
+		Since $X$ is not compact, we know that $K \subset X$ so $X \setminus K \neq \emptyset$.
+		Therefore $U \cap X = X \setminus K \neq \emptyset$.
+		
+		\item Finally we prove the additional claim.
+		\begin{itemize}
+			\item WTS $\implies$: Assume $(X_\infty,\tau_\infty)$ is Hausdorff.
+			Let's first show $X$ is Hausdorff. Fix $x,y \in X$ such that $x \neq y$.
+			Then there exist disjoint $U,V \in \tau_\infty$ such that $x \in U$ and $y \in V$.
+			Observe that $(U \cap X)$ and $(V \cap X)$ are still disjoint, and are indeed open sets in $X$.
+			Therefore we can separate $x,y$ with open sets $(U \cap X), (V \cap X)$ in $X$.
+			
+			Then we claim that $X$ is locally compact.
+			Pick $x \in X$.
+			Because $X_\infty$ is Hausdorff, there exist disjoint open sets $U,V$ that separate $x$ and $\infty$.
+			Then $X \setminus V$ is closed and compact, and $(U \cap X) \subseteq X \setminus V$, hence $\overline{U \cap X} \subseteq X \setminus V$.
+			Here $U \cap X$ is indeed an open neighborhood of $x$.
+			By \propref{SeveralPropertiesOfCompactness}(1) we know that $\overline{U \cap X}$ is compact.
+			
+			\item WTS $\impliedby$: Assume $(X,\tau)$ is Hausdorff and locally compact.
+			Suppose $x,y \in X_\infty$ and $x \neq y$.
+			If both $x,y$ are contained in $X$, then we can easily separate them using open sets in $X$.
+			Otherwise, let $x \in X$ and $y = \infty$.
+			Because $X$ is locally compact, there exists a neighborhood $U$ of $x$ in $X$ such that $\overline{U}$ is compact.
+			Then $X_\infty \setminus \overline{U}$ is a neighborhood of $\infty$ in $X_\infty$.
+			Since $U \cap (X_\infty \setminus \overline{U}) = \emptyset$, we conclude that we can separate $x$ and $y$ in $X_\infty$.
+		\end{itemize}
+	\end{enumerate}
+\end{proof}
 
 \begin{definition}\label{De:GeneralProductTopology}
 	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha \in \Lambda}$ be a collection of topological spaces.
@@ -1939,25 +2011,88 @@
 	The \emph{box topology} on $\prod_{\alpha \in \Lambda} X_\alpha$ is the topology generated by $\set{ \prod_{\alpha \in \Lambda} V_\alpha : V_\alpha \in \tau_\alpha }$.
 \end{definition}
 
+\begin{remark}\label{Rem:BoxTopologyNotWellBehaved}
+	\diw{TODO.}
+\end{remark}
+
 \begin{lemma}\label{Lem:ProdTopSeqConvergeIffEveryAxisConverge}
 	Let $X \coloneqq \prod_{\alpha \in \Lambda} X_\alpha$ with the product topology.
 	A sequence $\{x^n\}_{n \in \bbN} \subseteq X$ converges to $x^o \in X$ iff $x^n_\alpha \rightarrow x^o_\alpha$ for all $\alpha \in \Lambda$.
 \end{lemma}
+\begin{proof}
+	\begin{itemize}
+		\item WTS $\implies$: Assume $x^n \rightarrow x^o$.
+		Because projection maps $\pi_\alpha$ are continuous, by \propref{ContImplySeqCont}, we know that they are also sequentially continuous, thus
+		\[
+		x^n_\alpha = \pi_\alpha(x^n) \xrightarrow{X_\alpha} \pi_\alpha(x^o) = x^o_\alpha
+		\]
+		for all $\alpha$.
+		
+		\item WTS $\impliedby$: Assume $x^n_\alpha \xrightarrow{X_\alpha} x^o_\alpha$ for all $\alpha$.
+		Let $U$ be a neighborhood of $x^o$.
+		Then there exist $\alpha_1,\cdots,\alpha_m \in \Lambda$ and  $U_{\alpha_j}$ neighborhood of $x^o_{\alpha_j}$ for $j=1,\cdots,m$ such that
+		\[
+		\bigcap_{j=1}^m \pi_{\alpha_j}^{-1}(U_{\alpha_j}) \subseteq U
+		\]
+		Let $n_0 \gg 1$ such that for all $n \ge n_0$ and $j=1,\cdots,m$, we have $x^n_{\alpha_j} \in U_{\alpha_j}$ (observing that $x^n_\alpha \xrightarrow{X_\alpha} x^o_\alpha$ for all $\alpha$).
+		Then we know that
+		\[
+		x^n \in \bigcap_{j=1}^m \pi_{\alpha_j}^{-1}(U_{\alpha_j}) \subseteq U
+		\]
+		and since $U$ is an arbitrary neighborhood of $x^o$, we conclude that $x^n \rightarrow x^o$.
+	\end{itemize}
+\end{proof}
 
 \begin{lemma}\label{Lem:ProdTopContFuncIffContEveryAxis}
 	Let $X \coloneqq \prod_{\alpha \in \Lambda} X_\alpha$ with the product topology and $(Z,\tau_Z)$ be a topological space.
 	A function $f :Z \to X$ is continuous iff $\pi_\alpha \circ f : Z \to X_\alpha$ is continuous for all $\alpha \in \Lambda$.
 \end{lemma}
+\begin{proof}
+	The $\implies$ direction is easy since composition of continuous functions is continuous (\propref{ContCompIsCont}).
+	
+	To show the $\impliedby$ direction, it suffices to show that for all $\alpha \in \Lambda$ and $U_\alpha \in \tau_\alpha$, $f^{-1}(\pi_\alpha^{-1}(U_\alpha)) \in \tau_Z$.
+	We conclude the proof by observing
+	\[
+	f^{-1}(\pi_\alpha^{-1}(U_\alpha)) = (\pi_\alpha \circ f)^{-1}(U_\alpha)
+	\]
+	and $\pi_\alpha \circ f$ is continuous by assumption.
+\end{proof}
 
 \begin{lemma}\label{Lem:CompactIffCompactWRTSubbase}
 	Let $(X,\tau)$ be a topological space and $\calS$ be a subbase of $\tau$.
 	Then $X$ is compact iff every cover of $X$ with elements of $\calS$ admits a finite subcover.
 \end{lemma}
+\begin{proof}
+	\diw{TODO.}
+\end{proof}
 
-\begin{theorem}\label{The:Tikhonov}
+\begin{theorem}[Tikhonov's theorem]\label{The:Tikhonov}
 	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha \in \Lambda}$ be a collection of topological spaces.
 	Then $\prod_{\alpha \in \Lambda} X_\alpha$ is compact iff $X_\alpha$ is compact for all $\alpha \in \Lambda$.
 \end{theorem}
+\begin{proof}
+	\begin{itemize}
+		\item WTS $\implies$: Trivial by \propref{ContFuncPreserveCompact} and the fact that projection maps $\pi_\alpha$ are continuous.
+		\item WTS $\impliedby$: Let
+		\[
+		\calU \coloneqq \set{ \pi_\alpha^{-1}(V_{\alpha,i}) : \alpha \in \Lambda, i \in \calI_\alpha, V_{\alpha,i} \in \tau_\alpha  }
+		\]
+		to be a cover of $\prod_{\alpha \in \Lambda} X_\alpha$.
+		
+		We claim that there exists $\alpha \in \Lambda$ such that $X_\alpha = \bigcup_{i \in \calI_\alpha} V_{\alpha,i}$.
+		If not, for all $\alpha \in \Lambda$, there exists $x_\alpha \in X_\alpha$ such that $x_\alpha \not\in \bigcup_{i \in \calI_\alpha} V_{\alpha,i}$.
+		Then $x \coloneqq (x_\alpha)_{\alpha \in \Lambda} \not\in \bigcup \calU$, which contradicts the assumption that $\calU$ is a cover.
+		
+		Let $\alpha_0$ be such an $\alpha$.
+		Then $X_{\alpha_0}$ is compact, we know there exist $m$ and $i_1,\cdots,i_m \in \calI_{\alpha_0}$ such that $X_{\alpha_0} \subseteq \bigcup_{j=1}^m V_{\alpha_0,i_j}$.
+		Thus
+		\[
+		\set{ \pi_{\alpha_0}^{-1}(V_{\alpha_0, i_j}) : j = 1,\cdots m }
+		\]
+		covers the whole $\prod_{\alpha \in \Lambda} X_\alpha$.
+		By \lemref{CompactIffCompactWRTSubbase}, we conclude that $\prod_{\alpha \in \Lambda} X_\alpha$ is compact.
+	\end{itemize}
+\end{proof}
 
 \begin{proposition}\label{Prop:IntProdSubProdIntAndCloProdEqProdClo}
 	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha \in \Lambda}$ be a collection of topological spaces.
@@ -1967,23 +2102,119 @@
 		\item $\overline{\prod_{\alpha \in \Lambda} E_\alpha} = \prod_{\alpha \in \Lambda} \overline{E_\alpha}$.
 	\end{enumerate}
 \end{proposition}
+\begin{proof}
+	\diw{TODO.}
+\end{proof}
 
 \begin{proposition}\label{Prop:ProdConnIffBothConn}
 	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
 	Then $(X\times Y,\tau_{X \times Y})$ is connected iff $(X,\tau_X)$ and $(Y,\tau_Y)$ are connected.
 \end{proposition}
+\begin{proof}
+	The $\implies$ direction is straightforward by \propref{ContPreserveConn} and the fact that projection maps $\pi_X$ and $\pi_Y$ are continuous.
+	
+	To show the $\impliedby$ direction, by \ref{Prop:ConnIffEveryTwoPointsConn}, it suffices to show that for all $(x_1,y_1),(x_2,y_2) \in X \times Y$, there exists a connected $E \subseteq X \times Y$ such that $(x_1,y_1),(x_2,y_2) \in E$.
+	Because $x \mapsto (x,y_1)$ is continuous, we know $X \times \{y_1\}$ is connected.
+	Similarly, we have $\{x_2\} \times Y$ is connected.
+	Since $(X \times \set{y_1}) \cap (\set{x_2} \times Y) = \{ (x_2,y_1) \} \neq \emptyset$, by \propref{UnionConnStillConn}, we know that $(X \times \set{y_1}) \cup (\set{x_2} \times Y)$ is connected.
+	We conclude the proof by the fact that $(x_1,y_1) \in X \times \{y_1\}$ and $(x_2,y_2) \in \{x_2\} \times Y$.
+\end{proof}
 
 \begin{theorem}\label{The:ProdConnIffEachConn}
 	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha \in \Lambda}$ be a collection of topological spaces.
 	Then $\prod_{\alpha \in \Lambda}$ is connected iff $X_\alpha$ is connected for all $\alpha \in \Lambda$.
 \end{theorem}
+\begin{proof}
+	The $\implies$ direction is trivial by \propref{ContPreserveConn} and the fact that the projection maps $\pi_\beta$ are continuous for all $\beta \in \Lambda$.
+	
+	To show the $\impliedby$ direction, let's fix $g \in \prod_{\alpha \in \Lambda} X_\alpha$. Define
+	\[
+	E \coloneqq \set{ f \in \prod_{\alpha \in \Lambda} X_\alpha : f(\alpha)=g(\alpha)~\text{for all but finitely many $\alpha \in \Lambda$} }
+	\]
+	
+	Firstly, we claim that $\overline{E} = \prod_{\alpha \in \Lambda} X_\alpha$, i.e., $E$ is dense.
+	Let $f \in \prod_{\alpha \in \Lambda} X_\alpha$ and $U$ be a neighborhood of $f$.
+	There exist $n \in \bbN$ and $\alpha_1,\cdots,\alpha_n \in \Lambda$, $V_{\alpha_i} \in \tau_{\alpha_i}$ are neighborhoods of $f(\alpha_i)$ for all $i=1,\cdots,n$, such that
+	\[
+	\bigcap_{i=1}^n \pi_{\alpha_i}^{-1}(V_{\alpha_i}) \subseteq U
+	\]
+	Define
+	\[
+	h(\alpha) \coloneqq \begin{dcases}
+ 		f(\alpha_i) & \alpha=\alpha_i  \in \{ \alpha_1,\cdots, \alpha_n \} \\
+ 		g(\alpha) & \text{otherwise}
+ 	\end{dcases}
+	\]
+	to be an element of $U$.
+	By definition we know that $h \in E$.
+	Thus $U \cap E \neq \emptyset$.
+	Because $U$ is an arbitrary neighborhood of $f$, we conclude that $f \in \overline{E}$.
+	
+	Next, we claim that $E$ is connected, and then by \propref{ClosedConnComponentStillClosed} we conclude that $\overline{E}$ is connected.
+	Let $\beta$ be a collection of all finite subsets of $\Lambda$.
+	For all $\calI \in \beta$, consider $F_\calI \coloneqq \prod_{\alpha \in \Lambda} (F_\calI)_\alpha$ where
+	\[
+	(F_\calI)_\alpha \coloneqq \begin{dcases}
+ 		\{ g(\alpha)\} & \alpha \not\in \calI \\
+ 		X_{\alpha_i} & \alpha=\alpha_i \in \calI
+ 	\end{dcases}
+	\]
+	Then $E = \bigcup_{\calI \in \beta} F_\calI$.
+	It then suffices to show that $F_\calI$ is connected, then since $\bigcap_{\calI \in \beta} F_\calI \supseteq \{g\} \neq \emptyset$, thus by \propref{UnionConnStillConn}, we can conclude that $E$ is connected.
+	
+	Suppose $\calI = \{ \alpha_1,\cdots,\alpha_n\}$.
+	Define $\psi : X_{\alpha_1} \times \cdots \times X_{\alpha_n} \to \prod_{\alpha \in \Lambda} X_\alpha$ as $(x_{\alpha_1},\cdots,x_{\alpha_n}) \mapsto f_{(x_{\alpha_1},\cdots,x_{\alpha_n})}$ where
+	\[
+	f_{(x_{\alpha_1},\cdots,x_{\alpha_n})}(\alpha) \coloneqq \begin{dcases}
+ 		g(\alpha) & \alpha \not\in \calI \\
+ 		x_{\alpha_i} & \alpha \in \calI
+ 	\end{dcases}
+	\]
+	Thus $\psi$ is continuous and $\psi(X_{\alpha_1} \times \cdots \times X_{\alpha_n}) = F_\calI$.
+	By induction with \propref{ProdConnIffBothConn} we know that $X_{\alpha_1} \times \cdots \times X_{\alpha_n}$ is connected, thus by \propref{ContPreserveConn} we know that $F_\calI$ is connected.
+\end{proof}
 
 \begin{proposition}\label{Prop:ProdT2IffEachT2}
 	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha \in \Lambda}$ be a collection of topological spaces.
 	Then $\prod_{\alpha \in \Lambda}$ is Hausdorff iff $X_\alpha$ is Hausdorff for all $\alpha \in \Lambda$.
 \end{proposition}
+\begin{proof}
+	\begin{itemize}
+		\item WTS $\impliedby$: Suppose $f,g \in \prod_{\alpha \in \Lambda} X_\alpha$ and $f\neq g$.
+		Then there exists $\alpha_0 \in \Lambda$ such that $f(\alpha_0) \neq g(\alpha_0)$.
+		By Hausdorff, we know there exist disjoint open sets $U,V$ in $X_{\alpha_0}$ such that $f(\alpha_0) \in U$ and $g(\alpha_0) \in V$.
+		Thus $f \in \pi_{\alpha_0}^{-1}(U)$ and $g \in \pi_{\alpha_0}^{-1}(V)$, and these are disjoint sets in $\prod_{\alpha \in \Lambda} X_\alpha$.
+		
+		\item WTS $\implies$: Fix $\beta \in \Lambda$.
+		Let $x_\beta, y_\beta \in X_\beta$ such that $x_\beta \neq y_\beta$.
+		Fix $z_\alpha \in X_\alpha$ for every $\alpha \neq \beta$.
+		Define
+		\[
+		f(\alpha) \coloneqq \begin{dcases}
+ 			x_\beta & \alpha = \beta \\
+ 			z_\alpha & \alpha \neq \beta 
+ 		\end{dcases} \qquad
+ 		g(\alpha) \coloneqq \begin{dcases}
+ 			y_\beta & \alpha = \beta \\
+ 			z_\alpha & \alpha \neq \beta
+ 		\end{dcases}
+ 		\]
+ 		to be two elements of $\prod_{\alpha \in \Lambda} X_\alpha$.
+ 		Then $f \neq g$, by Hausdorff, there exist disjoint open sets $U,V$ such that $f \in U$ and $g \in V$.
+ 		Hence there exist $U_\alpha \in \tau_\alpha$ such that $f \in \prod_{\alpha \in \Lambda} U_\alpha \subseteq U$ and $V_\alpha \in \tau_\alpha$ such that $g \in \prod_{\alpha \in \Lambda} V_\alpha \subseteq V$.
+ 		Then $(\prod_{\alpha \in \Lambda} U_\alpha) \cap (\prod_{\alpha \in \Lambda} V_\alpha) = \emptyset$, but for all $\alpha \neq \beta$, $U_\alpha \cap V_\alpha \supseteq \{ z_\alpha\} \neq \emptyset$, thus we conclude that $U_\beta \cap V_\beta = \emptyset$.
+	\end{itemize}
+\end{proof}
 
-\begin{theorem}\label{The:StoneCechCompactification}
+\begin{definition}\label{De:CompletelyHausdorff}
+	A topological space $(X,\tau)$ is said to be \emph{completely Hausdorff}, if for all $x,y \in X$ such that $x \neq y$, there exists a continuous function $f:X \to [0,1]$ such that $f(x) \neq f(y)$.
+\end{definition}
+
+\begin{remark}\label{Rem:T2AndCompletelyRegularImplyCompletelyT2}
+	If $X$ is Hausdorff and completely regular, then it is completely Hausdorff.
+\end{remark}
+
+\begin{theorem}[Stone-{\v{C}}ech compactification]\label{The:StoneCechCompactification}
 	Suppose that a topological space $(X,\tau_X)$ is Hausdorff and completely regular.
 	Define $C_b(X) \coloneqq \{ f : X \to \bbR : f~\text{continuous and bounded} \}$.
 	For each $f \in C_b(X)$, there exists $m_f \in \bbR$ such that $f(X) \subseteq [-m_f,m_f]$.
@@ -1992,6 +2223,54 @@
 	Define $\beta \coloneqq e(X)$ and $Y \coloneqq \overline{\beta}$.
 	Then $Y$ with the inducted topology from $Y_0$ is a compactification of $X$.
 \end{theorem}
+\begin{proof}
+	\begin{itemize}
+		\item Firstly, we want to show that $e$ is an injection.
+		Suppose $x,y \in X$ such that $x \neq y$.
+		By \remref{T2AndCompletelyRegularImplyCompletelyT2}, we know that $X$ is completely Hausdorff, so there exists $f \in C_b(X)$ such that $f(x) \neq f(y)$.
+		Then $e(x)(f) = f(x) \neq f(y) = e(y)(f)$ and hence $e(x) \neq e(y)$.
+		
+		\item Then we want to show $e$ is a homeomorphism between $X$ and $\beta$.
+		\begin{itemize}
+			\item WTS $e$ is continuous: It suffices to show that for all $f \in C_b(X)$, $\pi_f \circ e$ is continuous, by \lemref{ProdTopContFuncIffContEveryAxis}.
+			We conclude by observing that
+			\[
+			(\pi_f \circ e)(x) = \pi_f(e(x)) = e(x)(f) = f(x)
+			\]
+			and $f$ is indeed continuous.
+			\item WTS $e^{-1} : \beta \to X$ is continuous: It suffices to show that for all $U \in \tau$, $(e^{-1})^{-1}(U)$ is open in $\beta$, i.e., $e$ is an open map.
+			Fix $y_0 \in e(U)$. Then there exists $x_0 \in U$ such that $y_0 = e(x_0)$.
+			Because $x_0 \in U$ is open, we have $x_0 \not\in X \setminus U$ is closed.
+			Then by complete regularity of $X$, there exists a continuous function $f : X \to [0,1]$ such that $f(x_0)=1$ and $f \equiv 0$ on $X \setminus U$.
+			Define $W \coloneqq f^{-1}((0,1])$ to be an open neighborhood of $x_0$.
+			Because $(X \setminus U) \cap W = \emptyset$, we have $W \subseteq U$.
+			Define $V \coloneqq e(W)$, then $y_0 \in V \subseteq e(U)$.
+			
+			Now we claim that $V$ is open in $\beta$. We know that
+			\begin{align}
+				& g \in \pi_f^{-1}((0,+\infty)) \cap \beta \\
+				\iff~ & \Exists{x \in X} g = e(x) \wedge \pi_f(g) > 0 \\
+				\iff~ & \Exists{x \in X } g=e(x) \wedge f(x)=e(x)(f)=g(f) = \pi_f(g) > 0 \\
+				\iff~& \Exists{x \in W} g = e(x) \\
+				\iff~ & g \in e(W) = V 
+			\end{align}
+			Because $\pi_f$ is continuous, we know that $V = \pi^{-1}_f((0,+\infty)) \cap \beta$ is open in $\beta$.
+		\end{itemize}
+		
+		\item Finally, by \theoref{Tikhonov} we know that $Y_0$ is compact, $Y = \overline{\beta} \subseteq Y_0$ is a closed subset, then by \propref{SeveralPropertiesOfCompactness}(1) we know that $Y$ is also compact.
+		We already show that $X$ is homeomorphic to $\beta$, which is dense in $Y$, thus we conclude the proof.
+	\end{itemize}
+\end{proof}
+
+\begin{remark}
+	In the Stone-{\v{C}}ech compactification, every bounded continuous function $f:X \to \bbR$ can be ``extended'' uniquely to a continuous function $F : \overline{\beta} \to \bbR$.
+	Consider $\pi_f |_{\overline{\beta}} : \overline{\beta} \to \bbR$.
+	Then for $g \in \beta$ for some $x \in X$ such that $e(x) = g$, we have
+	\[
+	\pi_f|_{\overline{\beta}}(g) = g(f) = e(x)(f) = f(x) = f(e^{-1}(e(x))) = (f \circ e^{-1})(e(x)) = (f \circ e^{-1})(g)
+	\]
+	If we identify $f \equiv f \circ e^{-1} : \beta \to \bbR$, then $\pi_f|_{\overline{\beta}}$ is a continuous extension.
+\end{remark}
 
 \begin{proposition}\label{Prop:ContIntoT2AtMostOneExt}
 	Let $(Y,\tau_Y)$ and $(Z,\tau_Z)$ be two topological spaces.
@@ -1999,6 +2278,23 @@
 	Let $E \subseteq Y$ and $h : E \to Z$ be a continuous function.
 	Then $h$ admits at most one continuous extension to $\overline{E}$.
 \end{proposition}
+\begin{proof}
+	\diw{TODO.}
+\end{proof}
+
+\begin{remark}\label{Rem:StoneCechNecessary}
+	\theoref{StoneCechCompactification} requires $X$ to be Hausdorff and completely regular.
+	These requirements are in fact necessary.
+	Because $X$ is homeomorphic to $\beta$ and $\overline{\beta} \subseteq Y_0$ where $Y_0$ is Hausdorff and compact anyway, then $\beta$ should be Hausdorff, which implies that $X$ should be Hausdorff.
+	
+	On the other hand, $Y_0$ is Hausdorff and compact, and then is indeed completely regular!
+	Let $C \subseteq Y_0$ be a closed set and $x \not\in C$, then $K \coloneqq \{ x \}$ is closed and hence compact.
+	By \theoref{LocCompT2StrongerCutOff}, there exists $f \in C_c(Y_0)$ such that $f|_K \equiv 1$ and $f|_{C} \equiv 0$.
+	Thus $f(x_0) = 1$ and we conclude that $Y_0$ is completely regular.
+	
+	Further, it is easy to prove that complete regularity is hereditary and preserved by homeomorphisms.
+	Since $\beta$ is a subset of $Y_0$ and homeomorphic to $X$, we know that $X$ should also be completely regular.
+\end{remark}
 
 \begin{definition}\label{De:SemiCont}
 	Let $(X,\tau)$ be a topological space.
