@@ -1,5 +1,14 @@
 \documentclass[screen]{techreport}
 
+\usepackage{cleveref}
+\crefname{theorem}{Thm.}{Thms.}
+\crefname{lemma}{Lem.}{Lemmas}
+\crefname{corollary}{Cor.}{Cors.}
+\crefname{definition}{Defn.}{Defns.}
+\crefname{example}{Ex.}{Exs.}
+\crefname{remark}{Remark}{Remarks}
+\crefname{proposition}{Prop.}{Props.}
+
 \numberwithin{equation}{section}
 
 \newcommand{\diw}[1]{{\color{Red} DW: #1}}
@@ -2336,8 +2345,22 @@
 \begin{lemma}\label{Lem:NormalIffNeighborContainClosure}
 	A topological space $(X,\tau)$ is normal iff for all closed $C$ and open $U$ such that $C \subseteq U$, there exists an open subset $V$ such that $C \subseteq V \subseteq \overline{V} \subseteq U$.
 \end{lemma}
-\begin{proof}
-	\diw{TODO.}
+\begin{proof}\
+	\begin{itemize}
+		\item WTS $\implies$: Suppose $X$ is normal and $C \subseteq U$ where $C$ is closed and $U$ is open.
+		Then $X \setminus U$ is closed, and there exist disjoint open sets $V,W$ such that $C \subseteq V$ and $X \setminus U \subseteq W$.
+		Because $V \cap W = \emptyset$, we have $V \subseteq X \setminus W$ and also $\overline{V} \subseteq X \setminus W$ because $X \setminus W$ is closed.
+		Since $X \setminus U \subseteq W$, we conclude the proof by $U \supseteq X \setminus W$.
+		\item WTS $\impliedby$: Suppose $C_1,C_2$ are disjoint closed sets in $X$.
+		Then $X \setminus C_2$ is open and $C_1 \subseteq X \setminus C_2$.
+		By assumption we know there exists an open set $V$ such that
+		\[
+		C_1 \subseteq V \subseteq \overline{V} \subseteq X \setminus C_2
+		\]
+		Define $W \coloneqq X \setminus \overline{V}$ to be an open set.
+		Then $V \cap W = \emptyset$, $C_1 \subseteq V$ and $C_2 = X \setminus (X \setminus C_2) \subseteq X \setminus \overline{V} = W$.
+		By definition we know that $X$ is normal.
+	\end{itemize}
 \end{proof}
 
 \begin{corollary}\label{Cor:NormalIffNeighborContainClosure}
@@ -2348,6 +2371,69 @@
 \begin{theorem}[Urysohn's lemma]\label{The:Urysohn}
 	A topological space $(X,\tau)$ is normal iff for all disjoint closed sets $C_1,C_2$, there exists a continuous function $f:X \to [0,1]$ such that $f \equiv 1$ on $C_1$ and $f \equiv 0$ on $C_2$.
 \end{theorem}
+\begin{proof}
+	The $\impliedby$ direction is easy.
+	Suppose $C_1,C_2$ are disjoint closed sets in $X$.
+	Then there exists a continuous $f : X \to [0,1]$ such that $f|_{C_1} \equiv 1$ and $f|_{C_2} \equiv 0$.
+	We conclude the proof by
+	\begin{gather}
+		C_1 \subseteq U \coloneqq f^{-1}((\nicefrac{1}{2},1]), \quad C_2 \subseteq V \coloneqq f^{-1}([0,\nicefrac{1}{2}))
+		\shortintertext{and}
+		U,V \in \tau ~\text{and}~ U \cap V = \emptyset
+	\end{gather}
+	
+	To prove the $\implies$ direction, let's assume $X$ is normal and $C_1,C_2$ are disjoint closed sets in $X$. We then proceed to the following construction as $n \to \infty$:
+	\begin{itemize}
+		\item $n=1$: By \cref{Cor:NormalIffNeighborContainClosure}, there exists an open set $U_{\nicefrac{1}{2}}$ such that $C_1 \subseteq U_{\nicefrac{1}{2}}$ and $C_2 \cap \overline{U_{\nicefrac{1}{2}}} = \emptyset$.
+		\item $n=2$: By \cref{Lem:NormalIffNeighborContainClosure}, there exists an open set $U_{\nicefrac{1}{4}}$ such that $C_1 \subseteq U_{\nicefrac{1}{4}} \subseteq \overline{U_{\nicefrac{1}{4}}} \subseteq U_{\nicefrac{1}{2}}$.
+		Then by \cref{Cor:NormalIffNeighborContainClosure}, there exists an open set $U_{\nicefrac{3}{4}}$ such that $\overline{U_{\nicefrac{1}{2}}} \subseteq U_{\nicefrac{3}{4}}$ and $C_2 \cap \overline{U_{\nicefrac{3}{4}}} = \emptyset$.
+		So now we have
+		\[
+		C_1 \subseteq U_{\nicefrac{1}{4}} \subseteq \overline{U_{\nicefrac{1}{4}}} \subseteq U_{\nicefrac{1}{2}} \subseteq \overline{U_{\nicefrac{1}{2}}} \subseteq   U_{\nicefrac{3}{4}} \subseteq \overline{U_{\nicefrac{3}{4}}} \subseteq X \setminus C_2
+		\]
+		\item $n = 3$: Repeat the process and we will obtain
+		\begin{align}
+		& C_1 \subseteq U_{\nicefrac{1}{2^3}} \subseteq \overline{U_{\nicefrac{1}{2^3}}} \subseteq U_{\nicefrac{1}{2^2}} \subseteq \overline{U_{\nicefrac{1}{2^2}} } \subseteq U_{\nicefrac{3}{2^3}} \subseteq \overline{U_{\nicefrac{3}{2^3}}} \subseteq U_{\nicefrac{1}{2}} \\
+		\subseteq ~ & \overline{U_{\nicefrac{1}{2}}} \subseteq U_{\nicefrac{5}{2^3}} \subseteq \overline{U_{\nicefrac{5}{2^3}}} \subseteq U_{\nicefrac{3}{2^2}} \subseteq \overline{U_{\nicefrac{3}{2^2}}} \subseteq U_{\nicefrac{7}{2^3}} \subseteq \overline{U_{\nicefrac{7}{2^3}}} \subseteq X \setminus C_2
+		\end{align}
+		\item $n \to \infty$: Repeat the construction above.
+	\end{itemize}
+	Then for each dyadic rational $r = \nicefrac{k}{2^n}$ where $k=1,\cdots,2^n-1$, there exists an open $U_r$ such that $C_1 \subseteq U_r, C_2 \cap \overline{U_r} = \emptyset$, and for all $r < s$, $\overline{U_r} \subseteq U_s$.
+	Now we define $f : X \to [0,1]$ as
+	\[
+	f(x) \coloneqq \begin{dcases}
+ 		1 & x \not\in \bigcup_r U_r \\
+ 		\inf \{r : x \in U_r\} & x \in \bigcup_r U_r
+	\end{dcases}
+	\]
+	Then for $x \in C_2$, we have $f(x) = 1$ and for $x \in C_1$, we know that $f(x) = 0$.
+	It now suffices to show that $f$ is continuous.
+	Fix $x \in X$ and $\epsilon > 0$.
+	\begin{itemize}
+		\item If $f(x) = 1$: Then $x \not\in U_r$ for all $r$.
+		Pick a dyadic $s$ such that $1 - s < \nicefrac{\epsilon}{2}$ and a dyadic $r < s$ such that $s - r < \nicefrac{\epsilon}{2}$.
+		Then $x \not\in U_s$ implies that $x \not\in \overline{U_r}$.
+		Thus there exists a neighborhood $V$ of $x$ such that $V \cap U_r = \emptyset$.
+		Hence for all $z \in V$, we know that $z \not\in U_r$ and so $\inf\{t : z \in U_t\} \ge r$.
+		Therefore $f(z) \ge r$ and $|f(z) - 1| = 1 - f(z) \le 1 - r = (1-s) + (s-r) < \epsilon$.
+		
+		\item If $f(x) = 0$: Then $x \in U_r$ for all $r$.
+		Pick a dyadic $s < \epsilon$. Then $U_s$ is a neighborhood of $x$.
+		For all $z \in U_s$, we have $|f(z) - 0| = f(z) = \inf\{ t : x \in U_t\} \le s < \epsilon$.
+		
+		\item Otherwise, if $0 < f(x) < 1$:
+		By definition, $f(x) = \inf\{ s : x \in U_s\}$, so there exists a dyadic $s_0$ such that $f(x) \le s_0 \le f(x) + \epsilon$ and $x \in U_{s_0}$.
+		On the other hand, $x \not\in U_r$ for all $r < f(x)$.
+		Pick a dyadic $r_0$ such that $f(x) - \nicefrac{\epsilon}{2} < r_0 < f(x)$.
+		Then by \cref{Prop:SomeEquivResultsAboutContFunc}(2) we conclude that $f$ is continuous.
+		Thus for all $t < r_0$, we know that $\overline{U_t} \subseteq U_{r_0}$, so $x \not\in \overline{U_t}$.
+		Pick a dyadic $t_0 < r_0$ such that $r_0 - t_0 < \nicefrac{\epsilon}{2}$.
+		Define $V \coloneqq U_{s_0} \setminus \overline{U_{t_0}}$ to be a neighborhood of $x$.
+		For all $z \in V$, on the one hand, we have $f(z) - f(x) \le s_0 - f(x) \le \epsilon$ and on the other hand, we have $f(z) - f(x) \ge t_0 - f(x) = (t_0 - r_0) + (r_0 - f(x)) > -\epsilon$.
+		Therefore $|f(z) - f(x)| \le \epsilon$.
+	\end{itemize}
+	By \cref{Prop:SomeEquivResultsAboutContFunc}(2), we conclude that $f$ is continuous.
+\end{proof}
 
 \begin{definition}\label{De:FsigmaGdelta}
 	Let $(X,\tau)$ be a topological space.
@@ -2363,6 +2449,49 @@
 		Then $C_1,C_2$ are $G_\delta$ sets iff there exists a continuous function $f: X \to [0,1]$ such that $f|_{C_1} \equiv 1$, $f|_{C_2} \equiv 0$, and $0 < f < 1$ in $X \setminus (C_1 \cup C_2)$.
 	\end{enumerate}
 \end{proposition}
+\begin{proof}\
+	\begin{enumerate}
+		\item  The $\impliedby$ direction is straightforward by $C = \bigcap_{n=1}^\infty f^{-1}([0,\nicefrac{1}{n}))$.
+		
+		To show the $\implies$ direction, let's assume $C = \bigcap_{n=1}^\infty U_n$ where $U_n$'s are open.
+		For each $n \in \bbN$, $C \subseteq U_n$ and so $C$ and $X \setminus U_n$ are disjoint closed sets, then by \cref{The:Urysohn} we know there exists a continuous $f_n : X \to [0,1]$ such that $f_n|_C \equiv 0$ and $f_n|_{X \setminus U_n} \equiv 1$.
+		Define
+		\[
+		f(x) \coloneqq \sum_{n=1}^\infty \frac{1}{2^n} f_n(x) : X \to [0,1]
+		\]
+		If $x \in C$, then $f_n(x) = 0$ for all $n$ and thus $f(x) = 0$.
+		If $x \not\in C$, then there exists $n \in \bbN$ such that $x \not\in U_n$, thus $f_n(x) = 1$ and $f(x) \ge \frac{1}{2^n} > 0$.
+		
+		Then it suffices to show that $f$ is continuous.
+		Fix $x \in X$ and $\epsilon > 0$.
+		Then there exists $n_0 \in \bbN$ such that $\sum_{n=n_0}^\infty \frac{1}{2^n-1} < \nicefrac{\epsilon}{2}$.
+		Because $f_1,\cdots,f_{n_0-1}$ are continuous, there exists a neighborhood $U$ of $x$ such that for all $y \in U$, $|f_n(y) - f_n(x)| < \nicefrac{\epsilon}{2}$ for $n=1,\cdots,n_0-1$.
+		Therefore
+		\[
+			|f(y) - f(x)|  \le \sum_{n=1}^{n_0-1} \frac{1}{2^n} |f_n(y) - f_n(x)| + \sum_{n=n_0}^\infty \frac{2}{2^n} < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+		\]
+		By \cref{Prop:SomeEquivResultsAboutContFunc} we conclude that $f$ is continuous.
+		
+		\item The $\impliedby$ direction is straightforward by
+		\[
+		C_1 = \bigcap_{n=1}^\infty f^{-1}((1-\nicefrac{1}{n},1]), \quad C_2 = \bigcap_{n=1}^\infty f^{-1}([0,\nicefrac{1}{n}))
+		\]
+		
+		To show the $\implies$ direction, let's assume disjoint closed sets $C_1,C_2$ are $G_\delta$.
+		By (1), we know that there exist continuous functions $f_i : X \to [0,1]$ where $i=1,2$ such that $f_i|_{C_i} \equiv 0$ and $f_i > 0$ on $X \setminus C_i$.
+		Define
+		\[
+		f(x) \coloneqq \frac{f_2(x)}{f_1(x) + f_2(x)}
+		\]
+		$f$ is well-defined because $C_1 \cap C_2 = \emptyset$. Then $f$ is continuous.
+		Then
+		\begin{itemize}
+			\item $f|_{C_2} \equiv 0$ because $f_2|_{C_2} \equiv 0$.
+			\item $f|_{C_1} \equiv 1$ because $f_1|_{C_1} \equiv 0$ and $f_2 > 0$ on $C_1$.
+			\item $f|_{X \setminus (C_1 \cup C_2)} \in (0,1)$ because both $f_1$ and $f_2$ are strictly positive on $X \setminus (C_1 \cup C_2)$.
+		\end{itemize}
+	\end{enumerate}
+\end{proof}
 
 \begin{lemma}\label{Lem:LocCompT2ImplyRegular}
 	If $(X,\tau)$ is locally compact and Hausdorff, then it is also regular.
@@ -2372,6 +2501,9 @@
 	Let $(X,\tau)$ be a Hausdorff space and $\{K_\alpha\}_{\alpha \in \Lambda}$ be a collection of compact sets.
 	If $\bigcap_{\alpha \in \Lambda} K_\alpha = \emptyset$ then there exists a finite $\calI \subseteq \Lambda$ such that $\bigcap_{\alpha \in \calI} K_\alpha = \emptyset$.
 \end{lemma}
+\begin{proof}
+	\diw{TODO.}
+\end{proof}
 
 \begin{lemma}\label{Lem:LocCompT2ThenNeighborContainCompactClosure}
 	Let $(X,\tau)$ be a locally compact Hausdorff space.
@@ -2401,10 +2533,115 @@
 	Let $f : X \to \bbR$.
 	If $\lim_{n \to \infty} \sup_{x \in X} |f_n(x) - f(x)| = 0$, then $f$ is continuous.
 \end{lemma}
+\begin{proof}
+	Fix $x_0 \in X$ and $\epsilon > 0$.
+	By assumption, there exists an $n_0 \in \bbN$ such that $\sup_{x \in X} |f_{n_0}(x) - f(x)| < \nicefrac{\epsilon}{3}$.
+	Because $f_{n_0}$ is continuous, there exists a neighborhood $U$ of $x_0$ such that for all $y \in U$, we have $|f_{n_0}(y) - f_{n_0}(x_0)| < \nicefrac{\epsilon}{3}$ by \cref{Prop:SomeEquivResultsAboutContFunc}(2).
+	Therefore
+	\begin{align}
+		|f(y) - f(x_0)| & \le |f(y) - f_{n_0}(y)| + |f_{n_0}(y) - f_{n_0}(x_0)| + |f_{n_0}(x_0) - f(x_0)| \\
+		& < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} \\
+		& = \epsilon
+	\end{align}
+	Then by \cref{Prop:SomeEquivResultsAboutContFunc}(2) we conclude that $f$ is continuous.
+\end{proof}
 
 \begin{theorem}[Tietze's extension theorem]\label{The:TietzeExtension}
 	A topological space $(X,\tau)$ is normal iff for every closed $C \subseteq X$ and every continuous function $f: C \to \bbR$, there exists a continuous function $g: X \to \bbR$ such that $g(x) = f(x)$ for all $x \in C$, and if $f(C) \subseteq [a,b]$, then $g(X) \subseteq [a,b]$.
 \end{theorem}
+\begin{proof}
+	The $\impliedby$ direction is easy.
+	Suppose $C_1,C_2$ are disjoint closed sets.
+	Then $C_1 \cup C_2$ is also closed.
+	Define $f : C_1 \cup C_2 \to [0,1]$ as
+	\[
+	f(x) \coloneqq \begin{dcases}
+ 		1 & x \in C_1 \\
+ 		0 & x \in C_2	
+ 	\end{dcases}
+	\]
+	then $f$ is indeed a continuous function by \propref{SomeEquivResultsAboutContFunc}(3).
+	By assumption, there exists a continuous extension $g : X \to [0,1]$ of $f$.
+	Then $g|_{C_1} = f|_{C_1} \equiv 1$, $g|_{C_2} = f_{C_2} \equiv 0$.
+	By \theoref{Urysohn} we know that $X$ is normal.
+	
+	Then let's prove the $\implies$ direction.
+	\begin{itemize}
+		\item First, let's show the result holds for $f : C \to [-1,1]$, i.e., $f$ is bounded.
+		Then $f^{-1}([\nicefrac{1}{3},1])$ and $f^{-1}([-1,-\nicefrac{1}{3}])$ are disjoint closed sets in $C$, thus are also closed in $X$.
+		By \cref{The:Urysohn}, there exists a continuous $f_1 : X \to [-\nicefrac{1}{3},\nicefrac{1}{3}]$ such that
+		\[
+		f_1|_{f^{-1}([\nicefrac{1}{3},1])} \equiv \frac{1}{3}, \quad
+		f_1|_{f^{-1}([-1,-\nicefrac{1}{3}])} \equiv -\frac{1}{3}
+		\]
+		We claim that $|f - f_1| \le \nicefrac{2}{3}$ on $C$.
+		\begin{itemize}
+			\item If $f(x) \in [-1,-\nicefrac{1}{3}]$, we have $f_1(x) = -\nicefrac{1}{3}$, then done.
+			\item If $f(x) \in [\nicefrac{1}{3},1]$, we have $f_1(x) = \nicefrac{1}{3}$, then done.
+			\item Otherwise, if $f(x) \in (-\nicefrac{1}{3}, \nicefrac{1}{3})$, we conclude the proof by $f_1(x) \in [-\nicefrac{1}{3},\nicefrac{1}{3}]$.
+		\end{itemize}
+		Repeat the argument with $f \gets f - f_1$, we obtain a continuous function $f_2 : X \to [-\nicefrac{2}{9}, \nicefrac{2}{9}]$ such that $|(f-f_1)-f_2| \le (\nicefrac{2}{3})^2$ on $C$.
+		Then we will get a series of functions $\{f_n\}_{n \in \bbN}$ where
+		\begin{gather}
+			f_n : X \to \sq{ -\frac{1}{3} \p{\frac{2}{3}}^{n-1}, \frac{1}{3} \p{ \frac{2}{3} }^{n-1} }
+			\shortintertext{such that}
+			\abs{f - (f_1 + \cdots + f_n)} \le \p{\frac{2}{3}}^n ~\text{on}~ C
+		\end{gather}
+		Define
+		\begin{align}
+		g_n(x) & \coloneqq \sum_{k=1}^n f_k(x) \\
+		g(x) & \coloneqq \sum_{k=1}^\infty f_k(x) =  \lim_{n \to \infty} \sum_{k=1}^n f_k(x) = \lim_{n \to \infty} g_n(x)
+		\end{align}
+		By former analysis we know that
+		\[
+		\sum_{k=1}^\infty \abs{f_k(x)}  \le \frac{1}{3} \sum_{k=1}^\infty \p{\frac{2}{3}}^{k-1} = 1
+		\]
+		thus $g : X \to [-1,1]$ is well-defined.
+		For all $x \in C$, we have
+		\begin{align}
+			\abs{f(x) - g(x)} & = \abs{f(x) - \lim_{n \to \infty} g_n(x) } \\
+			& = \abs{ \lim_{n \to \infty} \p{ f(x) - \sum_{k=1}^n f_k(x)}} \\
+			& = \lim_{n \to \infty} \abs{ f(x) - \sum_{k=1}^n f_k(x) } \\
+			& \le \lim_{n \to \infty} \p{\frac{2}{3}}^n \\
+			& = 0
+		\end{align}
+		thus $f \equiv g$ on $C$.
+		Then it remains to show that $g$ is continuous.
+		We have
+		\begin{align}
+			\sup_{x \in X} \abs{ g(x) - g_n(x) } & = \sup_{x \in X} \abs{ \lim_{m \to \infty} \sum_{k=1}^m f_k(x) - \sum_{k=1}^n f_k(x) } \\
+			& = \sup_{x \in X} \abs{ \sum_{k=n+1}^m f_k(x) } \\
+			& \le \sum_{k=n+1}^\infty \frac{1}{3} \p{\frac{2}{3}}^{k-1}
+		\end{align}
+		thus
+		\[
+		\adjustlimits \lim_{n \to \infty} \sup_{x \in X} \abs{g(x) - g_n(x)} = 0
+		\]
+		By \cref{Lem:UniformContinuous}, we conclude that $g$ is continuous.
+		
+		\item The next step is to show the result holds for arbitrary continuous functions $f : C \to \bbR$.
+		Let $h : \bbR \to (-1,1)$ be a homeomorphism.
+		Then $\tilde{f} \coloneqq h \circ f : C \to (-1,1)$ is continuous by \cref{Prop:ContCompIsCont}.
+		By the first step, there exists a continuous $\tilde{g} : X \to [-1,1]$ such that $\tilde{g}|_C \equiv \tilde{f}$.
+		
+		Define $C_1 \coloneqq \tilde{g}^{-1}(\{-1,1\})$ to be a closed set in $X$.
+		Then $C \cap C_1 = \emptyset$ by definition.
+		By \cref{The:Urysohn}, there exists a continuous $u : X \to [0,1]$ such that $u|_{C_1} \equiv 0$ and $u|_C \equiv 1$.
+		Define $\hat{g} \coloneqq u \cdot \tilde{g} : X \to [-1,1]$.
+		If $x \in C$, then $\hat{g}(x) = u(x) \cdot \tilde{g}(x) = \tilde{g}(x) = \tilde{f}(x)$.
+		Hence $\hat{g}$ is also an extension of $\tilde{f}$.
+		On the other hand, $\hat{g}(X) \subseteq (-1,1)$ because if $\tilde{g}(x) \in \{-1,1\}$ then $u(x) = 0$, which forces $\hat{g}(x) = 0 \in (-1,1)$.
+		Define $g \coloneqq h^{-1} \circ \hat{g} : X \to \bbR$ to be a continuous function.
+		We conclude that $g$ is an extension of $f$ by showing that
+		\begin{align}
+			g(x) & = h^{-1}(\hat{g}(x)) \\
+			& = h^{-1}(\tilde{f}(x)) \\
+			& = h^{-1}((h \circ f)(x)) \\
+			& = f(x)
+		\end{align}
+		for all $x \in C$.
+	\end{itemize}
+\end{proof}
 
 \section{Limits}
 
