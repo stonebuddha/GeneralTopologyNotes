@@ -2073,7 +2073,50 @@
 	Then $X$ is compact iff every cover of $X$ with elements of $\calS$ admits a finite subcover.
 \end{lemma}
 \begin{proof}
-	\diw{TODO.}
+	The $\implies$ direction is trivial.
+	To show the $\impliedby$ direction, let's assume $X$ is not compact.
+	Define $\scrA$ to be the collection of all open covers that do not admit a finite subcover.
+	Then $(\scrA,\subseteq)$ is partial order.
+	
+	We claim that for every chain $\{\calU_i\}_{i \in \calI}$ in $\scrA$, it has an upper bound.
+	Define $\calU \coloneqq \bigcup_{i \in \calI} \calU_i = \{ U \in \tau : \Exists{i \in \calI} U \in \calU_i \}$.
+	Then $\calU_i \subseteq \calU$ for all $i \in \calI$ and $\calU$ is a cover.
+	Now it suffices to show that $\calU \in \scrA$.
+	If not, then $\calU$ must admit a finite subcover, say, $U_1,\cdots,U_n \in \calU$ such that $X = U_1\cup \cdots \cup U_n$.
+	Suppose $U_j \in \calU_{i_j}$ for $j=1,\cdots,n$.
+	Because $\{ \calU_i \}_{i \in \calI}$ is a chain, there exists $j_0 \in \{1,\cdots,n\}$ such that $U_1,\cdots,U_n \in \calU_{i_{j_0}}$.
+	Then $\calU_{i_{j_0}}$ admits a finite subcover, which leads to a contradiction.
+	
+	By Zorn's lemma (\cref{The:EquivalentZFC}(2)), we know that $\scrA$ has a maximal element $\calW$.
+	Define $\calU \coloneqq \{ U \in \tau : U \not\in \calW \}$.
+	First of all, $\calU \neq \emptyset$ because $X \in \calU$: If not then $X \in \calW$ and $\calW$ admits a finite subcover $\{X\}$.
+	\begin{enumerate}
+		\item We claim that for all $U_1,U_2 \in \calU$, we have $U_1 \cap U_2 \in \calU$.
+		Because $U_1 \not\in \calW$, and $\calW$ is the maximal of $\scrA$, we know that $\calW \cup \{ U_1\} \not\in \scrA$, so there exist $V_1,\cdots,V_m \in \calW$ such that $V_1 \cup \cdots \cup V_m \cup U_1 = X$.
+		Similarly, there exist $Z_1,\cdots,Z_k \in \calW$ such that $Z_1 \cup \cdots \cup Z_k \cup U_2 = X$.
+		Thus
+		\begin{gather}
+			\p{ U_1 \cup \bigcup_{i=1}^m V_i } \cap \p{ U_2 \cup \bigcup_{j=1}^k Z_j } = X
+			\shortintertext{so}
+			(U_1 \cap U_2) \cup \p{ \bigcup_{i=1}^m V_i \cup \bigcup_{j=1}^k Z_j } = X
+		\end{gather}
+		Therefore $U_1 \cap U_2 \not\in \calW$ and indeed $U_1 \cap U_2 \in \calU$.
+		
+		\item We claim that if $U \in \calU$ and $U \subseteq V$ for some $V \in \tau$, then $V \in \calU$.
+		Similarly, we know that $\calW \cup \{ U_1\} \not\in \scrA$, so there exist $V_1,\cdots,V_m \in \calW$ such that $V_1\cup \cdots \cup V_m \cup U = X$.
+		Because $U \subseteq V$, we know that $V_1 \cup \cdots \cup V_m \cup V = X$.
+		Thus $V \not\in \calW$ and indeed $V \in \calU$.
+		
+		\item Define $\calW_\calS \coloneqq \{ W : W \in \calW \wedge W \in \calS \}$.
+		We claim that $\calW_\calS$ is a cover.
+		Let $x \in X$.
+		Because $\calW$ is a cover, we know that there exists $V \in \calW$ such that $x \in V \in \tau$.
+		Because $\calS$ is a subbase, there exist $S_1,\cdots,S_n \in \calS$ such that $x \in S_1 \cap \cdots \cap S_n \subseteq V$.
+		Define $S \coloneqq S_1 \cap \cdots \cap S_n$.
+		it then suffices to show that $S \in \calW$, because by (1) we will know that there exists at least one $S_i \not\in \calU$ and indeed $S_i \in \calW$.
+		If not, then $S \in \calU$ and by (2), we know that $V \in \calU$, which contradicts that $V \in \calW$.
+	\end{enumerate}
+	By assumption, $\calW_\calS$ admits a finite subcover, but $\calW_\calS \subseteq \calW$, so $\calW \not\in \scrA$, which leads to a contradiction.
 \end{proof}
 
 \begin{theorem}[Tikhonov's theorem]\label{The:Tikhonov}
@@ -2112,8 +2155,18 @@
 		\item $\overline{\prod_{\alpha \in \Lambda} E_\alpha} = \prod_{\alpha \in \Lambda} \overline{E_\alpha}$.
 	\end{enumerate}
 \end{proposition}
-\begin{proof}
-	\diw{TODO.}
+\begin{proof}\
+	\begin{enumerate}
+		\item Let $f \in \p{\prod_{\alpha \in \Lambda} E_\alpha}^o$.
+		It suffices to show that for all $\alpha \in \Lambda$, we have $f(\alpha) \in E_\alpha^o$.
+		By assumption, there exist a finite $\Lambda_0 \subseteq \Lambda$ and $V_\alpha \in \tau_\alpha$ for $\alpha \in \Lambda_0$ and $V_\alpha = X_\alpha$ otherwise, such that
+		\[
+		f \in \prod_{\alpha \in \Lambda} V_\alpha \subseteq \prod_{\alpha \in \Lambda} E_\alpha
+		\]
+		Hence for all $\alpha \in \Lambda$, $f(\alpha) \in V_\alpha \subseteq E_\alpha$ and indeed $f(\alpha) \in E_\alpha^o$.
+		
+		\item \diw{TODO.}
+	\end{enumerate}
 \end{proof}
 
 \begin{proposition}\label{Prop:ProdConnIffBothConn}
@@ -2289,7 +2342,14 @@
 	Then $h$ admits at most one continuous extension to $\overline{E}$.
 \end{proposition}
 \begin{proof}
-	\diw{TODO.}
+	Suppose $f_1,f_2 : \overline{E} \to Z$ are extensions of $h$ such that $f_1 \neq f_2$.
+	Let $x \in \overline{E}$ such that $f_1(x) \neq f_2(x)$.
+	Because $Z$ is Hausdorff, there exist disjoint open sets $U,V$ in $Z$ such that $f_1(x) \in U$, $f_2(x) \in V$.
+	Thus $f_1^{-1}(U) \cap f_2^{-1}(V)$ is a neighborhood of $x$ in $\overline{E}$, i.e., it is $W \cap \overline{E}$ for some open set $W$ in $Y$.
+	By $x \in W$ and $x \in \overline{E}$ we know that $E \cap W \neq \emptyset$.
+	Let $z \in E \cap W$.
+	Then $z \in \overline{E} \cap W = f_1^{-1}(U) \cap f_2^{-1}(V)$, thus $f_1(z) \in U$, $f_2(z) \in V$.
+	But $z \in E$ and $f_1,f_2$ are extensions of $h$, we know that $f_1(z) = f_2(z)=h(z)$, so $U \cap V \supseteq \{ h(z) \} \neq \emptyset$, which leads to a contradiction.
 \end{proof}
 
 \begin{remark}\label{Rem:StoneCechNecessary}
@@ -2496,6 +2556,18 @@
 \begin{lemma}\label{Lem:LocCompT2ImplyRegular}
 	If $(X,\tau)$ is locally compact and Hausdorff, then it is also regular.
 \end{lemma}
+\begin{proof}
+	Suppose $C$ is a closed set and $x \not\in C$.
+	Because $X$ is locally compact, there exists a neighborhood $U$ of $x$ such that $\overline{U}$ is compact.
+	Then $C \cap \overline{U}$ is a closed set of a compact set, by \cref{Prop:SeveralPropertiesOfCompactness}(1), we know that $C \cap \overline{U}$ is compact and $x \not\in C \cap \overline{U}$.
+	By \cref{Lem:HausdorffSeparatePointAndCompact}, we know that there exist disjoint open sets $V,W$ such that $x \in V$ and $C \cap \overline{U} \subseteq W$.
+	Then $V \cap U$ is a neighborhood of $x$, and
+	\begin{gather}
+	C = (C \cap \overline{U}) \cup (C \setminus \overline{U}) \subseteq W \cup (X \setminus \overline{U})
+	\shortintertext{so we conclude the proof by the following}
+	(V \cap U) \cap (W \cup (X \setminus \overline{U})) = \emptyset
+	\end{gather}
+\end{proof}
 
 \begin{lemma}\label{Lem:T2CompactEmptyInterThenFinteEmptyInter}
 	Let $(X,\tau)$ be a Hausdorff space and $\{K_\alpha\}_{\alpha \in \Lambda}$ be a collection of compact sets.
@@ -2510,6 +2582,37 @@
 	Let $K$ be a compact set and $U$ be an open set such that $K \subseteq U$.
 	Then there exists an open set $V$ such that $\overline{V}$ is compact and $K \subseteq V \subseteq \overline{V} \subseteq U$.
 \end{lemma}
+\begin{proof}
+	Because $X$ is locally compact, for all $x \in X$ there exists a neighborhood $U_x$ of $x$ such that $\overline{U_x}$ is compact.
+	Then $K \subseteq \bigcup_{x \in K} U_x$.
+	Because $K$ is compact, we know that there exist $n \in \bbN$ and $x_1,\cdots,x_n \in K$ such that $K \subseteq D \coloneqq \bigcup_{i=1}^n U_{x_i}$.
+	On the other hand, $\overline{D} \subseteq \bigcup_{i=1}^n \overline{U_{x_i}}$ and finite union preserves compactness, thus $\overline{D}$ is compact.
+	\begin{itemize}
+		\item If $U = X$, then we can set $V \coloneqq D$.
+		\item Otherwise, we assume $U \neq X$.
+		Then there exists $x \in X \setminus U$, and thus $x \not\in K$.
+		By \cref{Lem:HausdorffSeparatePointAndCompact}, there exist disjoint open sets $V_x,W_x$ such that $x \in V_X$ and $K \subseteq W_x$.
+		Because $V_x \cap W_x = \emptyset$, we know that $x \not\in \overline{W_x}$.
+		Consider the following collection of compact sets
+		\[
+		\set{ (X \setminus U) \cap \overline{D} \cap \overline{W_x} }_{x \in X \setminus U}
+		\]
+		
+		We claim that $\bigcap_{x \in X \setminus U} ((X \setminus U) \cap \overline{D} \cap \overline{W_x}) = \emptyset$.
+		If not, there exists $y \in X \setminus U$ such that $y \in \overline{W_x}$ for all $x \in X \setminus U$. Then we have $y \in \overline{W_y}$, which leads to a contradiction.
+		
+		Thus by \cref{Lem:T2CompactEmptyInterThenFinteEmptyInter}, there exist $m \in \bbN$ and $y_1,\cdots,y_m \in X \setminus U$ such that
+		\[
+		(X \setminus U) \cap \overline{D} \cap \overline{W_{y_1}} \cap \cdots \cap \overline{W_{y_m}} = \emptyset
+		\]
+		Define $V \coloneqq D \cap W_{y_1} \cap \cdots W_{y_m}$ to be a neighborhood of $K$.
+		Because $\overline{V} \subseteq \overline{D}$, we know that $\overline{V}$ is compact.
+		We conclude the proof by the following fact
+		\[
+		\overline{V} \subseteq \overline{D} \cap \overline{W_{y_1}} \cap \cdots \cap \overline{W_{y_m}} \subseteq U
+		\]
+	\end{itemize}
+\end{proof}
 
 \begin{theorem}\label{The:LocCompT2StrongerCutOff}
 	Let $(X,\tau)$ be a locally compact Hausdorff space.
@@ -2525,7 +2628,24 @@
 	Then the function $f|_X : X \to [0,1]$ is also continuous, and $\mathrm{supp}(f|_X) = \overline{\{x \in X: f(x) \neq 0\}} \subseteq \overline{V}$ is compact.
 \end{proof}
 \begin{proof}[Proof 2]
-	\diw{TODO.}
+	By \cref{Lem:LocCompT2ThenNeighborContainCompactClosure}, there exists an open set $V$ such that $\overline{V}$ is compact and $K \subseteq V \subseteq \overline{V} \subseteq U$.
+	Because $\overline{V}$ is Hausdorff and compact, by \cref{Prop:SeveralPropertiesOfCompactness}(4) we know that $\overline{V}$ is normal.
+	Then $K$ and $\overline{V} \setminus V$ are disjoint closed sets in $\overline{V}$.
+	By \cref{The:Urysohn}, there exists a continuous $f : \overline{V} \to [0,1]$ such that $f|_K \equiv 1$ and $f|_{\overline{V} \setminus V} \equiv 0$.
+	Define $F : X \to [0,1]$ as
+	\[
+	F(x) \coloneqq \begin{dcases}
+ 		f(x) & x \in \overline{V} \\
+ 		0 & x \not\in \overline{V}
+ 	\end{dcases}
+	\]
+	then $F|_K \equiv 1$, and $F(x) = 0$ for all $x \not\in U$ because $x \not\in \overline{V}$.
+	Also, $\mathrm{supp}(F) \subseteq \overline{V}$ so $\mathrm{supp}(F)$ is compact by \cref{Prop:SeveralPropertiesOfCompactness}(1).
+	Then it suffices to show that $F$ is continuous.
+	Let $A \subseteq [0,1]$ be a closed set.
+	If $0 \not\in A$, then $F^{-1}(A) = f^{-1}(A)$ is a closed set by \cref{Prop:SomeEquivResultsAboutContFunc}(3).
+	Otherwise, we have $0 \in A$, then $F^{-1}(A) = f^{-1}(A) \cup F^{-1}(0) = f^{-1}(A) \cup (X \setminus V)$ is a closed set.
+	Therefore we conclude that $f$ is continuous by \cref{Prop:SomeEquivResultsAboutContFunc}(3).
 \end{proof}
 
 \begin{lemma}\label{Lem:UniformContinuous}
