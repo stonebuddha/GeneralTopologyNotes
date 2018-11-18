@@ -374,6 +374,7 @@
 	\setlength\abovedisplayshortskip{0.5\abovedisplayshortskip}%
 	\setlength\belowdisplayshortskip{0.5\belowdisplayshortskip}%
 	\setlength\floatsep{0.5\floatsep}%
+	\def\MathparLineskip{\lineskip=0.29cm}%
 }
 \fi
 \RequirePackage{nicefrac}
