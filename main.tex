@@ -1,14 +1,5 @@
 \documentclass[screen]{techreport}
 
-\usepackage{cleveref}
-\crefname{theorem}{Thm.}{Thms.}
-\crefname{lemma}{Lem.}{Lemmas}
-\crefname{corollary}{Cor.}{Cors.}
-\crefname{definition}{Defn.}{Defns.}
-\crefname{example}{Ex.}{Exs.}
-\crefname{remark}{Remark}{Remarks}
-\crefname{proposition}{Prop.}{Props.}
-
 \numberwithin{equation}{section}
 
 \newcommand{\diw}[1]{{\color{Red} DW: #1}}
@@ -223,14 +214,14 @@
 		Then indeed $\beta \subseteq \tau$.
 		We claim that $\tau$ is a topology.
 		\begin{itemize}
-			\item WTS \defref{Topology}(1): On the one hand, (1) implies that $\emptyset \in \tau$.
+			\item WTS \cref{De:Topology}(1): On the one hand, (1) implies that $\emptyset \in \tau$.
 			On the other hand, for each $x \in X$, by (2) we know there exists $B_x \in \beta$ such that $x \in B_x$.
 			Therefore
 			\[
 			X = \bigcup_{x \in X} B_x \in \tau.
 			\]
 			
-			\item WTS \defref{Topology}(2):
+			\item WTS \cref{De:Topology}(2):
 			Suppose $U_1,\cdots,U_n \in \tau$.
 			It suffices to show that $U_1 \cap \cdots \cap U_n \in \tau$.
 			For each $i=1,\cdots,n$, $U_i \in \tau$ implies that
@@ -246,7 +237,7 @@
 			U_1 \cap \cdots \cap U_n = \bigcup_{x \in U_1 \cap \cdots \cap U_n} B_x \in \tau.
 			\]
 			
-			\item WTS \defref{Topology}(3):
+			\item WTS \cref{De:Topology}(3):
 			Suppose $\{U_\alpha \in \tau\}_{\alpha \in \calI}$.
 			It suffices to show that $\bigcup_{\alpha \in \calI} U_\alpha \in \tau$.
 			For each $\alpha \in \calI$, $U_\alpha \in \tau$ implies that
@@ -409,7 +400,7 @@
 	In other words, every metric space $(X,d)$ admits a natural topology $\tau_d$ with $\beta$ as its base.
 \end{lemma}
 \begin{proof}
-	By \propref{BaseStructure}(3) it is sufficient to show that for all $B_1,B_2 \in \beta$ satisfying $B_1 \cap B_2 \neq \emptyset$, then for all $x \in B_1 \cap B_2$, there exists $B_3 \in \beta$ such that $x \in B_3$ and $B_3 \subseteq B_1 \cap B_2$.
+	By \cref{Prop:BaseStructure}(3) it is sufficient to show that for all $B_1,B_2 \in \beta$ satisfying $B_1 \cap B_2 \neq \emptyset$, then for all $x \in B_1 \cap B_2$, there exists $B_3 \in \beta$ such that $x \in B_3$ and $B_3 \subseteq B_1 \cap B_2$.
 	Let $B_1 = B(x_1,r_1)$ and $B_2 = B(x_2,r_2)$.
 	For all $x \in B_1 \cap B_2$, define $r \coloneqq \min \{ r_1 - d(x,x_1), r_2 - d(x,x_2) \} > 0$.
 	Define $B_3 \coloneqq B(x,r) \in \beta$.
@@ -503,7 +494,7 @@
 	\[
 	B_{d_1}(x,R) = B_d\p{x, \frac{R}{1-R} }.
 	\]
-	Then by \propref{MetricOpenFindABall} we conclude that $d$ and $d_1$ yield the same topology.
+	Then by \cref{Prop:MetricOpenFindABall} we conclude that $d$ and $d_1$ yield the same topology.
 \end{proof}
 
 \begin{lemma}\label{Lem:SmallerMetricIsWeaker}
@@ -511,9 +502,9 @@
 \end{lemma}
 \begin{proof}
 	Let $U \in \tau_{d_1}$.
-	We want to show that $U \in \tau_{d_2}$ and by \propref{MetricOpenFindABall} it suffices to show that for every $x \in U$, there exists $r >0$ such that $B_{d_2}(x,r) \subseteq U$.
+	We want to show that $U \in \tau_{d_2}$ and by \cref{Prop:MetricOpenFindABall} it suffices to show that for every $x \in U$, there exists $r >0$ such that $B_{d_2}(x,r) \subseteq U$.
 	Suppose $x_0 \in U$.
-	Also by \propref{MetricOpenFindABall} we know that there exists $r_0 > 0$ such that $B_{d_1}(x_0,r_0) \subseteq U$.
+	Also by \cref{Prop:MetricOpenFindABall} we know that there exists $r_0 > 0$ such that $B_{d_1}(x_0,r_0) \subseteq U$.
 	For any $y \in B_{d_2}(x_0,r_0)$, we know that $d_1(x_0,y) \le d_2(x_0,y) < r_0$ thus $y \in B_{d_1}(x_0,r_0)$.
 	Therefore we have
 	\[
@@ -539,7 +530,7 @@
 	\max_{x \in K_n} \frac{\abs{f(x)-g(x)}}{1+\abs{f(x)-g(x)}} \le \tilde{d}(f,g)
 	\]
 	and $\nicefrac{1}{2^n} < 1$ for all $n \in \bbN$, we know that $d(f,g) \le \tilde{d}(f,g)$.
-	By \lemref{SmallerMetricIsWeaker} we know that $\tau_d \subseteq \tau_{\tilde{d}}$.
+	By \cref{Lem:SmallerMetricIsWeaker} we know that $\tau_d \subseteq \tau_{\tilde{d}}$.
 	To show $\tau_d \neq \tau_{\tilde{d}}$, we claim that $B_{\tilde{d}}(\mathbf{0},\nicefrac{1}{2})$ is not a neighborhood of $\mathbf{0}$ in $\tau_d$.
 	Suppose it is, then there exists $r > 0$ such that $B_d(\mathbf{0},r) \subseteq B_{\tilde{d}}(\mathbf{0},\nicefrac{1}{2})$.
 	Choose an $m >1$ such that $\nicefrac{1}{2^m} < r$.
@@ -556,7 +547,7 @@
 \end{proof}
 
 \begin{definition}\label{De:QuotientMetricSpaces}
-	Let $\rho$ be a pseudo-metric (i.e., a metric without the property as \defref{Metrics}(1)(b)) on $X$.
+	Let $\rho$ be a pseudo-metric (i.e., a metric without the property as \cref{De:Metrics}(1)(b)) on $X$.
 	Define an equivalence relation ${\sim}$ as $x \sim y$ iff $\rho(x,y) = 0$.
 	Then $(Y,d)$ with $Y \coloneqq X / {\sim}$ and $d([x],[y]) \coloneqq \rho(x,y)$ is said to be the \emph{quotient metric space}.
 \end{definition}
@@ -605,7 +596,7 @@
 \end{proposition}
 
 \begin{remark}\label{Rem:NormedBalls}
-	If $(X,\norm{\cdot})$ is a normed space, we will consider in $X$ the topology induced by the metric $d$ in \propref{NormInduceMetric}, i.e., the topology whose base of open sets are $\{ B(x,r) : x \in X, r > 0 \}$ with $B(x,r) \coloneqq \{ y \in X : \norm{x-y} < r \}$.
+	If $(X,\norm{\cdot})$ is a normed space, we will consider in $X$ the topology induced by the metric $d$ in \cref{Prop:NormInduceMetric}, i.e., the topology whose base of open sets are $\{ B(x,r) : x \in X, r > 0 \}$ with $B(x,r) \coloneqq \{ y \in X : \norm{x-y} < r \}$.
 \end{remark}
 
 \begin{remark}\label{Rem:MetricNotImplyNorm}
@@ -653,7 +644,7 @@
 \end{proposition}
 \begin{proof}\
 	\begin{itemize}
-		\item WTS \defref{Norms}(1):
+		\item WTS \cref{De:Norms}(1):
 		On the one hand, we have $\norm{\mathbf{0}}_p = 0$ trivially.
 		On the other hand, if $\norm{f}_p = 0$ then we know that
 		\[
@@ -661,7 +652,7 @@
 		\]
 		thus for all $x \in X$, we have $f(x) = 0$, i.e., $f = \mathbf{0}$.
 		
-		\item WTS \defref{Norms}(2): Suppose $f \in \ell^p(X)$ and $\alpha \in \bbR$.
+		\item WTS \cref{De:Norms}(2): Suppose $f \in \ell^p(X)$ and $\alpha \in \bbR$.
 		Then we have
 		\begin{align}
 			\norm{\alpha f} & = \p{\sum_{x \in X} \abs{\alpha \cdot f(x)}^p}^{\frac{1}{p}} \\
@@ -670,11 +661,11 @@
 			& = \abs{\alpha} \cdot \norm{f}_p.
 		\end{align}
 		
-		\item WTS \defref{Norms}(3): Suppose $f,g \in \ell^p(X)$ and we want to show that $\norm{f+g}_p \le \norm{f}_p+\norm{g}_p$, or equivalently
+		\item WTS \cref{De:Norms}(3): Suppose $f,g \in \ell^p(X)$ and we want to show that $\norm{f+g}_p \le \norm{f}_p+\norm{g}_p$, or equivalently
 		\[
 		\p{ \sum_{x \in X} \abs{f(x) + g(x)}^p }^\frac{1}{p} \le \p{ \sum_{x \in X} \abs{f(x)}^p}^\frac{1}{p} + \p{ \sum_{x \in X} \abs{g(x)}^p}^\frac{1}{p}.
 		\]
-		We then conclude this case by \theoref{MinkowskisInequality}.
+		We then conclude this case by \cref{The:MinkowskisInequality}.
 	\end{itemize}
 \end{proof}
 
@@ -725,7 +716,7 @@
 	Then $E \cup E' = \overline{E}$.
 \end{proposition}
 \begin{proof}
-	By the fact that $E \subseteq \overline{E}$ as well as \propref{LimitContainedInClosure} we know that $E \cup \overline{E} \subseteq \overline{E}$.
+	By the fact that $E \subseteq \overline{E}$ as well as \cref{Prop:LimitContainedInClosure} we know that $E \cup \overline{E} \subseteq \overline{E}$.
 	Then it suffices to show that $\overline{E} \subseteq E \cup E'$.
 	Suppose $p \in \overline{E}$, then for every neighborhood $U$ of $p$, $U \cap E \neq \emptyset$.
 	\begin{itemize}
@@ -758,7 +749,7 @@
 	If a topological space satisfies the first axiom of countability, then $p \in \overline{E}$ iff there exists a sequence $\{x_n\}_{n \in \bbN} \subseteq E$ such that $x_n \rightarrow p$.
 \end{lemma}
 \begin{proof}
-	The ${\impliedby}$ direction is given by \lemref{LimitOfSeqInClosure}.
+	The ${\impliedby}$ direction is given by \cref{Lem:LimitOfSeqInClosure}.
 	For the ${\implies}$ direction, suppose $\beta_p = \{B_n\}_{n \in \bbN}$ is a local base for $p$.
 	\begin{itemize}
 		\item If $p \in E$, then we define $x_n \coloneqq p$ for all $n$.
@@ -806,7 +797,7 @@
 \begin{proof}\
 	\begin{itemize}
 		\item If $E$ is closed, then we have $E = \overline{E}$.
-		By \lemref{LimitOfSeqInClosure} we know that for all sequences $\{x_n\}_{n \in \bbN} \subseteq E$ and $x_n \rightarrow p$, then $p \in \overline{E}$.
+		By \cref{Lem:LimitOfSeqInClosure} we know that for all sequences $\{x_n\}_{n \in \bbN} \subseteq E$ and $x_n \rightarrow p$, then $p \in \overline{E}$.
 		Therefore $E$ is sequentially closed.
 		
 		\item Suppose $U$ is open and $\{x_n\}_{n \in \bbN} \subseteq X$ with $x_n \rightarrow p$ for some $p \in U$.
@@ -892,7 +883,7 @@
 	Then $(X,d)$ is separable iff it is second countable.
 \end{proposition}
 \begin{proof}
-	The ${\impliedby}$ direction is proved in \propref{SndAxCountImplySeparable}.
+	The ${\impliedby}$ direction is proved in \cref{Prop:SndAxCountImplySeparable}.
 	To show the ${\implies}$ direction, let $E$ be a countable dense set in $\tau_d$.
 	Define a countable collection of open sets
 	\[
@@ -931,9 +922,9 @@
 	Then $(A,d|_A)$ is also separable.
 \end{proposition}
 \begin{proof}
-	By \propref{MetricSeparableImplySndAxCount} we know that $(X,d)$ satisfies the second axiom of countability.
-	By \remref{AxCountHereditary} we know that $(A,d|_A)$ is also second countable.
-	Again by \propref{MetricSeparableImplySndAxCount} we conclude that $(A,d|_A)$ is separable.
+	By \cref{Prop:MetricSeparableImplySndAxCount} we know that $(X,d)$ satisfies the second axiom of countability.
+	By \cref{Rem:AxCountHereditary} we know that $(A,d|_A)$ is also second countable.
+	Again by \cref{Prop:MetricSeparableImplySndAxCount} we conclude that $(A,d|_A)$ is separable.
 \end{proof}
 
 \section{Connectedness}
@@ -1113,7 +1104,7 @@
 	If $C$ is closed in $X$, then $r^{-1}(C)$ is closed in $[a,b]$.
 \end{proposition}
 \begin{proof}
-	By \lemref{ContinuousReverseOpenIsOpen}, we know that $r^{-1}(X \setminus C)$ is open.
+	By \cref{Lem:ContinuousReverseOpenIsOpen}, we know that $r^{-1}(X \setminus C)$ is open.
 	Then
 	\[
 	r^{-1}(C) = r^{-1}(X \setminus (X \setminus C)) = r^{-1}(X) \setminus r^{-1}(X \setminus C) = [a,b] \setminus r^{-1}(X\setminus C)
@@ -1133,13 +1124,13 @@
 	Then there exist two disjoint nonempty open sets $U,V$ such that $X = U \cup V$.
 	Let $x \in U$ and $y \in V$.
 	By the pathwise connectedness, there exists a continuous path $r : [0,1] \to X$ such that $r(0)=x$ and $r(1)=y$.
-	By \lemref{ContinuousReverseOpenIsOpen} and the fact that $r(0)=x,r(1)=y$, we know that $r^{-1}(U)$ and $r^{-1}(V)$ are nonempty open sets in $[a,b]$.
+	By \cref{Lem:ContinuousReverseOpenIsOpen} and the fact that $r(0)=x,r(1)=y$, we know that $r^{-1}(U)$ and $r^{-1}(V)$ are nonempty open sets in $[a,b]$.
 	By $U \cap V = \emptyset$, we know that $r^{-1}(U) \cap r^{-1}(V) = \emptyset$.
 	On the other hand,
 	\[
 	[0,1] = r^{-1}(X) = r^{-1}(U) \cup r^{-1}(V)
 	\]
-	is written as union of two disjoint nonempty open sets, which contradicts the fact that $[0,1]$ is connected (by \theoref{RConnectedConvex}).
+	is written as union of two disjoint nonempty open sets, which contradicts the fact that $[0,1]$ is connected (by \cref{The:RConnectedConvex}).
 	Therefore we conclude that $(X,\tau)$ is connected.
 \end{proof}
 
@@ -1157,7 +1148,7 @@
 	Then ${\sim}$ is an equivalence relation.
 	For all $x \in X$, define the equivalence class of $x$ as $E_x \coloneqq \{ y \in X : y \sim x \}$.
 	Then $E_x = \bigcup_{E \subseteq X, x \in E, E~\text{is connected}} E$, i.e., $E_x$ is a (largest) connected component containing $x$.
-	Moreover, we have $E_x = \overline{E_x}$ by \propref{ClosureOfConnStillConn}.
+	Moreover, we have $E_x = \overline{E_x}$ by \cref{Prop:ClosureOfConnStillConn}.
 \end{definition}
 
 \begin{proposition}\label{Prop:ClosedConnComponentStillClosed}
@@ -1260,7 +1251,7 @@
 	If $X$ satisfies the first axiom of countability, then $f$ is continuous iff $f$ is sequentially continuous.
 \end{proposition}
 \begin{proof}
-	We already proved the ${\implies}$ direction in \propref{ContImplySeqCont}.
+	We already proved the ${\implies}$ direction in \cref{Prop:ContImplySeqCont}.
 	To show the ${\impliedby}$ direction, suppose that $f$ is sequentially continuous but not continuous.
 	Then there exists $V \in \tau_Y$ such that $f^{-1}(V) \not\in \tau_X$.
 	In particular, $f^{-1}(V) \neq \emptyset$ so there exists $a \in f^{-1}(V)$ which is not an interior point of $f^{-1}(V)$.
@@ -1330,7 +1321,7 @@
 \end{proof}
 
 \begin{theorem}\label{The:HierarchyOfSeparation}
-	For the axioms of separation defined in \defref{AxiomsOfSeparation}, we have
+	For the axioms of separation defined in \cref{De:AxiomsOfSeparation}, we have
 	\begin{equation}
 		T_4 \implies T_3 \implies T_2 \implies T_1 \implies T_0.
 	\end{equation}
@@ -1340,11 +1331,11 @@
 		\item $T_1 \implies T_0$: Trivial.
 		\item $T_2 \implies T_1$: Trivial.
 		\item $T_3 \implies T_2$: Suppose $x \neq y$. By definition, $T_3$ is $T_1$ and regular.
-		By \propref{T1SingletonClosed}, we know that $\{y\}$ is closed.
+		By \cref{Prop:T1SingletonClosed}, we know that $\{y\}$ is closed.
 		Define $C \coloneqq \{ y\}$ to be a closed set.
 		By regularity we know that there exist disjoint open sets $U,V$ such that $x \in U$ and $C \subseteq V$, which is equivalent to $y \in V$.
 		\item $T_4 \implies T_3$: Suppose $x \in X$ and a closed $C \subseteq X$ such that $x \not\in C$.
-		Define $C' \coloneqq \{ x\}$ to be a closed set by \propref{T1SingletonClosed}.
+		Define $C' \coloneqq \{ x\}$ to be a closed set by \cref{Prop:T1SingletonClosed}.
 		By normality we know that there exist disjoint open sets $U,U'$ such that $C \subseteq U$ and $C' \subseteq U'$, which is equivalent to $x \in U'$.
 	\end{itemize}
 \end{proof}
@@ -1363,7 +1354,7 @@
 
 \begin{example}\label{Exa:NormalNotImplyRegular}
 	In general normal spaces are not necessarily regular spaces.
-	The topology in \exref{T0NotImplyT1} is an example.
+	The topology in \cref{Exa:T0NotImplyT1} is an example.
 \end{example}
 
 \begin{lemma}\label{Lem:RegularIffNeighborContainClosure}
@@ -1406,7 +1397,7 @@
 		Then $V \subseteq \overline{V_x} \times \overline{V_y} \subseteq W_x \times W_y \subseteq U$.
 		
 		We claim that $\overline{V} = \overline{V_x \times V_y} \subseteq \overline{V_x} \times \overline{V_y} $ and then
-		we conclude the proof by \lemref{RegularIffNeighborContainClosure}.
+		we conclude the proof by \cref{Lem:RegularIffNeighborContainClosure}.
 		Let $(a,b) \in \overline{V}$.
 		Let $V_a$ be a neighborhood of $a$ in $X$.
 		Let $V_b$ be a neighborhood of $b$ in $Y$.
@@ -1424,7 +1415,7 @@
 		Because $X \times Y$ is regular, there exists $V \in \tau_{X \times Y}$ such that $(x,y) \in V \subseteq \overline{V} \subseteq U$.
 		Let $V_x$ be a neighborhood of $x$ and $V_y$ be a neighborhood of $y$ such that $V_x \times V_y \subseteq V$.
 		
-		We claim that $\overline{V_x} \subseteq U_x$, and then we conclude by \lemref{RegularIffNeighborContainClosure}.
+		We claim that $\overline{V_x} \subseteq U_x$, and then we conclude by \cref{Lem:RegularIffNeighborContainClosure}.
 		Suppose $z \in \overline{V_x}$ and $y \in \overline{V_y}$.
 		Then $(z,y) \in \overline{V_x} \times \overline{V_y}$ and $\overline{V_x \times V_y} \subseteq \overline{V} \subseteq U = U_x \times Y$.
 		It then suffices to show that $\overline{V_x} \times \overline{V_y} \subseteq \overline{V_x \times V_y}$.
@@ -1443,7 +1434,7 @@
 	Then $S$ is regular but not normal.
 \end{example}
 \begin{proof}
-	First of all, let's prove $(\bbR,\tau)$ is regular, then by \theoref{ProductOfRegularStillRegular} we know that $S$ is regular.
+	First of all, let's prove $(\bbR,\tau)$ is regular, then by \cref{The:ProductOfRegularStillRegular} we know that $S$ is regular.
 	Suppose $x \in \bbR$ and a closed $C \subseteq \bbR$ such that $x \not\in C$.
 	Then there exists $\epsilon>0$ such that $[x,x+\epsilon) \cap C = \emptyset$.
 	Define $U \coloneqq [x,x+\epsilon)$ and $V \coloneqq \bbR \setminus [x,x+\epsilon)$.
@@ -1479,7 +1470,7 @@
 	
 	We claim that if $z \not\in C_1$, then $d(z,C_1) > 0$.
 	If not, there exists $\{y_n\}_{n \in \bbN} \subseteq C_1$ such that $d(z,y_n) \rightarrow 0$.
-	By \lemref{LimitOfSeqInClosure}, we know $z \in \overline{C_1} = C_1$, which leads to a contradiction.
+	By \cref{Lem:LimitOfSeqInClosure}, we know $z \in \overline{C_1} = C_1$, which leads to a contradiction.
 	
 	Define two open sets
 	\begin{align}
@@ -1559,13 +1550,13 @@
 		
 		\item We claim that $(X \setminus K)$ is open.
 		Let $x_0 \in X \setminus K$.
-		By \lemref{HausdorffSeparatePointAndCompact}, there exist disjoint open sets $U,V$ such that $K \subseteq U$ and $x_0 \in V$.
+		By \cref{Lem:HausdorffSeparatePointAndCompact}, there exist disjoint open sets $U,V$ such that $K \subseteq U$ and $x_0 \in V$.
 		Then $V \subseteq X \setminus U \subseteq X \setminus K$.
 		Therefore $(X \setminus K)$ is open.
 		
 		\item Let $C$ be a closed set and $x_0 \not\in C$.
 		By (1), we know that $C$ is compact.
-		Then we conclude the proof by \lemref{HausdorffSeparatePointAndCompact}.
+		Then we conclude the proof by \cref{Lem:HausdorffSeparatePointAndCompact}.
 		
 		\item Let $C_1,C_2$ be disjoint closed sets.
 		Then for all $x \in C_1$, by (3), we know that there exist disjoint open sets $U_x,V_x$ such that $x \in U_x$ and $C_2 \subseteq V_x$.
@@ -1627,13 +1618,13 @@
 \end{theorem}
 \begin{proof}\
 	\begin{itemize}
-		\item WTS ${\implies}$: Since $\bbR$ is Hausdorff, by \propref{SeveralPropertiesOfCompactness}(2), we know that $K$ is closed.
+		\item WTS ${\implies}$: Since $\bbR$ is Hausdorff, by \cref{Prop:SeveralPropertiesOfCompactness}(2), we know that $K$ is closed.
 		If $K$ is not bounded, then $\sup_{x \in K} \abs{x} = +\infty$.
 		Then $K \subseteq \bigcup_{n \in \bbN} (-n,n)$ does not have a finite subcover, which contradicts that $K$ is compact.
 		
 		\item WTS ${\impliedby}$: Because $K$ is bounded, there exists $n \in \bbN$ such that $K \subseteq [-n,n]$.
-		By \propref{ClosedIntervalCompact}, we know $[-n,n]$ is compact.
-		By \propref{SeveralPropertiesOfCompactness}(1) and $K$ is closed, we conclude that $K$ is compact.
+		By \cref{Prop:ClosedIntervalCompact}, we know $[-n,n]$ is compact.
+		By \cref{Prop:SeveralPropertiesOfCompactness}(1) and $K$ is closed, we conclude that $K$ is compact.
 	\end{itemize}
 \end{proof}
 
@@ -1704,9 +1695,9 @@
 	Define $E \coloneqq \{ x_n : n \in \bbN \}$.
 	If $\#E < \infty$, then one of $E$ must repeat infinitely many times in $\{x_n\}_{n \in \bbN}$.
 	Then let's assume $\#E = \infty$.
-	By \lemref{InfiniteSubsetOfCompactHasLimit}, we know that there exists $x_0 \in X$ such that $x_0 \in E'$.
-	By \propref{OrigPlusLimitIsClosure} we know that $x_0 \in \overline{E}$.
-	Then by \lemref{FirstCountLimitOfSeqIffClosure} we know that there exists $\{y_m\}_{m \in \bbN} \subseteq E$ such that $y_m \rightarrow x_0$.
+	By \cref{Lem:InfiniteSubsetOfCompactHasLimit}, we know that there exists $x_0 \in X$ such that $x_0 \in E'$.
+	By \cref{Prop:OrigPlusLimitIsClosure} we know that $x_0 \in \overline{E}$.
+	Then by \cref{Lem:FirstCountLimitOfSeqIffClosure} we know that there exists $\{y_m\}_{m \in \bbN} \subseteq E$ such that $y_m \rightarrow x_0$.
 	Let's assume $x_0 \not\in E$, otherwise a constant sequence with $x_0$ converges to $x_0$ trivially.
 	
 	Let $\{B_n\}_{n \in \bbN}$ be a nesting countable local base at $x_0$.
@@ -1748,12 +1739,12 @@
 	Then $X$ is compact iff $X$ is sequentially compact.
 \end{proposition}
 \begin{proof}
-	The ${\implies}$ direction is trivial: Because $X$ is a metric space, $X$ is first countable, and then by \propref{CompactFstCountThenSeqCompact} we conclude that $X$ is sequentially compact.
+	The ${\implies}$ direction is trivial: Because $X$ is a metric space, $X$ is first countable, and then by \cref{Prop:CompactFstCountThenSeqCompact} we conclude that $X$ is sequentially compact.
 	
 	To show the ${\impliedby}$ direction, let's assume $X$ is sequentially compact.
 	Let $X = \bigcup_{\alpha \in \Lambda} U_\alpha$ where $U_\alpha$'s are open sets.
 	Suppose there does not exist a finite subcover.
-	By \lemref{MetricSeqCompactIsTotallyBounded}, $X$ is totally bounded and $a	\coloneqq \mathrm{diam}(X) < +\infty$.
+	By \cref{Lem:MetricSeqCompactIsTotallyBounded}, $X$ is totally bounded and $a	\coloneqq \mathrm{diam}(X) < +\infty$.
 	Thus there exist $n \in \bbN$ and $x_1,\cdots,x_n \in X$ such that $X = \bigcup_{i=1}^n B(x_i, \nicefrac{a}{4})$.
 	Moreover, $X = \bigcup_{i=1}^n \overline{B(x_i, \nicefrac{a}{4})}$.
 	Then at least one closed ball cannot be covered with finitely many $U_\alpha$'s.
@@ -1787,7 +1778,7 @@
 	In particular, $X$ is second countable.
 \end{proposition}
 \begin{proof}
-	By \lemref{MetricSeqCompactIsTotallyBounded}, $X$ is totally bounded.
+	By \cref{Lem:MetricSeqCompactIsTotallyBounded}, $X$ is totally bounded.
 	Then for all $m \in \bbN$, there exist $n_m \in \bbN$ and $x^{(m)}_1,\cdots,x^{(m)}_{n_m} \in X$ such that
 	\[
 	X = \bigcup_{i=1}^{n_m} B\p{ x^{(m)}_i, \frac{1}{m}} 
@@ -1800,7 +1791,7 @@
 	Then $x^{(m)}_i \in B(x,\nicefrac{1}{m}) \subseteq B(x,\epsilon)$, therefore $B(x,\epsilon) \cap S \supseteq \{ x^{(m)}_i \} \neq \emptyset$.
 	Because $\epsilon$ is arbitrarily chosen, we have $x \in \overline{S}$.
 	Thus we conclude that $\overline{S} = X$.
-	By \propref{MetricSeparableImplySndAxCount}, we know that the metric space $X$ is second countable.
+	By \cref{Prop:MetricSeparableImplySndAxCount}, we know that the metric space $X$ is second countable.
 \end{proof}
 
 \begin{proposition}\label{Prop:MetricSndCountImplyLindelof}
@@ -1809,11 +1800,11 @@
 \end{proposition}
 
 \begin{remark}\label{Rem:AnotherProofMetricSeqCompactImplyCompact}
-	Here we give another proof of \propref{MetricCompactIffSeqCompact}.
+	Here we give another proof of \cref{Prop:MetricCompactIffSeqCompact}.
 	Suppose $(X,d)$ is a sequentially compact metric space.
 	Let $X = \bigcup_{\alpha \in \Lambda} U_\alpha$ where $U_\alpha$'s are open sets.
-	By \propref{MetricSeqCompactImplySeparable}, $X$ is second countable.
-	By \propref{MetricSndCountImplyLindelof}, $X$ is Lindel{\"o}f, so there exists a countable subcover $X = \bigcup_{n=1}^\infty U_n$.
+	By \cref{Prop:MetricSeqCompactImplySeparable}, $X$ is second countable.
+	By \cref{Prop:MetricSndCountImplyLindelof}, $X$ is Lindel{\"o}f, so there exists a countable subcover $X = \bigcup_{n=1}^\infty U_n$.
 	If there is no finite subcover, then for all $m \in \bbN$, there exists $x_m \not\in U_1 \cup \cdots \cup U_m$.
 	Because $X$ is sequentially compact, we know that $\{x_m\}_{m \in \bbN}$ admits a converging subsequence, say, $\{x_{m_k}\}_{k \in \bbN} \subseteq \{ x_m \}_{m \in \bbN}$ and $x_{m_k} \rightarrow p$.
 	Suppose $m_0 \in \bbN$ such that $p \in U_{m_0}$.
@@ -1841,14 +1832,14 @@
 \begin{proof}
 	Define $g \coloneqq f^{-1} : Y \to X$.
 	Let $C \subseteq X$ be a closed set.
-	Because $X$ is compact, by \propref{SeveralPropertiesOfCompactness}(1) we know that $C$ is also compact.
-	Thus by \propref{ContFuncPreserveCompact}, $f(C) = g^{-1}(C)$ is compact in $Y$.
-	Because $Y$ is $T_2$, by \propref{SeveralPropertiesOfCompactness}(2) we know that $g^{-1}(C)$ is closed in $Y$.
-	Then by \propref{SomeEquivResultsAboutContFunc}(3) we know that $g$ is continuous.
+	Because $X$ is compact, by \cref{Prop:SeveralPropertiesOfCompactness}(1) we know that $C$ is also compact.
+	Thus by \cref{Prop:ContFuncPreserveCompact}, $f(C) = g^{-1}(C)$ is compact in $Y$.
+	Because $Y$ is $T_2$, by \cref{Prop:SeveralPropertiesOfCompactness}(2) we know that $g^{-1}(C)$ is closed in $Y$.
+	Then by \cref{Prop:SomeEquivResultsAboutContFunc}(3) we know that $g$ is continuous.
 \end{proof}
 
 \begin{example}\label{Exa:ContBijectionNotHome}
-	In general \propref{ContBijectionFromCompactToT2IsHome} does not hold if $X$ is not compact or $Y$ is not $T_2$.
+	In general \cref{Prop:ContBijectionFromCompactToT2IsHome} does not hold if $X$ is not compact or $Y$ is not $T_2$.
 	\diw{TODO.}
 \end{example}
 
@@ -1858,8 +1849,8 @@
 \end{theorem}
 \begin{proof}
 	\begin{itemize}
-		\item First proof: Because $X$ is compact and $f$ is continuous, by \propref{ContFuncPreserveCompact}, we know $f(X)$ is compact in $\bbR$.
-		Then by \theoref{HeineBorelProperty} we know that $f(X)$ is closed and bounded.
+		\item First proof: Because $X$ is compact and $f$ is continuous, by \cref{Prop:ContFuncPreserveCompact}, we know $f(X)$ is compact in $\bbR$.
+		Then by \cref{The:HeineBorelProperty} we know that $f(X)$ is closed and bounded.
 		
 		\item Second proof: Define $\alpha \coloneqq \inf f(X)$.
 		If $\alpha \not\in f(X)$, then for all $x \in X$, $f(x) > \alpha$, and there exists $y_x \in X$ such that $f(x) > \alpha_x \coloneqq f(y_x) > \alpha$.
@@ -1884,7 +1875,7 @@
 \end{theorem}
 \begin{proof}
 	The $\impliedby$ direction is easy.
-	The projection maps $\pi_X : X \times Y \to X$ and $\pi_Y : X \times Y \to Y$ are indeed continuous, thus by \propref{ContFuncPreserveCompact} we conclude that $X$ and $Y$ are compact.
+	The projection maps $\pi_X : X \times Y \to X$ and $\pi_Y : X \times Y \to Y$ are indeed continuous, thus by \cref{Prop:ContFuncPreserveCompact} we conclude that $X$ and $Y$ are compact.
 	
 	To show the $\implies$ direction, suppose $X \times Y$ is not compact.
 	Then there exists $X \times Y \subseteq \bigcup_{\alpha \in \Lambda} W_\alpha$ that does not admit a finite subcover.
@@ -1944,7 +1935,7 @@
 		\[
 		X \setminus \p{\bigcup_{\alpha \in \Lambda} U_\alpha} \subseteq X \setminus U_\beta
 		\]
-		and $X \setminus U_\beta$ is closed and compact, so by \propref{SeveralPropertiesOfCompactness}(1) we know that $X \setminus (\bigcup_{\alpha \in \Lambda} U_\alpha)$ is also compact.
+		and $X \setminus U_\beta$ is closed and compact, so by \cref{Prop:SeveralPropertiesOfCompactness}(1) we know that $X \setminus (\bigcup_{\alpha \in \Lambda} U_\alpha)$ is also compact.
 		Hence we conclude that $\bigcup_{\alpha \in \Lambda} U_\alpha \in \tau_\infty$, i.e., $\tau_\infty$ is closed under arbitrary union.
 		\diw{TODO: finite intersection.}
 		
@@ -1984,7 +1975,7 @@
 			Because $X_\infty$ is Hausdorff, there exist disjoint open sets $U,V$ that separate $x$ and $\infty$.
 			Then $X \setminus V$ is closed and compact, and $(U \cap X) \subseteq X \setminus V$, hence $\overline{U \cap X} \subseteq X \setminus V$.
 			Here $U \cap X$ is indeed an open neighborhood of $x$.
-			By \propref{SeveralPropertiesOfCompactness}(1) we know that $\overline{U \cap X}$ is compact.
+			By \cref{Prop:SeveralPropertiesOfCompactness}(1) we know that $\overline{U \cap X}$ is compact.
 			
 			\item WTS $\impliedby$: Assume $(X,\tau)$ is Hausdorff and locally compact.
 			Suppose $x,y \in X_\infty$ and $x \neq y$.
@@ -2032,7 +2023,7 @@
 \begin{proof}\
 	\begin{itemize}
 		\item WTS $\implies$: Assume $x^n \rightarrow x^o$.
-		Because projection maps $\pi_\alpha$ are continuous, by \propref{ContImplySeqCont}, we know that they are also sequentially continuous, thus
+		Because projection maps $\pi_\alpha$ are continuous, by \cref{Prop:ContImplySeqCont}, we know that they are also sequentially continuous, thus
 		\[
 		x^n_\alpha = \pi_\alpha(x^n) \xrightarrow{X_\alpha} \pi_\alpha(x^o) = x^o_\alpha
 		\]
@@ -2058,7 +2049,7 @@
 	A function $f :Z \to X$ is continuous iff $\pi_\alpha \circ f : Z \to X_\alpha$ is continuous for all $\alpha \in \Lambda$.
 \end{lemma}
 \begin{proof}
-	The $\implies$ direction is easy since composition of continuous functions is continuous (\propref{ContCompIsCont}).
+	The $\implies$ direction is easy since composition of continuous functions is continuous (\cref{Prop:ContCompIsCont}).
 	
 	To show the $\impliedby$ direction, it suffices to show that for all $\alpha \in \Lambda$ and $U_\alpha \in \tau_\alpha$, $f^{-1}(\pi_\alpha^{-1}(U_\alpha)) \in \tau_Z$.
 	We conclude the proof by observing
@@ -2125,7 +2116,7 @@
 \end{theorem}
 \begin{proof}\
 	\begin{itemize}
-		\item WTS $\implies$: Trivial by \propref{ContFuncPreserveCompact} and the fact that projection maps $\pi_\alpha$ are continuous.
+		\item WTS $\implies$: Trivial by \cref{Prop:ContFuncPreserveCompact} and the fact that projection maps $\pi_\alpha$ are continuous.
 		\item WTS $\impliedby$: Let
 		\[
 		\calU \coloneqq \set{ \pi_\alpha^{-1}(V_{\alpha,i}) : \alpha \in \Lambda, i \in \calI_\alpha, V_{\alpha,i} \in \tau_\alpha  }
@@ -2143,7 +2134,7 @@
 		\set{ \pi_{\alpha_0}^{-1}(V_{\alpha_0, i_j}) : j = 1,\cdots m }
 		\]
 		covers the whole $\prod_{\alpha \in \Lambda} X_\alpha$.
-		By \lemref{CompactIffCompactWRTSubbase}, we conclude that $\prod_{\alpha \in \Lambda} X_\alpha$ is compact.
+		By \cref{Lem:CompactIffCompactWRTSubbase}, we conclude that $\prod_{\alpha \in \Lambda} X_\alpha$ is compact.
 	\end{itemize}
 \end{proof}
 
@@ -2174,12 +2165,12 @@
 	Then $(X\times Y,\tau_{X \times Y})$ is connected iff $(X,\tau_X)$ and $(Y,\tau_Y)$ are connected.
 \end{proposition}
 \begin{proof}
-	The $\implies$ direction is straightforward by \propref{ContPreserveConn} and the fact that projection maps $\pi_X$ and $\pi_Y$ are continuous.
+	The $\implies$ direction is straightforward by \cref{Prop:ContPreserveConn} and the fact that projection maps $\pi_X$ and $\pi_Y$ are continuous.
 	
 	To show the $\impliedby$ direction, by \ref{Prop:ConnIffEveryTwoPointsConn}, it suffices to show that for all $(x_1,y_1),(x_2,y_2) \in X \times Y$, there exists a connected $E \subseteq X \times Y$ such that $(x_1,y_1),(x_2,y_2) \in E$.
 	Because $x \mapsto (x,y_1)$ is continuous, we know $X \times \{y_1\}$ is connected.
 	Similarly, we have $\{x_2\} \times Y$ is connected.
-	Since $(X \times \set{y_1}) \cap (\set{x_2} \times Y) = \{ (x_2,y_1) \} \neq \emptyset$, by \propref{UnionConnStillConn}, we know that $(X \times \set{y_1}) \cup (\set{x_2} \times Y)$ is connected.
+	Since $(X \times \set{y_1}) \cap (\set{x_2} \times Y) = \{ (x_2,y_1) \} \neq \emptyset$, by \cref{Prop:UnionConnStillConn}, we know that $(X \times \set{y_1}) \cup (\set{x_2} \times Y)$ is connected.
 	We conclude the proof by the fact that $(x_1,y_1) \in X \times \{y_1\}$ and $(x_2,y_2) \in \{x_2\} \times Y$.
 \end{proof}
 
@@ -2188,7 +2179,7 @@
 	Then $\prod_{\alpha \in \Lambda}$ is connected iff $X_\alpha$ is connected for all $\alpha \in \Lambda$.
 \end{theorem}
 \begin{proof}
-	The $\implies$ direction is trivial by \propref{ContPreserveConn} and the fact that the projection maps $\pi_\beta$ are continuous for all $\beta \in \Lambda$.
+	The $\implies$ direction is trivial by \cref{Prop:ContPreserveConn} and the fact that the projection maps $\pi_\beta$ are continuous for all $\beta \in \Lambda$.
 	
 	To show the $\impliedby$ direction, let's fix $g \in \prod_{\alpha \in \Lambda} X_\alpha$. Define
 	\[
@@ -2213,7 +2204,7 @@
 	Thus $U \cap E \neq \emptyset$.
 	Because $U$ is an arbitrary neighborhood of $f$, we conclude that $f \in \overline{E}$.
 	
-	Next, we claim that $E$ is connected, and then by \propref{ClosedConnComponentStillClosed} we conclude that $\overline{E}$ is connected.
+	Next, we claim that $E$ is connected, and then by \cref{Prop:ClosedConnComponentStillClosed} we conclude that $\overline{E}$ is connected.
 	Let $\beta$ be a collection of all finite subsets of $\Lambda$.
 	For all $\calI \in \beta$, consider $F_\calI \coloneqq \prod_{\alpha \in \Lambda} (F_\calI)_\alpha$ where
 	\[
@@ -2223,7 +2214,7 @@
  	\end{dcases}
 	\]
 	Then $E = \bigcup_{\calI \in \beta} F_\calI$.
-	It then suffices to show that $F_\calI$ is connected, then since $\bigcap_{\calI \in \beta} F_\calI \supseteq \{g\} \neq \emptyset$, thus by \propref{UnionConnStillConn}, we can conclude that $E$ is connected.
+	It then suffices to show that $F_\calI$ is connected, then since $\bigcap_{\calI \in \beta} F_\calI \supseteq \{g\} \neq \emptyset$, thus by \cref{Prop:UnionConnStillConn}, we can conclude that $E$ is connected.
 	
 	Suppose $\calI = \{ \alpha_1,\cdots,\alpha_n\}$.
 	Define $\psi : X_{\alpha_1} \times \cdots \times X_{\alpha_n} \to \prod_{\alpha \in \Lambda} X_\alpha$ as $(x_{\alpha_1},\cdots,x_{\alpha_n}) \mapsto f_{(x_{\alpha_1},\cdots,x_{\alpha_n})}$ where
@@ -2234,7 +2225,7 @@
  	\end{dcases}
 	\]
 	Thus $\psi$ is continuous and $\psi(X_{\alpha_1} \times \cdots \times X_{\alpha_n}) = F_\calI$.
-	By induction with \propref{ProdConnIffBothConn} we know that $X_{\alpha_1} \times \cdots \times X_{\alpha_n}$ is connected, thus by \propref{ContPreserveConn} we know that $F_\calI$ is connected.
+	By induction with \cref{Prop:ProdConnIffBothConn} we know that $X_{\alpha_1} \times \cdots \times X_{\alpha_n}$ is connected, thus by \cref{Prop:ContPreserveConn} we know that $F_\calI$ is connected.
 \end{proof}
 
 \begin{proposition}\label{Prop:ProdT2IffEachT2}
@@ -2290,12 +2281,12 @@
 	\begin{itemize}
 		\item Firstly, we want to show that $e$ is an injection.
 		Suppose $x,y \in X$ such that $x \neq y$.
-		By \remref{T2AndCompletelyRegularImplyCompletelyT2}, we know that $X$ is completely Hausdorff, so there exists $f \in C_b(X)$ such that $f(x) \neq f(y)$.
+		By \cref{Rem:T2AndCompletelyRegularImplyCompletelyT2}, we know that $X$ is completely Hausdorff, so there exists $f \in C_b(X)$ such that $f(x) \neq f(y)$.
 		Then $e(x)(f) = f(x) \neq f(y) = e(y)(f)$ and hence $e(x) \neq e(y)$.
 		
 		\item Then we want to show $e$ is a homeomorphism between $X$ and $\beta$.
 		\begin{itemize}
-			\item WTS $e$ is continuous: It suffices to show that for all $f \in C_b(X)$, $\pi_f \circ e$ is continuous, by \lemref{ProdTopContFuncIffContEveryAxis}.
+			\item WTS $e$ is continuous: It suffices to show that for all $f \in C_b(X)$, $\pi_f \circ e$ is continuous, by \cref{Lem:ProdTopContFuncIffContEveryAxis}.
 			We conclude by observing that
 			\[
 			(\pi_f \circ e)(x) = \pi_f(e(x)) = e(x)(f) = f(x)
@@ -2320,7 +2311,7 @@
 			Because $\pi_f$ is continuous, we know that $V = \pi^{-1}_f((0,+\infty)) \cap \beta$ is open in $\beta$.
 		\end{itemize}
 		
-		\item Finally, by \theoref{Tikhonov} we know that $Y_0$ is compact, $Y = \overline{\beta} \subseteq Y_0$ is a closed subset, then by \propref{SeveralPropertiesOfCompactness}(1) we know that $Y$ is also compact.
+		\item Finally, by \cref{The:Tikhonov} we know that $Y_0$ is compact, $Y = \overline{\beta} \subseteq Y_0$ is a closed subset, then by \cref{Prop:SeveralPropertiesOfCompactness}(1) we know that $Y$ is also compact.
 		We already show that $X$ is homeomorphic to $\beta$, which is dense in $Y$, thus we conclude the proof.
 	\end{itemize}
 \end{proof}
@@ -2353,13 +2344,13 @@
 \end{proof}
 
 \begin{remark}\label{Rem:StoneCechNecessary}
-	\theoref{StoneCechCompactification} requires $X$ to be Hausdorff and completely regular.
+	\cref{The:StoneCechCompactification} requires $X$ to be Hausdorff and completely regular.
 	These requirements are in fact necessary.
 	Because $X$ is homeomorphic to $\beta$ and $\overline{\beta} \subseteq Y_0$ where $Y_0$ is Hausdorff and compact anyway, then $\beta$ should be Hausdorff, which implies that $X$ should be Hausdorff.
 	
 	On the other hand, $Y_0$ is Hausdorff and compact, and then is indeed completely regular!
 	Let $C \subseteq Y_0$ be a closed set and $x \not\in C$, then $K \coloneqq \{ x \}$ is closed and hence compact.
-	By \theoref{LocCompT2StrongerCutOff}, there exists $f \in C_c(Y_0)$ such that $f|_K \equiv 1$ and $f|_{C} \equiv 0$.
+	By \cref{The:LocCompT2StrongerCutOff}, there exists $f \in C_c(Y_0)$ such that $f|_K \equiv 1$ and $f|_{C} \equiv 0$.
 	Thus $f(x_0) = 1$ and we conclude that $Y_0$ is completely regular.
 	
 	Further, it is easy to prove that complete regularity is hereditary and preserved by homeomorphisms.
@@ -2620,11 +2611,11 @@
 	Then there exists a cut-off function $f : X \to [0,1]$ that is continuous and compactly supported, such that $f|_K \equiv 1$ and $f|_{X \setminus U} \equiv 0$.
 \end{theorem}
 \begin{proof}[Proof 1]
-	By \lemref{LocCompT2ThenNeighborContainCompactClosure}, there exists an open set $V$ such that $\overline{V}$ is compact and $K \subseteq V \subseteq \overline{V} \subseteq U$.
-	Let $X_\infty$ be the one-point compactification of $X$ by \theoref{AlexandroffCompactification}.
+	By \cref{Lem:LocCompT2ThenNeighborContainCompactClosure}, there exists an open set $V$ such that $\overline{V}$ is compact and $K \subseteq V \subseteq \overline{V} \subseteq U$.
+	Let $X_\infty$ be the one-point compactification of $X$ by \cref{The:AlexandroffCompactification}.
 	Because $X$ is locally compact and Hausdorff, $X_\infty$ is Hausdorff.
 	Since $X_\infty$ is indeed compact, we know that $X_\infty$ is normal.
-	Then by \theoref{Urysohn} we know that there exists a continuous function $f : X_\infty \to [0,1]$ such that $f|_K \equiv 1$ and $f |_{X_\infty \setminus V } \equiv 0$.
+	Then by \cref{The:Urysohn} we know that there exists a continuous function $f : X_\infty \to [0,1]$ such that $f|_K \equiv 1$ and $f |_{X_\infty \setminus V } \equiv 0$.
 	Then the function $f|_X : X \to [0,1]$ is also continuous, and $\mathrm{supp}(f|_X) = \overline{\{x \in X: f(x) \neq 0\}} \subseteq \overline{V}$ is compact.
 \end{proof}
 \begin{proof}[Proof 2]
@@ -2680,10 +2671,10 @@
  		0 & x \in C_2	
  	\end{dcases}
 	\]
-	then $f$ is indeed a continuous function by \propref{SomeEquivResultsAboutContFunc}(3).
+	then $f$ is indeed a continuous function by \cref{Prop:SomeEquivResultsAboutContFunc}(3).
 	By assumption, there exists a continuous extension $g : X \to [0,1]$ of $f$.
 	Then $g|_{C_1} = f|_{C_1} \equiv 1$, $g|_{C_2} = f_{C_2} \equiv 0$.
-	By \theoref{Urysohn} we know that $X$ is normal.
+	By \cref{The:Urysohn} we know that $X$ is normal.
 	
 	Then let's prove the $\implies$ direction.
 	\begin{itemize}

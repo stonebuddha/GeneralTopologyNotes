@@ -385,6 +385,20 @@
 \RequirePackage{hhline}
 \RequirePackage{rotating}
 \RequirePackage{wrapfig}
+\RequirePackage{cleveref}
+\AtEndPreamble{%
+	\crefname{theorem}{Thm.}{Thms.}%
+	\crefname{lemma}{Lem.}{Lemmas}%
+	\crefname{corollary}{Cor.}{Cors.}%
+	\crefname{figure}{Fig.}{Figs.}%
+	\crefname{definition}{Defn.}{Defns.}%
+	\crefname{table}{Tab.}{Tabs.}%
+	\crefmultiformat{section}{\S#2#1#3}{ and~\S#2#1#3}{, \S#2#1#3}{ and~\S#2#1#3}%
+	\crefname{example}{Ex.}{Exs.}%
+	\crefname{footnote}{footnote}{footnote}%
+	\crefname{observation}{Obs.}{Obs.}%
+	\crefname{remark}{Remark}{Remarks}%
+	\crefname{proposition}{Prop.}{Props.}%
+}
 
-\IfFileExists{refs.sty}{\RequirePackage{refs}}{}
 \IfFileExists{shortcuts.sty}{\RequirePackage{shortcuts}}{}
