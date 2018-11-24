@@ -48,9 +48,9 @@
 
 \begin{remark}\label{Rem:PowerSetAndIndicators}
 	Let $X$ be a set. Then
-	\begin{equation}
+	\begin{equation*}
 		\wp(X) \sim \{0,1\}^X \coloneqq \set{ f : X \to \{0,1\} }.
-	\end{equation}
+	\end{equation*}
 \end{remark}
 
 \begin{definition}\label{De:PartialOrder}
@@ -132,9 +132,9 @@
 
 \begin{remark}\label{Rem:IntersectTopStillTop}
 	If $\{ \tau_\alpha \}_{\alpha \in \calI}$ is a collection of topologies on $X$, then
-	\begin{equation}
+	\begin{equation*}
 		\bigcap_{\alpha \in \calI} \tau_\alpha = \set{ U \subseteq X : \Forall{\alpha \in \calI} U \in \tau_\alpha }
-	\end{equation}
+	\end{equation*}
 	is still a topology on $X$.
 \end{remark}
 
@@ -143,9 +143,9 @@
 \begin{proposition}\label{Prop:Subbase}
 	Let $X$ be a set and $\calF$ be a family of subsets of $X$.
 	Then the smallest topology $\tau$ containing $\calF$ is given by arbitrary union of finite intersection of elements of $\calF \cup \{\emptyset,X\}$, i.e.,
-	\begin{equation}
+	\begin{equation*}
 		\set{ \bigcup_{\alpha \in \calI} \p{U_1^\alpha \cap \cdots \cap U_{N(\alpha)}^\alpha} : N(\alpha) \in \bbN, U_i^\alpha \in \calF \cup \{ \emptyset, X \} }.
-	\end{equation}
+	\end{equation*}
 	Moreover, we say that $\tau$ is \emph{generated} by $\calF$, and $\calF$ is a \emph{subbase} of $\tau$.
 \end{proposition}
 \begin{proof}
@@ -406,13 +406,13 @@
 	Define $B_3 \coloneqq B(x,r) \in \beta$.
 	Then $x \in B_3$ and we claim that $B_3 \subseteq B_1 \cap B_2$.
 	For every $x_o \in B_3$, we have
-	\begin{align}
+	\begin{align*}
 		& d(x_o,x) < r \\
 		\implies~ & d(x_o,x) < \min \{ r_1 - d(x,x_1), r_2 - d(x,x_2) \} \\
 		\implies~ & d(x_o,x) + d(x,x_1) < r_1 \wedge d(x_o,x)+d(x,x_2) < r_2 \\
 		\implies~ & d(x_o,x_1) < r_1 \wedge d(x_o,x_2) < r_2 \\
 		\implies~ & x_o \in B_1 \wedge x_o \in B_2
-	\end{align}
+	\end{align*}
 	and indeed we conclude that $x_o \in B_1 \cap B_2$.
 \end{proof}
 
@@ -427,11 +427,11 @@
 		Then $d(f,g) \coloneqq \max_{x \in [a,b]} \abs{f(x)-g(x)}$ is a metric.
 		\item Consider the space $\bbR^N$.
 		Define
-		\begin{align}
+		\begin{align*}
 			d_1(x,y) & \coloneqq \sqrt{\sum_{i=1}^N (x_i-y_i)^2} \\
 			d_2(x,y) & \coloneqq \sum_{i=1}^N \abs{x_i - y_i} \\
 			d_3(x,y) & \coloneqq \max_{i=1,\cdots,N} \abs{x_i - y_i}
-		\end{align}
+		\end{align*}
 		then the topologies associated to these metrics coincide.
 		Indeed, they are all standard topology in $\bbR^N$, or the \emph{Euclidean topology}.
 	\end{itemize}
@@ -485,11 +485,11 @@
 \begin{proof}
 	For all $x,y \in X$, we have $d_1(x,y) = \nicefrac{d(x,y)}{(1+d(x,y))} < 1$, thus $\mathrm{diam}(X) \le 1$ and $X$ is trivially bounded.
 	Obverse that for any $R \in (0,1)$, and for all $x, y \in X$,
-	\begin{align}
+	\begin{align*}
 		& \frac{d(x,y)}{1+d(x,y)} < R \\
 		\iff~ & d(x,y) < R + R \cdot d(x,y) \\
 		\iff~ & d(x,y) < \frac{R}{1-R}.
-	\end{align}
+	\end{align*}
 	Thus we know that for all $x \in X$ and $R \in (0,1)$,
 	\[
 	B_{d_1}(x,R) = B_d\p{x, \frac{R}{1-R} }.
@@ -517,10 +517,10 @@
 	Define $K_n \coloneqq \sq{\frac{1}{n}, 1-\frac{1}{n}}$ for $n \in \bbN$.
 	Then $\bigcup_{n=1}^\infty K_n = (0,1)$.
 	Define
-	\begin{align}
+	\begin{align*}
 		d(f,g) & \coloneqq \max_{n \in \bbN} \set{ \frac{1}{2^n} \max_{x \in K_n} \frac{\abs{f(x)-g(x)}}{1+\abs{f(x)-g(x)}} } \\
 		\tilde{d}(f,g) & \coloneqq  \sup_{x \in (0,1)} \frac{\abs{f(x)-g(x)}}{1+\abs{f(x)-g(x)}}
-	\end{align}
+	\end{align*}
 	to be two metrics on $C((0,1))$.
 	Then $\tau_d \subset \tau_{\tilde{d}}$.
 \end{proposition}
@@ -555,9 +555,9 @@
 \begin{definition}\label{De:InifiniteSums}
 	Let $X$ be a set and $f : X \to [0,+\infty]$.
 	The \emph{infinite sum}, written as $\sum_{x \in X} f(x)$, is defined as
-	\begin{equation}
+	\begin{equation*}
 		\sup \set{ \sum_{x \in Y} f(x) : Y \subseteq X, Y~\text{is finite} }.
-	\end{equation}
+	\end{equation*}
 \end{definition}
 
 \begin{proposition}\label{Prop:FiniteSumImplyCountableNonZero}
@@ -572,11 +572,11 @@
 	\{ x \in X : f(x) > 0 \} = \bigcup_{k \in \bbN} X_k.
 	\]
 	On the other hand, we have
-	\begin{gather}
+	\begin{gather*}
 	\sum_{x \in X_k} f(x) \le M
 	\shortintertext{so indeed}
 	\abs{X_k} \le \frac{M}{\frac{1}{k}} = Mk
-	\end{gather}
+	\end{gather*}
 	is finite. Therefore we conclude that $\{x \in X : f(x) > 0\}$ is countable.
 \end{proof}
 
@@ -605,9 +605,9 @@
 
 \begin{definition}\label{De:lpSpaces}
 	Given a set $X$ and $p \in [1,+\infty)$, the space $\ell^p(X)$ is defined as
-	\begin{equation}
+	\begin{equation*}
 		\set{ f : X \to \bbR : \sum_{x \in X} \abs{f(x)}^p < +\infty }.
-	\end{equation}
+	\end{equation*}
 \end{definition}
 
 \begin{definition}\label{De:HoldersConjugateExponent}
@@ -623,20 +623,20 @@
 \begin{theorem}[H{\"o}lder's inequality]\label{The:HoldersInequality}
 	Let $X$ be a set.
 	Given $1 \le p \le +\infty$, $q$ conjugate exponent of $p$, and $f,g: X \to [-\infty,+\infty]$, we have
-	\begin{alignat}{2}
+	\begin{alignat*}{2}
 		\sum_{x \in X} \abs{f(x) \cdot g(x)} & \le  \p{ \sum_{x \in X} \abs{f(x)}^p }^{\frac{1}{p}} \p{  \sum_{y \in X} \abs{g(y)}^q }^{\frac{1}{q}}, \quad &&  1 < p < +\infty \\
 		\sum_{x \in X} \abs{f(x) \cdot g(x)} & \le \p{ \sum_{x \in X} \abs{f(x)} } \cdot \sup_{y \in X} \abs{g(y)}, \quad &&  p=1 \\
 		\sum_{x \in X} \abs{f(x) \cdot g(x)} & \le \sup_{x \in X} \abs{f(x)} \cdot \p{ \sum_{y \in X} \abs{g(y)} }, \quad && p=+\infty
-	\end{alignat}
+	\end{alignat*}
 	As a corollary, if $f \in \ell^p(X)$ and $g \in \ell^q(X)$, then $f \cdot g \in \ell^1(X)$.
 \end{theorem}
 
 \begin{theorem}[Minkowski's inequality]\label{The:MinkowskisInequality}
 	Let $X$ be a set.
 	Given $1 \le p < +\infty$ and $f,g:X \to [-\infty,+\infty]$, we have
-	\begin{equation}
+	\begin{equation*}
 		\p{ \sum_{x \in X} \abs{f(x)+g(x)}^p }^{\frac{1}{p}} \le \p{ \sum_{x \in X} \abs{f(x)}^p }^{\frac{1}{p}} + \p{ \sum_{x \in X} \abs{g(x)}^p }^{\frac{1}{p}}.
-	\end{equation}
+	\end{equation*}
 \end{theorem}
 
 \begin{proposition}\label{Prop:lpVectorSpace}
@@ -654,12 +654,12 @@
 		
 		\item WTS \cref{De:Norms}(2): Suppose $f \in \ell^p(X)$ and $\alpha \in \bbR$.
 		Then we have
-		\begin{align}
+		\begin{align*}
 			\norm{\alpha f} & = \p{\sum_{x \in X} \abs{\alpha \cdot f(x)}^p}^{\frac{1}{p}} \\
 			& = \p{ \sum_{x \in X} \abs{\alpha}^p \cdot \abs{f(x)}^p}^\frac{1}{p} \\
 			& = \p{ \abs{\alpha}^p \cdot \sum_{x \in X} \abs{f(x)}^p }^\frac{1}{p} \\
 			& = \abs{\alpha} \cdot \norm{f}_p.
-		\end{align}
+		\end{align*}
 		
 		\item WTS \cref{De:Norms}(3): Suppose $f,g \in \ell^p(X)$ and we want to show that $\norm{f+g}_p \le \norm{f}_p+\norm{g}_p$, or equivalently
 		\[
@@ -691,13 +691,13 @@
 	Then $p \in E \setminus E'$ iff $\{p\} \in \tau_E$ (i.e., $p$ is an isolated point in $\tau_E$).
 \end{proposition}
 \begin{proof}
-	\begin{align}
+	\begin{align*}
 		& \{p\} \in \tau_E \\
 		\iff~ & \Exists{U \in \tau} U \cap E = \{p\} \\
 		\iff~ & p \in E \wedge \Exists{U \in \tau} (U \cap E) \setminus \{p\} = \emptyset \\
 		\iff~ & p \in E \wedge p \not\in E' \\
 		\iff~ & p \in E \setminus E'.
-	\end{align}
+	\end{align*}
 \end{proof}
 
 \begin{proposition}\label{Prop:BallOfLimitContainInfinite}
@@ -990,23 +990,23 @@
 		By $A \cup \overline{B} = \emptyset$, we know that for every $a \in A$, there exists $r_a > 0$ such that $B(a,r_a) \cap B = \emptyset$.
 		Similarly, for every $b \in B$, there exists $r_b > 0$ such that $B(b,r_b) \cap A = \emptyset$.
 		Define two open sets
-		\begin{align}
+		\begin{align*}
 			\tilde{U} & \coloneqq \bigcup_{a \in A} B\p{a,\frac{r_a}{2}} \\
 			\tilde{V} & \coloneqq \bigcup_{b \in B} B\p{b,\frac{r_b}{2}}
-		\end{align}
+		\end{align*}
 		and then we have
 		\begin{itemize}
 			\item $\tilde{U} \cap E \supseteq A \cap E  = A \neq \emptyset$ by (i) and (iv),
 			\item $\tilde{V} \cap E \supseteq B \cap E = B \neq \emptyset$ by (i) and (iv),
 			\item $E = A \cup B \subseteq \tilde{U} \cap \tilde{V}$ by (i), and
 			\item $\tilde{U} \cap \tilde{V} = \emptyset$, because for all $x \in B(a,\nicefrac{r_a}{2})$ and $y \in B(b,\nicefrac{r_b}{2})$, we know the following
-			\begin{align}
+			\begin{align*}
 				& d(a,b) \le d(a,x) + d(x,y) + d(y,b) \\
 				\implies~ & d(x,y) \ge d(a,b) - d(a,x) - d(y,b) \\
 				\implies~ & d(x,y) > \max\{r_a,r_b\} - \frac{r_a}{2} - \frac{r_b}{2} \\
 				\implies~ & d(x,y) > 0 \\
 				\implies~ & x \neq y
-			\end{align}
+			\end{align*}
 			hence $\tilde{U} \cap \tilde{V} = \emptyset$.
 		\end{itemize}
 	\end{itemize}
@@ -1322,9 +1322,9 @@
 
 \begin{theorem}\label{The:HierarchyOfSeparation}
 	For the axioms of separation defined in \cref{De:AxiomsOfSeparation}, we have
-	\begin{equation}
+	\begin{equation*}
 		T_4 \implies T_3 \implies T_2 \implies T_1 \implies T_0.
-	\end{equation}
+	\end{equation*}
 \end{theorem}
 \begin{proof}\
 	\begin{itemize}
@@ -1389,10 +1389,10 @@
 		\item To show ${\implies}$: Suppose $(x,y) \in X \times Y$ and $U \in \tau_{X \times Y}$ such that $(x,y) \in U$.
 		By definition of product topology we have $W_x \in \tau_X$ and $W_y \in \tau_Y$ such that $x \in W_x$, $y \in W_y$ and $W_x \times W_y \subseteq U$.
 		Because $X,Y$ are regular, there exist $V_x \in \tau_X$ and $V_y \in \tau_Y$ such that
-		\begin{gather}
+		\begin{gather*}
 			x \in V_x \subseteq \overline{V_x} \subseteq W_x \\
 			y \in V_y \subseteq \overline{V_y} \subseteq W_y
-		\end{gather}
+		\end{gather*}
 		Define $V \coloneqq V_x \times V_y$ to be a neighborhood of $(x,y)$.
 		Then $V \subseteq \overline{V_x} \times \overline{V_y} \subseteq W_x \times W_y \subseteq U$.
 		
@@ -1402,12 +1402,12 @@
 		Let $V_a$ be a neighborhood of $a$ in $X$.
 		Let $V_b$ be a neighborhood of $b$ in $Y$.
 		Then
-		\begin{align}
+		\begin{align*}
 			(a,b) \in \overline{V} & \implies (V_a \times V_b) \cap V \neq \emptyset \\
 			& \implies V_a \cap V_x \neq \emptyset \wedge V_b \cap V_y \neq \emptyset \\
 			& \implies a \in \overline{V_x} \wedge b \in \overline{V_y} \\
 			& \implies (a,b) \in \overline{V_x} \times \overline{V_y}
-		\end{align}
+		\end{align*}
 		
 		\item To show ${\impliedby}$: It suffices to show that $X$ is regular.
 		Let $x \in X$ and $U_x \in \tau_X$ such that $x \in U_x$.
@@ -1441,17 +1441,17 @@
 	Then $x \in U$ and $C \subseteq V$.
 	
 	We claim that $V$ is open. We conclude the proof by observing that
-	\begin{align}
+	\begin{align*}
 		V & = (-\infty,x) \cup [x+\epsilon,+\infty) \\
 		& = \bigcup_{n \in \bbN} [-n, x-\nicefrac{1}{n}) \cup \bigcup_{m > x + \epsilon} [x+\epsilon,m)
-	\end{align}
+	\end{align*}
 	
 	Then we need to show that $S$ is not normal.
 	Define
-	\begin{align}
+	\begin{align*}
 		C_1 & \coloneqq \{ (x,-x) : x \in \bbQ \} \\
 		C_2 & \coloneqq \{ (y,-y) : y \in \bbR \setminus \bbQ \}
-	\end{align}
+	\end{align*}
 	We claim that $C_1,C_2$ are closed and cannot be separated by disjoint open sets.
 	\diw{Baire category theorem.}
 \end{proof}
@@ -1473,10 +1473,10 @@
 	By \cref{Lem:LimitOfSeqInClosure}, we know $z \in \overline{C_1} = C_1$, which leads to a contradiction.
 	
 	Define two open sets
-	\begin{align}
+	\begin{align*}
 		U_1 & \coloneqq \bigcup_{x \in C_1} B\p{x,\frac{d(x,C_2)}{3}} \\
 		U_2 & \coloneqq \bigcup_{y \in C_2} B\p{y,\frac{d(y,C_1)}{3}}
-	\end{align}
+	\end{align*}
 	such that $C_1 \subseteq U_1$ and $C_2 \subseteq U_2$.
 	We claim that $U_1 \cap U_2 = \emptyset$.
 	If not, let $z \in U_1 \cap U_2$.
@@ -1944,13 +1944,13 @@
 		Let $\beta \in \Lambda$ such that $\infty \in U_\beta$.
 		Then $X \setminus U_\beta$ is closed and compact in $X$.
 		Observing that
-		\begin{gather}
+		\begin{gather*}
 		X \setminus U_\beta \subseteq \bigcup_{\alpha \in \Lambda} (U_\alpha \cap X)
 		\shortintertext{there exist $n \in \bbN$ and $\alpha_1,\cdots,\alpha_n \in \Lambda$ such that}
 		X \setminus U_\beta \subseteq \bigcup_{i=1}^n (U_{\alpha_i} \cap X)
 		\shortintertext{thus}
 		X_\infty \subseteq \bigcup_{i=1}^n (U_{\alpha_i} \cap X) \cup U_\beta \subseteq \bigcup_{i=1}^n U_{\alpha_i} \cup U_\beta
-		\end{gather}
+		\end{gather*}
 		Therefore we conclude that there exists a finite subcover.
 		
 		\item Now we claim that $\overline{X} = X_\infty$. Then the inclusion map $i : X \to X \subseteq X_\infty$ is a homeomorphism (observing that $\tau_\infty |_X = \tau$).
@@ -2086,11 +2086,11 @@
 		Because $U_1 \not\in \calW$, and $\calW$ is the maximal of $\scrA$, we know that $\calW \cup \{ U_1\} \not\in \scrA$, so there exist $V_1,\cdots,V_m \in \calW$ such that $V_1 \cup \cdots \cup V_m \cup U_1 = X$.
 		Similarly, there exist $Z_1,\cdots,Z_k \in \calW$ such that $Z_1 \cup \cdots \cup Z_k \cup U_2 = X$.
 		Thus
-		\begin{gather}
+		\begin{gather*}
 			\p{ U_1 \cup \bigcup_{i=1}^m V_i } \cap \p{ U_2 \cup \bigcup_{j=1}^k Z_j } = X
 			\shortintertext{so}
 			(U_1 \cap U_2) \cup \p{ \bigcup_{i=1}^m V_i \cup \bigcup_{j=1}^k Z_j } = X
-		\end{gather}
+		\end{gather*}
 		Therefore $U_1 \cap U_2 \not\in \calW$ and indeed $U_1 \cap U_2 \in \calU$.
 		
 		\item We claim that if $U \in \calU$ and $U \subseteq V$ for some $V \in \tau$, then $V \in \calU$.
@@ -2301,13 +2301,13 @@
 			Define $V \coloneqq e(W)$, then $y_0 \in V \subseteq e(U)$.
 			
 			Now we claim that $V$ is open in $\beta$. We know that
-			\begin{align}
+			\begin{align*}
 				& g \in \pi_f^{-1}((0,+\infty)) \cap \beta \\
 				\iff~ & \Exists{x \in X} g = e(x) \wedge \pi_f(g) > 0 \\
 				\iff~ & \Exists{x \in X } g=e(x) \wedge f(x)=e(x)(f)=g(f) = \pi_f(g) > 0 \\
 				\iff~& \Exists{x \in W} g = e(x) \\
 				\iff~ & g \in e(W) = V 
-			\end{align}
+			\end{align*}
 			Because $\pi_f$ is continuous, we know that $V = \pi^{-1}_f((0,+\infty)) \cap \beta$ is open in $\beta$.
 		\end{itemize}
 		
@@ -2427,11 +2427,11 @@
 	Suppose $C_1,C_2$ are disjoint closed sets in $X$.
 	Then there exists a continuous $f : X \to [0,1]$ such that $f|_{C_1} \equiv 1$ and $f|_{C_2} \equiv 0$.
 	We conclude the proof by
-	\begin{gather}
+	\begin{gather*}
 		C_1 \subseteq U \coloneqq f^{-1}((\nicefrac{1}{2},1]), \quad C_2 \subseteq V \coloneqq f^{-1}([0,\nicefrac{1}{2}))
 		\shortintertext{and}
 		U,V \in \tau ~\text{and}~ U \cap V = \emptyset
-	\end{gather}
+	\end{gather*}
 	
 	To prove the $\implies$ direction, let's assume $X$ is normal and $C_1,C_2$ are disjoint closed sets in $X$. We then proceed to the following construction as $n \to \infty$:
 	\begin{itemize}
@@ -2443,10 +2443,10 @@
 		C_1 \subseteq U_{\nicefrac{1}{4}} \subseteq \overline{U_{\nicefrac{1}{4}}} \subseteq U_{\nicefrac{1}{2}} \subseteq \overline{U_{\nicefrac{1}{2}}} \subseteq   U_{\nicefrac{3}{4}} \subseteq \overline{U_{\nicefrac{3}{4}}} \subseteq X \setminus C_2
 		\]
 		\item $n = 3$: Repeat the process and we will obtain
-		\begin{align}
+		\begin{align*}
 		& C_1 \subseteq U_{\nicefrac{1}{2^3}} \subseteq \overline{U_{\nicefrac{1}{2^3}}} \subseteq U_{\nicefrac{1}{2^2}} \subseteq \overline{U_{\nicefrac{1}{2^2}} } \subseteq U_{\nicefrac{3}{2^3}} \subseteq \overline{U_{\nicefrac{3}{2^3}}} \subseteq U_{\nicefrac{1}{2}} \\
 		\subseteq ~ & \overline{U_{\nicefrac{1}{2}}} \subseteq U_{\nicefrac{5}{2^3}} \subseteq \overline{U_{\nicefrac{5}{2^3}}} \subseteq U_{\nicefrac{3}{2^2}} \subseteq \overline{U_{\nicefrac{3}{2^2}}} \subseteq U_{\nicefrac{7}{2^3}} \subseteq \overline{U_{\nicefrac{7}{2^3}}} \subseteq X \setminus C_2
-		\end{align}
+		\end{align*}
 		\item $n \to \infty$: Repeat the construction above.
 	\end{itemize}
 	Then for each dyadic rational $r = \nicefrac{k}{2^n}$ where $k=1,\cdots,2^n-1$, there exists an open $U_r$ such that $C_1 \subseteq U_r, C_2 \cap \overline{U_r} = \emptyset$, and for all $r < s$, $\overline{U_r} \subseteq U_s$.
@@ -2553,11 +2553,11 @@
 	Then $C \cap \overline{U}$ is a closed set of a compact set, by \cref{Prop:SeveralPropertiesOfCompactness}(1), we know that $C \cap \overline{U}$ is compact and $x \not\in C \cap \overline{U}$.
 	By \cref{Lem:HausdorffSeparatePointAndCompact}, we know that there exist disjoint open sets $V,W$ such that $x \in V$ and $C \cap \overline{U} \subseteq W$.
 	Then $V \cap U$ is a neighborhood of $x$, and
-	\begin{gather}
+	\begin{gather*}
 	C = (C \cap \overline{U}) \cup (C \setminus \overline{U}) \subseteq W \cup (X \setminus \overline{U})
 	\shortintertext{so we conclude the proof by the following}
 	(V \cap U) \cap (W \cup (X \setminus \overline{U})) = \emptyset
-	\end{gather}
+	\end{gather*}
 \end{proof}
 
 \begin{lemma}\label{Lem:T2CompactEmptyInterThenFinteEmptyInter}
@@ -2649,11 +2649,11 @@
 	By assumption, there exists an $n_0 \in \bbN$ such that $\sup_{x \in X} |f_{n_0}(x) - f(x)| < \nicefrac{\epsilon}{3}$.
 	Because $f_{n_0}$ is continuous, there exists a neighborhood $U$ of $x_0$ such that for all $y \in U$, we have $|f_{n_0}(y) - f_{n_0}(x_0)| < \nicefrac{\epsilon}{3}$ by \cref{Prop:SomeEquivResultsAboutContFunc}(2).
 	Therefore
-	\begin{align}
+	\begin{align*}
 		|f(y) - f(x_0)| & \le |f(y) - f_{n_0}(y)| + |f_{n_0}(y) - f_{n_0}(x_0)| + |f_{n_0}(x_0) - f(x_0)| \\
 		& < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} \\
 		& = \epsilon
-	\end{align}
+	\end{align*}
 	Then by \cref{Prop:SomeEquivResultsAboutContFunc}(2) we conclude that $f$ is continuous.
 \end{proof}
 
@@ -2693,37 +2693,37 @@
 		\end{itemize}
 		Repeat the argument with $f \gets f - f_1$, we obtain a continuous function $f_2 : X \to [-\nicefrac{2}{9}, \nicefrac{2}{9}]$ such that $|(f-f_1)-f_2| \le (\nicefrac{2}{3})^2$ on $C$.
 		Then we will get a series of functions $\{f_n\}_{n \in \bbN}$ where
-		\begin{gather}
+		\begin{gather*}
 			f_n : X \to \sq{ -\frac{1}{3} \p{\frac{2}{3}}^{n-1}, \frac{1}{3} \p{ \frac{2}{3} }^{n-1} }
 			\shortintertext{such that}
 			\abs{f - (f_1 + \cdots + f_n)} \le \p{\frac{2}{3}}^n ~\text{on}~ C
-		\end{gather}
+		\end{gather*}
 		Define
-		\begin{align}
+		\begin{align*}
 		g_n(x) & \coloneqq \sum_{k=1}^n f_k(x) \\
 		g(x) & \coloneqq \sum_{k=1}^\infty f_k(x) =  \lim_{n \to \infty} \sum_{k=1}^n f_k(x) = \lim_{n \to \infty} g_n(x)
-		\end{align}
+		\end{align*}
 		By former analysis we know that
 		\[
 		\sum_{k=1}^\infty \abs{f_k(x)}  \le \frac{1}{3} \sum_{k=1}^\infty \p{\frac{2}{3}}^{k-1} = 1
 		\]
 		thus $g : X \to [-1,1]$ is well-defined.
 		For all $x \in C$, we have
-		\begin{align}
+		\begin{align*}
 			\abs{f(x) - g(x)} & = \abs{f(x) - \lim_{n \to \infty} g_n(x) } \\
 			& = \abs{ \lim_{n \to \infty} \p{ f(x) - \sum_{k=1}^n f_k(x)}} \\
 			& = \lim_{n \to \infty} \abs{ f(x) - \sum_{k=1}^n f_k(x) } \\
 			& \le \lim_{n \to \infty} \p{\frac{2}{3}}^n \\
 			& = 0
-		\end{align}
+		\end{align*}
 		thus $f \equiv g$ on $C$.
 		Then it remains to show that $g$ is continuous.
 		We have
-		\begin{align}
+		\begin{align*}
 			\sup_{x \in X} \abs{ g(x) - g_n(x) } & = \sup_{x \in X} \abs{ \lim_{m \to \infty} \sum_{k=1}^m f_k(x) - \sum_{k=1}^n f_k(x) } \\
 			& = \sup_{x \in X} \abs{ \sum_{k=n+1}^m f_k(x) } \\
 			& \le \sum_{k=n+1}^\infty \frac{1}{3} \p{\frac{2}{3}}^{k-1}
-		\end{align}
+		\end{align*}
 		thus
 		\[
 		\adjustlimits \lim_{n \to \infty} \sup_{x \in X} \abs{g(x) - g_n(x)} = 0
@@ -2744,12 +2744,12 @@
 		On the other hand, $\hat{g}(X) \subseteq (-1,1)$ because if $\tilde{g}(x) \in \{-1,1\}$ then $u(x) = 0$, which forces $\hat{g}(x) = 0 \in (-1,1)$.
 		Define $g \coloneqq h^{-1} \circ \hat{g} : X \to \bbR$ to be a continuous function.
 		We conclude that $g$ is an extension of $f$ by showing that
-		\begin{align}
+		\begin{align*}
 			g(x) & = h^{-1}(\hat{g}(x)) \\
 			& = h^{-1}(\tilde{f}(x)) \\
 			& = h^{-1}((h \circ f)(x)) \\
 			& = f(x)
-		\end{align}
+		\end{align*}
 		for all $x \in C$.
 	\end{itemize}
 \end{proof}
