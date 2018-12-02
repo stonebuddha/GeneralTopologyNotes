@@ -2813,6 +2813,189 @@
 	Moreover, $\lim_{x \to x_0} f(x)$ exists iff there is equality in \eqref{Eq:LimInfLeLimSup}, and $\lim_{x \to x_0} f(x)$ is that common value.
 \end{theorem}
 
+\begin{theorem}[Cauchy's lemma]\label{The:CauchyLemma}
+  Let $(X,\tau)$ be a topological space and $f : E \to \bbR$ for some $E \subseteq X$.
+  Let $x_0 \in E'$.
+  Then $\lim_{x \to x_0} f(x)$ exists in $\bbR$ iff for all $\epsilon > 0$, there exists a neighborhood $U_\epsilon$ of $x_0$ such that for all $x_1,x_2 \in (U_\epsilon \cap E) \setminus \{ x_0 \}$, we have $|f(x_1)-f(x_2)| < \epsilon$.
+\end{theorem}
+
+\section{Partition of Unity}
+
+\begin{definition}\label{De:RelatedDefsOfPartiOfUnity}
+  Let $(X,\tau)$ be a topological space and $\calF$ be a collection of subsets of $X$.
+  Then
+  \begin{itemize}
+    \item $\calF$ is \emph{point finite} if every $x \in X$ belongs at most to finitely many $U \in \calF$.
+    \item $\calF$ is \emph{locally finite} if every $x \in X$ has a neighborhood that intersects at most finitely many $U \in \calF$.
+    \item $\calF$ is \emph{$\sigma$-locally finite} if $\calF = \bigcup_{n=1}^\infty \calF_n$ where $\calF_n$ is locally finite for all $n \in \bbN$.
+    \item $\calG \subseteq \wp(X)$ is a \emph{refinement} of $\calF$, if $\bigcup_{G \in \calG} G = \bigcup_{F \in \calF} F$ and for all $G \in \calG$, there exists $F \in \calF$ such that $G \subseteq F$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}\label{De:PartiOfUnity}
+  Let $(X,\tau)$ be a topological space.
+  A \emph{partition of unity} on $X$ is a family $\{ \varphi_\alpha \}_{\alpha \in \Lambda}$ of continuous functions $\varphi_\alpha : X \to [0,1]$ such that for all $x \in X$, we have $\sum_{\alpha \in \Lambda} \varphi_\alpha(x) = 1$.
+  
+  The partition of unity $\{ \varphi_\alpha\}_{\alpha \in \Lambda}$ is said to be \emph{locally finite} if for all $x \in X$, there exists a neighborhood $U$ of $x$ such that $\{ \alpha \in \Lambda : U \cap \mathrm{supp}(\varphi_\alpha) \neq \emptyset \}$ is finite.
+  
+  Let $\{U_i\}_{i \in \calI}$ be an open cover of $X$.
+  The partition of unity $\{ \varphi_{\alpha} \}_{\alpha \in \Lambda}$ is said to be \emph{subordinated} to $\{U_i\}_{i \in \calI}$ if for all $\alpha \in \Lambda$, there exists $i \in \calI$ such that $\mathrm{supp}(\varphi_\alpha) \subseteq U_i$.
+\end{definition}
+
+\begin{lemma}\label{Lem:SeparMetricImplyOpenCoverAdmitCountableRefine}
+  Let $(X,d)$ be a separable metric space and let $\{U_\alpha\}_{\alpha \in \Lambda}$ be an open cover of $X$.
+  Then there exists a countable family $\{V_n\}_{n \in \bbN}$ of open sets such that $X = \bigcup_{n \in \bbN} V_n$ and for all $n \in \bbN$, there exists $\alpha \in \Lambda$ such that $V_n \subseteq U_\alpha$.
+\end{lemma}
+
+\begin{theorem}\label{The:SeparMetricImplyLocFinPartiOfUnitySubord}
+  Let $(X,d)$ be a separable metric space and let $\{U_\alpha\}_{\alpha \in \Lambda}$ be an open cover of $X$.
+  Then there exists a locally finite partition of unity subordinated to the cover $\{U_\alpha\}_{\alpha \in \Lambda}$.
+\end{theorem}
+
+\begin{lemma}\label{Lem:NormalIffAnyPointFinCoverAdmitClosRefineCover}
+  A topological space $(X,\tau)$ is normal iff for all point finite open cover $\{U_\alpha\}_{\alpha \in \Lambda}$ there exists another open cover $\{V_\alpha\}_{\alpha \in \Lambda}$ such that $\overline{V_\alpha} \subseteq U_\alpha$.
+\end{lemma}
+
+\begin{theorem}\label{The:NormalImplyLocFinCoverAdmitPartiOfUnity}
+  Let $(X,\tau)$ be a normal space and $\{U_\alpha\}_{\alpha \in \Lambda}$ be a locally finite open cover of $X$.
+  Then there exists a partition of unity subordinated to it.
+\end{theorem}
+
+\begin{definition}\label{De:ParacompactSpace}
+  A topological space $(X,\tau)$ is \emph{paracompact} if it is Hausdorff and if every open cover $\{U_\alpha\}_{\alpha \in \Lambda}$ admits a locally finite refinement.
+\end{definition}
+
+\begin{theorem}\label{The:MetricImplyParacompact}
+  A metric space $(X,d)$ is paracompact and has a $\sigma$-locally finite base.
+\end{theorem}
+
+\begin{remark}\label{Rem:StrongerThmByParacompact}
+  Let $(X,d)$ be a metric space, then it is Hausdorff and normal by \cref{Prop:MetricT4}.
+  By \cref{The:MetricImplyParacompact}, we know it is also paracompact.
+  Hence by \cref{De:ParacompactSpace}, every open cover of $X$ admits a locally finite refinement.
+  Then by \cref{The:NormalImplyLocFinCoverAdmitPartiOfUnity}, we can find a partition of unity subordinated to it.
+  In this way we obtain a stronger theorem than \cref{The:SeparMetricImplyLocFinPartiOfUnitySubord} since we no longer need separability.
+\end{remark}
+
+\section{Metrization}
+
+\begin{definition}\label{De:Metrizable}
+  A topological space $(X,\tau)$ is \emph{metrizable} if there exists a metric $d : X \times X \to [0,+\infty)$ such that $\tau$ is the topology induced by $d$.
+\end{definition}
+
+\begin{theorem}[Urysohn's metrization theorem]\label{The:UrysohnMetrization}
+  A topological space $(X,\tau)$ is metrizable and separable iff it is $T_4$ and has a countable base.
+\end{theorem}
+
+\begin{theorem}[Nagata–Smirnov metrization theorem]\label{The:NagataSmirnov}
+  A topological space $(X,\tau)$ is metrizable iff it is $T_4$ and has a $\sigma$-locally finite base.
+\end{theorem}
+
+\section{Completeness}
+
+\begin{definition}\label{De:CompleteMetric}
+  A metric space $(X,d)$ is \emph{complete} if every Cauchy sequence converges.
+\end{definition}
+
+\begin{theorem}\label{De:MetricSpaceCompletion}
+  Let $(X,d_X)$ be a metric space.
+  Then there exists a complete metric space $(Y,d_Y)$ and an isometry $f : X \to f(X) \subseteq Y$ (i.e., $d_X(x,y) = d_Y(f(x),f(y))$) such that $\overline{f(X)} = Y$.
+  Moreover, $Y$ is unique up to isometries.
+\end{theorem}
+
+\begin{remark}\label{Rem:CompletionOfQIsR}
+  The completion of $\bbQ$ with respect to $d(x,y) \coloneqq |x-y|$ is $\bbR$.
+\end{remark}
+
+\begin{proposition}\label{Prop:BoundedFunctionSpaceCompeteIffRangeComplete}
+  Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
+  Define
+  \[
+  C_b(X;Y) \coloneqq \set{ f \in C(X;Y) : \sup_{x,x' \in X} d_Y\p{ f(x), f(x') } < \infty }.
+  \]
+  Then $C_b(X;Y)$ is complete iff $(Y,d_Y)$ is complete.
+\end{proposition}
+
+\section{Baire Spaces}
+
+\begin{definition}\label{De:BaireSpace}
+  A topological space $(X,\tau)$ is a \emph{Baire space} if the intersection of a countable family of dense open sets is also dense.
+\end{definition}
+
+\begin{definition}\label{De:NowhereDenseAndMeager}
+  Let $(X,\tau)$ be a topological space and $E \subseteq X$.
+  \begin{itemize}
+    \item $E$ is \emph{nowhere dense} if $\overline{E}^o = \emptyset$.
+    \item $E$ is \emph{meager} if it is a countable union of nowhere dense sets.
+  \end{itemize}
+\end{definition}
+
+\begin{remark}\label{Rem:SeveralClosIntEqulities}
+  \begin{align*}
+    \overline{(X \setminus E)^o} & = X \setminus \overline{E}^o, \\
+    X \setminus \overline{E} & = (X \setminus E)^o, \\
+    \overline{X \setminus E} & = X \setminus E^o.
+  \end{align*}
+\end{remark}
+
+\begin{proposition}\label{Prop:BaireIffMeagerSetHasEmptyInt}
+  A topological space $(X,\tau)$ is a Baire space iff every meager subset of $X$ has empty interior.
+\end{proposition}
+
+\begin{corollary}\label{Cor:BaireImplyComplementOfMeagerIsDense}
+  Let $(X,\tau)$ be a Baire space and $M$ be a meager subset.
+  Then $X \setminus M$ is dense.
+\end{corollary}
+
+\begin{theorem}[Baire category theorem]\label{The:BaireCategory}
+  If $(X,d)$ is a complete metric space, then it is a Baire space.
+\end{theorem}
+
+\begin{corollary}\label{Cor:CompleteMetricIntersectDenseGDeltaIsDenseGDelta}
+  Let $(X,d)$ be a complete metric space.
+  Then intersection of a countable family of dense $G_\delta$ sets is also a dense $G_\delta$ set.
+\end{corollary}
+
+\begin{theorem}\label{The:LocallyCompactT2ImplyBaire}
+  Let $(X,\tau)$ ba a locally compact Hausdorff space.
+  Then it is a Baire space.
+\end{theorem}
+
+\section{Uniform Continuity}
+
+\begin{definition}\label{De:UniformContinuity}
+  Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
+  A function $f : X \to Y$ is said to be \emph{uniformly continuous} if for all $\epsilon > 0$, there exists $\delta >0$ such that for all $x,x' \in X$ satisfying $d_X(x,x') < \delta$, we have $d_Y(f(x),f(x')) < \epsilon$.
+\end{definition}
+
+\begin{proposition}\label{Prop:DomainCompactImplyContImplyUCont}
+  Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
+  Let $K \subseteq X$ be a compact subset.
+  If a function $f : K \to Y$ is continuous, then it is uniformly continuous.
+\end{proposition}
+
+\begin{definition}\label{De:ModulusOfContinuity}
+  Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
+  A function $\omega : [0,+\infty) \to [0,+\infty)$ is a \emph{modulus of continuity} for a function $f : X \to Y$ if
+  \begin{enumerate}
+    \item $\omega(0) = 0$, $\lim_{s \to 0} \omega(s) = 0$, and
+    \item for all $x,x' \in X$, we have $d_Y\p{f(x),f(x')} \le \omega(d_X(x,x'))$.
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}\label{De:LipschitzHolder}
+  Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
+  Let $f : X \to Y$ be a function.
+  \begin{itemize}
+    \item $f$ is said to be \emph{Lipschitz continuous} if there exists $L > 0$ such that $d_Y\p{f(x_1),f(x_2)} \le L \cdot d_X(x_1,x_2)$ for all $x_1,x_2 \in X$.
+    The \emph{Lipschitz constant} $\mathrm{lip}(f)$ is defined as
+    \[
+    \mathrm{lip}(f) \coloneqq \sup_{x_1,x_2 \in X, x_1 \neq x_2} \frac{d_Y(f(x_1),f(x_2))}{d_X(x_1,x_2)}.
+    \]
+    \item $f$ is said to be \emph{H{\"o}lder continuous} with exponent $\alpha \in (0,1)$ if there exists $L > 0$ such that for all $x_1,x_2 \in X$, we have $d_Y\p{f(x_1),f(x_2)} \le L \cdot \p{d_X(x_1,x_2)}^\alpha$.
+  \end{itemize}
+\end{definition}
+
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{db}
 
