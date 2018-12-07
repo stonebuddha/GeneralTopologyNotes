@@ -2996,6 +2996,117 @@
   \end{itemize}
 \end{definition}
 
+\begin{proposition}\label{Prop:UnifContIffModCont}
+  A function is continuous iff it admits a modulus of continuity.
+\end{proposition}
+
+\begin{remark}\label{Rem:UnifContNotImplyLipHolder}
+  In general uniform continuity does not imply Lipschitz or H{\"o}lder continuity.
+  Weierstrass nowhere differentiable function is not H{\"o}lder continuous for any $\alpha \in (0,1]$.
+  The function is given by
+  \[
+  u(x) = \sum_{n=0}^\infty a^n \cos(b^n \pi x),
+  \]
+  where $0 < a < 1$, $b \in \bbN$ odd, and $ab > 1 + \nicefrac{3\pi}{2}$.
+\end{remark}
+
+\begin{remark}\label{Rem:LipImplyHolder}
+  Let $(X,d)$ be a metric space.
+  If $f : E \to \bbR$ is Lipschitz continuous and $E \subseteq X$ is bounded, then $f$ is H{\"o}lder continuous for all $\alpha \in (0,1)$.
+  However, this property does not hold in general if $E$ is unbounded.
+\end{remark}
+
+\begin{theorem}{The:UnifContToCompleteCanBeExtended}
+  Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
+  Suppose $Y$ is complete.
+  Let $f : E \to Y$ be uniformly continuous where $E \subseteq X$.
+  Then $f$ can be uniquely extended as a uniformly continuous function $g : \overline{E} \to Y$.
+\end{theorem}
+
+\section{Fixed Point Theorems}
+
+\begin{definition}\label{De:FixedPoint}
+  Let $\Phi : X \to X$.
+  An element $x \in X$ is said to be a \emph{fixed point} of $\Phi$ if $\Phi(x) = x$.
+\end{definition}
+
+\begin{theorem}[Banach's construction principle]\label{The:BanachConstrPrinc}
+  Let $(X,d)$ be a complete metric space.
+  If $f : X \to X$ is a contraction (i.e., Lipschitz continuous with $L=1$), then $f$ has a unique fixed point.
+\end{theorem}
+
+\begin{example}\label{Exa:SolvingIVP}
+  We can use \cref{The:BanachConstrPrinc} to show existence of solutions to an ODE.
+  \diw{TODO}
+\end{example}
+
+\begin{theorem}[Brouwer's fixed point theorem]\label{The:BrouwerFixedPoint}
+  Let $E \subseteq \bbR^N$ be homeomorphic to $\overline{B}(0,1)$.
+  If $f : E \to E$ is continuous then $f$ has a fixed point.
+\end{theorem}
+
+\section{Equicontinuity}
+
+\begin{definition}\label{De:Equicont}
+  Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
+  Let $\calF$ be a collection of continuous functions (i.e., $\calF \subseteq C(X;Y)$).
+  Then $\calF$ is said to be \emph{equicontinuous} at a point $x_o \in X$ if for all $\epsilon > 0$, there exists $\delta = \delta(x_o,\epsilon) > 0$ such that for all $x \in X$, we have $d_X(x,x_o) < \delta$ implies $d_Y(f(x),f(x_o)) < \epsilon$ for all $f \in \calF$.
+  
+  Moreover, $\calF$ is said to be \emph{(uniformly) equicontinuous} if for all $\epsilon > 0$, there exists $\delta > 0$ such that for all $x,y \in X$, we have $d_X(x,y) < \delta$ implies $d_Y(f(x),f(y)) < \epsilon$ for all $f \in \calF$.
+\end{definition}
+
+\begin{definition}\label{De:PointwiseBounded}
+  Let $(X,d)$ be a metric space.
+  Then $\calF \subseteq C(X;\bbR)$ is said to be \emph{pointwise bounded} if for all $x \in X$, we have $\sup_{f \in \calF} |f(x)| < +\infty$.
+\end{definition}
+
+\begin{remark}\label{Rem:PointBoundedButNotEquicont}
+  Consider $\calF \coloneqq \{ f_n\}_{n \in \bbN} \subseteq C([0,1])$ where $f_n(x) \coloneqq x^n$.
+  Then $\calF$ is pointwise bounded but not equicontinuous.
+\end{remark}
+
+\begin{theorem}[Ascoli-Arzel{\`a} theorem]\label{The:AscoliArzela}
+  Let $(X,d)$ be a separable metric space and $\calF \subseteq C(X;\bbR)$ be pointwise bounded and equicontinuous.
+  Then every sequence in $\calF$ admits a subsequence that converges uniformly on every compact subset of $X$ to a continuous function in $C(X;\bbR)$.
+\end{theorem}
+
+\begin{corollary}\label{Cor:RelCompactIffBoundedAndEquicont}
+  Let $(X,d)$ be a compact metric space and $\calF \subseteq C(X;\bbR)$.
+  Then $\calF$ is relatively compact iff it is bounded and equicontinuous.
+\end{corollary}
+
+\section{Stone-Weierstrass Theorem}
+
+\begin{theorem}[Dini's theorem]\label{The:Dini}
+  Let $(X,d)$ be a compact metric space.
+  Let $\{f_n\}_{n \in \bbN} \subseteq C(X;\bbR)$ be such that for all $x \in X$, we have $f_n(x) \le f_{n+1}(x)$ for all $n \in \bbN$, and $f(x) \coloneqq \lim_{n \to \infty} f_n(x) \in \bbR$.
+  If $f : X \to \bbR$ is continuous, then the convergence is uniform.
+\end{theorem}
+
+\begin{remark}\label{Rem:ContCompactNecInDini}
+  Continuity of $f$ and compactness of $X$ are necessary in \cref{The:Dini}.
+\end{remark}
+
+\begin{theorem}[Stone]\label{The:Stone}
+  Let $(X,d)$ be a compact metric space and $\calF \subseteq C(X;\bbR)$ be such that
+  \begin{enumerate}[(i)]
+    \item $\calF$ separates points, i.e., if $x,y\in X$ and $x \neq y$, then there exists $f \in \calF$ such that $f(x) \neq f(y)$,
+    \item $\calF$ contains the constant functions, and
+    \item $\calF$ is an algebra, i.e., $\calF$ is closed under addition, multiplication and scalar multiplication.
+  \end{enumerate}
+  Then $\calF$ is dense in $C(X;\bbR)$.
+\end{theorem}
+
+\begin{theorem}[Weierstrass]\label{The:WeierstrassAsCorOfStone}
+  Let $K \subseteq \bbR^N$ be compact.
+  Then every continuous function $f : K \to \bbR$ is the uniform limit of polynomials.
+\end{theorem}
+
+\begin{corollary}\label{Cor:CompactMetricToRSeparable}
+  Let $(X,d)$ be a compact metric space.
+  Then $C(X;\bbR)$ is separable.
+\end{corollary}
+
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{db}
 
