@@ -2759,44 +2759,66 @@
 \begin{definition}\label{De:Limits}
 	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces.
 	Let $E \subseteq X$ and $f: E \to Y$.
-	Let $x_0 \in E'$ and $y_0 \in Y$.
-	Then $y_0$ is said to be a \emph{limit} of $f$ as $x$ \emph{approaches} $x_0$ \emph{within} $E$ if for every neighborhood $V$ of $y_0$ in $Y$, there exists a neighborhood $U$ of $x_0$ in $X$ such that
-	$x \in (U \cap E) \setminus \{x_0\}$ implies $f(x) \in V$.
+	Let $x_o \in E'$ and $y_o \in Y$.
+	Then $y_o$ is said to be a \emph{limit} of $f$ as $x$ \emph{approaches} $x_o$ \emph{within} $E$ if for every neighborhood $V$ of $y_o$ in $Y$, there exists a neighborhood $U$ of $x_o$ in $X$ such that
+	$x \in (U \cap E) \setminus \{x_o\}$ implies $f(x) \in V$.
 \end{definition}
 
 \begin{remark}\label{Rem:LimitsConsiderLocalbase}
-	It suffices to consider $V$ in a local base of neighborhoods of $y_0$ and $U$ in a local base of neighborhoods of $x_0$.
+	It suffices to consider $V$ in a local base of neighborhoods of $y_o$ and $U$ in a local base of neighborhoods of $x_o$.
 \end{remark}
 
 \begin{proposition}\label{Prop:LimitIntoT2AtMostOne}
 	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological space.
 	Suppose $Y$ is Hausdorff and $E \subseteq X$.
-	Then if the limit of $f : E \to Y$ at a point $x_0 \in E'$ exists, then it is unique.
-	In case of existence, we write $\lim_{x \to x_0, x \in E} f(x) = y_0$.
+	Then if the limit of $f : E \to Y$ at a point $x_o \in E'$ exists, then it is unique.
+	In case of existence, we write the limit as $\lim_{x \to x_o, x \in E} f(x) = y_o$.
 \end{proposition}
+\begin{proof}
+  Suppose $y_1,y_2$ are limits of $f$ at $x_o \in E'$.
+  If $y_1 \neq y_2$, then because $Y$ is Hausdorff, there exist disjoint open sets $V_1,V_2$ in $Y$ such that $y_1 \in V_1,y_2\in V_2$.
+  Let $U_1$ be an open set in $X$ such that $x_o \in U_1$ and $x \in (U_1 \cap E) \setminus \{x_o\}$ implies $f(x) \in V_1$.
+  Let $U_2$ be an open set in $X$ such that $x_o \in U_2$ and $x \in (U_2 \cap E) \setminus \{x_o\}$ implies $f(x) \in V_2$.
+  Because $x_o \in E'$, we know that $((U_1 \cap U_2) \cap E) \setminus \{x_o\} \neq \emptyset$.
+  Pick an $x \in ((U_1 \cap U_2) \cap E) \setminus \{x_o\}$.
+  Then we have $f(x) \in V_1$ and $f(x) \in V_2$, which contradicts $V_1 \cap V_2 = \emptyset$.
+\end{proof}
 
 \begin{proposition}\label{Prop:LimitImlySeqConv}
 	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be two topological spaces and $E \subseteq X$.
 	Let $f : E \to Y$.
-	Given $x_0 \in E'$, if $\lim_{x \to x_0} f(x) = y_0$ exists, then for all $\{x_n\}_{n \in \bbN} \subseteq E \setminus \{x_0\}$ such that $x_n \rightarrow x_0$, then $f(x_n) \rightarrow y_0$.
+	Given $x_o \in E'$, if $\lim_{x \to x_o} f(x) = y_o$ exists, then for all $\{x_n\}_{n \in \bbN} \subseteq E \setminus \{x_o\}$ such that $x_n \xrightarrow{X} x_o$, then $f(x_n) \xrightarrow{Y} y_o$.
 \end{proposition}
+\begin{proof}
+  Let $V$ be a neighborhood of $y_o$.
+  Then there exists a neighborhood $U$ of $x_o$ such that $x \in (U \cap E) \setminus \{x_o\}$ implies $f(x) \in V$.
+  On the other hand, by $x_n \xrightarrow{X} x_o$, there exists $n_o \in \bbN$ such that for all $n \ge n_o$, we have $x_n \in (U \cap E) \setminus \{x_o\}$, thus $f(x_n) \in V$.
+  By definition we conclude that $f(x_n) \xrightarrow{Y} y_o$.
+\end{proof}
 
 \begin{proposition}\label{Prop:LimitFromFstCountExistIfSeqConv}
 	Let $(X,\tau_X)$ be first countable.
 	Let $(Y,\tau_Y)$ be a topological space, $E \subseteq X$ and $f: E \to Y$.
-	Given $x_0 \in E'$, if there exists $y_0$ such that for all $\{x_n\}_{n \in \bbN} \subseteq E \setminus \{x_0\}$ such that $x_n \rightarrow x_0$ there holds $f(x_n) \rightarrow y_0$, then $\lim_{x \to x_0} f(x) = y_0$.
+	Given $x_o \in E'$, if there exists $y_o$ such that $\{x_n\}_{n \in \bbN} \subseteq E \setminus \{x_o\}$ satisfying $x_n \xrightarrow{X} x_o$ implies $f(x_n) \xrightarrow{Y} y_o$, then $\lim_{x \to x_o} f(x) = y_o$.
 \end{proposition}
+\begin{proof}
+  If not, then there exists a neighborhood $V$ of $y_o$ such that for all neighborhoods $U$ of $x_o$, there exists $x \in (U \cap E) \setminus \{x_o\}$ such that $f(x) \not\in V$.
+  Let $\{B_n\}_{n \in \bbN}$ be a nesting local base at $x_o$.
+  Let $x_n \in (B_n \cap E) \setminus \{x_o\}$ be such that $f(x_n) \not\in V$.
+  Then $x_n \xrightarrow{X} x_o$ implies $f(x_n) \xrightarrow{Y} y_o$.
+  Thus there exists $n_o \in \bbN$ such that for all $n \ge n_o$, we have $f(x_n) \in V$, which leads to a contradiction.
+\end{proof}
 
 \begin{definition}\label{De:LimitInfAndSup}
 	Let $(X,\tau)$ be a topological space and $E \subseteq X$.
-	Let $f : E \to \bbR$ and $x_0 \in E'$.
-	The \emph{limit inferior} of $f$ as $x$ tends to $x_0$ is
+	Let $f : E \to \bbR$ and $x_o \in E'$.
+	The \emph{limit inferior} of $f$ as $x$ tends to $x_o$ is
 	\[
- 	\liminf_{x \to x_0, x \in E} f(x) \coloneqq \adjustlimits \sup_{U \in \tau(x_0)} \inf_{x \in (U \cap E) \setminus \{x_0\}} f(x)
+ 	\liminf_{x \to x_o, x \in E} f(x) \coloneqq \adjustlimits \sup_{U \in \tau(x_o)} \inf_{x \in (U \cap E) \setminus \{x_o\}} f(x)
 	\]
-	The \emph{limit superior} of $f$ as $x$ tends to $x_0$ is
+	The \emph{limit superior} of $f$ as $x$ tends to $x_o$ is
 	\[
-	\limsup_{x \to x_0, x \in E} f(x) \coloneqq \adjustlimits \inf_{U \in \tau(x_0)} \sup_{x \in (U \cap E) \setminus \{x_0\}} f(x)
+	\limsup_{x \to x_o, x \in E} f(x) \coloneqq \adjustlimits \inf_{U \in \tau(x_o)} \sup_{x \in (U \cap E) \setminus \{x_o\}} f(x)
 	\]
 \end{definition}
 
@@ -2805,13 +2827,38 @@
 \end{remark}
 
 \begin{theorem}\label{The:LimInfLeLimSup}
-	Let $(X,\tau)$ be a topological space, $E \subseteq X$, $x_0 \in E'$ and $f : E \to \bbR$.
+	Let $(X,\tau)$ be a topological space, $E \subseteq X$, $x_o \in E'$ and $f : E \to \bbR$.
 	Then
 	\begin{equation}
-		\liminf_{x \to x_0} f(x) \le \limsup_{x \to x_0} f(x) \label{Eq:LimInfLeLimSup}
+		\liminf_{x \to x_o} f(x) \le \limsup_{x \to x_o} f(x) \label{Eq:LimInfLeLimSup}
 	\end{equation}
-	Moreover, $\lim_{x \to x_0} f(x)$ exists iff there is equality in \eqref{Eq:LimInfLeLimSup}, and $\lim_{x \to x_0} f(x)$ is that common value.
+	Moreover, $\lim_{x \to x_o} f(x)$ exists iff there is equality in \eqref{Eq:LimInfLeLimSup}, and $\lim_{x \to x_o} f(x)$ is that common value.
 \end{theorem}
+\begin{proof}
+  Let $U,V$ be neighborhoods of $x_o$.
+  Then we have
+  \[
+  \inf_{x \in (U \cap E) \setminus \{ x_o\}} f(x) \le \inf_{x \in ((V\cap U) \cap E) \setminus \{x_o\}} f(x) \le \sup_{x \in ((V \cap U) \cap E) \setminus \{x_o\}} f(x) \le \sup_{x \in (V \cap E) \setminus \{x_o\}} f(x).
+  \]
+  Because $U,V$ are arbitrarily chosen, we have $\sup_{U \in \tau(x_o)} \mathrm{LHS} \le \inf_{V \in \tau(x_o)} \mathrm{RHS}$ and therefore conclude the inequality in \eqref{Eq:LimInfLeLimSup}.
+  
+  Now let's prove the second part.
+  \begin{itemize}
+    \item WTS the $\implies$ direction: Suppose $\lim_{x \to x_o} f(x) = \ell$.
+    Let's assume $\ell \in \bbR$ (the cases where $\ell=\pm\infty$ are left for exercise).
+    For all $\epsilon > 0$, there exists a neighborhood $U_\epsilon$ of $x_o$ such that $x \in (U_\epsilon \cap E) \setminus \{x_o\}$ implies $f(x_o) \in (\ell-\epsilon,\ell+\epsilon)$.
+    Therefore
+    \begin{gather*}
+    \ell - \epsilon \le \inf_{x \in (U_\epsilon \cap E) \setminus \{x_o\}} f(x) \le \liminf_{x \to x_o} f(x),
+    \shortintertext{and similarly}
+    \limsup_{x \to x_o} f(x) \le \sup_{x \in (U_\epsilon \cap E) \setminus \{x_o\}} f(x) \le \ell+\epsilon,
+    \shortintertext{therefore by \eqref{Eq:LimInfLeLimSup} we have}
+    \ell -\epsilon \le \liminf_{x \to x_o} f(x) \le \limsup_{x \to x_o} f(x) \le \ell +\epsilon.
+    \end{gather*}
+    Because $\epsilon > 0$ is arbitrarily chosen, we conclude the equality in \eqref{Eq:LimInfLeLimSup} and $\ell = \lim_{x \to x_o} f(x)$ is the common value.
+    \item WTS the $\impliedby$ direction: 
+  \end{itemize}
+\end{proof}
 
 \begin{theorem}[Cauchy's lemma]\label{The:CauchyLemma}
   Let $(X,\tau)$ be a topological space and $f : E \to \bbR$ for some $E \subseteq X$.
