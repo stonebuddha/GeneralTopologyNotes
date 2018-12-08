@@ -2856,15 +2856,46 @@
     \ell -\epsilon \le \liminf_{x \to x_o} f(x) \le \limsup_{x \to x_o} f(x) \le \ell +\epsilon.
     \end{gather*}
     Because $\epsilon > 0$ is arbitrarily chosen, we conclude the equality in \eqref{Eq:LimInfLeLimSup} and $\ell = \lim_{x \to x_o} f(x)$ is the common value.
-    \item WTS the $\impliedby$ direction: 
+    \item WTS the $\impliedby$ direction: Assume $\liminf_{x \to x_o} f(x) = \limsup_{x \to x_o} f(x) = L$.
+    Let's assume $L \in \bbR$ (the cases where $L = \pm\infty$ are left for exercise).
+    Fix $\epsilon > 0$.
+    It suffices to find a neighborhood $U$ of $x_o$ such that $x \in (U \cap E) \setminus \{x_o\}$ implies $|f(x) - L| < \epsilon$.
+    Let $U_\epsilon$ be a neighborhood of $x_o$ such that
+    \[
+    L - \epsilon < \inf_{x \in (U_\epsilon \cap E) \setminus \{x_o\}} f(x)
+    \]
+    and $V_\epsilon$ be a neighborhood of $x_o$ such that
+    \[
+    \sup_{x \in (V_\epsilon \cap E) \setminus \{x_o\}} f(x) < L +\epsilon.
+    \]
+    Define $U \coloneqq U_\epsilon \cap V_\epsilon$ to be a neighborhood of $x_o$.
+    Then we conclude that for all $x \in (U \cap E) \setminus \{x_o\}$, we have $L -\epsilon < f(x) < L+\epsilon$, i.e., $|f(x) - L| < \epsilon$.
   \end{itemize}
 \end{proof}
 
 \begin{theorem}[Cauchy's lemma]\label{The:CauchyLemma}
   Let $(X,\tau)$ be a topological space and $f : E \to \bbR$ for some $E \subseteq X$.
-  Let $x_0 \in E'$.
-  Then $\lim_{x \to x_0} f(x)$ exists in $\bbR$ iff for all $\epsilon > 0$, there exists a neighborhood $U_\epsilon$ of $x_0$ such that for all $x_1,x_2 \in (U_\epsilon \cap E) \setminus \{ x_0 \}$, we have $|f(x_1)-f(x_2)| < \epsilon$.
+  Let $x_o \in E'$.
+  Then $\lim_{x \to x_o} f(x)$ exists in $\bbR$ iff for all $\epsilon > 0$, there exists a neighborhood $U_\epsilon$ of $x_o$ such that for all $x_1,x_2 \in (U_\epsilon \cap E) \setminus \{ x_o \}$, we have $|f(x_1)-f(x_2)| < \epsilon$.
 \end{theorem}
+\begin{proof}\
+  \begin{itemize}
+    \item WTS the $\implies$ direction: Assume $\lim_{x \to x_o} f(x) = L \in \bbR$.
+    Fix $\epsilon > 0$.
+    Then there exists a neighborhood $U_\epsilon$ of $x_o$ such that $x \in (U_\epsilon \cap E) \setminus \{x_o\}$ implies $|f(x_o)-L| < \nicefrac{\epsilon}{2}$.
+    Thus we conclude that for all $x_1,x_2 \in (U_\epsilon \cap E) \setminus \{x_o\}$, we have
+    \[
+    |f(x_1)-f(x_2)| \le |f(x_1)-L|+|L-f(x_2)| < \frac{\epsilon}{2}+\frac{\epsilon}{2} = \epsilon.
+    \]
+    
+    \item WTS the $\impliedby$ direction: Fix $\epsilon > 0$. Let $U_\epsilon$ be a neighborhood of $x_o$ such that for all $x_1,x_2 \in (U_\epsilon \cap E) \setminus \{x_o\}$, we have $|f(x_1)-f(x_2)| < \epsilon$.
+    Then we have
+    \[
+    \liminf_{x \to x_o} f(x) \ge \inf_{x \in (U_\epsilon \cap E) \setminus \{x_o\}}f(x) \ge \sup_{x \in (U_\epsilon \cap E) \setminus \{x_o\}} f(x) - \epsilon \ge \limsup_{x \to x_o} f(x) - \epsilon.
+    \]
+    As $\epsilon$ can be arbitrarily closed to $0$, we conclude that $\liminf_{x \to x_o} f(x) \ge \limsup_{x \to x_o} f(x)$ and then by \cref{The:LimInfLeLimSup} we have $\liminf_{x \to x_o} f(x) = \limsup_{x \to x_o} f(x)$ and the limit $\lim_{x \to x_o} f(x) = L$.
+  \end{itemize}
+\end{proof}
 
 \section{Partition of Unity}
 
@@ -2892,12 +2923,101 @@
 \begin{lemma}\label{Lem:SeparMetricImplyOpenCoverAdmitCountableRefine}
   Let $(X,d)$ be a separable metric space and let $\{U_\alpha\}_{\alpha \in \Lambda}$ be an open cover of $X$.
   Then there exists a countable family $\{V_n\}_{n \in \bbN}$ of open sets such that $X = \bigcup_{n \in \bbN} V_n$ and for all $n \in \bbN$, there exists $\alpha \in \Lambda$ such that $V_n \subseteq U_\alpha$.
+  In other words, $X$ is Lindel{\"o}f.
 \end{lemma}
+\begin{proof}
+  By \cref{Prop:MetricSeparableImplySndAxCount} we know that $X$ satisfies the second axiom of countability.
+  Then we conclude by \cref{Prop:MetricSndCountImplyLindelof}.
+\end{proof}
 
 \begin{theorem}\label{The:SeparMetricImplyLocFinPartiOfUnitySubord}
   Let $(X,d)$ be a separable metric space and let $\{U_\alpha\}_{\alpha \in \Lambda}$ be an open cover of $X$.
   Then there exists a locally finite partition of unity subordinated to the cover $\{U_\alpha\}_{\alpha \in \Lambda}$.
 \end{theorem}
+\begin{proof}\
+  \paragraph{Step 1}
+  Firstly, let's consider $\Lambda=\{1,\cdots,n\}$ for some $n \in \bbN$.
+  For all $i \in \{1,\cdots,n\}$, define $f_i : X \to [0,+\infty)$ as $f_i(x) \coloneqq d(x, X \setminus U_i)$.
+  Note that $f_i$'s are continuous.
+  For all $x \in U_i$, we know $x \not\in X \setminus U_i$, but $X \setminus U_i$ is closed, hence $f_i(x) > 0$.
+  Define $f(x) \coloneqq \sum_{i=1}^n f_i(x)$ to be a continuous function.
+  Since $X = \bigcup_{i=1}^n U_i$, we know that for every $x \in U_i$, we have $f(x) \ge f_i(x) > 0$.
+  Define
+  \[
+  g_i(x) \coloneqq \max\set{ f_i(x) - \frac{1}{n+1} f(x), 0}, i=1,\cdots,n
+  \]
+  to be continuous functions.
+  Then we have
+  \begin{align*}
+    \mathrm{supp}(g_i) & = \overline{\set{x \in X : f_i(x) > \frac{1}{n+1} f(x) }} \\
+    & \subseteq \set{x \in X: f_i(x) \ge \frac{1}{n+1} f(x) } \\
+    & \subseteq \set{x \in X: f_i(x) > 0 } \\
+    & \subseteq U_i.
+  \end{align*}
+  Not we claim that $\sum_{i=1}^n g_i(x) > 0$ for all $x \in X$.
+  This follows from
+  \begin{align*}
+    \sum_{i=1}^n g_i(x) & \ge \sum_{i=1}^n \p{ f_i(x) - \frac{1}{n+1} f(x) } \\ 
+    & = \sum_{i=1}^n f_i(x) - \frac{n}{n+1} f(x) \\
+    & = f(x) - \frac{n}{n+1} f(x) \\
+    & = \frac{1}{n+1} f(x) \\
+    & > 0.
+  \end{align*}
+  Define $\varphi_i \coloneqq \nicefrac{g_i}{\sum_{j=1}^n g_j}$ to be a continuous function for $i=1,\cdots,n$.
+  Then we have $\sum_{i=1}^n \varphi_i \equiv 1$ and $\mathrm{supp}(\varphi_i) = \mathrm{supp}(g_i) \subseteq U_i$ for each $i$.
+  
+  \paragraph{Step 2}
+  Secondly, let's consider $\Lambda = \bbN$.
+  By \cref{Prop:MetricCanAlwaysBounded}, let's assume $d(x,y) < 1$ for all $x,y\in X$ without loss of generality.
+  For all $i \in \bbN$, define a continuous function $f_i : X \to [0, \nicefrac{1}{2^i}]$ as $f_i(x) \coloneqq \min\{ d(x, X \setminus U_i), \nicefrac{1}{2^i}\}$.
+  For all $x \in U_i$, we know that $x \not\in X \setminus U_i$, but $X \setminus U_i$ is closed, hence $f_i(x) > 0$.
+  Define $f \coloneqq \sum_{i=1}^\infty \nicefrac{1}{2^{i-1}} \cdot f_i$.
+  Then $f$ is a continuous function.
+  Since $X = \bigcup_{i=1}^\infty U_i$, we know that for every $x \in U_i$, we have $f(x) \ge f_i(x) > 0$.
+  Define
+  \[
+  g_i(x) \coloneqq \max\set{f_i(x) - \frac{1}{3} f(x), 0}, i \in \bbN
+  \]
+  to be continuous functions.
+  Then we have
+  \begin{align*}
+    \mathrm{supp}(g_i) & = \overline{\set{x \in X : f_i(x) > \frac{1}{3} f(x)  }} \\
+    & \subseteq \set{ x \in X: f_i(x) \ge \frac{1}{3}f(x) } \\
+    & \subseteq \set{x \in X: f_i(x) > 0} \\
+    & \subseteq U_i.
+  \end{align*}
+  
+  \underline{Claim 1}. $\{g_i\}_{i \in \bbN}$ is locally finite, thus $\sum_{i=1}^\infty g_i$ is continuous.
+  Fix $x \in X$.
+  Then there exist $\epsilon > 0$ and $r >0$ such that $y \in B(x,r)$ implies $f(y) > \epsilon$.
+  Find $i_o \in \bbN$ such that $\nicefrac{1}{2^{i_o}} < \nicefrac{\epsilon}{3}$.
+  Thus for all $y \in B(x,r)$ and $i \ge i_o$, we have
+  \[
+  f_i(y) - \frac{1}{3} f(y) \le \frac{1}{2^i} - \frac{\epsilon}{3} \le \frac{1}{2^{i_o}} - \frac{\epsilon}{3} < 0
+  \]
+  thus we have $g_i(y) = 0$.
+  Therefore for all $i \ge i_o$, we have $B(x,r) \cap \{ x \in X : g_i(x) > 0\} = \emptyset$, hence $B(x,r) \cap \mathrm{supp}(g_i) = \emptyset$.
+  
+  \underline{Claim 2}. $\sum_{i=1}^\infty g_i(x) > 0$ for all $x \in X$.
+  Fix $x \in X$.
+  Then there exists $i \in \bbN$ such that $x \in U_i$, thus $f_i(x) > 0$.
+  On the other hand, for all $n \ge i$ we know $f_n(x) \le \nicefrac{1}{2^n} \le \frac{1}{2^i}$.
+  Thus there exists $i_o \in \bbN$ such that $f_{i_o}(x) = \sup_{i \in \bbN} f_i(x) > 0$.
+  Therefore
+  \begin{gather*}
+  f(x) = \sum_{i=1}^\infty \frac{1}{2^{i-1}} f_i(x) \le f_{i_o}(x) \sum_{i=1}^\infty \frac{1}{2^{i-1}} = 2f_{i_o}(x),
+  \shortintertext{and then}
+  g(x) \ge g_{i_o}(x) \ge f_{i_o}(x) - \frac{1}{3} f(x) \ge f_{i_o}(x) - \frac{2}{3} f_{i_o}(x) = \frac{1}{3}f_{i_o}(x) > 0.
+  \end{gather*}
+  
+  Now we define $\varphi_i \coloneqq \nicefrac{g_i}{\sum_{j=1}^\infty g_j}$ to be a continuous function for $i \in \bbN$.
+  Then we have $\sum_{i=1}^\infty \varphi_i \equiv 1$ and $\mathrm{supp}(\varphi_i) = \mathrm{supp}(g_i) \subseteq U_i$ for each $i$.
+  
+  \paragraph{Step 3}
+  Let's finally show the case where $\Lambda$ can be arbitrary.
+  By \cref{Lem:SeparMetricImplyOpenCoverAdmitCountableRefine}, $\{U_\alpha\}_{\alpha \in \Lambda}$ admits a countable refinement $\{V_n\}_{n \in \bbN}$.
+  Then we reduce this case to Step 2 because a partition of unity subordinated to $\{V_n\}_{n \in \bbN}$ is also subordinated to $\{U_\alpha\}_{\alpha \in \Lambda}$.
+\end{proof}
 
 \begin{lemma}\label{Lem:NormalIffAnyPointFinCoverAdmitClosRefineCover}
   A topological space $(X,\tau)$ is normal iff for all point finite open cover $\{U_\alpha\}_{\alpha \in \Lambda}$ there exists another open cover $\{V_\alpha\}_{\alpha \in \Lambda}$ such that $\overline{V_\alpha} \subseteq U_\alpha$.
