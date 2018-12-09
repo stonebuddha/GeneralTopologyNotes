@@ -3086,7 +3086,7 @@
     For each $x \in U$, since $X$ is $T_4$ thus also $T_1$ by \cref{The:HierarchyOfSeparation}, we know that $\{x\}$ is closed in $X$ by \cref{Prop:T1SingletonClosed}.
     By \cref{Lem:NormalIffNeighborContainClosure}, there exists an open set $V$ such that $\{x\}\subseteq V \subseteq \overline{V} \subseteq U$.
     Let $\{B_n : n \in \bbN\}$ be a countable base and let $B_x$ be an element of the base such that $x \in B_x \subseteq V$.
-    Then $\{x\} \subseteq B_x \subseteq \overline{B_x} \subseteq \overline{V} \subseteq U$ and $U = \bigcup_{x \in U} \overline{B_X}$, i.e., a countable union of closed sets.
+    Then $\{x\} \subseteq B_x \subseteq \overline{B_x} \subseteq \overline{V} \subseteq U$ and $U = \bigcup_{x \in U} \overline{B_x}$, i.e., a countable union of closed sets.
     
     Fix a $B_n$ from the base.
     Then $X \setminus B_n$ is closed, thus a $G_\delta$.
@@ -3099,7 +3099,7 @@
     \[
     \sum_{n=1}^\infty \p{ \psi_n(x)}^2 = \sum_{n=1}^\infty \frac{1}{n^2} \cdot \frac{\p{\varphi_n(x)}^2}{1 + \p{ \varphi(x) }^2} \le \sum_{n=1}^\infty \frac{1}{n^2} < +\infty.
     \]
-    Now we define $f : X \to \ell^2$ as $f(X) \coloneqq \{ \psi_n(x) \}_{n \in \bbN}$.
+    Now we define $f : X \to \ell^2$ as $f(x) \coloneqq \{ \psi_n(x) \}_{n \in \bbN}$.
     
     \underline{Claim}. $f$ is injective.
     For all $x,y \in X$ satisfying $x \neq y$, since $X$ is $T_1$, there exists $B_n$ from the base such that $x \in B_n$ and $y \not\in B_n$.
@@ -3123,12 +3123,72 @@
     \end{align*}
     
     \underline{Claim}. $f^{-1}$ is continuous.
+    Let $y_o \in f(X)$. Then $y_o = f(x_o)$ for some $x_o \in X$.
+    We want to show that if $U$ is a neighborhood of $x_o$ in $X$, there exists a neighborhood $V$ of $y_o$ in $\ell^2$, if $y \in V \cap f(X)$ then $f^{-1}(y) \in U$.
+    Fix $U$.
+    Let $B_{n_o}$ be an element of the base such that $x_o \in B_{n_o} \subseteq U$.
+    Thus $\psi_{n_o}(x_o) > 0$.
+    Define $\delta \coloneqq \psi_{n_o}(x_o)$.
+    Define $V \coloneqq B_{\ell^2}(y_o,\delta)$.
+    Then for all $y \in B_{\ell^2}(y_o,\delta) \cap f(X)$, we know that $y = f(x)$ for some $x \in X$, thus
+    \begin{align*}
+      \abs{\psi_{n_o}(x) - \psi_{n_o}(x_o)} & \le \sqrt{\sum_{n=1}^\infty \p{ \psi_{n}(x) - \psi_n(x_o) }^2} \\
+      & = d_{\ell^2}(f(x),f(x_o)) \\
+      & = d_{\ell^2}(y,y_o) \\
+      & < \delta.  
+    \end{align*}
+    On the other hand, we already have $\delta = \psi_{n_o}(x_o) > 0$, therefore $\psi_{n_o}(x) > 0$.
+    By definition of $\psi$'s and $\varphi$'s we know that $x \in B_{n_o}$, therefore we have $f^{-1}(y) = x \in U$.
   \end{itemize}
 \end{proof}
 
 \begin{theorem}[Nagata–Smirnov metrization theorem]\label{The:NagataSmirnov}
   A topological space $(X,\tau)$ is metrizable iff it is $T_4$ and has a $\sigma$-locally finite base.
 \end{theorem}
+\begin{proof}\
+  \begin{itemize}
+    \item WTS the $\implies$ direction: By \cref{Prop:MetricT4} we know that $X$ is $T_2$ and normal, thus $X$ is $T_4$.
+    On the other hand, by \cref{The:MetricImplyParacompact} we know that $X$ has a $\sigma$-locally finite base.
+    \item WTS the $\impliedby$ direction: The idea is also to find a homeomorphism between $X$ and a subset of an $\ell^2$ space.
+    Let $\beta = \bigcup_{n=1}^\infty \beta_n$ be a base where $\beta_n$ is locally finite for all $n \in \bbN$.
+    
+    \underline{Claim}. Every closed set if a $G_\delta$, or equivalently, every open set if an $F_\sigma$.
+    Fix $U \in \tau$.
+    For every $x \in U$, find a $B_x \in \beta$ such that $x \in B_x \subseteq \overline{B_x} \subseteq U$.
+    For every $n \in \bbN$, define $C_n \coloneqq \bigcup_{B_x \in \beta_n} \overline{B_x}$.
+    Then by (\diw{TODO}) we know $\bigcup_{B_x \in \beta_n} \overline{B_x} = \overline{\bigcup_{B_x \in \beta_n} B_x}$.
+    Thus $C_n$ is closed.
+    Moreover, we have $C_n \subseteq U$ and thus $U = \bigcup_{n=1}^\infty C_n$, i.e., an $F_\sigma$.
+    
+    Let $\beta_n = \{B_{n,\alpha}\}_{\alpha \in \Lambda_n}$. Similar to the proof of \cref{The:UrysohnMetrization}, there exist continuous $\varphi_{n,\alpha} : X \to [0,1]$ such that $\varphi_{n,\alpha} \equiv 0$ on $X \setminus B_{n,\alpha}$ and $\varphi_{n,\alpha} >0$ on $B_{n,\alpha}$.
+    
+    We define a continuous function
+    \[
+    \psi_{n,\alpha}(x) \coloneqq \frac{1}{n} \cdot \frac{\varphi_{n,\alpha}(x)}{\sqrt{1 + \p{ \sum_{\beta \in \Lambda_n} \varphi_{n,\beta}(x)}^2}}.
+    \]
+    Then
+    \[
+    \sum_{n \in \bbN, \alpha \in \Lambda_n} \p{ \psi_{n,\alpha}(x)}^2 = \sum_{n=1}^\infty \frac{1}{n^2} \cdot \sum_{\alpha \in \Lambda_n}  \frac{\p{\varphi_{n,\alpha}(x)}^2}{1 + \p{ \sum_{\beta \in \Lambda_n} \varphi_{n,\beta}(x)}^2} \le \sum_{n=1}^\infty \frac{1}{n^2} < +\infty. 
+    \]
+    Define an $\ell^2$ space as follows:
+    \[
+    \ell^2 \coloneqq \set{ \{ a_{n,\alpha}\} _{n \in \bbN,\alpha\in \Lambda_n} : \sum_{n \in \bbN,\alpha \in \Lambda_n} \p{a_{n,\alpha}}^2 < +\infty }
+    \]
+    with the norm
+    \[
+    \norm{a }_{\ell^2} \coloneqq \sqrt{\sum_{n\in\bbN, \alpha \in \Lambda_n} a_{n,\alpha}^2 } ~\text{where}~a = \{a_{n,\alpha}\}_{n \in \bbN,\alpha \in \Lambda_n}.
+    \]
+    Now we define $f : X \to \ell^2$ as $f(x) \coloneqq \{ \psi_{n,\alpha}(x)\}_{n \in \bbN,\alpha \in \Lambda_n}$.
+    
+    \underline{Claim}. $f$ is injective;
+    
+    \underline{Claim}. $f$ is continuous;
+  
+    \underline{Claim}. $f^{-1}$ is continuous;
+    
+    Similar to the proof of \cref{The:UrysohnMetrization}.
+  \end{itemize}
+\end{proof}
 
 \section{Completeness}
 
