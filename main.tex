@@ -3783,14 +3783,74 @@
   Fix $x \in K$. Let $i_o \in \{1,\cdots,M\}$ be such that $x \in B(y_{i_o},\delta_{y_{i_o}})$.
   Then for all $n,m \ge n_\epsilon$, we have
   \begin{align*}
-    |f_{n,n}(x) - f_{m,m}(x)|
+    |f_{n,n}(x) - f_{m,m}(x)| & \le |f_{n,n}(x) - f_{n,n}(y_{i_o})| \\
+    & + |f_{n,n}(y_{i_o}) - f_{n,n}(x_{z_{i_o}})| \\
+    & +  |f_{n,n}(x_{z_{i_o}}) -  f_{m,m}(x_{z_{i_o}})| \\
+    & + |f_{m,m}(x_{z_{i_o}}) - f_{m,m}(y_{i_o})| \\
+    & + |f_{m,m}(y_{i_o}) - f_{m,m}(x)| \\
+    & < \frac{\epsilon}{8} + \frac{\epsilon}{8} + \frac{\epsilon}{2} + \frac{\epsilon}{8} + \frac{\epsilon}{8} \\
+    & = \epsilon.
   \end{align*}
+  
+  Since singletons $\{x\}$ are compact for all $x \in X$, we know that $\{f_{n,n}(x)\}_{n \in \bbN}$ is a Cauchy sequence in $\bbR$.
+  Then we define $g : X \to \bbR$ as $f_{n,n}(x) \rightarrow g(x)$.
+  
+  \underline{Claim}. If $K \subseteq X$ is compact, then $\sup_{x \in K} |f_{n,n}(x) - g(x)| \rightarrow 0$, i.e., $\{f_{n,n}\}_{n \in \bbN}$ converges uniformly on compact sets.
+  Fix $\epsilon > 0$.
+  There exists $n_\epsilon \in \bbN$ such that for all $n,m \ge n_\epsilon$, we have $\max_{x \in K} |f_{n,n}(x) - f_{m,m}(x)| < \epsilon$ (we use $\max$ here because $K$ is compact and \cref{The:Weierstrass}).
+  For all $x \in K$, we have $\epsilon > |f_{n,n}(x) - f_{m,m}(x)|$.
+  As $m \to \infty$, we have $f_{m,m}(x) \rightarrow g(x)$, therefore $\epsilon \ge |f_{n,n}(x) - g(x)|$.
+  Thus we conclude that $\epsilon \ge \sup_{x \in K} |f_{n,n}(x) - g(x)|$ for all $n \ge n_\epsilon$.
+  
+  \underline{Claim}. $g$ is continuous.
+  Fix $x_o \in X$ and $\epsilon > 0$.
+  By equicontinuity, there exists $\delta_{x_o} > 0$ such that $d(x,x_o) < \delta_{x_o}$ implies that $\sup_{f \in \calF} |f(x)-f(x_o)| < \nicefrac{\epsilon}{3}$.
+  For all $x \in B(x_o,\delta_{x_o})$, we have $f_{n,n}(x) \rightarrow g(x)$ and $f_{n,n}(x_o) \rightarrow g(x_o)$.
+  Let $n_o = n_o(\epsilon,x,x_o) \in \bbN$ such that for all $n \ge n_o$, we have
+  \begin{align*}
+  |f_{n,n}(x_o) - g(x_o)| & <  \frac{\epsilon}{3}, \\
+  |f_{n,n}(x) - g(x)| & < \frac{\epsilon}{3},
+  \end{align*}
+  therefore we conclude the proof by
+  \begin{align*}
+    |g(x) - g(x_o)| & \le |g(x) - f_{n_o,n_o}(x)| + |f_{n_o,n_o}(x) - f_{n_o,n_o}(x_o)| + |f_{n_o,n_o}(x_o) - g(x_o)| \\
+    & < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} \\
+    & = \epsilon,
+  \end{align*}
+  then $g(B(x_o,\delta_{x_o})) \subseteq (g(x_o) - \epsilon,g(x_o)+\epsilon)$.
 \end{proof}
 
 \begin{corollary}\label{Cor:RelCompactIffBoundedAndEquicont}
   Let $(X,d)$ be a compact metric space and $\calF \subseteq C(X;\bbR)$.
   Then $\calF$ is relatively compact iff it is bounded and equicontinuous.
 \end{corollary}
+\begin{proof}\
+  \begin{itemize}
+    \item WTS the $\impliedby$ direction: Because $\calF$ is bounded, we know that $\sup_{f \in \calF} \max_{x \in X} |f(x)| < +\infty$, so trivially $\calF$ is also pointwise bounded.
+    Because $X$ is a compact metric space, by \cref{Prop:MetricSeqCompactImplySeparable}, we know that $X$ is separable.
+    By \cref{The:AscoliArzela}, we know that $\overline{\calF}$ is sequentially compact, thus by \cref{Prop:MetricCompactIffSeqCompact} we know that $\overline{\calF}$ is compact.
+    
+    \item WTS the $\implies$ direction:
+    Since $\overline{\calF}$ is compact, we know that $\overline{\calF}$ is bounded thus $\calF$ is also bounded.
+    If $\calF$ is not equicontinuous, there exists $\epsilon_o > 0$ such that for all $n \in \bbN$, there exists $x_n,y_n \in X$ and $f_n \in C(X;\bbR)$ such that $d(x_n,y_n) < \nicefrac{1}{n}$ and $|f_n(x_n) - f_n(y_n)| \ge \epsilon_o$.
+    
+    Since $\calF$ is relatively compact, we know $\{f_n\}_{n \in \bbN}$ admits a convergent subsequence $\{f_{n_k}\}_{k \in \bbN}$ such that $f_{n_k} \rightarrow f_o \in C(X;\bbR)$, i.e., $\max_{x \in X} |f_{n_k}(x) - f_o(x)| \rightarrow 0$.
+    Let $k_1 \gg 1$ be such that for all $k \ge k_1$, we have $\max_{x \in X} |f_{n_k}(x) - f_o(x)| < \nicefrac{\epsilon_o}{3}$.
+    Because $f_o$ is continuous and $X$ is compact, we know that $f_o$ is uniformly continuous by \cref{Prop:DomainCompactImplyContImplyUCont}.
+    Hence there exists $\delta > 0$ such that $d(x,y) < \delta$ implies $|f_o(x) - f_o(y)| < \nicefrac{\epsilon_o}{3}$.
+    Now let $k_2 \ge k_1$ be such that for all $k \ge k_2$, we have $d(x_{n_k},y_{n_k}) < \delta$.
+    For all $k \ge k_2$, we observe that
+    \begin{align*}
+      \epsilon_o  & \le |f_{n_k}(x_{n_k}) - f_{n_k}(y_{n_k})|   \\
+      & \le |f_{n_k}(x_{n_k}) - f_o(x_{n_k})| \\
+      & + |f_o(x_{n_k}) - f_o(y_{n_k})| \\
+      & + |f_o(y_{n_k}) - f_{n_k}(y_{n_k}) | \\
+      & < \frac{\epsilon_o}{3} + \frac{\epsilon_o}{3} + \frac{\epsilon_o}{3} \\
+      & = \epsilon_o,
+    \end{align*}
+    which leads to a contradiction.
+  \end{itemize}
+\end{proof}
 
 \section{Stone-Weierstrass Theorem}
 
@@ -3799,9 +3859,24 @@
   Let $\{f_n\}_{n \in \bbN} \subseteq C(X;\bbR)$ be such that for all $x \in X$, we have $f_n(x) \le f_{n+1}(x)$ for all $n \in \bbN$, and $f(x) \coloneqq \lim_{n \to \infty} f_n(x) \in \bbR$.
   If $f : X \to \bbR$ is continuous, then the convergence is uniform.
 \end{theorem}
+\begin{proof}
+  Fix $\epsilon > 0$.
+  For each $x \in X$, since $f_n(x) \rightarrow f(x)$, we know there exists $n_x \in \bbN$ such that for all $n \ge n_x$, we have $0 \le f(x) - f_n(x) \le \epsilon$.
+  On the other hand, $f$ and $f_n$'s are continuous, we know there exists $r_x > 0$ such that if $y \in B(x,r_x)$ then $0 \le f(y) - f_{n_x}(y) \le 3\epsilon$.
+  Now since $X$ is compact and $X = \bigcup_{x \in X} B(x,r_x)$, there exist $m \in \bbN$ and $x_1,\cdots,x_m \in X$ such that $X = \bigcup_{i=1}^m B(x_i,r_{x_i})$.
+  
+  Define $n_\epsilon \coloneqq \max\{n_{x_1},\cdots,n_{x_m}\}$.
+  For all $y \in X$ and $n \ge n_\epsilon$, let $i_o =1,\cdots,m$ be such that $y \in B(x_{i_o},r_{x_{i_o}})$.
+  Thus we have
+  \[
+  0 \le f(y) - f_n(y) \le f(y) - f_{n_{x_{i_o}}}(y) \le 3\epsilon.
+  \]
+  Therefore $\sup_{y \in X} |f(y) - f_n(y)| \le 3\epsilon$.
+\end{proof}
 
 \begin{remark}\label{Rem:ContCompactNecInDini}
   Continuity of $f$ and compactness of $X$ are necessary in \cref{The:Dini}.
+  \diw{TODO}
 \end{remark}
 
 \begin{theorem}[Stone]\label{The:Stone}
@@ -3813,6 +3888,77 @@
   \end{enumerate}
   Then $\calF$ is dense in $C(X;\bbR)$.
 \end{theorem}
+\begin{proof}
+  \underline{Claim (Exercise)}. Define $f(x) \coloneqq \sqrt{x}$ where $x \in [0,1]$.
+  Define $p_0(x) \coloneqq 0$ and
+  \[
+  p_n(x) \coloneqq p_{n-1}(x) + \frac{1}{2}\p{ x - p_{n-1}^2(x) }.
+  \]
+  Then
+  \begin{itemize}
+    \item $p_n$'s are polynomials,
+    \item $0 \le p_n(x) \le \sqrt{x}$ for all $x \in [0,1], n \in \bbN$,
+    \item $p_n(x) \le p_{n+1}(x)$ for all $x \in [0,1], n \in \bbN$, and
+    \item $p_n \rightarrow f$ uniformly on $[0,1]$ (by \cref{The:Dini}). 
+  \end{itemize}
+  
+  \paragraph{Step 1} First let's show $\overline{\calF}$ also satisfies (i), (ii) and (iii), and the first two are trivial.
+  To show $\overline{\calF}$ is an algebra, let's pick $f,g \in \overline{\calF}$.
+  Because $\overline{\calF}$ is also sequentially compact by \cref{Prop:MetricCompactIffSeqCompact}, there exist $\{f_n\}_{n \in \bbN} \subseteq \calF$ and $\{g_n\}_{n \in \bbN} \subseteq \calF$ such that $f_n \rightarrow f$ and $g_n \rightarrow g$.
+  Therefore $f_n + g_n \rightarrow f + g$.
+  Since $\calF$ is an algebra, we know that $f_n + g_n \in \calF$ for every $n \in \bbN$, thus $f+g \in \overline{\calF}$ by \cref{Lem:LimitOfSeqInClosure}.
+  The proof for multiplication and scalar multiplication is similar.
+  
+  \paragraph{Step 2} If $f \in \overline{\calF}$, then $|f| \in \overline{\calF}$.
+  Define $M \coloneqq \max_{x \in X} |f(x)|$ by \cref{The:Weierstrass} on the fact that $X$ is compact and $f$ is continuous.
+  Define $g(x) \coloneqq \nicefrac{|f(x)|}{M} \in [0,1]$.
+  Define
+  \[
+  g_n(x) \coloneqq p_n\p{ \p{\frac{f(x)}{M}}^2 }, n \in \bbN
+  \]
+  such that $g_n \in \overline{\calF}$ for all $n \in \bbN$.
+  By the claim we know that $g_n \rightarrow \sqrt{\p{\nicefrac{f}{M} }^2} = g$ uniformly on $X$.
+  Thus $g \in \overline{\calF}$. Therefore $|f| = M \cdot \nicefrac{|f|}{M} = M \cdot g \in \overline{\calF}$ because $\overline{\calF}$ is an algebra.
+  
+  \paragraph{Step 3} If $f,g\in \overline{\calF}$ then $\max\{f,g\},\min\{f,g\} \in \overline{\calF}$.
+  This is easy by the following observation
+  \begin{align*}
+    \max\{f,g\} & = \frac{1}{2} \p{ f+g+|f-g| }, \\
+    \min\{f,g\} & = \frac{1}{2} \p{ f+g - |f-g| }.
+  \end{align*}
+  
+  \paragraph{Step 4} For all $x,y \in X$ that $x \neq y$, for all $\alpha,\beta \in \bbR$, there exists $g \in \overline{\calF}$ such that $g(x) = \alpha$ and $g(y) = \beta$.
+  We construct such a $g$ as follows
+  \[
+  g(z) \coloneqq \frac{\alpha \cdot \p{f(z) - f(y)} + \beta \cdot \p{ f(x) - f(z) }}{f(x) - f(y)},
+  \]
+  where $f \in \overline{\calF}$ is such that $f(x) \neq f(y)$ ($f$ exists by (i)).
+  
+  \paragraph{Step 5} Finally we can show $\overline{\calF} = C(X;\bbR)$.
+  Let $f \in C(X;\bbR)$ and $\epsilon > 0$.
+  We claim that there exists $g \in \overline{\calF}$ such that $\max_{x \in X} |f(x) -  g(x)| < \epsilon$.
+  
+  By Step 4, for all $x,y \in X$ that $x \neq y$ we find a $g_{x,y} \in \overline{\calF}$ such that $g_{x,y}(x) = f(x)$ and $g_{x,y}(y) = f(y)$.
+  Define open sets
+  \begin{align*}
+    U_{x,y} & \coloneqq \set{ z \in X : g_{x,y}(z) < f(z) + \epsilon }, \\
+    V_{x,y} & \coloneqq \set{z \in X: g_{x,y}(z) > f(z) - \epsilon }.
+  \end{align*}
+  
+  For all $y \in X$, we know that $y \in U_{x,y}$.
+  Then $X = \bigcup_{x \in X} U_{x,y}$.
+  Sine $X$ is compact, there exist $m_y \in \bbN$ and $x_1,\cdots,x_{m_y} \in X$ such that $X = \bigcup_{i=1}^{m_y} U_{x_i,y}$.
+  Now define $g_y \coloneqq \min\{ g_{x_1,y},\cdots,g_{x_{m_y},y}\} \in \overline{\calF}$.
+  Then for all $z \in X$, there exists $i \in \{1,\cdots,m_y\}$ such that $z \in U_{x_i,y}$, thus $g_y(z) \le g_{x_i,y}(z) < f(z) + \epsilon$.
+  
+  Define $V_y \coloneqq \bigcap_{i=1}^{m_y} V_{x_i,y}$.
+  For all $z \in V_y$, we can derive that $g_y(z) > f(z) - \epsilon$.
+  Again since $X$ is compact and $X = \bigcup_{y \in X} V_y$, there exist $n \in \bbN$ and $y_1,\cdots,y_n \in X$ such that $X = \bigcup_{i=1}^n V_{y_i}$.
+  Now define $g \coloneqq \max\{ g_{y_1},\cdots,g_{y_n}\} \in \overline{\calF}$.
+  For all $z \in X$, we have $g_{y_i}(z) < f(z) + \epsilon$ for all $i=1,\cdots,n$, thus $g(z) < f(z) + \epsilon$.
+  On the other hand, there exists $i \in \{1,\cdots,n\}$ such that $z \in V_{y_i}$.
+  Thus $g(z) \ge g_{y_i}(z) > f(z) - \epsilon$.
+\end{proof}
 
 \begin{theorem}[Weierstrass]\label{The:WeierstrassAsCorOfStone}
   Let $K \subseteq \bbR^N$ be compact.
@@ -3823,6 +3969,29 @@
   Let $(X,d)$ be a compact metric space.
   Then $C(X;\bbR)$ is separable.
 \end{corollary}
+\begin{proof}
+  By \cref{Prop:MetricSeqCompactImplySeparable}, we know that $X$ is separable.
+  Let $E = \{x_n : n \in \bbN\}$ be such that $\overline{E} = X$.
+  Define $f_n(x) \coloneqq d(x,x_n)$ to be continuous functions for $n \in \bbN$.
+  
+  \underline{Claim}. $\{f_n : n \in \bbN\}$ separates points.
+  If not, there exists $x,y \in X$ such that $x \ne y$ and $f_n(x) = f_n(y)$ (i.e., $d(x,x_n) = d(y,x_n)$) for all $n \in \bbN$.
+  Let $\{x_{n_k}\}_{k \in \bbN} \subseteq \{x_n\}_{n \in \bbN}$ be such that $x_{n_k} \rightarrow x$.
+  Then $d(x_{n_k},x) \rightarrow 0$, thus $d(x_{n_k},y) \rightarrow 0$.
+  On the other hand, we know that $d(x_{n_k},y) \rightarrow d(x,y)$, thus $d(x,y) = 0$ and $x=y$, which leads to a contradiction.
+  
+  Define $f_0(x) \coloneqq 1$.
+  For all $k \in \bbN$ and $n_1,\cdots,n_k \in \bbN_0$, define
+  \[
+  f_{n_1,\cdots,n_k}(x) \coloneqq f_{n_1}(x) \times \cdots \times f_{n_k}(x).
+  \]
+  Let $\calF$ be all linear combinations of all these functions.
+  By \cref{The:Stone} we have $\overline{\calF} = C(X;\bbR)$.
+  
+  It remains to show the property still holds if we consider only rational coefficients.
+  The idea is that $\bbQ$ is dense in $\bbR$.
+  \diw{TODO}
+\end{proof}
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{db}
