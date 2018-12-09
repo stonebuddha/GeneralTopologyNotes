@@ -3196,11 +3196,145 @@
   A metric space $(X,d)$ is \emph{complete} if every Cauchy sequence converges.
 \end{definition}
 
+\begin{proposition}\label{Prop:MetricCompleteIfCauchyHasConvSub}
+  A metric space $(X,d)$ is complete if every Cauchy sequence in $X$ admits a convergent subsequence.
+\end{proposition}
+
+\begin{lemma}\label{Lem:RNComplete}
+  $\bbR^N$ with $N \in \bbN$ is complete with respect to the standard topology.
+\end{lemma}
+\begin{proof}
+  Let's show the case where $N = 1$.
+  Let $\{a_n\}_{n \in \bbN} \subseteq \bbR$ be a Cauchy sequence.
+  Then there exists $n_o \in \bbN$ such that for all $n \ge n_o$, $|a_n - a_{n_o}| < 1$.
+  Therefore for all $n \in \bbN$, we have
+  \[
+  |a_n| \le \max\set{ |a_1|,\cdots,|a_{n_o}|,|a_{n_o}|+1 },
+  \]
+  thus $\{a_n : n \in \bbN\}$ is bounded.
+  Hence $\overline{\{a_n : n \in \bbN \}}$ is closed and bounded.
+  By \cref{The:HeineBorelProperty}, this set is also compact.
+  By \cref{Prop:MetricCompactIffSeqCompact}, this set is sequentially compact.
+  Thus there exists $\{a_{n_k}\}_{k \in \bbN} \subseteq \{a_n\}_{n \in \bbR}$ such that $a_{n_k} \rightarrow a$ for some $a \in \bbR$.
+  
+  We claim that $a_n \rightarrow a$.
+  Fix $\epsilon > 0$.
+  Then there exists $n_o \in \bbN$ such that for all $n,m \ge n_o$, we have $|a_n-a_m| < \nicefrac{\epsilon}{2}$.
+  Pick $k_o \gg 1$ such that $n_{k_o} \ge n_o$ and for all $k \ge k_o$, $|a_{n_k} - a| < \nicefrac{\epsilon}{2}$.
+  Then if $n \ge n_o$, we have
+  \[
+  |a_n - a| \le |a_n - a_{n_{k_o}}| + |a_{n_{k_o}} - a| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+  \]
+\end{proof}
+
 \begin{theorem}\label{De:MetricSpaceCompletion}
   Let $(X,d_X)$ be a metric space.
   Then there exists a complete metric space $(Y,d_Y)$ and an isometry $f : X \to f(X) \subseteq Y$ (i.e., $d_X(x,y) = d_Y(f(x),f(y))$) such that $\overline{f(X)} = Y$.
   Moreover, $Y$ is unique up to isometries.
 \end{theorem}
+\begin{proof}
+  Define $Z \coloneqq \{ \{x_n\}_{n \in \bbN} \subseteq X : \text{Cauchy sequences} \}$.
+  Define $d_Z(x,z) \coloneqq \lim_{n \to \infty} d_X(x_n,z_n)$ where $x = \{x_n\}_{n \in \bbN}$ and $z = \{z_n\}_{n \in \bbN}$.
+  
+  We claim that $d_Z : Z \times Z \to [0,+\infty)$ is well-defined.
+  For all $n,m \in \bbN$ we have
+  \begin{gather*}
+    \begin{split}
+    d_X(x_n,z_n) & \le d_X(x_n,x_m) + d_X(x_m,z_m) + d_X(z_m,z_n) \\
+    d_X(x_m,z_m) & \le d_X(x_m,x_n) + d_X(x_n,z_n) + d_X(z_n,z_m)
+    \end{split}
+    \shortintertext{thus}
+    \abs{d_X(x_n,z_n) - d_X(x_m,z_m)} \le d_X(x_n,x_m) + d_X(z_n,z_m).
+  \end{gather*}
+  Since $\{x_n\}_{n \in \bbN}, \{z_n\}_{n \in \bbN}$ are Cauchy sequences, we know that $d_X(x_n,x_m) \rightarrow 0$ and $d_X(z_n,z_m) \rightarrow 0 $, thus $\lim_{n,m \to \infty} |d_X(x_n,z_n)-d_X(x_m,z_m)| = 0$, i.e., $\{d_X(x_n,z_n)\}_{n \in \bbN}$ is a Cauchy sequence in $\bbR$.
+  By \cref{Lem:RNComplete} we know that $\{d_X(x_n,z_n)\}_{n \in \bbN}$ converges.
+  
+  It is easy to show that $d_Z$ is a pseudo-metric.
+  Define an equivalence equation ${\sim}$ as $x \sim z$ if $d_Z(x,z) = 0$ where $x = \{x_n\}_{n \in \bbN}, z = \{z_n\}_{n \in \bbN}$.
+  Define $Y \coloneqq \nicefrac{Z}{{\sim}}$ and
+  \[
+  d_Y([\{x_n\}_{n \in \bbN}], [\{z_n\}_{n \in \bbN}]) \coloneqq d_Z(\{x_n\}_{n \in \bbN}, \{z_n\}_{n \in \bbN}) = \lim_{n \to \infty} d_X(x_n,z_n).
+  \]
+  For $x \in X$, define $\hat{x} \coloneqq [\{x_n\}_{n \in \bbN}]$ where $x_n = x$ for all $n \in \bbN$.
+  Now we define $f : X \to Y$ as $f(x) \coloneqq \hat{x}$.
+  Here $f$ defines an isometry because
+  \[
+  d_Y(f(x),f(x')) = d_Y(\hat{x},\hat{x'}) = \lim_{n \to \infty} d_X(x,x') = d_X(x,x').
+  \]
+  
+  \underline{Claim}. $f(X)$ is dense in $Y$.
+  Fix $[\{x_n\}_{n \in \bbN}] \in Y$ and $\epsilon > 0$.
+  It suffices to show that there exists $x \in X$ such that $f(x) \in B_Y([\{x_n\}_{n \in \bbN}],\epsilon)$.
+  Since $\{x_n\}_{n \in \bbN}$ is Cauchy, there exists $n_\epsilon \in \bbN$ such that for all $n,m \ge n_\epsilon$, we have $d_X(x_n,x_m) < \nicefrac{\epsilon}{2}$.
+  Thus
+  \[
+  d_Y(f(x_{n_\epsilon}), [\{x_n\}_{n\in \bbN}]) = \lim_{n \to \infty} d_X(x_{n_\epsilon}, x_n) \le \frac{\epsilon}{2} < \epsilon.
+  \]
+  
+  \underline{Claim}. $Y$ is complete.
+  It suffices to show that every Cauchy sequence in $f(X)$ converges in $Y$ (by the fact that $f(X)$ is dense in $Y$ \diw{TODO}).
+  Let $\{ y_k\}_{k \in \bbN} \subseteq f(X)$ to be a Cauchy sequence w.r.t. $d_Y$.
+  For each $k \in \bbN$ there exists $x_k \in X$ such that $y_k = f(x_k) = \hat{x_k}$.
+  Thus
+  \[
+  \lim_{k,\ell \to \infty} d_X(x_k,x_\ell) = \lim_{k,\ell \to \infty} d_Y(f(x_k), f(x_\ell)) = 0,
+  \]
+  hence $\{x_k\}_{k \in \bbN}$ is a Cauchy sequence in $X$.
+  Define $y_o \coloneqq [\{x_k\}_{k \in \bbN}]$.
+  We want to show that $y_k \rightarrow y_o$.
+  Fix $\epsilon > 0$.
+  Let $n_o \in \bbN$ be such that for all $n,m \ge n_o$, we have $d_X(x_n,x_m) < \nicefrac{\epsilon}{2}$.
+  Thus for $k \ge n_o$, we have
+  \[
+  d_Y(y_k, y_o) = d_Y(\hat{x_k}, [\{x_n\}_{n \in \bbN}]) = \lim_{n \to \infty} d_X(x_k,x_n) \le \frac{\epsilon}{2} < \epsilon,
+  \]
+  therefore $y_k \in B_Y(y_o,\epsilon)$.
+  
+  \underline{Claim}. The completion $Y$ is unique up to isometries.
+  Let $g : X \to g(X)$ be an isometry such that $g(X)$ is dense in a complete space $Y'$.
+  
+  Define $h : Y' \to Y$ as follows.
+  Let $y' \in Y'$.
+  Because $g(X)$ is dense in $Y'$, there exists $\{y_m'\}_{m \in \bbN} \subseteq g(X)$ such that $\lim_{m \to \infty} d_{Y'}(y_m',y') = 0$.
+  Define $x_m \coloneqq g^{-1}(y_m') \in X$ and $y_m \coloneqq f(x_m) \in Y$.
+  Then we claim that $\{y_m\}_{m \in \bbN}$ is Cauchy in $Y$ by the following
+  \[
+  d_Y(y_n,y_m) = d_X(x_n,x_m) = d_{Y'}(y_n',y_m') \rightarrow 0.
+  \]
+  Since $Y$ is complete, there exists $y \in Y$ such that $y_n \rightarrow y$.
+  Now we define $h(y') \coloneqq y$.
+  
+  \underline{Claim}. $h$ is well-defined.
+  Suppose $\bar{y}_n' \rightarrow y'$ in $Y'$.
+  Define $\bar{x}_n' \coloneqq g^{-1}(\bar{y}_n')$ and $\bar{y}_n \coloneqq f(\bar{x}_n')$.
+  Then
+  \[
+  d_Y(\bar{y}_n,y_n) = d_X(\bar{x}_n, x_n) = d_{Y'}(\bar{y}_n',y_n') \rightarrow 0,
+  \]
+  and since $y_n \rightarrow y$, we know that $\bar{y}_n \rightarrow y$.
+  
+  \underline{Claim}. $h$ is an isometry.
+  For all $y_1',y_2' \in Y'$, we want to show that $d_Y(h(y_1'),h(y_2')) = d_{Y'}(y_1',y_2')$.
+  Let $y_m'^{(1)} \rightarrow y_1'$ and $y_n'^{(2)} \rightarrow y_2'$ in $g(X)$.
+  Define $x_m^{(1)} \coloneqq g^{-1}(y_m'^{(1)})$ and $x_n^{(2)} \coloneqq g^{-1}(y_n'^{(2)})$.
+  Define $y_m^{(1)} \coloneqq f(x_m^{(1)}) \rightarrow y_1$.
+  Define $y_n^{(2)} \coloneqq f(x_n^{(2)}) \rightarrow y_2$.
+  Then
+  \begin{align*}
+    d_Y(h(y_1'), h(y_2')) & = d_Y(y_1,y_2) \\
+    & = \lim_{n \to \infty} d_Y(y_n^{(1)},y_n^{(2)}) \\
+    & = \lim_{n \to \infty} d_X(x_n^{(1)},x_n^{(2)}) \\
+    & = \lim_{n \to \infty} d_{Y'}(y_n'^{(1)}, y_n'^{(2)}) \\
+    & = d_{Y'}(y_1',y_2').
+  \end{align*}
+  
+  \underline{Claim}. $h$ is onto.
+  Fix $y \in Y$, then $y = [\{x_n\}_{n\in \bbN}]$ for some Cauchy sequence $\{x_n\}_{n \in \bbN}$ in $X$.
+  Because $g$ is isometry, we know that $\{g(x_n)\}_{n \in \bbN} \subseteq Y'$ is a Cauchy sequence.
+  Since $Y'$ is complete, we know that $g(x_n) \rightarrow y'$ for some $y' \in Y'$.
+  It remains to show that $h(y') = y$.
+  The proof is similar and left for exercise \diw{TODO}.
+\end{proof}
 
 \begin{remark}\label{Rem:CompletionOfQIsR}
   The completion of $\bbQ$ with respect to $d(x,y) \coloneqq |x-y|$ is $\bbR$.
@@ -3214,6 +3348,59 @@
   \]
   Then $C_b(X;Y)$ is complete iff $(Y,d_Y)$ is complete.
 \end{proposition}
+\begin{proof}\
+  \begin{itemize}
+    \item WTS the $\implies$ direction:
+    Let $\{y_n\}_{n \in \bbN} \subseteq Y$ be a Cauchy sequence.
+    Define $f_n : X \to Y$ as $f_n(x) \coloneqq y_n$ for all $x \in X$.
+    It is clear that $f_n \in C_b(X;Y)$ for all $n \in \bbN$.
+    Then we know that $d_\infty(f_n,f_m) = \sup_{x \in X} d_Y(f_n(x),f_m(x)) = d_Y(y_n,y_m) \rightarrow 0$.
+    By assumption we know that $C_b(X;Y)$ is complete, so there exists $f \in C_b(X;Y)$ such that $f_n \rightarrow f$.
+    
+    \underline{Claim}. $f$ is a constant function.
+    For all $x,x' \in X$, we have
+    \[
+    d_Y(f(x), f(x')) \le d_Y(f(x),f_n(x)) + d_Y(f_n(x),f_n(x')) + d_Y(f_n(x'), f(x')) \rightarrow 0,
+    \]
+    thus $f(x) = f(x')$.
+    Let $y \in Y$ be such that $f(x) = y$ for all $x \in X$.
+    
+    \underline{Claim}. $y_n \rightarrow y$.
+    It immediately follows from the fact that $d_Y(y_n,y) = d_\infty(f_n,f) \rightarrow 0$.
+    
+    \item WTS the $\impliedby$ direction:
+    Let $\{f_n\}_{n \in \bbN} \subseteq C_b(X;Y)$ be a Cauchy sequence, i.e., $d_\infty(f_n,f_m) \rightarrow 0$.
+    We want to show that there exists $f \in C_b(X;Y)$ such that $f_n \rightarrow f$.
+    
+    For all $x \in X$, we have $d_Y(f_n(x),f_m(x)) \le d_\infty(f_n,f_m) \rightarrow 0$, thus $\{f_n(x)\}_{n \in \bbN} \subseteq Y$ is a Cauchy sequence.
+    Since $Y$ is complete by assumption, we know that $\{f_n(x)\}_{n \in \bbN}$ converges.
+    Define a function $f : X \to Y$ as $f(X) \coloneqq \lim_{n \to \infty} f_n(x)$.
+    
+    \underline{Claim}. $\sup_{x,x' \in X} d_Y(f(x),f(x')) < +\infty$.
+    Find $n_o \in \bbN$ such that for all $n,m \ge n_o$, we have $d_\infty(f_n,f_m) \le 1$.
+    For $x,x' \in X$, find $n_1 = n(x,x') > n_o$ such that $d_Y(f_{n_1}(x),f(x)) + d_Y(f_{n_1}(x'), f(x')) \le 1$.
+    Then
+    \begin{align*}
+      d_Y(f(x),f(x')) & \le d_Y(f(x),f_{n_1}(x)) \\
+      & + d_Y(f_{n_1}(x), f_{n_o}(x)) \\
+      & + d_Y(f_{n_o}(x), f_{n_o}(x')) \\
+      & + d_Y(f_{n_o}(x'), f_{n_1}(x')) \\
+      & + d_Y(f_{n_1}(x'), f(x')) \\
+      & \le 1 + 1 + 1 + \sup_{z,z'\in X} d_Y(f_{n_o}(z),f_{n_o}(z')) \\
+      & < +\infty,  
+    \end{align*}
+    because $f_{n_o} \in C_b(X;Y)$.
+    
+    \underline{Claim}. $d_\infty(f_n,f) \rightarrow 0$ and then we can conclude continuity by uniform convergence (\cref{Lem:UniformContinuous}).
+    Fix $\epsilon > 0$.
+    Find $n_o \in \bbN$ such that for all $n,m \ge n_o$, we have $d_\infty(f_n,f_m) < \nicefrac{\epsilon}{2}$.
+    Then for all $x \in X$, choose $n_1 = n_1(x) > n_o$ such that $d_Y(f_{n_1}(x),f(x)) < \nicefrac{\epsilon}{2}$.
+    Now for all $n \ge n_o$, we have
+    \[
+    d_Y(f_n(x), f(x)) \le d_Y(f_n(x),f_{n_1}(x)) + d_Y(f_{n_1}(x), f(x)) < \frac{\epsilon}{2} +\frac{\epsilon}{2} = \epsilon.
+    \]
+  \end{itemize}
+\end{proof}
 
 \section{Baire Spaces}
 
