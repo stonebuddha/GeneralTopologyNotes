@@ -3427,6 +3427,33 @@
 \begin{proposition}\label{Prop:BaireIffMeagerSetHasEmptyInt}
   A topological space $(X,\tau)$ is a Baire space iff every meager subset of $X$ has empty interior.
 \end{proposition}
+\begin{proof}\
+  \begin{itemize}
+    \item WTS the $\implies$ direction: Suppose $E = \bigcup_{n=1}^\infty E_n$ where $\overline{E_n}^o = \emptyset$ for all $n \in \bbN$.
+    Then $\overline{(X \setminus E_n)^o} = X \setminus \overline{E_n}^o = X$ for all $n \in \bbN$.
+    Hence $\{ (X \setminus E_n)^o\}_{n \in \bbN}$ is a collection of dense open sets.
+    Since $X$ is Baire, we know that
+    \[
+    \overline{\bigcap_{n=1}^\infty (X \setminus E_n)^o }= X.
+    \]
+    
+    We proceed by contradiction. Suppose there exist $x \in X$ and $U \in \tau$ such that $x \in U$ and $U \subseteq E$.
+    On the other hand, $U \cap \bigcap_{n=1}^\infty (X \setminus E_n)^o \neq \emptyset$, thus there exists $z \in U$ such that $z \in X \setminus E_n$ for all $n \in \bbN$, i.e., $z \not\in E_n$ for all $n \in \bbN$.
+    However, $z \in U \subseteq E = \bigcup_{n=1}^\infty E_n$, which leads to a contradiction.
+    
+    \item WTS the $\impliedby$ direction: Suppose $\{E_n\}_{n \in \bbN}$ is a collection of dense open sets.
+    Then we have
+    \[
+    X \setminus \overline{\bigcap_{n=1}^\infty E_n} = \p{X \setminus \bigcap_{n=1}^\infty E_n}^o = \p{ \bigcup_{n=1}^\infty (X \setminus E_n)}^o.
+    \]
+    We want to show that $X \setminus E_n$ is nowhere dense.
+    We proceed by the following argument
+    \[
+    \overline{X \setminus E_n}^o = (X \setminus E_n)^o = X \setminus \overline{E_n} = X \setminus X = \emptyset.
+    \]
+    Thus $\bigcup_{n=1}^\infty (X \setminus E_n)$ is meager, then by assumption we conclude that this set has an empty interior, therefore $\overline{\bigcap_{n=1}^\infty E_n} = X$.
+  \end{itemize}
+\end{proof}
 
 \begin{corollary}\label{Cor:BaireImplyComplementOfMeagerIsDense}
   Let $(X,\tau)$ be a Baire space and $M$ be a meager subset.
@@ -3436,16 +3463,66 @@
 \begin{theorem}[Baire category theorem]\label{The:BaireCategory}
   If $(X,d)$ is a complete metric space, then it is a Baire space.
 \end{theorem}
+\begin{proof}
+  Suppose $\{U_n\}_{n \in \bbN}$ is a family of dense open sets (the finite case is left for exercise \diw{TODO}).
+  Fix $x_0 \in X$ and $r_0 > 0$.
+  By $x_0 \in X = \overline{U_1}$, we know that $B(x_0,r_0) \cap U_1 \neq \emptyset$.
+  Let $x_1 \in B(x_0,r_0) \cap U_1$.
+  Since $B(x_0,r_0) \cap U_1$ is open, we can find $0 < r_1 < 1$ such that $B(x_1,2r_1) \subseteq B(x_0,r_0) \cap U_1$.
+  Inductively, consider $n \in \bbN$, $x_n \in X$, and $0 < r_n < \nicefrac{1}{n}$.
+  Since $x_n \in X = \overline{U_{n+1}}$, we have $B(x_n,r_n) \cap U_{n+1} \neq \emptyset$, thus we find $x_{n+1} \in B(x_n,r_n) \cap U_{n+1}$ and $0 < r_{n+1} < \nicefrac{1}{n+1}$ such that $B(x_{n+1},2r_{n+1}) \subseteq B(x_n,r_n) \cap U_{n+1}$.
+  We then obtain a chain of open sets:
+  \[
+  \cdots \subseteq B(x_{n+1},2r_{n+1}) \subseteq B(x_n,r_n) \subseteq B(x_n,2r_n) \subseteq \cdots \subseteq B(x_1,2r_1) \subseteq B(x_0,r_0) \cap U_1.
+  \]
+  
+  \underline{Claim}. $\{x_n\}_{n \in \bbN}$ is a Cauchy sequence.
+  Fix $\epsilon > 0$. Pick $k \gg 1$ such that $\nicefrac{2}{k} < \epsilon$.
+  Then for all $n,m \ge k$, we have $x_n,x_m \in B(x_k,r_k)$ hence $d(x_n,x_m) \le d(x_n,x_k)+d(x_k,d_m) < 2r_k < \nicefrac{2}{k} < \epsilon$.
+  Because $X$ is complete, we know $x_n \rightarrow x$ for some $x \in X$.
+  
+  \underline{Claim}. $x \in B(x_0,r_0) \cap U_\ell$ for all $\ell \in \bbN$.
+  Fix $\ell \in \bbN$.
+  For all $n \ge \max\{ \ell, \ceil{\nicefrac{1}{r_\ell}}\}$, we know that $x_n \in B(x_\ell,r_\ell)$, then
+  \[
+  d(x,x_\ell) \le d(x,x_n)+d(x_n,x_\ell) < r_n + r_\ell < \frac{1}{n}+r_\ell \le 2r_\ell.
+  \]
+  Thus $x \in B(x_\ell,2r_\ell) \subseteq B(x_{\ell-1},r_{\ell-1}) \cap U_\ell \subseteq B(x_0,r_0) \cap U_\ell$.
+  
+  Therefore $ B(x_0,r_0) \cap \bigcap_{n=1}^\infty U_n \supseteq \{x\} \neq \emptyset$, and we conclude that $x_0 \in \overline{\bigcap_{n=1}^\infty U_n}$. 
+\end{proof}
 
 \begin{corollary}\label{Cor:CompleteMetricIntersectDenseGDeltaIsDenseGDelta}
   Let $(X,d)$ be a complete metric space.
   Then intersection of a countable family of dense $G_\delta$ sets is also a dense $G_\delta$ set.
 \end{corollary}
+\begin{proof}
+  Let $\{G_n\}_{n \in \bbN}$ be a family of dense $G_\delta$ sets, i.e., $G_n = \bigcap_{k=1}^\infty U_{n,k}$ where $U_{n,k}$'s are open.
+  By the fact that $G_n$'s are dense, we know that $U_{n,k}$'s are also dense.
+  Therefore
+  \[
+  G \coloneqq \bigcap_{n=1}^\infty G_n = \bigcap_{n=1}^\infty \bigcap_{k=1}^\infty U_{n,k}
+  \]
+  is a countable intersection of dense open sets,
+  so by \cref{The:BaireCategory}, we conclude that $G$ is also dense.
+\end{proof}
 
 \begin{theorem}\label{The:LocallyCompactT2ImplyBaire}
   Let $(X,\tau)$ ba a locally compact Hausdorff space.
   Then it is a Baire space.
 \end{theorem}
+\begin{proof}
+  Suppose $\{U_n\}_{n \in \bbN}$ is a family of dense open sets.
+  Fix $x \in X$ and $W$ to be a neighborhood of $x$.
+  Since $x \in X = \overline{U_1}$, we have $W \cap U_1 \neq \emptyset$, so we find $x_1 \in W \cap U_1$ and by \cref{Lem:LocCompT2ThenNeighborContainCompactClosure} we can find an open $V_1$ such that $\overline{V_1}$ is compact and $\{x_1\} \subseteq V_1 \subseteq \overline{V_1} \subseteq W \cap U_1$.
+  Inductively, we can construct a sequence of open sets $\{V_n\}_{n \in \bbN}$ such that $\overline{V_n}$ is compact and $\overline{V_n} \subseteq V_{n-1} \cap U_n$.
+  Thus we obtain a chain of compact (also closed by Hausdorff) sets:
+  \[
+  \cdots \subseteq \overline{V_n} \subseteq \overline{V_{n-1}} \subseteq \cdots \subseteq \overline{V_1}.
+  \]
+  Obviously $\{\overline{V_n}\}_{n \in \bbN}$ satisfies finite intersection property, thus by \cref{Prop:CompactIffFiniteIntersectClosedSetsNonemptyIntersection} with the induced topology on $\overline{V_1}$ we have $K \coloneqq \bigcap_{n=1}^\infty \overline{V_n} \neq \emptyset$.
+  Therefore we conclude the proof by the fact that $\overline{V_1} \subseteq W$ and $K \subseteq \overline{V_m} \subseteq U_m$ for all $m \in \bbN$, thus $\emptyset \neq K \subseteq W \cap (\bigcap_{n=1}^\infty U_n)$.
+\end{proof}
 
 \section{Uniform Continuity}
 
