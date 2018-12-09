@@ -3573,7 +3573,20 @@
 \begin{proof}\
   \begin{itemize}
     \item WTS the $\impliedby$ direction: Fix $\epsilon > 0$.
-    Because $\lim_{s \to 0} \omega(s) = 0$, there exists $\delta > 0$ such that for all $0 \le s < \delta$ we have $\omega(s) < \delta$.
+    Because $\lim_{s \to 0} \omega(s) = 0$, there exists $\delta > 0$ such that for all $0 \le s < \delta$ we have $\omega(s) < \epsilon$.
+    Then if $d_X(x,x') < \delta$, we have $d_Y(f(x),f(x')) \le \omega(d_X(x,x')) < \epsilon$.
+    
+    \item WTS the $\implies$ direction: Define
+    \[
+    \omega(s) \coloneqq \sup\{ d_Y(f(x),f(x')) : d_X(x,x') \le s \}.
+    \]
+    Then trivially we have $d_Y(f(x),f(x')) \le \omega(d_X(x,x'))$ for all $x,x' \in X$.
+    For $s = 0$, by definition of metric spaces we have $d_X(x,x') = 0$ implies $x=x'$, thus $f(x) = f(x')$ and $d_Y(f(x),f(x')) = 0$.
+    Now it remains to show that $\lim_{s \to 0} \omega(s) = 0$.
+    Fix $\epsilon > 0$.
+    Let $\delta > 0$ be such that $d_X(x,x') < \delta$ implies $d_Y(f(x),f(x')) < \epsilon$.
+    Consider $0 < s < \delta$.
+    Let $x,x' \in X$ be such that $d_X(x,x') \le s < \delta$, then $d_Y(f(x),f(x')) < \epsilon$, therefore $\omega(s) \le \epsilon$.
   \end{itemize}
 \end{proof}
 
@@ -3592,6 +3605,19 @@
   If $f : E \to \bbR$ is Lipschitz continuous and $E \subseteq X$ is bounded, then $f$ is H{\"o}lder continuous for all $\alpha \in (0,1)$.
   However, this property does not hold in general if $E$ is unbounded.
 \end{remark}
+\begin{proof}
+  Let $E \subseteq B(x_o,R)$ for some $x_o \in E$ and $R > 0$.
+  Then we have
+  \begin{align*}
+    d_Y(f(x),f(x')) & \le L \cdot d_X(x,x') \\
+    & = L \cdot \p{ d_X(x,x') }^\alpha \p{ d_X(x,x')}^{1-\alpha} \\
+    & \le \p{ L \cdot (2R)^{1-\alpha} } \cdot \p{d_X(x,x')}^\alpha.
+  \end{align*}
+  
+  If $E$ is unbounded, for example, $E = \bbR$, the property does not hold in general.
+  Let $f(x) = x$ with $\mathrm{lip}(f) = 1$.
+  However, $f$ is not H{\"o}lder continuous for any $\alpha \in (0,1)$.
+\end{proof}
 
 \begin{theorem}\label{The:UnifContToCompleteCanBeExtended}
   Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
@@ -3599,6 +3625,45 @@
   Let $f : E \to Y$ be uniformly continuous where $E \subseteq X$.
   Then $f$ can be uniquely extended as a uniformly continuous function $g : \overline{E} \to Y$.
 \end{theorem}
+\begin{proof}\
+  \paragraph{Step 1}
+  If $\{x_n\}_{n \in \bbN} \subseteq E$ is Cauchy, then $\{f(x_n)\}_{n \in \bbN} \subseteq Y$ is also Cauchy.
+  By the uniform continuity of $f$, we know that for all $\epsilon > 0$, there exists $\delta > 0$ such that $d_X(x_n,x_m) < \delta$ implies $d_Y(f(x_n),f(x_m)) < \epsilon$.
+  Since $\{x_n\}_{n \in \bbN}$ is Cauchy, there exists $n_o \in \bbN$ such that for all $n,m \ge n_o$, we have $d_X(x_n,x_m) < \delta$, therefore $d_Y(f(x_n),f(x_m)) < \epsilon$.
+  
+  \paragraph{Step 2} Let's define the function $g : \overline{E} \to Y$.
+  If $x \in E$, simply set $g(x) \coloneqq f(x)$.
+  If $x \in \overline{E} \setminus E$, by \cref{Lem:FirstCountLimitOfSeqIffClosure} there exists $\{x_n\}_{n \in \bbN} \subseteq E$ such that $x_n \rightarrow x$.
+  Since $\{x_n\}_{n \in \bbN}$ converges, we know that it is a Cauchy sequence.
+  Then $\{f(x_n)\}_{n \in \bbN}$ is a Cauchy sequence in $Y$.
+  Since $Y$ is complete, let us define $g(x)$ as $f_n(x) \rightarrow g(x)$.
+  
+  Now let's show that $g$ is well-defined.
+  Consider another sequence $\{z_n\}_{n \in \bbN} \subseteq E$ such that $z_n \rightarrow x$.
+  Then
+  \[
+  d_Y(g(x), f(z_n)) \le d_Y(g(x), f(x_n)) + d_Y(f(x_n), f(z_n)) \rightarrow 0
+  \]
+  by the uniform continuity of $f$.
+  Thus $f(z_n) \rightarrow g(x)$ in $Y$.
+  
+  \paragraph{Step 3}
+  We want to show that $g$ is uniformly continuous.
+  Fix $\epsilon > 0$.
+  Pick $\delta > 0$ such that for all $x,x' \in E$, we have $d_X(x,x') < \delta$ implies $d_Y(f(x),f(x')) < \epsilon$.
+  Fix $\bar{x}, \bar{x}' \in \overline{E}$ such that $d_X(\bar{x},\bar{x}') < \nicefrac{\delta}{2}$.
+  Then there exist $\{x_n\}_{n \in \bbN} \subseteq E$ and $\{x_n'\}_{n \in \bbN} \subseteq E$ such that $x_n \rightarrow \bar{x}$ and $x_n' \rightarrow \bar{x}'$.
+  Hence
+  \[
+    d_Y(g(\bar{x}), g(\bar{x}'))  = \lim_{n \to \infty} d_Y(f(x_n), f(x'_n)).
+  \]
+  Observe that
+  \[
+  d_X(x_n,x_n') \le d_X(x_n,\bar{x}) + d_X(\bar{x}, \bar{x}') + d_X(\bar{x}',x_n') \rightarrow \frac{\delta}{2} < \delta.
+  \]
+  Therefore we can find $n_o \gg 1$ such that $d_X(x_n,x_n') < \delta$ for all $n \ge n_o$.
+  Hence for all $n \ge n_o$, we have $d_Y(f(x_n), f(x_n')) < \epsilon$ and then conclude that $d_Y(g(\bar{x}), g(\bar{x}')) \le \epsilon$.
+\end{proof}
 
 \section{Fixed Point Theorems}
 
@@ -3609,12 +3674,61 @@
 
 \begin{theorem}[Banach's construction principle]\label{The:BanachConstrPrinc}
   Let $(X,d)$ be a complete metric space.
-  If $f : X \to X$ is a contraction (i.e., Lipschitz continuous with $L=1$), then $f$ has a unique fixed point.
+  If $f : X \to X$ is a contraction (i.e., Lipschitz continuous with $L<1$), then $f$ has a unique fixed point.
 \end{theorem}
+\begin{proof}
+  First let's show the uniqueness.
+  Suppose $f(x_1) = x_1$ and $f(x_2) = x_2$.
+  Then $d(x_1,x_2) = d(f(x_1),f(x_2)) \le L \cdot d_X(x_1,x_2)$, but $L < 1$, therefore we have $d(x_1,x_2) = 0$ and so $x_1 = x_2$.
+  
+  Now we claim that such fixed points exist.
+  Fix $x_0 \in X$. Define $x_{n+1} \coloneqq f(x_n)$ for all $n \in \bbN$.
+  
+  \underline{Claim}. $\{x_n\}_{n \in \bbN}$ is a Cauchy sequence.
+  By definition we have $d(x_n,x_{n+1}) \le L^n \cdot d(x_0,x_1)$.
+  Therefore for $n \le m$ we have
+  \[
+  d(x_n,x_m) \le \sum_{i=n}^{m-1} d(x_i,x_{i+1}) \le d(x_0,x_1) \cdot \sum_{i=n}^{m-1} L^{i} \le d(x_0,x_1) \cdot \sum_{i=n}^\infty L^i = d(x_0,x_1) \cdot \frac{L^n}{1 - L}.
+  \]
+  Since $L < 1$, we conclude that for any $\epsilon > 0$ we can find $n_o \gg 1$ such that $d(x_0,x_1) \cdot\nicefrac{L^n}{(1-L)} < \epsilon$.
+  
+  Because $X$ is complete, we know that $x_n \rightarrow x$ for some $x \in X$.
+  Therefore $f(x_n) \rightarrow f(x)$ by the continuity of $f$.
+  On the other hand, $f(x_n) = x_{n+1}$, thus $x_n \rightarrow f(x)$.
+  Hence we conclude that $f(x) = x$.
+\end{proof}
 
 \begin{example}\label{Exa:SolvingIVP}
-  We can use \cref{The:BanachConstrPrinc} to show existence of solutions to an ODE.
-  \diw{TODO}
+  We can use \cref{The:BanachConstrPrinc} to show existence of solutions to an ordinary differential equation (ODE).
+  Consider the following initial value problem (IVP):
+  \begin{align*}
+    u'(t) & = f(t, u(t)) \\
+    u(0) & = u_0  
+  \end{align*}
+  where $t \in \calI \coloneqq [0,\tau]$ and $f: \calI \times \bbR \to \bbR$ is continuous and $|f(t,z_1) - f(t,z_2)| \le L \cdot |z_1-z_2|$ for all $t \in \calI$ and $z_1,z_2 \in \bbR$ with some constant $L > 0$.
+  
+  Consider $X = C([0,T])$ with $T$ indeterminate.
+  By \cref{Prop:BoundedFunctionSpaceCompeteIffRangeComplete}, we know that $X$ is complete.
+  Define $F : C([0,T]) \to C([0,T])$ as
+  \[
+  F(g) \coloneqq \lambda t. u_0 + \int_0^t f(s,g(s)) ds.
+  \]
+  
+  \underline{Claim}. $F$ is a contraction if $T < \nicefrac{1}{L}$.
+  \begin{align*}
+    |F(g_1)(t) - F(g_2)(t)| & = \abs{ \int_0^t \p{ f(s,g_1(s)) - f(s,g_2(s)) } ds  } \\
+    & \le \int_0^t \abs{f(s,g_1(s)) - f(s,g_2(s))} ds \\
+    & \le \int_0^t L \cdot |g_1(s) - g_2(s)| ds \\
+    & \le L \cdot t \cdot \norm{g_1-g_2}_{\ell^\infty([0,T])} \\
+    & \le (L \cdot T) \cdot d_{\ell^\infty}(g_1,g_2).
+  \end{align*}
+
+  Therefore by \cref{The:BanachConstrPrinc}, there exists a unique $u \in C([0,\nicefrac{1}{L}])$ such that $F(u) = u$, i.e., $u(t) = u_0 + \int_0^t f(s,u(s)) ds$.
+  To check whether $u$ is a solution, we have
+  \[
+    u'(t) =  f(s,u(s)), u(0) = u_0 + \int_0^0 f(s,u(s)) ds = u_0.
+  \]
+
 \end{example}
 
 \begin{theorem}[Brouwer's fixed point theorem]\label{The:BrouwerFixedPoint}
@@ -3646,6 +3760,32 @@
   Let $(X,d)$ be a separable metric space and $\calF \subseteq C(X;\bbR)$ be pointwise bounded and equicontinuous.
   Then every sequence in $\calF$ admits a subsequence that converges uniformly on every compact subset of $X$ to a continuous function in $C(X;\bbR)$.
 \end{theorem}
+\begin{proof}
+  Let $E = \{x_n : n \in \bbN\} \subseteq X$ be such that $\overline{E} = X$.
+  Fix $\{f_n\}_{n \in \bbN} \subseteq \calF$.
+  Because $\calF$ is pointwise bounded, we know that $\{f_n(x_1)\}_{n \in \bbN}$ is bounded.
+  By \cref{The:HeineBorelProperty}, we can find $\{f_{n,1}(x_1)\}_{n \in \bbN} \subseteq \{ f_n(x_1) \}_{n \in \bbN}$ such that $f_{n,1}(x_1) \rightarrow \ell^1 \in \bbR$.
+  Similarly, $\{f_{n,1}(x_2)\}_{n \in \bbN}$ is bounded, so we can find $\{f_{n,2}(x_2)\}_{n\in \bbN} \subseteq \{ f_{n,1}(x_2) \}_{n \in \bbN}$ such that $f_{n,2}(x_2) \rightarrow \ell_2 \in \bbR$.
+  Inductively, we can find $\{f_{n,k}\}_{n \in \bbN} \subseteq \{f_{n,k-1}\}_{n \in \bbN}$ and $f_{n,k}(x_k) \rightarrow \ell_k \in \bbR$ for all $k \in \bbN$.
+  
+  Now consider $x_k \in E$.
+  We know that $\{f_{n,n}\}_{n \ge k}$ is a subsequence of $\{f_{n,k}\}_{n \in \bbN}$.
+  Thus $f_{n,n}(x_k) \rightarrow \ell_k$.
+  
+  \underline{Claim}. If $K \subseteq X$ is compact, then for all $\epsilon > 0$, there exists $n_\epsilon \in \bbN$ such that for all $n,m \ge n_\epsilon$ we have $\sup_{x \in K} |f_{n,n}(x) - f_{m,m}(x)| < \epsilon$.
+  
+  Fix $\epsilon > 0$. For each $x \in K$, by equicontinuity of $\calF$ we can find $\delta_x > 0$ such that for all $y \in X$, we have $d(x,y) < \delta_x$ implies that $\sup_{f \in \calF} |f(x) - f(y)| < \nicefrac{\epsilon}{8}$.
+  Since $K$ is compact and $K \subseteq \bigcup_{y \in K} B(y,\delta_y)$, we can find $M \in \bbN$ and $y_1,\cdots,y_M \in K$ such that $K \subseteq \bigcup_{i=1}^M B(y_i,\delta_{y_i})$.
+  Because $\overline{E} = X$, we can find for every $i=1,\cdots,M$ a $x_{z_i} \in B(y_i,\delta_{y_i}) \cap E$.
+  Then $f_{n,n}(x_{z_i}) \rightarrow \ell_{z_i}$.
+  Thus there exists $n_\epsilon \in \bbN$ such that for all $i=1,\cdots,M$ and $n,m \ge n_\epsilon$, we have $|f_{n,n}(x_{z_i}) - f_{m,m}(x_{z_i})| < \nicefrac{\epsilon}{2}$.
+  
+  Fix $x \in K$. Let $i_o \in \{1,\cdots,M\}$ be such that $x \in B(y_{i_o},\delta_{y_{i_o}})$.
+  Then for all $n,m \ge n_\epsilon$, we have
+  \begin{align*}
+    |f_{n,n}(x) - f_{m,m}(x)|
+  \end{align*}
+\end{proof}
 
 \begin{corollary}\label{Cor:RelCompactIffBoundedAndEquicont}
   Let $(X,d)$ be a compact metric space and $\calF \subseteq C(X;\bbR)$.
