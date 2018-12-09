@@ -3536,6 +3536,14 @@
   Let $K \subseteq X$ be a compact subset.
   If a function $f : K \to Y$ is continuous, then it is uniformly continuous.
 \end{proposition}
+\begin{proof}
+  Suppose not.
+  Then there exists $\epsilon_o > 0$ and we can find $\{x_n\}_{n \in \bbN}$, $\{x_n'\}_{n\in \bbN}$ such that $d_X(x_n,x_n') < \nicefrac{1}{n} \rightarrow 0$ and $d_Y(f(x_n),f(x_n')) \ge \epsilon_o$ for all $n\in \bbN$.
+  Because $K$ is compact and thus sequentially compact by \cref{Prop:MetricCompactIffSeqCompact}, $\{x_n\}_{n\in\bbN}$ admits a convergent subsequence $\{x_{n_k}\}_{k \in \bbN}$ with $x_{n_k} \rightarrow x_o \in X$.
+  Since $f$ is continuous and thus sequentially continuous by \cref{Prop:ContImplySeqCont}, we have $f(x_{n_k}) \rightarrow f(x_o)$.
+  Because $d_X(x_n,x_n') \rightarrow 0$, we know that $x_{n_k}' \rightarrow x_o$ in $X$, hence $f(x_{n_k}') \rightarrow f(x_o)$.
+  Therefore we have $d_Y(f(x_{n_k}), f(x_{n_k}')) \rightarrow 0$, which contradicts that $d_Y(f(x_n),f(x_n')) \ge \epsilon_o > 0$ for all $n \in \bbN$.
+\end{proof}
 
 \begin{definition}\label{De:ModulusOfContinuity}
   Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
@@ -3560,8 +3568,14 @@
 \end{definition}
 
 \begin{proposition}\label{Prop:UnifContIffModCont}
-  A function is continuous iff it admits a modulus of continuity.
+  A function is uniformly continuous iff it admits a modulus of continuity.
 \end{proposition}
+\begin{proof}\
+  \begin{itemize}
+    \item WTS the $\impliedby$ direction: Fix $\epsilon > 0$.
+    Because $\lim_{s \to 0} \omega(s) = 0$, there exists $\delta > 0$ such that for all $0 \le s < \delta$ we have $\omega(s) < \delta$.
+  \end{itemize}
+\end{proof}
 
 \begin{remark}\label{Rem:UnifContNotImplyLipHolder}
   In general uniform continuity does not imply Lipschitz or H{\"o}lder continuity.
@@ -3579,7 +3593,7 @@
   However, this property does not hold in general if $E$ is unbounded.
 \end{remark}
 
-\begin{theorem}{The:UnifContToCompleteCanBeExtended}
+\begin{theorem}\label{The:UnifContToCompleteCanBeExtended}
   Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
   Suppose $Y$ is complete.
   Let $f : E \to Y$ be uniformly continuous where $E \subseteq X$.
