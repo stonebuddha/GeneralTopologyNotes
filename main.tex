@@ -3027,9 +3027,28 @@
   Let $(X,\tau)$ be a normal space and $\{U_\alpha\}_{\alpha \in \Lambda}$ be a locally finite open cover of $X$.
   Then there exists a partition of unity subordinated to it.
 \end{theorem}
+\begin{proof}
+  By \cref{Lem:NormalIffAnyPointFinCoverAdmitClosRefineCover}, there exists an open cover $\{W_\alpha\}_{\alpha \in \Lambda}$ such that $\overline{W_\alpha} \subseteq U_\alpha$ and also locally finite.
+  Again by \cref{Lem:NormalIffAnyPointFinCoverAdmitClosRefineCover}, there exists an open cover $\{V_\alpha\}_{\alpha \in \Lambda}$ such that $\overline{V_\alpha} \subseteq W_\alpha$ and also locally finite.
+  Now we have
+  \[
+  \overline{V_\alpha} \subseteq W_\alpha \subseteq \overline{W_\alpha} \subseteq U_\alpha,
+  \]
+  for all $\alpha \in \Lambda$.
+  By \cref{The:Urysohn} on disjoint closed sets $\overline{V_\alpha}$ and $X \setminus W_\alpha$, we have a continuous function $f_\alpha : X \to [0,1]$ such that $f_\alpha \equiv 1$ on $\overline{V_\alpha}$ and $f_\alpha \equiv 0$ on $X \setminus W_\alpha$.
+  Therefore $\mathrm{supp}(f_\alpha) \subseteq \overline{W_\alpha} \subseteq U_\alpha$.
+  
+  Define $f \coloneqq \sum_{\alpha \in \Lambda} f_\alpha(x)$.
+  Since $X = \bigcup_{\alpha \in \Lambda} V_\alpha$, so for every $x \in X$ there exists $\alpha \in \Lambda$ such that $x \in V_\alpha$, thus $f(x) \ge f_\alpha(x) = 1 > 0$.
+  Because $\{U_\alpha\}_{\alpha \in \Lambda}$ is locally finite, we know that for all $x \in X$, there exists a neighborhood $U$ of $x$ such that $\{ \alpha : \mathrm{supp}(f_\alpha) \cap U \neq \emptyset \}$ is finite.
+  Hence $\sum_{\alpha \in \Lambda} f_\alpha$ reduces to a finite sum in $U$, therefore $f$ is continuous.
+  
+  Set $\varphi_\alpha \coloneqq \nicefrac{f_\alpha}{\sum_{\beta \in \Lambda} f_\beta}$ to be continuous functions.
+  Then $\sum_{\alpha \in \Lambda} \varphi_\alpha \equiv 1$ and $\mathrm{supp}(\varphi_\alpha) \subseteq \mathrm{supp}(f_\alpha) \subseteq U_\alpha$ for each $\alpha \in \Lambda$.
+\end{proof}
 
 \begin{definition}\label{De:ParacompactSpace}
-  A topological space $(X,\tau)$ is \emph{paracompact} if it is Hausdorff and if every open cover $\{U_\alpha\}_{\alpha \in \Lambda}$ admits a locally finite refinement.
+  A topological space $(X,\tau)$ is \emph{paracompact} if it is Hausdorff and if every open cover $\{U_\alpha\}_{\alpha \in \Lambda}$ admits a locally finite open refinement.
 \end{definition}
 
 \begin{theorem}\label{The:MetricImplyParacompact}
@@ -3053,6 +3072,59 @@
 \begin{theorem}[Urysohn's metrization theorem]\label{The:UrysohnMetrization}
   A topological space $(X,\tau)$ is metrizable and separable iff it is $T_4$ and has a countable base.
 \end{theorem}
+\begin{proof}\
+  \begin{itemize}
+    \item WTS the $\implies$ direction: Suppose $X$ is metrizable and separable.
+    Then by \cref{Prop:MetricT4}, we know that $X$ is $T_4$.
+    By \cref{Prop:MetricSeparableImplySndAxCount}, $X$ satisfies the second axiom of countability, i.e., $X$ has a countable base.
+    
+    \item WTS the $\impliedby$ direction: The idea is to show $X$ is homeomorphic to a subset of $\ell^2$. Suppose $f : X \to f(X) \subseteq \ell^2$ is a homeomorphism. Then we can define $d(x,y) \coloneqq \norm{f(x) - f(y)}_{\ell^2}$ and conclude by $\tau = \tau_d$.
+    
+    \underline{Claim}. Every closed set is a $G_\delta$, i.e., a countable intersection of open sets.
+    It is equivalent to show that every open set is an $F_\sigma$, i.e., a countable union of closed sets.
+    Fix $U \in \tau$.
+    For each $x \in U$, since $X$ is $T_4$ thus also $T_1$ by \cref{The:HierarchyOfSeparation}, we know that $\{x\}$ is closed in $X$ by \cref{Prop:T1SingletonClosed}.
+    By \cref{Lem:NormalIffNeighborContainClosure}, there exists an open set $V$ such that $\{x\}\subseteq V \subseteq \overline{V} \subseteq U$.
+    Let $\{B_n : n \in \bbN\}$ be a countable base and let $B_x$ be an element of the base such that $x \in B_x \subseteq V$.
+    Then $\{x\} \subseteq B_x \subseteq \overline{B_x} \subseteq \overline{V} \subseteq U$ and $U = \bigcup_{x \in U} \overline{B_X}$, i.e., a countable union of closed sets.
+    
+    Fix a $B_n$ from the base.
+    Then $X \setminus B_n$ is closed, thus a $G_\delta$.
+    Now by \cref{Prop:GdeltaStrongerSeparation}, there exists a continuous $\varphi_n : X \to [0,1]$ such that $\varphi_n \equiv 0$ on $X \setminus B_n$ and $\varphi_n > 0$ of $B_n$.
+    Define a continuous function
+    \[
+    \psi_n(x) \coloneqq \frac{1}{n} \cdot \frac{\varphi_n(x)}{\sqrt{1 + \p{ \varphi(x)}^2}}.
+    \]
+    Then
+    \[
+    \sum_{n=1}^\infty \p{ \psi_n(x)}^2 = \sum_{n=1}^\infty \frac{1}{n^2} \cdot \frac{\p{\varphi_n(x)}^2}{1 + \p{ \varphi(x) }^2} \le \sum_{n=1}^\infty \frac{1}{n^2} < +\infty.
+    \]
+    Now we define $f : X \to \ell^2$ as $f(X) \coloneqq \{ \psi_n(x) \}_{n \in \bbN}$.
+    
+    \underline{Claim}. $f$ is injective.
+    For all $x,y \in X$ satisfying $x \neq y$, since $X$ is $T_1$, there exists $B_n$ from the base such that $x \in B_n$ and $y \not\in B_n$.
+    Thus $\psi_n(x) > 0$ and $\psi_n(y) = 0$.
+    Therefore $\{\psi_n(x)\}_{n \in \bbN} \neq \{ \psi_n(y)\}_{n \in \bbN}$ and $f(x) \neq f(y)$.
+    
+    \underline{Claim}. $f$ is continuous.
+    Fix $x_o \in X$ and $\epsilon > 0$.
+    Let $n_\epsilon \in \bbN$ be such that $\sum_{n = n_\epsilon+1}^\infty \nicefrac{1}{n^2} < \nicefrac{\epsilon^2}{8}$.
+    Consider continuous functions $\psi_1,\cdots,\psi_{n_\epsilon}$.
+    Let $V$ be a neighborhood of $x_o$ such that for all $x \in V$ we have
+    \[
+    \abs{\psi_i(x) - \psi_i(x_o)} < \frac{\epsilon}{\sqrt{2n_\epsilon}}, i = 1,\cdots,n_\epsilon.
+    \]
+    Therefore
+    \begin{align*}
+      \norm{f(x) - f(x_o)}_{\ell^2}^2 & = \sum_{n=1}^{n_\epsilon} \p{ \psi_n(x) - \psi_n(x_o)}^2 + \sum_{n=n_\epsilon+1}^\infty \p{ \psi_n(x) - \psi_n(x_o)}^2 \\
+      & \le n_\epsilon \cdot \frac{\epsilon^2}{2n_\epsilon} +   \sum_{n=n_\epsilon+1}^\infty 2\p{ \p{\psi_n(x)}^2 + \p{\psi_n(x_o)}^2} \\
+      & \le \frac{\epsilon^2}{2} + 4 \cdot \frac{\epsilon^2}{8} \\
+      & = \epsilon^2.
+    \end{align*}
+    
+    \underline{Claim}. $f^{-1}$ is continuous.
+  \end{itemize}
+\end{proof}
 
 \begin{theorem}[Nagata–Smirnov metrization theorem]\label{The:NagataSmirnov}
   A topological space $(X,\tau)$ is metrizable iff it is $T_4$ and has a $\sigma$-locally finite base.
