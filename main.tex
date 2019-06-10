@@ -279,7 +279,7 @@
 \end{proposition}
 \begin{proof}\
 	\begin{itemize}
-		\item For each $x \in \bbR$, $\beta_x \coloneqq \{ [x,x+\nicefrac{1}{n}) : n \in \bbN \}$ is a countable local base of $x$. Therefore $(\bbR,\tau_{\mathrm{sorg}})$ is first countable.
+		\item For each $x \in \bbR$, $\beta_x \coloneqq \{ [x,x+\sfrac{1}{n}) : n \in \bbN \}$ is a countable local base of $x$. Therefore $(\bbR,\tau_{\mathrm{sorg}})$ is first countable.
 		\item We claim that if $\beta \subseteq \tau_{\mathrm{sorg}}$ is a base, the map $\Phi : \beta \to \bbR \cup \{ - \infty \}$ defined as $B \mapsto \inf B$ is onto.
 		Suppose $x \in \bbR$.
 		Because $[x,x+1) \in \tau_{\mathrm{sorg}}$, we know that there exists a collection $\{ U_\alpha\}_{\alpha \in \calI} \subseteq \beta$ such that
@@ -479,11 +479,11 @@
 
 \begin{proposition}\label{Prop:MetricCanAlwaysBounded}
 	Let $(X,d)$ be a metric space.
-	Define $d_1(x,y) \coloneqq \nicefrac{d(x,y)}{(1 + d(x,y))}$.
+	Define $d_1(x,y) \coloneqq \sfrac{d(x,y)}{(1 + d(x,y))}$.
 	Then $(X,d_1)$ is a bounded metric space and $\tau_d = \tau_{d_1}$.
 \end{proposition}
 \begin{proof}
-	For all $x,y \in X$, we have $d_1(x,y) = \nicefrac{d(x,y)}{(1+d(x,y))} < 1$, thus $\mathrm{diam}(X) \le 1$ and $X$ is trivially bounded.
+	For all $x,y \in X$, we have $d_1(x,y) = \sfrac{d(x,y)}{(1+d(x,y))} < 1$, thus $\mathrm{diam}(X) \le 1$ and $X$ is trivially bounded.
 	Obverse that for any $R \in (0,1)$, and for all $x, y \in X$,
 	\begin{align*}
 		& \frac{d(x,y)}{1+d(x,y)} < R \\
@@ -529,12 +529,12 @@
 	\[
 	\max_{x \in K_n} \frac{\abs{f(x)-g(x)}}{1+\abs{f(x)-g(x)}} \le \tilde{d}(f,g)
 	\]
-	and $\nicefrac{1}{2^n} < 1$ for all $n \in \bbN$, we know that $d(f,g) \le \tilde{d}(f,g)$.
+	and $\sfrac{1}{2^n} < 1$ for all $n \in \bbN$, we know that $d(f,g) \le \tilde{d}(f,g)$.
 	By \cref{Lem:SmallerMetricIsWeaker} we know that $\tau_d \subseteq \tau_{\tilde{d}}$.
-	To show $\tau_d \neq \tau_{\tilde{d}}$, we claim that $B_{\tilde{d}}(\mathbf{0},\nicefrac{1}{2})$ is not a neighborhood of $\mathbf{0}$ in $\tau_d$.
-	Suppose it is, then there exists $r > 0$ such that $B_d(\mathbf{0},r) \subseteq B_{\tilde{d}}(\mathbf{0},\nicefrac{1}{2})$.
-	Choose an $m >1$ such that $\nicefrac{1}{2^m} < r$.
-	Define $f \in C((0,1))$ to be the piecewise linear functions through $(0,1)$, $(\nicefrac{1}{(m+1)},1)$, $(\nicefrac{1}{m},0)$, $(1-\nicefrac{1}{m},0)$, $(1-\nicefrac{1}{m+1},1)$ and $(1,1)$.
+	To show $\tau_d \neq \tau_{\tilde{d}}$, we claim that $B_{\tilde{d}}(\mathbf{0},\sfrac{1}{2})$ is not a neighborhood of $\mathbf{0}$ in $\tau_d$.
+	Suppose it is, then there exists $r > 0$ such that $B_d(\mathbf{0},r) \subseteq B_{\tilde{d}}(\mathbf{0},\sfrac{1}{2})$.
+	Choose an $m >1$ such that $\sfrac{1}{2^m} < r$.
+	Define $f \in C((0,1))$ to be the piecewise linear functions through $(0,1)$, $(\sfrac{1}{(m+1)},1)$, $(\sfrac{1}{m},0)$, $(1-\sfrac{1}{m},0)$, $(1-\sfrac{1}{m+1},1)$ and $(1,1)$.
 	Then for all $n \le m$, $f(K_n) = \{0\}$, so
 	\[
 	d(f,\mathbf{0})  = \max_{n > m} \set{ \frac{1}{2^n} \max_{x \in K_n} \frac{f(x)}{1+f(x)}  } < \frac{1}{2^m} < r
@@ -543,7 +543,7 @@
 	\[
 	\tilde{d}(f,\mathbf{0}) = \sup_{x \in (0,1)} \frac{f(x)}{1+f(x)} = \frac{1}{2}
 	\]
-	thus $f \in B_d(\mathbf{0},r)$ and $f \not\in B_{\tilde{d}}(\mathbf{0}, \nicefrac{1}{2})$, which leads to a contradiction.
+	thus $f \in B_d(\mathbf{0},r)$ and $f \not\in B_{\tilde{d}}(\mathbf{0}, \sfrac{1}{2})$, which leads to a contradiction.
 \end{proof}
 
 \begin{definition}\label{De:QuotientMetricSpaces}
@@ -566,7 +566,7 @@
 \end{proposition}
 \begin{proof}
 	Suppose $\sum_{x \in X} f(x) = M < +\infty$.
-	For all $k \in \bbN$, define $X_k \coloneqq \{ x \in X : f(x) > \nicefrac{1}{k} \}$.
+	For all $k \in \bbN$, define $X_k \coloneqq \{ x \in X : f(x) > \sfrac{1}{k} \}$.
 	Then
 	\[
 	\{ x \in X : f(x) > 0 \} = \bigcup_{k \in \bbN} X_k.
@@ -612,12 +612,12 @@
 
 \begin{definition}\label{De:HoldersConjugateExponent}
 	Suppose $1 \le p \le +\infty$.
-	The \emph{H{\"o}lder's conjugate exponent} of $p$ is $p' \coloneqq \nicefrac{p}{(1-p)} \in [1,+\infty]$.
-	Then $\nicefrac{1}{p} + \nicefrac{1}{p'}=1$ and $(p')' = p$.
+	The \emph{H{\"o}lder's conjugate exponent} of $p$ is $p' \coloneqq \sfrac{p}{(1-p)} \in [1,+\infty]$.
+	Then $\sfrac{1}{p} + \sfrac{1}{p'}=1$ and $(p')' = p$.
 \end{definition}
 
 \begin{theorem}[Yang's inequality]\label{The:YangsInequality}
-	Given $1 < p < +\infty$ and $a,b > 0$, we have $ab \le \nicefrac{1}{p}  \cdot a^p + \nicefrac{1}{p'} \cdot b^{p'}$.
+	Given $1 < p < +\infty$ and $a,b > 0$, we have $ab \le \sfrac{1}{p}  \cdot a^p + \sfrac{1}{p'} \cdot b^{p'}$.
 \end{theorem}
 
 \begin{theorem}[H{\"o}lder's inequality]\label{The:HoldersInequality}
@@ -640,7 +640,7 @@
 \end{theorem}
 
 \begin{proposition}\label{Prop:lpVectorSpace}
-	$\ell^p(X)$ is a vector space over $\bbR$ with the norm $\norm{f}_p \coloneqq  \p{\sum_{x \in X} \abs{f(x)}^p}^{\nicefrac{1}{p}}$.
+	$\ell^p(X)$ is a vector space over $\bbR$ with the norm $\norm{f}_p \coloneqq  \p{\sum_{x \in X} \abs{f(x)}^p}^{\sfrac{1}{p}}$.
 \end{proposition}
 \begin{proof}\
 	\begin{itemize}
@@ -892,14 +892,14 @@
 	and we claim that $\beta$ is a base for $\tau_d$.
 	Let $U \in \tau_d$ be an open set.
 	Then for each $x \in U$, there exists $r_x > 0$ such that $B(x,r_x) \subseteq U$.
-	On the other hand, $\overline{E} = X$ implies that $B(x,\nicefrac{r_x}{2}) \cap E \neq \emptyset$, thus we can pick $e_x \in B(x,\nicefrac{r_x}{2}) \cap E$.
-	Then $x \in B(e_x,\nicefrac{r_x}{2})$.
-	On the other hand, for every $y \in B(e_x,\nicefrac{r_x}{2})$, we have
+	On the other hand, $\overline{E} = X$ implies that $B(x,\sfrac{r_x}{2}) \cap E \neq \emptyset$, thus we can pick $e_x \in B(x,\sfrac{r_x}{2}) \cap E$.
+	Then $x \in B(e_x,\sfrac{r_x}{2})$.
+	On the other hand, for every $y \in B(e_x,\sfrac{r_x}{2})$, we have
 	\[
 	d(y,x) \le d(y,e_x) + d(e_x,x) < \frac{r_x}{2} + \frac{r_x}{2} = r_x
 	\]
 	thus $y \in B(x,r_x)$.
-	Hence we know that $B(e_x,\nicefrac{r_x}{2}) \subseteq B(x,r_x) \subseteq U$.
+	Hence we know that $B(e_x,\sfrac{r_x}{2}) \subseteq B(x,r_x) \subseteq U$.
 	Therefore, we conclude the proof by
 	\[
 	U = \bigcup_{x \in U} B\p{e_x, \frac{r_x}{2}}.
@@ -999,7 +999,7 @@
 			\item $\tilde{U} \cap E \supseteq A \cap E  = A \neq \emptyset$ by (i) and (iv),
 			\item $\tilde{V} \cap E \supseteq B \cap E = B \neq \emptyset$ by (i) and (iv),
 			\item $E = A \cup B \subseteq \tilde{U} \cap \tilde{V}$ by (i), and
-			\item $\tilde{U} \cap \tilde{V} = \emptyset$, because for all $x \in B(a,\nicefrac{r_a}{2})$ and $y \in B(b,\nicefrac{r_b}{2})$, we know the following
+			\item $\tilde{U} \cap \tilde{V} = \emptyset$, because for all $x \in B(a,\sfrac{r_a}{2})$ and $y \in B(b,\sfrac{r_b}{2})$, we know the following
 			\begin{align*}
 				& d(a,b) \le d(a,x) + d(x,y) + d(y,b) \\
 				\implies~ & d(x,y) \ge d(a,b) - d(a,x) - d(y,b) \\
@@ -1093,7 +1093,7 @@
 \begin{proof}
 	Suppose $U \in \tau$ and $r^{-1}(U)$ is not open in $[a,b]$.
 	Then there exists $x \in r^{-1}(U)$, such that for all $\epsilon > 0$, $(x-\epsilon,x+\epsilon) \cap [a,b] \not\subseteq r^{-1}(U)$.
-	Define a sequence $\{x_n\}_{n \in \bbN}$ such that for all $n \in \bbN$, $x_n \in ((x-\nicefrac{1}{n},x+\nicefrac{1}{n}) \cap [a,b]) \setminus r^{-1}(U)$.
+	Define a sequence $\{x_n\}_{n \in \bbN}$ such that for all $n \in \bbN$, $x_n \in ((x-\sfrac{1}{n},x+\sfrac{1}{n}) \cap [a,b]) \setminus r^{-1}(U)$.
 	Thus $r(x_n) \not\in U$ for all $n \in \bbN$.
 	Then $x_n \xrightarrow{[a,b]} x$ and because $r$ is continuous, we know that $r(x_n) \xrightarrow{X} r(x) \in U$.
 	By contradiction, we conclude that $r^{-1}(U)$ must be open.
@@ -1443,7 +1443,7 @@
 	We claim that $V$ is open. We conclude the proof by observing that
 	\begin{align*}
 		V & = (-\infty,x) \cup [x+\epsilon,+\infty) \\
-		& = \bigcup_{n \in \bbN} [-n, x-\nicefrac{1}{n}) \cup \bigcup_{m > x + \epsilon} [x+\epsilon,m)
+		& = \bigcup_{n \in \bbN} [-n, x-\sfrac{1}{n}) \cup \bigcup_{m > x + \epsilon} [x+\epsilon,m)
 	\end{align*}
 	
 	Then we need to show that $S$ is not normal.
@@ -1480,7 +1480,7 @@
 	such that $C_1 \subseteq U_1$ and $C_2 \subseteq U_2$.
 	We claim that $U_1 \cap U_2 = \emptyset$.
 	If not, let $z \in U_1 \cap U_2$.
-	Then there exist $x \in C_1$ and $y \in C_2$ such that $z \in B(x,\nicefrac{d(x,C_2)}{3})$ and $z \in B(y,\nicefrac{d(y,C_1)}{3})$.
+	Then there exist $x \in C_1$ and $y \in C_2$ such that $z \in B(x,\sfrac{d(x,C_2)}{3})$ and $z \in B(y,\sfrac{d(y,C_1)}{3})$.
 	Without loss of generality, let's assume $d(y,C_1) \le d(x,C_2)$.
 	Thus
 	\[
@@ -1594,7 +1594,7 @@
 	Define $x_0 \coloneqq \sup S$.
 	\begin{itemize}
 		\item WTS $x_0 > a$: Let $\alpha_0 \in \Lambda$ such that $a \in U_{\alpha_0}$.
-		Because $U_{\alpha_0}$ is open, there exists $\epsilon > 0$ such that $(a-\epsilon,a+\epsilon) \subseteq U_{\alpha_0}$, thus $x_0 \ge a + \nicefrac{\epsilon}{2} > a$.
+		Because $U_{\alpha_0}$ is open, there exists $\epsilon > 0$ such that $(a-\epsilon,a+\epsilon) \subseteq U_{\alpha_0}$, thus $x_0 \ge a + \sfrac{\epsilon}{2} > a$.
 		
 		\item WTS $x_0 = b$: If not, let $\alpha_0 \in \Lambda$ such that $x_0 \in U_{\alpha_0}$.
 		Let $\epsilon > 0$ such that $a < x_0 - \epsilon < x_0 < x_0 + \epsilon < b$ and $(x_0-\epsilon,x_0+\epsilon) \subseteq U_{\alpha_0}$.
@@ -1603,7 +1603,7 @@
 		\[
 		\sq{a,x_0+\frac{\epsilon}{2}} = \sq{a,x_1} \cup \sq{x_1,x_0+\frac{\epsilon}{2}}
 		\]
-		and $[x_1,x_0+\nicefrac{\epsilon}{2}] \subseteq U_{\alpha_0}$, therefore $x_0 + \nicefrac{\epsilon}{2} \in S$ contradicts $\sup S = x_0$.
+		and $[x_1,x_0+\sfrac{\epsilon}{2}] \subseteq U_{\alpha_0}$, therefore $x_0 + \sfrac{\epsilon}{2} \in S$ contradicts $\sup S = x_0$.
 		
 		\item WTS $b \in S$: Let $b \in U_{\alpha_0}$ for $\alpha_0 \in \Lambda$.
 		Then there exists $\epsilon > 0$ such that $(b-\epsilon,b+\epsilon) \subseteq U_{\alpha_0}$.
@@ -1640,7 +1640,7 @@
 	\[
 	E \subseteq \bigcup_{n \in \bbN} B\p{e_n, \frac{1}{2}}
 	\]
-	and $E \cap B(e_n,\nicefrac{1}{2}) = \{ e_n \}$ and so there is no finite subcover,
+	and $E \cap B(e_n,\sfrac{1}{2}) = \{ e_n \}$ and so there is no finite subcover,
 	we conclude the proof.
 \end{example}
 
@@ -1745,24 +1745,24 @@
 	Let $X = \bigcup_{\alpha \in \Lambda} U_\alpha$ where $U_\alpha$'s are open sets.
 	Suppose there does not exist a finite subcover.
 	By \cref{Lem:MetricSeqCompactIsTotallyBounded}, $X$ is totally bounded and $a	\coloneqq \mathrm{diam}(X) < +\infty$.
-	Thus there exist $n \in \bbN$ and $x_1,\cdots,x_n \in X$ such that $X = \bigcup_{i=1}^n B(x_i, \nicefrac{a}{4})$.
-	Moreover, $X = \bigcup_{i=1}^n \overline{B(x_i, \nicefrac{a}{4})}$.
+	Thus there exist $n \in \bbN$ and $x_1,\cdots,x_n \in X$ such that $X = \bigcup_{i=1}^n B(x_i, \sfrac{a}{4})$.
+	Moreover, $X = \bigcup_{i=1}^n \overline{B(x_i, \sfrac{a}{4})}$.
 	Then at least one closed ball cannot be covered with finitely many $U_\alpha$'s.
-	Call it $\overline{B_1}$. Then $\mathrm{diam}(\overline{B_1}) = \nicefrac{a}{2}$ and $\overline{B_1}$ is also sequentially compact.
+	Call it $\overline{B_1}$. Then $\mathrm{diam}(\overline{B_1}) = \sfrac{a}{2}$ and $\overline{B_1}$ is also sequentially compact.
 	So the induced metric space on $\overline{B_1}$ is totally bounded and so there exist $m > 0$ and $y_1,\cdots,y_m \in \overline{B_1}$ such that
 	\[
 	\overline{B_1} = \bigcup_{i=1}^m\p{ \overline{B\p{y_i,\frac{a}{8}}} \cap \overline{B_1} }
 	\]
 	Because $\overline{B_1}=\bigcup_{\alpha \in \Lambda} (\overline{B_1} \cap U_\alpha)$, we know that there exists one closed ball $\overline{B\p{y_i,\frac{a}{8}}}$ that cannot be covered by finitely many $(\overline{B_1} \cap U_\alpha)$'s.
-	Call it $\overline{B_2}$. Then $\mathrm{diam}(\overline{B_2}) \le \nicefrac{a}{4}$.
+	Call it $\overline{B_2}$. Then $\mathrm{diam}(\overline{B_2}) \le \sfrac{a}{4}$.
 	
-	Repeat the process and find nesting closed balls $\overline{B_1} \supseteq \overline{B_2} \supseteq \cdots \supseteq \overline{B_n} \supseteq \cdots$ with $\mathrm{diam}(\overline{B_n}) \le \nicefrac{a}{2^n}$.
+	Repeat the process and find nesting closed balls $\overline{B_1} \supseteq \overline{B_2} \supseteq \cdots \supseteq \overline{B_n} \supseteq \cdots$ with $\mathrm{diam}(\overline{B_n}) \le \sfrac{a}{2^n}$.
 	Pick $x_n \in \overline{B_n}$.
 	Because $X$ is sequentially compact, there exists $\{x_{n_k}\}_{k \in \bbN} \subseteq \{x_n\}_{n \in \bbN}$ such that $x_{n_k} \rightarrow p$.
 	Then $p \in \bigcap_{n=1}^\infty \overline{B_n}$, but since $\mathrm{diam}(\overline{B_n}) \rightarrow 0$, we have indeed $\{p\} = \bigcap_{n=1}^\infty \overline{B_n}$.
 	Let $\alpha_0 \in \Lambda$ such that $p \in U_{\alpha_0}$.
 	Then there exists $r > 0$ such that $B(p,r) \subseteq U_{\alpha_0}$.
-	Let $n_k \gg 1$ such that $d(p,x_{n_k}) < \nicefrac{r}{2}$ and $\mathrm{diam}(\overline{B_{n_k}}) < \nicefrac{r}{2}$.
+	Let $n_k \gg 1$ such that $d(p,x_{n_k}) < \sfrac{r}{2}$ and $\mathrm{diam}(\overline{B_{n_k}}) < \sfrac{r}{2}$.
 	
 	Then we claim that $\overline{B_{n_k}} \subseteq B(p,r) \subseteq U_{\alpha_0}$.
 	For all $y \in \overline{B_{n_k}}$, we have
@@ -1786,9 +1786,9 @@
 	Define $S \coloneqq \{ x^{(m)}_i : m \in \bbN, i=1,\cdots,n_m \}$ to be a countable set.
 	We claim that $S$ is dense in $X$, i.e., $\overline{S} = X$.
 	Fix $x \in X$ and $\epsilon > 0$.
-	Let $m \gg 1$ such that $\nicefrac{1}{m} < \epsilon$.
-	Let $x^{(m)}_i$ be such that $x \in B(x^{(m)}_i, \nicefrac{1}{m})$.
-	Then $x^{(m)}_i \in B(x,\nicefrac{1}{m}) \subseteq B(x,\epsilon)$, therefore $B(x,\epsilon) \cap S \supseteq \{ x^{(m)}_i \} \neq \emptyset$.
+	Let $m \gg 1$ such that $\sfrac{1}{m} < \epsilon$.
+	Let $x^{(m)}_i$ be such that $x \in B(x^{(m)}_i, \sfrac{1}{m})$.
+	Then $x^{(m)}_i \in B(x,\sfrac{1}{m}) \subseteq B(x,\epsilon)$, therefore $B(x,\epsilon) \cap S \supseteq \{ x^{(m)}_i \} \neq \emptyset$.
 	Because $\epsilon$ is arbitrarily chosen, we have $x \in \overline{S}$.
 	Thus we conclude that $\overline{S} = X$.
 	By \cref{Prop:MetricSeparableImplySndAxCount}, we know that the metric space $X$ is second countable.
@@ -2428,28 +2428,28 @@
 	Then there exists a continuous $f : X \to [0,1]$ such that $f|_{C_1} \equiv 1$ and $f|_{C_2} \equiv 0$.
 	We conclude the proof by
 	\begin{gather*}
-		C_1 \subseteq U \coloneqq f^{-1}((\nicefrac{1}{2},1]), \quad C_2 \subseteq V \coloneqq f^{-1}([0,\nicefrac{1}{2}))
+		C_1 \subseteq U \coloneqq f^{-1}((\sfrac{1}{2},1]), \quad C_2 \subseteq V \coloneqq f^{-1}([0,\sfrac{1}{2}))
 		\shortintertext{and}
 		U,V \in \tau ~\text{and}~ U \cap V = \emptyset
 	\end{gather*}
 	
 	To prove the $\implies$ direction, let's assume $X$ is normal and $C_1,C_2$ are disjoint closed sets in $X$. We then proceed to the following construction as $n \to \infty$:
 	\begin{itemize}
-		\item $n=1$: By \cref{Cor:NormalIffNeighborContainClosure}, there exists an open set $U_{\nicefrac{1}{2}}$ such that $C_1 \subseteq U_{\nicefrac{1}{2}}$ and $C_2 \cap \overline{U_{\nicefrac{1}{2}}} = \emptyset$.
-		\item $n=2$: By \cref{Lem:NormalIffNeighborContainClosure}, there exists an open set $U_{\nicefrac{1}{4}}$ such that $C_1 \subseteq U_{\nicefrac{1}{4}} \subseteq \overline{U_{\nicefrac{1}{4}}} \subseteq U_{\nicefrac{1}{2}}$.
-		Then by \cref{Cor:NormalIffNeighborContainClosure}, there exists an open set $U_{\nicefrac{3}{4}}$ such that $\overline{U_{\nicefrac{1}{2}}} \subseteq U_{\nicefrac{3}{4}}$ and $C_2 \cap \overline{U_{\nicefrac{3}{4}}} = \emptyset$.
+		\item $n=1$: By \cref{Cor:NormalIffNeighborContainClosure}, there exists an open set $U_{\sfrac{1}{2}}$ such that $C_1 \subseteq U_{\sfrac{1}{2}}$ and $C_2 \cap \overline{U_{\sfrac{1}{2}}} = \emptyset$.
+		\item $n=2$: By \cref{Lem:NormalIffNeighborContainClosure}, there exists an open set $U_{\sfrac{1}{4}}$ such that $C_1 \subseteq U_{\sfrac{1}{4}} \subseteq \overline{U_{\sfrac{1}{4}}} \subseteq U_{\sfrac{1}{2}}$.
+		Then by \cref{Cor:NormalIffNeighborContainClosure}, there exists an open set $U_{\sfrac{3}{4}}$ such that $\overline{U_{\sfrac{1}{2}}} \subseteq U_{\sfrac{3}{4}}$ and $C_2 \cap \overline{U_{\sfrac{3}{4}}} = \emptyset$.
 		So now we have
 		\[
-		C_1 \subseteq U_{\nicefrac{1}{4}} \subseteq \overline{U_{\nicefrac{1}{4}}} \subseteq U_{\nicefrac{1}{2}} \subseteq \overline{U_{\nicefrac{1}{2}}} \subseteq   U_{\nicefrac{3}{4}} \subseteq \overline{U_{\nicefrac{3}{4}}} \subseteq X \setminus C_2
+		C_1 \subseteq U_{\sfrac{1}{4}} \subseteq \overline{U_{\sfrac{1}{4}}} \subseteq U_{\sfrac{1}{2}} \subseteq \overline{U_{\sfrac{1}{2}}} \subseteq   U_{\sfrac{3}{4}} \subseteq \overline{U_{\sfrac{3}{4}}} \subseteq X \setminus C_2
 		\]
 		\item $n = 3$: Repeat the process and we will obtain
 		\begin{align*}
-		& C_1 \subseteq U_{\nicefrac{1}{2^3}} \subseteq \overline{U_{\nicefrac{1}{2^3}}} \subseteq U_{\nicefrac{1}{2^2}} \subseteq \overline{U_{\nicefrac{1}{2^2}} } \subseteq U_{\nicefrac{3}{2^3}} \subseteq \overline{U_{\nicefrac{3}{2^3}}} \subseteq U_{\nicefrac{1}{2}} \\
-		\subseteq ~ & \overline{U_{\nicefrac{1}{2}}} \subseteq U_{\nicefrac{5}{2^3}} \subseteq \overline{U_{\nicefrac{5}{2^3}}} \subseteq U_{\nicefrac{3}{2^2}} \subseteq \overline{U_{\nicefrac{3}{2^2}}} \subseteq U_{\nicefrac{7}{2^3}} \subseteq \overline{U_{\nicefrac{7}{2^3}}} \subseteq X \setminus C_2
+		& C_1 \subseteq U_{\sfrac{1}{2^3}} \subseteq \overline{U_{\sfrac{1}{2^3}}} \subseteq U_{\sfrac{1}{2^2}} \subseteq \overline{U_{\sfrac{1}{2^2}} } \subseteq U_{\sfrac{3}{2^3}} \subseteq \overline{U_{\sfrac{3}{2^3}}} \subseteq U_{\sfrac{1}{2}} \\
+		\subseteq ~ & \overline{U_{\sfrac{1}{2}}} \subseteq U_{\sfrac{5}{2^3}} \subseteq \overline{U_{\sfrac{5}{2^3}}} \subseteq U_{\sfrac{3}{2^2}} \subseteq \overline{U_{\sfrac{3}{2^2}}} \subseteq U_{\sfrac{7}{2^3}} \subseteq \overline{U_{\sfrac{7}{2^3}}} \subseteq X \setminus C_2
 		\end{align*}
 		\item $n \to \infty$: Repeat the construction above.
 	\end{itemize}
-	Then for each dyadic rational $r = \nicefrac{k}{2^n}$ where $k=1,\cdots,2^n-1$, there exists an open $U_r$ such that $C_1 \subseteq U_r, C_2 \cap \overline{U_r} = \emptyset$, and for all $r < s$, $\overline{U_r} \subseteq U_s$.
+	Then for each dyadic rational $r = \sfrac{k}{2^n}$ where $k=1,\cdots,2^n-1$, there exists an open $U_r$ such that $C_1 \subseteq U_r, C_2 \cap \overline{U_r} = \emptyset$, and for all $r < s$, $\overline{U_r} \subseteq U_s$.
 	Now we define $f : X \to [0,1]$ as
 	\[
 	f(x) \coloneqq \begin{dcases}
@@ -2462,7 +2462,7 @@
 	Fix $x \in X$ and $\epsilon > 0$.
 	\begin{itemize}
 		\item If $f(x) = 1$: Then $x \not\in U_r$ for all $r$.
-		Pick a dyadic $s$ such that $1 - s < \nicefrac{\epsilon}{2}$ and a dyadic $r < s$ such that $s - r < \nicefrac{\epsilon}{2}$.
+		Pick a dyadic $s$ such that $1 - s < \sfrac{\epsilon}{2}$ and a dyadic $r < s$ such that $s - r < \sfrac{\epsilon}{2}$.
 		Then $x \not\in U_s$ implies that $x \not\in \overline{U_r}$.
 		Thus there exists a neighborhood $V$ of $x$ such that $V \cap U_r = \emptyset$.
 		Hence for all $z \in V$, we know that $z \not\in U_r$ and so $\inf\{t : z \in U_t\} \ge r$.
@@ -2475,10 +2475,10 @@
 		\item Otherwise, if $0 < f(x) < 1$:
 		By definition, $f(x) = \inf\{ s : x \in U_s\}$, so there exists a dyadic $s_0$ such that $f(x) \le s_0 \le f(x) + \epsilon$ and $x \in U_{s_0}$.
 		On the other hand, $x \not\in U_r$ for all $r < f(x)$.
-		Pick a dyadic $r_0$ such that $f(x) - \nicefrac{\epsilon}{2} < r_0 < f(x)$.
+		Pick a dyadic $r_0$ such that $f(x) - \sfrac{\epsilon}{2} < r_0 < f(x)$.
 		Then by \cref{Prop:SomeEquivResultsAboutContFunc}(2) we conclude that $f$ is continuous.
 		Thus for all $t < r_0$, we know that $\overline{U_t} \subseteq U_{r_0}$, so $x \not\in \overline{U_t}$.
-		Pick a dyadic $t_0 < r_0$ such that $r_0 - t_0 < \nicefrac{\epsilon}{2}$.
+		Pick a dyadic $t_0 < r_0$ such that $r_0 - t_0 < \sfrac{\epsilon}{2}$.
 		Define $V \coloneqq U_{s_0} \setminus \overline{U_{t_0}}$ to be a neighborhood of $x$.
 		For all $z \in V$, on the one hand, we have $f(z) - f(x) \le s_0 - f(x) \le \epsilon$ and on the other hand, we have $f(z) - f(x) \ge t_0 - f(x) = (t_0 - r_0) + (r_0 - f(x)) > -\epsilon$.
 		Therefore $|f(z) - f(x)| \le \epsilon$.
@@ -2502,7 +2502,7 @@
 \end{proposition}
 \begin{proof}\
 	\begin{enumerate}
-		\item  The $\impliedby$ direction is straightforward by $C = \bigcap_{n=1}^\infty f^{-1}([0,\nicefrac{1}{n}))$.
+		\item  The $\impliedby$ direction is straightforward by $C = \bigcap_{n=1}^\infty f^{-1}([0,\sfrac{1}{n}))$.
 		
 		To show the $\implies$ direction, let's assume $C = \bigcap_{n=1}^\infty U_n$ where $U_n$'s are open.
 		For each $n \in \bbN$, $C \subseteq U_n$ and so $C$ and $X \setminus U_n$ are disjoint closed sets, then by \cref{The:Urysohn} we know there exists a continuous $f_n : X \to [0,1]$ such that $f_n|_C \equiv 0$ and $f_n|_{X \setminus U_n} \equiv 1$.
@@ -2515,8 +2515,8 @@
 		
 		Then it suffices to show that $f$ is continuous.
 		Fix $x \in X$ and $\epsilon > 0$.
-		Then there exists $n_0 \in \bbN$ such that $\sum_{n=n_0}^\infty \frac{1}{2^n-1} < \nicefrac{\epsilon}{2}$.
-		Because $f_1,\cdots,f_{n_0-1}$ are continuous, there exists a neighborhood $U$ of $x$ such that for all $y \in U$, $|f_n(y) - f_n(x)| < \nicefrac{\epsilon}{2}$ for $n=1,\cdots,n_0-1$.
+		Then there exists $n_0 \in \bbN$ such that $\sum_{n=n_0}^\infty \frac{1}{2^n-1} < \sfrac{\epsilon}{2}$.
+		Because $f_1,\cdots,f_{n_0-1}$ are continuous, there exists a neighborhood $U$ of $x$ such that for all $y \in U$, $|f_n(y) - f_n(x)| < \sfrac{\epsilon}{2}$ for $n=1,\cdots,n_0-1$.
 		Therefore
 		\[
 			|f(y) - f(x)|  \le \sum_{n=1}^{n_0-1} \frac{1}{2^n} |f_n(y) - f_n(x)| + \sum_{n=n_0}^\infty \frac{2}{2^n} < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
@@ -2525,7 +2525,7 @@
 		
 		\item The $\impliedby$ direction is straightforward by
 		\[
-		C_1 = \bigcap_{n=1}^\infty f^{-1}((1-\nicefrac{1}{n},1]), \quad C_2 = \bigcap_{n=1}^\infty f^{-1}([0,\nicefrac{1}{n}))
+		C_1 = \bigcap_{n=1}^\infty f^{-1}((1-\sfrac{1}{n},1]), \quad C_2 = \bigcap_{n=1}^\infty f^{-1}([0,\sfrac{1}{n}))
 		\]
 		
 		To show the $\implies$ direction, let's assume disjoint closed sets $C_1,C_2$ are $G_\delta$.
@@ -2646,8 +2646,8 @@
 \end{lemma}
 \begin{proof}
 	Fix $x_0 \in X$ and $\epsilon > 0$.
-	By assumption, there exists an $n_0 \in \bbN$ such that $\sup_{x \in X} |f_{n_0}(x) - f(x)| < \nicefrac{\epsilon}{3}$.
-	Because $f_{n_0}$ is continuous, there exists a neighborhood $U$ of $x_0$ such that for all $y \in U$, we have $|f_{n_0}(y) - f_{n_0}(x_0)| < \nicefrac{\epsilon}{3}$ by \cref{Prop:SomeEquivResultsAboutContFunc}(2).
+	By assumption, there exists an $n_0 \in \bbN$ such that $\sup_{x \in X} |f_{n_0}(x) - f(x)| < \sfrac{\epsilon}{3}$.
+	Because $f_{n_0}$ is continuous, there exists a neighborhood $U$ of $x_0$ such that for all $y \in U$, we have $|f_{n_0}(y) - f_{n_0}(x_0)| < \sfrac{\epsilon}{3}$ by \cref{Prop:SomeEquivResultsAboutContFunc}(2).
 	Therefore
 	\begin{align*}
 		|f(y) - f(x_0)| & \le |f(y) - f_{n_0}(y)| + |f_{n_0}(y) - f_{n_0}(x_0)| + |f_{n_0}(x_0) - f(x_0)| \\
@@ -2679,19 +2679,19 @@
 	Then let's prove the $\implies$ direction.
 	\begin{itemize}
 		\item First, let's show the result holds for $f : C \to [-1,1]$, i.e., $f$ is bounded.
-		Then $f^{-1}([\nicefrac{1}{3},1])$ and $f^{-1}([-1,-\nicefrac{1}{3}])$ are disjoint closed sets in $C$, thus are also closed in $X$.
-		By \cref{The:Urysohn}, there exists a continuous $f_1 : X \to [-\nicefrac{1}{3},\nicefrac{1}{3}]$ such that
+		Then $f^{-1}([\sfrac{1}{3},1])$ and $f^{-1}([-1,-\sfrac{1}{3}])$ are disjoint closed sets in $C$, thus are also closed in $X$.
+		By \cref{The:Urysohn}, there exists a continuous $f_1 : X \to [-\sfrac{1}{3},\sfrac{1}{3}]$ such that
 		\[
-		f_1|_{f^{-1}([\nicefrac{1}{3},1])} \equiv \frac{1}{3}, \quad
-		f_1|_{f^{-1}([-1,-\nicefrac{1}{3}])} \equiv -\frac{1}{3}
+		f_1|_{f^{-1}([\sfrac{1}{3},1])} \equiv \frac{1}{3}, \quad
+		f_1|_{f^{-1}([-1,-\sfrac{1}{3}])} \equiv -\frac{1}{3}
 		\]
-		We claim that $|f - f_1| \le \nicefrac{2}{3}$ on $C$.
+		We claim that $|f - f_1| \le \sfrac{2}{3}$ on $C$.
 		\begin{itemize}
-			\item If $f(x) \in [-1,-\nicefrac{1}{3}]$, we have $f_1(x) = -\nicefrac{1}{3}$, then done.
-			\item If $f(x) \in [\nicefrac{1}{3},1]$, we have $f_1(x) = \nicefrac{1}{3}$, then done.
-			\item Otherwise, if $f(x) \in (-\nicefrac{1}{3}, \nicefrac{1}{3})$, we conclude the proof by $f_1(x) \in [-\nicefrac{1}{3},\nicefrac{1}{3}]$.
+			\item If $f(x) \in [-1,-\sfrac{1}{3}]$, we have $f_1(x) = -\sfrac{1}{3}$, then done.
+			\item If $f(x) \in [\sfrac{1}{3},1]$, we have $f_1(x) = \sfrac{1}{3}$, then done.
+			\item Otherwise, if $f(x) \in (-\sfrac{1}{3}, \sfrac{1}{3})$, we conclude the proof by $f_1(x) \in [-\sfrac{1}{3},\sfrac{1}{3}]$.
 		\end{itemize}
-		Repeat the argument with $f \gets f - f_1$, we obtain a continuous function $f_2 : X \to [-\nicefrac{2}{9}, \nicefrac{2}{9}]$ such that $|(f-f_1)-f_2| \le (\nicefrac{2}{3})^2$ on $C$.
+		Repeat the argument with $f \gets f - f_1$, we obtain a continuous function $f_2 : X \to [-\sfrac{2}{9}, \sfrac{2}{9}]$ such that $|(f-f_1)-f_2| \le (\sfrac{2}{3})^2$ on $C$.
 		Then we will get a series of functions $\{f_n\}_{n \in \bbN}$ where
 		\begin{gather*}
 			f_n : X \to \sq{ -\frac{1}{3} \p{\frac{2}{3}}^{n-1}, \frac{1}{3} \p{ \frac{2}{3} }^{n-1} }
@@ -2882,7 +2882,7 @@
   \begin{itemize}
     \item WTS the $\implies$ direction: Assume $\lim_{x \to x_o} f(x) = L \in \bbR$.
     Fix $\epsilon > 0$.
-    Then there exists a neighborhood $U_\epsilon$ of $x_o$ such that $x \in (U_\epsilon \cap E) \setminus \{x_o\}$ implies $|f(x_o)-L| < \nicefrac{\epsilon}{2}$.
+    Then there exists a neighborhood $U_\epsilon$ of $x_o$ such that $x \in (U_\epsilon \cap E) \setminus \{x_o\}$ implies $|f(x_o)-L| < \sfrac{\epsilon}{2}$.
     Thus we conclude that for all $x_1,x_2 \in (U_\epsilon \cap E) \setminus \{x_o\}$, we have
     \[
     |f(x_1)-f(x_2)| \le |f(x_1)-L|+|L-f(x_2)| < \frac{\epsilon}{2}+\frac{\epsilon}{2} = \epsilon.
@@ -2963,15 +2963,15 @@
     & = \frac{1}{n+1} f(x) \\
     & > 0.
   \end{align*}
-  Define $\varphi_i \coloneqq \nicefrac{g_i}{\sum_{j=1}^n g_j}$ to be a continuous function for $i=1,\cdots,n$.
+  Define $\varphi_i \coloneqq \sfrac{g_i}{\sum_{j=1}^n g_j}$ to be a continuous function for $i=1,\cdots,n$.
   Then we have $\sum_{i=1}^n \varphi_i \equiv 1$ and $\mathrm{supp}(\varphi_i) = \mathrm{supp}(g_i) \subseteq U_i$ for each $i$.
   
   \paragraph{Step 2}
   Secondly, let's consider $\Lambda = \bbN$.
   By \cref{Prop:MetricCanAlwaysBounded}, let's assume $d(x,y) < 1$ for all $x,y\in X$ without loss of generality.
-  For all $i \in \bbN$, define a continuous function $f_i : X \to [0, \nicefrac{1}{2^i}]$ as $f_i(x) \coloneqq \min\{ d(x, X \setminus U_i), \nicefrac{1}{2^i}\}$.
+  For all $i \in \bbN$, define a continuous function $f_i : X \to [0, \sfrac{1}{2^i}]$ as $f_i(x) \coloneqq \min\{ d(x, X \setminus U_i), \sfrac{1}{2^i}\}$.
   For all $x \in U_i$, we know that $x \not\in X \setminus U_i$, but $X \setminus U_i$ is closed, hence $f_i(x) > 0$.
-  Define $f \coloneqq \sum_{i=1}^\infty \nicefrac{1}{2^{i-1}} \cdot f_i$.
+  Define $f \coloneqq \sum_{i=1}^\infty \sfrac{1}{2^{i-1}} \cdot f_i$.
   Then $f$ is a continuous function.
   Since $X = \bigcup_{i=1}^\infty U_i$, we know that for every $x \in U_i$, we have $f(x) \ge f_i(x) > 0$.
   Define
@@ -2990,7 +2990,7 @@
   \underline{Claim 1}. $\{g_i\}_{i \in \bbN}$ is locally finite, thus $\sum_{i=1}^\infty g_i$ is continuous.
   Fix $x \in X$.
   Then there exist $\epsilon > 0$ and $r >0$ such that $y \in B(x,r)$ implies $f(y) > \epsilon$.
-  Find $i_o \in \bbN$ such that $\nicefrac{1}{2^{i_o}} < \nicefrac{\epsilon}{3}$.
+  Find $i_o \in \bbN$ such that $\sfrac{1}{2^{i_o}} < \sfrac{\epsilon}{3}$.
   Thus for all $y \in B(x,r)$ and $i \ge i_o$, we have
   \[
   f_i(y) - \frac{1}{3} f(y) \le \frac{1}{2^i} - \frac{\epsilon}{3} \le \frac{1}{2^{i_o}} - \frac{\epsilon}{3} < 0
@@ -3001,7 +3001,7 @@
   \underline{Claim 2}. $\sum_{i=1}^\infty g_i(x) > 0$ for all $x \in X$.
   Fix $x \in X$.
   Then there exists $i \in \bbN$ such that $x \in U_i$, thus $f_i(x) > 0$.
-  On the other hand, for all $n \ge i$ we know $f_n(x) \le \nicefrac{1}{2^n} \le \frac{1}{2^i}$.
+  On the other hand, for all $n \ge i$ we know $f_n(x) \le \sfrac{1}{2^n} \le \frac{1}{2^i}$.
   Thus there exists $i_o \in \bbN$ such that $f_{i_o}(x) = \sup_{i \in \bbN} f_i(x) > 0$.
   Therefore
   \begin{gather*}
@@ -3010,7 +3010,7 @@
   g(x) \ge g_{i_o}(x) \ge f_{i_o}(x) - \frac{1}{3} f(x) \ge f_{i_o}(x) - \frac{2}{3} f_{i_o}(x) = \frac{1}{3}f_{i_o}(x) > 0.
   \end{gather*}
   
-  Now we define $\varphi_i \coloneqq \nicefrac{g_i}{\sum_{j=1}^\infty g_j}$ to be a continuous function for $i \in \bbN$.
+  Now we define $\varphi_i \coloneqq \sfrac{g_i}{\sum_{j=1}^\infty g_j}$ to be a continuous function for $i \in \bbN$.
   Then we have $\sum_{i=1}^\infty \varphi_i \equiv 1$ and $\mathrm{supp}(\varphi_i) = \mathrm{supp}(g_i) \subseteq U_i$ for each $i$.
   
   \paragraph{Step 3}
@@ -3043,7 +3043,7 @@
   Because $\{U_\alpha\}_{\alpha \in \Lambda}$ is locally finite, we know that for all $x \in X$, there exists a neighborhood $U$ of $x$ such that $\{ \alpha : \mathrm{supp}(f_\alpha) \cap U \neq \emptyset \}$ is finite.
   Hence $\sum_{\alpha \in \Lambda} f_\alpha$ reduces to a finite sum in $U$, therefore $f$ is continuous.
   
-  Set $\varphi_\alpha \coloneqq \nicefrac{f_\alpha}{\sum_{\beta \in \Lambda} f_\beta}$ to be continuous functions.
+  Set $\varphi_\alpha \coloneqq \sfrac{f_\alpha}{\sum_{\beta \in \Lambda} f_\beta}$ to be continuous functions.
   Then $\sum_{\alpha \in \Lambda} \varphi_\alpha \equiv 1$ and $\mathrm{supp}(\varphi_\alpha) \subseteq \mathrm{supp}(f_\alpha) \subseteq U_\alpha$ for each $\alpha \in \Lambda$.
 \end{proof}
 
@@ -3108,7 +3108,7 @@
     
     \underline{Claim}. $f$ is continuous.
     Fix $x_o \in X$ and $\epsilon > 0$.
-    Let $n_\epsilon \in \bbN$ be such that $\sum_{n = n_\epsilon+1}^\infty \nicefrac{1}{n^2} < \nicefrac{\epsilon^2}{8}$.
+    Let $n_\epsilon \in \bbN$ be such that $\sum_{n = n_\epsilon+1}^\infty \sfrac{1}{n^2} < \sfrac{\epsilon^2}{8}$.
     Consider continuous functions $\psi_1,\cdots,\psi_{n_\epsilon}$.
     Let $V$ be a neighborhood of $x_o$ such that for all $x \in V$ we have
     \[
@@ -3219,8 +3219,8 @@
   
   We claim that $a_n \rightarrow a$.
   Fix $\epsilon > 0$.
-  Then there exists $n_o \in \bbN$ such that for all $n,m \ge n_o$, we have $|a_n-a_m| < \nicefrac{\epsilon}{2}$.
-  Pick $k_o \gg 1$ such that $n_{k_o} \ge n_o$ and for all $k \ge k_o$, $|a_{n_k} - a| < \nicefrac{\epsilon}{2}$.
+  Then there exists $n_o \in \bbN$ such that for all $n,m \ge n_o$, we have $|a_n-a_m| < \sfrac{\epsilon}{2}$.
+  Pick $k_o \gg 1$ such that $n_{k_o} \ge n_o$ and for all $k \ge k_o$, $|a_{n_k} - a| < \sfrac{\epsilon}{2}$.
   Then if $n \ge n_o$, we have
   \[
   |a_n - a| \le |a_n - a_{n_{k_o}}| + |a_{n_{k_o}} - a| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
@@ -3251,7 +3251,7 @@
   
   It is easy to show that $d_Z$ is a pseudo-metric.
   Define an equivalence equation ${\sim}$ as $x \sim z$ if $d_Z(x,z) = 0$ where $x = \{x_n\}_{n \in \bbN}, z = \{z_n\}_{n \in \bbN}$.
-  Define $Y \coloneqq \nicefrac{Z}{{\sim}}$ and
+  Define $Y \coloneqq \sfrac{Z}{{\sim}}$ and
   \[
   d_Y([\{x_n\}_{n \in \bbN}], [\{z_n\}_{n \in \bbN}]) \coloneqq d_Z(\{x_n\}_{n \in \bbN}, \{z_n\}_{n \in \bbN}) = \lim_{n \to \infty} d_X(x_n,z_n).
   \]
@@ -3265,7 +3265,7 @@
   \underline{Claim}. $f(X)$ is dense in $Y$.
   Fix $[\{x_n\}_{n \in \bbN}] \in Y$ and $\epsilon > 0$.
   It suffices to show that there exists $x \in X$ such that $f(x) \in B_Y([\{x_n\}_{n \in \bbN}],\epsilon)$.
-  Since $\{x_n\}_{n \in \bbN}$ is Cauchy, there exists $n_\epsilon \in \bbN$ such that for all $n,m \ge n_\epsilon$, we have $d_X(x_n,x_m) < \nicefrac{\epsilon}{2}$.
+  Since $\{x_n\}_{n \in \bbN}$ is Cauchy, there exists $n_\epsilon \in \bbN$ such that for all $n,m \ge n_\epsilon$, we have $d_X(x_n,x_m) < \sfrac{\epsilon}{2}$.
   Thus
   \[
   d_Y(f(x_{n_\epsilon}), [\{x_n\}_{n\in \bbN}]) = \lim_{n \to \infty} d_X(x_{n_\epsilon}, x_n) \le \frac{\epsilon}{2} < \epsilon.
@@ -3283,7 +3283,7 @@
   Define $y_o \coloneqq [\{x_k\}_{k \in \bbN}]$.
   We want to show that $y_k \rightarrow y_o$.
   Fix $\epsilon > 0$.
-  Let $n_o \in \bbN$ be such that for all $n,m \ge n_o$, we have $d_X(x_n,x_m) < \nicefrac{\epsilon}{2}$.
+  Let $n_o \in \bbN$ be such that for all $n,m \ge n_o$, we have $d_X(x_n,x_m) < \sfrac{\epsilon}{2}$.
   Thus for $k \ge n_o$, we have
   \[
   d_Y(y_k, y_o) = d_Y(\hat{x_k}, [\{x_n\}_{n \in \bbN}]) = \lim_{n \to \infty} d_X(x_k,x_n) \le \frac{\epsilon}{2} < \epsilon,
@@ -3393,8 +3393,8 @@
     
     \underline{Claim}. $d_\infty(f_n,f) \rightarrow 0$ and then we can conclude continuity by uniform convergence (\cref{Lem:UniformContinuous}).
     Fix $\epsilon > 0$.
-    Find $n_o \in \bbN$ such that for all $n,m \ge n_o$, we have $d_\infty(f_n,f_m) < \nicefrac{\epsilon}{2}$.
-    Then for all $x \in X$, choose $n_1 = n_1(x) > n_o$ such that $d_Y(f_{n_1}(x),f(x)) < \nicefrac{\epsilon}{2}$.
+    Find $n_o \in \bbN$ such that for all $n,m \ge n_o$, we have $d_\infty(f_n,f_m) < \sfrac{\epsilon}{2}$.
+    Then for all $x \in X$, choose $n_1 = n_1(x) > n_o$ such that $d_Y(f_{n_1}(x),f(x)) < \sfrac{\epsilon}{2}$.
     Now for all $n \ge n_o$, we have
     \[
     d_Y(f_n(x), f(x)) \le d_Y(f_n(x),f_{n_1}(x)) + d_Y(f_{n_1}(x), f(x)) < \frac{\epsilon}{2} +\frac{\epsilon}{2} = \epsilon.
@@ -3469,21 +3469,21 @@
   By $x_0 \in X = \overline{U_1}$, we know that $B(x_0,r_0) \cap U_1 \neq \emptyset$.
   Let $x_1 \in B(x_0,r_0) \cap U_1$.
   Since $B(x_0,r_0) \cap U_1$ is open, we can find $0 < r_1 < 1$ such that $B(x_1,2r_1) \subseteq B(x_0,r_0) \cap U_1$.
-  Inductively, consider $n \in \bbN$, $x_n \in X$, and $0 < r_n < \nicefrac{1}{n}$.
-  Since $x_n \in X = \overline{U_{n+1}}$, we have $B(x_n,r_n) \cap U_{n+1} \neq \emptyset$, thus we find $x_{n+1} \in B(x_n,r_n) \cap U_{n+1}$ and $0 < r_{n+1} < \nicefrac{1}{n+1}$ such that $B(x_{n+1},2r_{n+1}) \subseteq B(x_n,r_n) \cap U_{n+1}$.
+  Inductively, consider $n \in \bbN$, $x_n \in X$, and $0 < r_n < \sfrac{1}{n}$.
+  Since $x_n \in X = \overline{U_{n+1}}$, we have $B(x_n,r_n) \cap U_{n+1} \neq \emptyset$, thus we find $x_{n+1} \in B(x_n,r_n) \cap U_{n+1}$ and $0 < r_{n+1} < \sfrac{1}{n+1}$ such that $B(x_{n+1},2r_{n+1}) \subseteq B(x_n,r_n) \cap U_{n+1}$.
   We then obtain a chain of open sets:
   \[
   \cdots \subseteq B(x_{n+1},2r_{n+1}) \subseteq B(x_n,r_n) \subseteq B(x_n,2r_n) \subseteq \cdots \subseteq B(x_1,2r_1) \subseteq B(x_0,r_0) \cap U_1.
   \]
   
   \underline{Claim}. $\{x_n\}_{n \in \bbN}$ is a Cauchy sequence.
-  Fix $\epsilon > 0$. Pick $k \gg 1$ such that $\nicefrac{2}{k} < \epsilon$.
-  Then for all $n,m \ge k$, we have $x_n,x_m \in B(x_k,r_k)$ hence $d(x_n,x_m) \le d(x_n,x_k)+d(x_k,d_m) < 2r_k < \nicefrac{2}{k} < \epsilon$.
+  Fix $\epsilon > 0$. Pick $k \gg 1$ such that $\sfrac{2}{k} < \epsilon$.
+  Then for all $n,m \ge k$, we have $x_n,x_m \in B(x_k,r_k)$ hence $d(x_n,x_m) \le d(x_n,x_k)+d(x_k,d_m) < 2r_k < \sfrac{2}{k} < \epsilon$.
   Because $X$ is complete, we know $x_n \rightarrow x$ for some $x \in X$.
   
   \underline{Claim}. $x \in B(x_0,r_0) \cap U_\ell$ for all $\ell \in \bbN$.
   Fix $\ell \in \bbN$.
-  For all $n \ge \max\{ \ell, \ceil{\nicefrac{1}{r_\ell}}\}$, we know that $x_n \in B(x_\ell,r_\ell)$, then
+  For all $n \ge \max\{ \ell, \ceil{\sfrac{1}{r_\ell}}\}$, we know that $x_n \in B(x_\ell,r_\ell)$, then
   \[
   d(x,x_\ell) \le d(x,x_n)+d(x_n,x_\ell) < r_n + r_\ell < \frac{1}{n}+r_\ell \le 2r_\ell.
   \]
@@ -3538,7 +3538,7 @@
 \end{proposition}
 \begin{proof}
   Suppose not.
-  Then there exists $\epsilon_o > 0$ and we can find $\{x_n\}_{n \in \bbN}$, $\{x_n'\}_{n\in \bbN}$ such that $d_X(x_n,x_n') < \nicefrac{1}{n} \rightarrow 0$ and $d_Y(f(x_n),f(x_n')) \ge \epsilon_o$ for all $n\in \bbN$.
+  Then there exists $\epsilon_o > 0$ and we can find $\{x_n\}_{n \in \bbN}$, $\{x_n'\}_{n\in \bbN}$ such that $d_X(x_n,x_n') < \sfrac{1}{n} \rightarrow 0$ and $d_Y(f(x_n),f(x_n')) \ge \epsilon_o$ for all $n\in \bbN$.
   Because $K$ is compact and thus sequentially compact by \cref{Prop:MetricCompactIffSeqCompact}, $\{x_n\}_{n\in\bbN}$ admits a convergent subsequence $\{x_{n_k}\}_{k \in \bbN}$ with $x_{n_k} \rightarrow x_o \in X$.
   Since $f$ is continuous and thus sequentially continuous by \cref{Prop:ContImplySeqCont}, we have $f(x_{n_k}) \rightarrow f(x_o)$.
   Because $d_X(x_n,x_n') \rightarrow 0$, we know that $x_{n_k}' \rightarrow x_o$ in $X$, hence $f(x_{n_k}') \rightarrow f(x_o)$.
@@ -3597,7 +3597,7 @@
   \[
   u(x) = \sum_{n=0}^\infty a^n \cos(b^n \pi x),
   \]
-  where $0 < a < 1$, $b \in \bbN$ odd, and $ab > 1 + \nicefrac{3\pi}{2}$.
+  where $0 < a < 1$, $b \in \bbN$ odd, and $ab > 1 + \sfrac{3\pi}{2}$.
 \end{remark}
 
 \begin{remark}\label{Rem:LipImplyHolder}
@@ -3651,7 +3651,7 @@
   We want to show that $g$ is uniformly continuous.
   Fix $\epsilon > 0$.
   Pick $\delta > 0$ such that for all $x,x' \in E$, we have $d_X(x,x') < \delta$ implies $d_Y(f(x),f(x')) < \epsilon$.
-  Fix $\bar{x}, \bar{x}' \in \overline{E}$ such that $d_X(\bar{x},\bar{x}') < \nicefrac{\delta}{2}$.
+  Fix $\bar{x}, \bar{x}' \in \overline{E}$ such that $d_X(\bar{x},\bar{x}') < \sfrac{\delta}{2}$.
   Then there exist $\{x_n\}_{n \in \bbN} \subseteq E$ and $\{x_n'\}_{n \in \bbN} \subseteq E$ such that $x_n \rightarrow \bar{x}$ and $x_n' \rightarrow \bar{x}'$.
   Hence
   \[
@@ -3690,7 +3690,7 @@
   \[
   d(x_n,x_m) \le \sum_{i=n}^{m-1} d(x_i,x_{i+1}) \le d(x_0,x_1) \cdot \sum_{i=n}^{m-1} L^{i} \le d(x_0,x_1) \cdot \sum_{i=n}^\infty L^i = d(x_0,x_1) \cdot \frac{L^n}{1 - L}.
   \]
-  Since $L < 1$, we conclude that for any $\epsilon > 0$ we can find $n_o \gg 1$ such that $d(x_0,x_1) \cdot\nicefrac{L^n}{(1-L)} < \epsilon$.
+  Since $L < 1$, we conclude that for any $\epsilon > 0$ we can find $n_o \gg 1$ such that $d(x_0,x_1) \cdot\sfrac{L^n}{(1-L)} < \epsilon$.
   
   Because $X$ is complete, we know that $x_n \rightarrow x$ for some $x \in X$.
   Therefore $f(x_n) \rightarrow f(x)$ by the continuity of $f$.
@@ -3714,7 +3714,7 @@
   F(g) \coloneqq \lambda t. u_0 + \int_0^t f(s,g(s)) ds.
   \]
   
-  \underline{Claim}. $F$ is a contraction if $T < \nicefrac{1}{L}$.
+  \underline{Claim}. $F$ is a contraction if $T < \sfrac{1}{L}$.
   \begin{align*}
     |F(g_1)(t) - F(g_2)(t)| & = \abs{ \int_0^t \p{ f(s,g_1(s)) - f(s,g_2(s)) } ds  } \\
     & \le \int_0^t \abs{f(s,g_1(s)) - f(s,g_2(s))} ds \\
@@ -3723,7 +3723,7 @@
     & \le (L \cdot T) \cdot d_{\ell^\infty}(g_1,g_2).
   \end{align*}
 
-  Therefore by \cref{The:BanachConstrPrinc}, there exists a unique $u \in C([0,\nicefrac{1}{L}])$ such that $F(u) = u$, i.e., $u(t) = u_0 + \int_0^t f(s,u(s)) ds$.
+  Therefore by \cref{The:BanachConstrPrinc}, there exists a unique $u \in C([0,\sfrac{1}{L}])$ such that $F(u) = u$, i.e., $u(t) = u_0 + \int_0^t f(s,u(s)) ds$.
   To check whether $u$ is a solution, we have
   \[
     u'(t) =  f(s,u(s)), u(0) = u_0 + \int_0^0 f(s,u(s)) ds = u_0.
@@ -3774,11 +3774,11 @@
   
   \underline{Claim}. If $K \subseteq X$ is compact, then for all $\epsilon > 0$, there exists $n_\epsilon \in \bbN$ such that for all $n,m \ge n_\epsilon$ we have $\sup_{x \in K} |f_{n,n}(x) - f_{m,m}(x)| < \epsilon$.
   
-  Fix $\epsilon > 0$. For each $x \in K$, by equicontinuity of $\calF$ we can find $\delta_x > 0$ such that for all $y \in X$, we have $d(x,y) < \delta_x$ implies that $\sup_{f \in \calF} |f(x) - f(y)| < \nicefrac{\epsilon}{8}$.
+  Fix $\epsilon > 0$. For each $x \in K$, by equicontinuity of $\calF$ we can find $\delta_x > 0$ such that for all $y \in X$, we have $d(x,y) < \delta_x$ implies that $\sup_{f \in \calF} |f(x) - f(y)| < \sfrac{\epsilon}{8}$.
   Since $K$ is compact and $K \subseteq \bigcup_{y \in K} B(y,\delta_y)$, we can find $M \in \bbN$ and $y_1,\cdots,y_M \in K$ such that $K \subseteq \bigcup_{i=1}^M B(y_i,\delta_{y_i})$.
   Because $\overline{E} = X$, we can find for every $i=1,\cdots,M$ a $x_{z_i} \in B(y_i,\delta_{y_i}) \cap E$.
   Then $f_{n,n}(x_{z_i}) \rightarrow \ell_{z_i}$.
-  Thus there exists $n_\epsilon \in \bbN$ such that for all $i=1,\cdots,M$ and $n,m \ge n_\epsilon$, we have $|f_{n,n}(x_{z_i}) - f_{m,m}(x_{z_i})| < \nicefrac{\epsilon}{2}$.
+  Thus there exists $n_\epsilon \in \bbN$ such that for all $i=1,\cdots,M$ and $n,m \ge n_\epsilon$, we have $|f_{n,n}(x_{z_i}) - f_{m,m}(x_{z_i})| < \sfrac{\epsilon}{2}$.
   
   Fix $x \in K$. Let $i_o \in \{1,\cdots,M\}$ be such that $x \in B(y_{i_o},\delta_{y_{i_o}})$.
   Then for all $n,m \ge n_\epsilon$, we have
@@ -3804,7 +3804,7 @@
   
   \underline{Claim}. $g$ is continuous.
   Fix $x_o \in X$ and $\epsilon > 0$.
-  By equicontinuity, there exists $\delta_{x_o} > 0$ such that $d(x,x_o) < \delta_{x_o}$ implies that $\sup_{f \in \calF} |f(x)-f(x_o)| < \nicefrac{\epsilon}{3}$.
+  By equicontinuity, there exists $\delta_{x_o} > 0$ such that $d(x,x_o) < \delta_{x_o}$ implies that $\sup_{f \in \calF} |f(x)-f(x_o)| < \sfrac{\epsilon}{3}$.
   For all $x \in B(x_o,\delta_{x_o})$, we have $f_{n,n}(x) \rightarrow g(x)$ and $f_{n,n}(x_o) \rightarrow g(x_o)$.
   Let $n_o = n_o(\epsilon,x,x_o) \in \bbN$ such that for all $n \ge n_o$, we have
   \begin{align*}
@@ -3832,12 +3832,12 @@
     
     \item WTS the $\implies$ direction:
     Since $\overline{\calF}$ is compact, we know that $\overline{\calF}$ is bounded thus $\calF$ is also bounded.
-    If $\calF$ is not equicontinuous, there exists $\epsilon_o > 0$ such that for all $n \in \bbN$, there exists $x_n,y_n \in X$ and $f_n \in C(X;\bbR)$ such that $d(x_n,y_n) < \nicefrac{1}{n}$ and $|f_n(x_n) - f_n(y_n)| \ge \epsilon_o$.
+    If $\calF$ is not equicontinuous, there exists $\epsilon_o > 0$ such that for all $n \in \bbN$, there exists $x_n,y_n \in X$ and $f_n \in C(X;\bbR)$ such that $d(x_n,y_n) < \sfrac{1}{n}$ and $|f_n(x_n) - f_n(y_n)| \ge \epsilon_o$.
     
     Since $\calF$ is relatively compact, we know $\{f_n\}_{n \in \bbN}$ admits a convergent subsequence $\{f_{n_k}\}_{k \in \bbN}$ such that $f_{n_k} \rightarrow f_o \in C(X;\bbR)$, i.e., $\max_{x \in X} |f_{n_k}(x) - f_o(x)| \rightarrow 0$.
-    Let $k_1 \gg 1$ be such that for all $k \ge k_1$, we have $\max_{x \in X} |f_{n_k}(x) - f_o(x)| < \nicefrac{\epsilon_o}{3}$.
+    Let $k_1 \gg 1$ be such that for all $k \ge k_1$, we have $\max_{x \in X} |f_{n_k}(x) - f_o(x)| < \sfrac{\epsilon_o}{3}$.
     Because $f_o$ is continuous and $X$ is compact, we know that $f_o$ is uniformly continuous by \cref{Prop:DomainCompactImplyContImplyUCont}.
-    Hence there exists $\delta > 0$ such that $d(x,y) < \delta$ implies $|f_o(x) - f_o(y)| < \nicefrac{\epsilon_o}{3}$.
+    Hence there exists $\delta > 0$ such that $d(x,y) < \delta$ implies $|f_o(x) - f_o(y)| < \sfrac{\epsilon_o}{3}$.
     Now let $k_2 \ge k_1$ be such that for all $k \ge k_2$, we have $d(x_{n_k},y_{n_k}) < \delta$.
     For all $k \ge k_2$, we observe that
     \begin{align*}
@@ -3911,14 +3911,14 @@
   
   \paragraph{Step 2} If $f \in \overline{\calF}$, then $|f| \in \overline{\calF}$.
   Define $M \coloneqq \max_{x \in X} |f(x)|$ by \cref{The:Weierstrass} on the fact that $X$ is compact and $f$ is continuous.
-  Define $g(x) \coloneqq \nicefrac{|f(x)|}{M} \in [0,1]$.
+  Define $g(x) \coloneqq \sfrac{|f(x)|}{M} \in [0,1]$.
   Define
   \[
   g_n(x) \coloneqq p_n\p{ \p{\frac{f(x)}{M}}^2 }, n \in \bbN
   \]
   such that $g_n \in \overline{\calF}$ for all $n \in \bbN$.
-  By the claim we know that $g_n \rightarrow \sqrt{\p{\nicefrac{f}{M} }^2} = g$ uniformly on $X$.
-  Thus $g \in \overline{\calF}$. Therefore $|f| = M \cdot \nicefrac{|f|}{M} = M \cdot g \in \overline{\calF}$ because $\overline{\calF}$ is an algebra.
+  By the claim we know that $g_n \rightarrow \sqrt{\p{\sfrac{f}{M} }^2} = g$ uniformly on $X$.
+  Thus $g \in \overline{\calF}$. Therefore $|f| = M \cdot \sfrac{|f|}{M} = M \cdot g \in \overline{\calF}$ because $\overline{\calF}$ is an algebra.
   
   \paragraph{Step 3} If $f,g\in \overline{\calF}$ then $\max\{f,g\},\min\{f,g\} \in \overline{\calF}$.
   This is easy by the following observation

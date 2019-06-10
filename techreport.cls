@@ -143,7 +143,7 @@
 \newcommand\shortcite[2][]{\ifNAT@numbers\cite[#1]{#2}\else\citeyearpar[#1]{#2}\fi}
 \def\bibliographystyle#1{%
 	\ifx\@begindocumenthook\@undefined\else\expandafter\AtBeginDocument\fi%
-    {\if@filesw\immediate\write\@auxout{\string\bibstyle{#1}}\fi}}
+	{\if@filesw\immediate\write\@auxout{\string\bibstyle{#1}}\fi}}
 \RequirePackage{graphicx}
 \RequirePackage[prologue]{xcolor}
 \definecolor[named]{Blue}{cmyk}{1,0.1,0,0.1}
@@ -184,6 +184,7 @@
 \pdfgentounicode=1
 \fi
 \RequirePackage{cmap}
+% \RequirePackage[mathcal]{euscript}
 \if@TR@libertine
 \ifxetex
 	\RequirePackage[tt=false]{libertine}
@@ -192,13 +193,23 @@
 \fi
 \RequirePackage[varqu]{zi4}
 \RequirePackage[libertine]{newtxmath}
+\RequirePackage{bbold}
 \else
-\RequirePackage[scaled=0.88]{beraserif}
-\RequirePackage[scaled=0.85]{berasans}
+\if@TR@screen
+\RequirePackage[nott]{kpfonts}
+\else
+\RequirePackage[light,nott]{kpfonts}
+\fi
+% \RequirePackage[scaled=0.88]{beraserif}
+% \RequirePackage[scaled=0.85]{berasans}
 \RequirePackage[scaled=0.84]{beramono}
-\RequirePackage{mathpazo}
-\linespread{1.05}
-\RequirePackage[T1,small,euler-digits]{eulervm}
+% \RequirePackage{mathpazo}
+% \linespread{1.05}
+% \RequirePackage[T1,small,euler-digits]{eulervm}
+\RequirePackage{bbm}
+\AtBeginDocument{%
+	\renewcommand{\mathbb}{\mathbbmss}%
+}
 \fi
 \ifxetex\else
 	\RequirePackage[T1]{fontenc}
@@ -401,7 +412,7 @@
 	\def\MathparLineskip{\lineskip=0.29cm}%
 }
 \fi
-\RequirePackage{nicefrac}
+\RequirePackage{xfrac}
 \RequirePackage{marginnote}
 \RequirePackage{authblk}
 \ifx\TR@column\@TR@twocolumn
@@ -467,6 +478,7 @@
 		\crefname{figure}{Fig.}{Figs.}%
 		\crefname{definition}{Defn.}{Defns.}%
 		\crefname{table}{Tab.}{Tabs.}%
+		\crefformat{section}{\S#2#1#3}%
 		\crefmultiformat{section}{\S#2#1#3}{ and~\S#2#1#3}{, \S#2#1#3}{ and~\S#2#1#3}%
 		\crefname{example}{Ex.}{Exs.}%
 		\crefname{item}{item}{item}%
