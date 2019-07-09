@@ -196,16 +196,12 @@
 \RequirePackage{bbold}
 \else
 \if@TR@screen
-\RequirePackage[nott]{kpfonts}
-\else
-\RequirePackage[light,nott]{kpfonts}
-\fi
-% \RequirePackage[scaled=0.88]{beraserif}
-% \RequirePackage[scaled=0.85]{berasans}
+\RequirePackage[nott,nosf]{kpfonts}
+\RequirePackage[scaled=0.85]{berasans}
 \RequirePackage[scaled=0.84]{beramono}
-% \RequirePackage{mathpazo}
-% \linespread{1.05}
-% \RequirePackage[T1,small,euler-digits]{eulervm}
+\else
+\RequirePackage[light]{kpfonts}
+\fi
 \RequirePackage{bbm}
 \AtBeginDocument{%
 	\renewcommand{\mathbb}{\mathbbmss}%
@@ -471,7 +467,6 @@
 \else
 	\RequirePackage{cleveref}
 	\AtEndPreamble{%
-		\newcommand{\theoref}[1]{\cref{#1}}
 		\crefname{theorem}{Thm.}{Thms.}%
 		\crefname{lemma}{Lem.}{Lemmas}%
 		\crefname{corollary}{Cor.}{Cors.}%
