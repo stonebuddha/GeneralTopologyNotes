@@ -1522,7 +1522,7 @@
 		C_2 & \coloneqq \{ (y,-y) : y \in \bbR \setminus \bbQ \}
 	\end{align*}
 	We claim that $C_1,C_2$ are closed and cannot be separated by disjoint open sets.
-	We conclude by {\color{Red}Baire category theorem}.
+	We conclude by \cref{The:BaireCategory}.
 \end{proof}
 
 \begin{proposition}\label{Prop:MetricT4}
@@ -2018,7 +2018,7 @@
 		\]
 		and $X \setminus U_\beta$ is closed and compact, so by \cref{Prop:SeveralPropertiesOfCompactness}(1) we know that $X \setminus (\bigcup_{\alpha \in \Lambda} U_\alpha)$ is also compact.
 		Hence we conclude that $\bigcup_{\alpha \in \Lambda} U_\alpha \in \tau_\infty$, i.e., $\tau_\infty$ is closed under arbitrary union.
-		Finite intersection is left for an exercise.
+		Finite intersection is left for exercise.
 		
 		\item Then we want to show that $(X_\infty,\tau_\infty)$ is compact.
 		Suppose $X_\infty \subseteq \bigcup_{\alpha \in \Lambda} U_\alpha$ where $U_\alpha$'s are open in $X_\infty$.
@@ -2651,7 +2651,7 @@
 	If $\bigcap_{\alpha \in \Lambda} K_\alpha = \emptyset$ then there exists a finite $\calI \subseteq \Lambda$ such that $\bigcap_{\alpha \in \calI} K_\alpha = \emptyset$.
 \end{lemma}
 \begin{proof}
-	\diw{TODO.}
+	Exercise.
 \end{proof}
 
 \begin{lemma}\label{Lem:LocCompT2ThenNeighborContainCompactClosure}
@@ -3229,7 +3229,7 @@
 \end{proof}
 
 \begin{theorem}[Nagata–Smirnov metrization theorem]\label{The:NagataSmirnov}
-  A topological space $(X,\tau)$ is metrizable iff it is $T_4$ and has a $\sigma$-locally finite base.
+  A topological space $(X,\tau)$ is metrizable iff it is $T_4$ and has a $\sigma$-locally finite base, i.e., $\beta = \bigcup_{n=1}^\infty \beta_n$ with $\beta_n$ locally finite (i.e., for all $x \in X$, there exists a neighborhood $U$ of $x$ such that $U$ intersects finitely many elements of $\beta_n$).
 \end{theorem}
 \begin{proof}\
   \begin{itemize}
@@ -3242,7 +3242,7 @@
     Fix $U \in \tau$.
     For every $x \in U$, find a $B_x \in \beta$ such that $x \in B_x \subseteq \overline{B_x} \subseteq U$.
     For every $n \in \bbN$, define $C_n \coloneqq \bigcup_{B_x \in \beta_n} \overline{B_x}$.
-    Then by (\diw{TODO}) we know $\bigcup_{B_x \in \beta_n} \overline{B_x} = \overline{\bigcup_{B_x \in \beta_n} B_x}$.
+    Then we know $\bigcup_{B_x \in \beta_n} \overline{B_x} = \overline{\bigcup_{B_x \in \beta_n} B_x}$.
     Thus $C_n$ is closed.
     Moreover, we have $C_n \subseteq U$ and thus $U = \bigcup_{n=1}^\infty C_n$, i.e., an $F_\sigma$.
     
@@ -3358,7 +3358,7 @@
   \]
   
   \underline{Claim}. $Y$ is complete.
-  It suffices to show that every Cauchy sequence in $f(X)$ converges in $Y$ (by the fact that $f(X)$ is dense in $Y$ \diw{TODO}).
+  It suffices to show that every Cauchy sequence in $f(X)$ converges in $Y$ (by the fact that $f(X)$ is dense in $Y$).
   Let $\{ y_k\}_{k \in \bbN} \subseteq f(X)$ to be a Cauchy sequence w.r.t. $d_Y$.
   For each $k \in \bbN$ there exists $x_k \in X$ such that $y_k = f(x_k) = \hat{x_k}$.
   Thus
@@ -3419,7 +3419,7 @@
   Because $g$ is isometry, we know that $\{g(x_n)\}_{n \in \bbN} \subseteq Y'$ is a Cauchy sequence.
   Since $Y'$ is complete, we know that $g(x_n) \rightarrow y'$ for some $y' \in Y'$.
   It remains to show that $h(y') = y$.
-  The proof is similar and left for exercise \diw{TODO}.
+  The proof is similar and left for exercise.
 \end{proof}
 
 \begin{remark}\label{Rem:CompletionOfQIsR}
@@ -3550,7 +3550,7 @@
   If $(X,d)$ is a complete metric space, then it is a Baire space.
 \end{theorem}
 \begin{proof}
-  Suppose $\{U_n\}_{n \in \bbN}$ is a family of dense open sets (the finite case is left for exercise \diw{TODO}).
+  Suppose $\{U_n\}_{n \in \bbN}$ is a family of dense open sets (the finite case is left for exercise).
   Fix $x_0 \in X$ and $r_0 > 0$.
   By $x_0 \in X = \overline{U_1}$, we know that $B(x_0,r_0) \cap U_1 \neq \emptyset$.
   Let $x_1 \in B(x_0,r_0) \cap U_1$.
@@ -3962,7 +3962,26 @@
 
 \begin{remark}\label{Rem:ContCompactNecInDini}
   Continuity of $f$ and compactness of $X$ are necessary in \cref{The:Dini}.
-  \diw{TODO}
+  
+  Suppose $X=[0,1]$. Let $f_n(x) \defeq x^n$, then
+  \[
+  f(x) = \begin{dcases}
+  0 & 0 \le x < 1 \\
+  1 & x=1  
+ \end{dcases}
+ \]
+  is not continuous.
+  Clearly, the convergence is not uniform.
+  
+  Suppose $X = \bbR$, which is not compact. Define
+  \[
+    f_n(x) \defeq \begin{dcases}
+    1 & x \le n \\
+    1+n-x & n <x \le n+1 \\
+    0 & x > n+1  
+ \end{dcases}.
+  \]
+  Then $f_n$ converges to $f(x) \equiv 1$. Clearly, the convergence is not uniform.
 \end{remark}
 
 \begin{theorem}[Stone]\label{The:Stone}
@@ -4075,8 +4094,7 @@
   By \cref{The:Stone} we have $\overline{\calF} = C(X;\bbR)$.
   
   It remains to show the property still holds if we consider only rational coefficients.
-  The idea is that $\bbQ$ is dense in $\bbR$.
-  \diw{TODO}
+  The idea is that $\bbQ$ is dense in $\bbR$. The rest of the proof is left for exercise.
 \end{proof}
 
 \end{document}
