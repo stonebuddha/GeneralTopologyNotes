@@ -1171,8 +1171,34 @@
 	Suppose $U \subseteq \bbR^N$ is an open set.
 	Then $U$ is connected iff it is pathwise connected.
 \end{proposition}
-\begin{proof}
-	\diw{TODO.}
+\begin{proof}\
+	\begin{itemize}
+	  \item WTS the $\impliedby$ direction: By \cref{Prop:PathWiseConnImplyConn}.
+	  \item WTS the $\implies$ direction: Fix $x \in U$.
+	  Define
+	  \begin{align*}
+	   A & \defeq \{ y \in U : \text{$x$ and $y$ can be connected by a continuous path in $U$} \} \\
+	   B & \defeq \{ y \in U : \text{$x$ and $y$ can\emph{not} be connected by a continuous path in $U$} \}  
+	  \end{align*}
+      thus $A \cup B = U$, $A \cap B = \emptyset$, $A \neq \emptyset$.
+      If both $A$ and $B$ are open in $U$, then by the fact that $U$ is connected, we obtain that $B = \emptyset$, and thus we can conclude the proof.
+      Because $U$ is open, it then suffices to show that $A$ and $B$ are open.
+      
+      We claim that $A$ is open. Fix $x_o \in A$.
+      Let $r : [0,1] \to U$ be a continuous path such that $r(0)=x$ and $r(1)=x_o$.
+      Since $U$ is open, there exists $\epsilon>0$ such that $B(x_o,\epsilon) \subseteq U$.
+      Let $y \in B(x_o,\epsilon)$. We want to show that there exists a continuous path that connects $y$ to $x$.
+      Define $r_y : [0,1] \to U$ as $r_y(t) \defeq (1-t)x_o + ty$ and $\tau : [0,1] \to U$ as
+      \[
+      \tau(t) \defeq \begin{dcases}
+   r(2t) & 0 \le t \le \sfrac{1}{2} \\
+   r_y(2t-1) & \sfrac{1}{2} \le t \le 1
+ \end{dcases}.
+ \]
+    Obviously both $r_y$ and $\tau$ are continuous, thus we conclude the proof.
+    
+    We claim that $B$ is open. The proof proceeds in a similar way to the claim that $A$ is open.
+	\end{itemize}
 \end{proof}
 
 \begin{definition}\label{De:ConnEquivalenceRelation}
