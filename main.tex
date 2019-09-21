@@ -1015,8 +1015,41 @@
 \begin{theorem}\label{The:RConnectedConvex}
 	$C \subseteq \bbR$ is connected iff $C$ is convex, i.e., an interval.
 \end{theorem}
-\begin{proof}
-	\diw{TODO.}
+\begin{proof}\
+  \begin{itemize}
+    \item WTS the $\implies$ direction: Fix $x,u \in C$ such that $x<y$.
+    If $[x,y] \not\subseteq C$, then there exists $z$ with $x < z < y$ such that $z \not\in C$.
+    Observe that
+    \[
+    C = (C \cap (-\infty,z)) \cup (C \cap (z,+\infty))
+    \]
+    and $C \cap (-\infty,z) \supseteq \{ x\}$, $C \cap (z,+\infty) \supseteq \{ y\}$ are two nonempty sets that are open in $C$.
+    Hence $C$ is not connected, which leads to a contradiction.
+    
+    \item WTS the $\impliedby$ direction: If $C$ is not connected, then by \cref{Prop:MetricDisconnectedSubsetLifting} and the fact that the standard topology in $\bbR$ is a metric space, we know that there exist disjoint open sets $U,V \subseteq \bbR$ such that $C \subseteq U \cup V$, $C \cap U \neq \emptyset$, $C \cap V \neq \emptyset$.
+    Let $x \in C \cap U$ and $y \in C \cap V$.
+    Since $(C \cap U) \cap (C \cap V) \subseteq U \cap V = \emptyset$, we know that $x \neq y$.
+    Without loss of generality, let's assume $x<y$.
+    Because $C$ is convex, we know that $[x,y] \subseteq C$.
+    Define $z \defeq \sup \{ w : w \in U \cap [x,y] \}$.
+    Then obviously $x \le z \le y$.
+    
+    We claim that $x < z < y$. Because $x \in U$ and $U$ is open, there exists $\epsilon>0$ such that $(x-\epsilon,x+\epsilon) \subseteq U$, thus $z > x$.
+    On the other hand, if $z=y$, we know that $y \in \overline{U}$, but $y \in V$ and $V \cap U = \emptyset$, which indicate that $V \cap \overline{U} = \emptyset$.
+    Therefore $z < y$.
+    
+    Thus there exists $\delta>0$ such that $x +\delta < z < y -\delta$.
+    We claim that $z \not\in U \cup V$, which contradicts $z \in [x,y] \subseteq C \subseteq U \cup V$.
+    Suppose $z \in U$. Because $U$ is open, there exists $r > 0$ such that $(z-r,z+r) \subseteq U$.
+    Without loss of generality, let's assume $r < y-z$.
+    Then $[z,z+r) \subseteq U$ and $[z,z+r) \subseteq [x,y]$, thus $[z,z+r) \subseteq U \cap [x,y]$, which indicates that $z$ is not the supremum.
+    On the other hand, suppose $z \in V$.
+    Because $V$ is open, there exists $r_1 > 0$ such that $(z-r_1,z+r_1) \subseteq V$.
+    Without loss of generality, let's assume $r_1 < z-x$.
+    Then $(z-r_1,z] \subseteq V \cap [x,y]$ by a similar reasoning.
+    But then $(z-r_1,z] \cap (U \cap [x,y]) = \emptyset$, which indicates that $z$ cannot be the supremum.
+    Therefore we prove the claim that $z \not\in U \cup V$ and conclude the proof.
+  \end{itemize}
 \end{proof}
 
 \begin{proposition}\label{Prop:ConnIffEveryTwoPointsConn}
