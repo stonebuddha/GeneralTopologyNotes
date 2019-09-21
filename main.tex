@@ -1522,7 +1522,7 @@
 		C_2 & \coloneqq \{ (y,-y) : y \in \bbR \setminus \bbQ \}
 	\end{align*}
 	We claim that $C_1,C_2$ are closed and cannot be separated by disjoint open sets.
-	\diw{Baire category theorem.}
+	We conclude by {\color{Red}Baire category theorem}.
 \end{proof}
 
 \begin{proposition}\label{Prop:MetricT4}
@@ -1909,7 +1909,19 @@
 
 \begin{example}\label{Exa:ContBijectionNotHome}
 	In general \cref{Prop:ContBijectionFromCompactToT2IsHome} does not hold if $X$ is not compact or $Y$ is not $T_2$.
-	\diw{TODO.}
+	
+	Suppose $X = (0,1) \cup [2,3]$ and $Y=(0,2]$. Then $X$ is not compact.
+	Define
+	\[
+	f(x) \defeq \begin{dcases} x & x \in (0,1) \\ x-1 & x \in [2,3] \end{dcases}
+	\]
+	so $f:X \to Y$ is a continuous bijection but $f^{-1} : Y \to X$ is not continuous.
+	
+	Suppose $X=\{0,1\}$ and $Y = \{0,1\}$.
+	Let $\tau_X = \tau_{\mathrm{discrete}}$ and $\tau_Y = \tau_{\mathrm{trivial}}$.
+	Then $X$ is compact but $Y$ is not $T_2$.
+	Let $f: X \to Y$ be the identify function.
+	Then $f$ is a continuous bijection, but $f^{-1}$ is not continuous, since $f^{-1}(\{0\}) = \{0\} \not\in \tau_Y$.
 \end{example}
 
 \begin{theorem}[Weierstrass theorem]\label{The:Weierstrass}
