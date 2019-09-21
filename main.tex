@@ -1275,8 +1275,18 @@
 	Let $\calS$ be a subbase of open sets in $\tau_Y$.
 	Then $f : X \to Y$ is continuous iff for all $V \in \calS$, $f^{-1}(V) \in \tau_X$.
 \end{proposition}
-\begin{proof}
-	\diw{TODO.}
+\begin{proof}\
+	\begin{itemize}
+	  \item WTS the $\implies$ direction: Trivial by the fact that $\calS \subseteq \tau_Y$.
+	  \item WTS the $\impliedby$ direction: Let $V \in \tau_Y$.
+	  Because $\calS$ is a subbase, we can write $V = \bigcup_{\alpha \in \Lambda} V_\alpha$ where $V_\alpha = S_1^\alpha \cap \cdots S_{N_\alpha}^\alpha$ with $N_\alpha \in \bbN$ and $S^\alpha_i \in \calS$.
+	  Then we conclude by
+	  \begin{align*}
+	    f^{-1}(V) & = \bigcup_{\alpha\in\Lambda} f^{-1}(V_\alpha) \\
+	    & = \bigcup_{\lambda \in \Lambda} (f^{-1}(S^\alpha_i) \cap \cdots \cap f^{-1}(S_{N_\alpha}^\alpha)) \\
+	    & \in \tau_x.
+	  \end{align*}
+	\end{itemize}
 \end{proof}
 
 \begin{definition}\label{De:SequentiallyContinuous}
